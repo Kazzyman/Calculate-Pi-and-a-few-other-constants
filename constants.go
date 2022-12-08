@@ -60,14 +60,16 @@ p("     π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...")
 p("       4 Billion iterations will be executed")
 p("       10 digits of π -- 8 digits in 100M iterations in under a second")
 p(" ")
-p("5:   Archimedes' method of bisecting triangles  --  16 digits of π in microseconds")
-p("     π = begining with a hexagon, iteratively double its sides") 
-p("       26 iterations, 16 digits of π\n")
+p("5:   Archimedes' method (improved) of bisecting triangles, circa 200 BC")
+p("     π = begining with a hexagon, iteratively double its number of sides") 
+p("       26 iterations is all it will take to get the ... ")
+p("       16 digits of π -- v.fast     (enter '6' for Pythagorean theorem)")
+p("")
 p("7:   An infinite series by John Wallis circa 1655")
 p("     π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
 p("       One-Billion iterations will be executed; option for 40 billion iterations")
 p("       9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
-p("8:   Euler's Number: \u2107 or \u2147 ")
+p("8:   Euler's Number: \u2107 or \u2147 the natural logarithmic base")
 p("       Explore the limit of interest")
 p(" ")
 
@@ -181,7 +183,7 @@ p("Newton also found π to 16 digits by the first 22 terms of :")
 p("3*Sqrt(3)/4 + 24*( 2/3*2^3 - 1/5*2^5 - 1/28*2^7 - 1/72*2^9 - 5/704*2^11 - 7/1664*2^13 )")  // this psudocode is emplemented below
 
 π = ( (3*math.Sqrt(3))/4) + ( 24* ( 2/(3*math.Pow(2,3)) - 1/(5*math.Pow(2,5)) - 1/(28*math.Pow(2,7)) - 1/(72*math.Pow(2,9)) - 5/(704*math.Pow(2,11)) - 7/(1664*math.Pow(2,13)) )  )
-p(π,"per the above formula (six terms)")
+p(π,"per the above formula (only six terms, of the supposed 22 terms he used)")
 p("3.141592653589793 is the value of π from the web\n") 
 
 //p(12.0*((1/2.0) - (1/2.0)*(1/3.0)*math.Pow(0.50,3) - (1/8.0)*(1/5.0)*math.Pow(0.50,5) - (1/16.0)*(1/7.0)*math.Pow(0.50,7) - math.Sqrt(3)/8.0), "straight (3-terms) calc via go" )
@@ -434,7 +436,7 @@ p(" ")
                 LinesPerIter = 11
                 fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
                 TotalLinesInElapsedNanoSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
-                fmt.Printf("xxxxx  %.0f lines of code were executed per second \n", TotalLinesInElapsedNanoSecond) 
+                fmt.Printf("       %.0f lines of code were executed per second \n", TotalLinesInElapsedNanoSecond) 
                 fmt.Println("      1000000000 is one billion\n\n")
 
 // 9
@@ -613,7 +615,7 @@ case 5:  // --------------------------------------------------------------------
     start6 := time.Now()
 
 p(" ")
-p("You selected #", num, "  --  the Archimedes' method")
+p("You selected #", num, "  --  An improved version of Archimedes' method")
 p("  -- enter \"6' at the main menu for the derivation and proof of the Pythagorean -- ")
             // the above escape does not seem to work as advertised ??
 
@@ -746,13 +748,35 @@ for iterInt64 < 27 {
                 t := time.Now()
                 elapsed := t.Sub(start6)
                 fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 16 digits of π\n") 
-                fmt.Printf("the above was estimated from a %.0f sided polygon\n\n", n)
-                fmt.Println(" per option #", num, "  --  the Archimedes' method\n")
+                fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
+                
+                fmt.Printf("%.0f as parsed against ...\n", n)
+                fmt.Println("100000000 which is one-hundred-million")
+                fmt.Println("... Which is to say a 201,326,592 sided polygon, Mr. A. would have wept\n")
+
+
+                fmt.Println(" per option #", num, "  --  an improved version of Archimedes' method\n")
+
+// Don't know what the   codes from WikiPedia were supposed to do? But they do not display or have any obvious consequence.
+/*arch := `Archimedes of Syracuse (c. 287 – c. 212 BC) was a Greek mathematician, physicist, engineer, 
+astronomer, and inventor from the ancient city of Syracuse in Sicily.`
+*/
+arch := `Archimedes of Syracuse (287 – 212 BC) was a Greek mathematician, physicist, engineer, 
+astronomer, and inventor from the ancient city of Syracuse in Sicily. He estimated π 
+by drawing a larger regular hexagon outside a circle then a smaller regular hexagon inside
+the circle, and progressively doubling the number of sides of each regular polygon, 
+calculating the length of a side of each polygon at each step. As the number of sides 
+increases, it becomes a more accurate approximation of a circle. After four such steps, 
+when the polygons had 96 sides each, he was able to determine that the value of π lay between 
+3+1/7 (approx. 3.1429) and 3+10/71 (approx. 3.1408), consistent with its actual value of 
+approximately 3.1416 He also proved that the area of a circle was equal to π multiplied by the 
+square of the radius of the circle.`
+                fmt.Println(arch)
 
                 LinesPerIter = 18
-                fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
+                fmt.Println("\nat aprox", LinesPerIter, "lines of code per iteration ...")
                 TotalLinesInElapsedNanoSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
-                fmt.Printf("Aprox %.0f lines of code were executed per second \n\n\n", TotalLinesInElapsedNanoSecond) 
+                fmt.Printf("Aprox %.0f lines of code were executed per second \n\n", TotalLinesInElapsedNanoSecond) 
                 //fmt.Println("      1000000000 is one billion\n\n")
 
                 //fmt.Println("elapsed in seconds is", elapsed.Seconds())
@@ -762,11 +786,11 @@ for iterInt64 < 27 {
  fmt.Println("   let s1 = s2  // s1 begins as 1, thereafter it adopts s2, base of unbisected triangle")
  fmt.Println("   s1_2 = s1/2 // set the variable s1_2 to one half of s1")
  fmt.Println("   a = \u221A( 1-(s1/2)\u00b2) ) // length of side 'a' is height of bisected triangle ")
- fmt.Println("   b = 1-a                      // new short side ")
+ fmt.Println("   b = 1-a                    // new short side ")
  fmt.Println("   s2 = \u221A( (b)\u00b2 + (s1/2)\u00b2 )  // s2 is new hypotenuse, and New s1 ")
  fmt.Println("   p = n * s1 // p is the length of the perimeter of the constructed polygon ")
  fmt.Println("   p_d = p/2 // the diameter of the polygon is always two, so p/2 = π \n")
- fmt.Println("   -- enter '6' for the derivation and proof of the Pythagorean\n")
+ fmt.Println("   -- After hitting Return for menu redisplay, enter '6' for the derivation and proof of the Pythagorean")
  fmt.Println(" ")
 
 }
@@ -1105,7 +1129,7 @@ var sum float64
 sum = 1 + 1/n 
 Eulers = math.Pow(sum, n)
 
-fmt.Println("\n\n\nEuler's Number \u2107 or \u2147 ")
+fmt.Println("\n\n\nEuler's Number \u2107 or \u2147 the natural logarithmic base")
 fmt.Println("\u2147 = (1+1/n)^n")
 fmt.Println("... the limit of an increasing value for n\n\n") 
 
