@@ -771,7 +771,7 @@ for iterInt64 < 27 {
                 fmt.Println("   #1 23456789012# :: counting the first 12 actual digits of π")
                 t := time.Now()
                 elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 11 digits of π\n") 
+                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 12 digits of π\n") 
                 fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
     }    
     if iterInt64 == 23 {
@@ -782,10 +782,10 @@ for iterInt64 < 27 {
                 fmt.Println("   #1 23456789012345# :: counting the first 15 actual digits of π")
                 t := time.Now()
                 elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 14 digits of π\n") 
+                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 15 digits of π\n") 
                 fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
     }
-    if iterInt64 == 26 {
+    if iterInt64 == 25 {
         fmt.Println(" ")
                 fmt.Println("   #1 234567890123456# :: counting the first 16 actual digits of π")
                 fmt.Println("   ", p_d, " is what we have calculated per Archimedes' -- 16 -- digits") 
@@ -797,9 +797,8 @@ for iterInt64 < 27 {
                 fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
                 
                 fmt.Printf("%.0f as parsed against ...\n", n)
-                fmt.Println("100000000 which is one-hundred-million")
+                fmt.Println("100000000 which is one-hundred-million, for comparison to the above line")
                 fmt.Println("... Which is to say a 201,326,592 sided polygon, Mr. A. would have wept\n")
-
 
                 fmt.Println(" per option #", num, "  --  an improved version of Archimedes' method\n")
 
@@ -857,15 +856,15 @@ fmt.Println(arch) // prints the above rune
 case 6:  // ---- display a review of the derivation of the Pythagorean --------------------------------------------------
 
 
-fmt.Println("\n\n\n -- You entered '", num, "' to review the derivation of the Pythagorean, which is needed in method #5. We will")
-fmt.Println("be geometrically deriving the Pythagorean theorem according to the 12th century Indian Bhaskara.")
+fmt.Println("\n\n\n -- You entered '", num, "' to review the derivation of the Pythagorean, which was needed in method #5. We will")
+fmt.Println("be geometrically deriving the Pythagorean theorem according to the 12th century Indian, Bhaskara.")
 fmt.Println("    We begin with a square of area c\u00b2. We then partially fill that square with four congruent")
 fmt.Println("right triangles each with its right angle opposite to one of the sides 'c'. Each of the four congruent")
 fmt.Println("triangles now have sides c, a, and b. 'c' being the hypotenuse of each; 'a' being the shortest side and 'b'")
 fmt.Println("being the longer of sides 'a' and 'b'. Thus leaving a small square in the center, which we can ignore.")
 
 fmt.Println("     Next, we detach and slide two adjacent right triangles, each to its opposite side of the parent square.")
-fmt.Println("We now have two attached squares a x a and b x b. We can then clearly see that c\u00b2 = a\u00b2 + b\u00b2  ... ")
+fmt.Println("We now have two attached squares a x a and b x b. We can then clearly see that c\u00b2 = a\u00b2 + b\u00b2 ")
 fmt.Println(" --- The Pythagorean theorem is thereby derived, per Bhaskara --- ")
 
 fmt.Println("\n     Apparently it was not until 1876 that James Garfield (yea, the former U.S. president) discovered")
