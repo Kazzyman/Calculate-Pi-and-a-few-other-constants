@@ -4,7 +4,7 @@
 // One can obtain the Go Compiler from : https://go.dev/dl/
 
 package main
-import ("fmt"; "time"; "math"; "os")
+import ("fmt"; "time"; "math"; "os"; "io/ioutil"; "log") // include additional packages 
 
                 var LinesPerSecond float64  // global variables defined outside any function
                 var LinesPerIter float64
@@ -15,9 +15,9 @@ import ("fmt"; "time"; "math"; "os")
                 // a Println("\u00b0 is degree symbol") // would demonstrate the degree symbol 
 
 
-func check(e error) {   // create a func called check which e of type error ?
+func check(e error) {   // create a func named check which takes e of type error 
     if e != nil {
-        panic(e)        // use panic to display error code ? 
+        panic(e)        // use panic to display error code 
     }
 }
 
@@ -26,14 +26,14 @@ func main() {        // top-level program logic flow
         RicksDisplayMenu()   // displays the menu 
         RicksSwitch()       // contains a Scanf to input a menu selection 
 
-            // dummy pause section
+            // dummy pause 
             var Pnum int // intended to be used only as a dummy 
             fmt.Println("Hit Enter/Return to redisplay the menu") 
             fmt.Scanf("%d", &Pnum) // often flys right-past this Scanf 
 
-            // another dummy pause 
-            fmt.Println("Hit Enter/Return again to redisplay the menu") 
+            // another dummy pause is needed because some environments sometimes fly past the first
             var Mnum int
+            fmt.Println("Hit Enter/Return again to redisplay the menu") 
             fmt.Scanf("%d", &Mnum) 
 
     } // end of for 
@@ -45,7 +45,8 @@ p := fmt.Println  // define p as synonomous with the format Print line function
 p("")
 p("Enter 1 - 6 to execute one of the following methods for calculating π")
 p(" ")
-// p("1: Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the inspiration for all of this")
+// Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was my initial inspiration for all of this
+// ... option 1 below having been discussed on his channel 
 p("1:   Contains a square root, and only yeilds 4 digits of π")
 p("     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ...")
 p("                                    (1/8   * 1/5 * (1/2)exp5) - ...")
@@ -82,12 +83,12 @@ p("8:   Euler's Number: \u2107 or \u2147 the natural logarithmic base")
 p("       Explore the limit of interest")
 p(" ")
 
-fmt.Print("Enter your selection from above, 1 - 6 \u00a9 2022, by Richard Hart Woolley\n")
-fmt.Println("Ctrl-C to End/Exit\n")
+fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley\n")
+fmt.Println("Ctrl-C to End/Exit  SLOC including comments and white space = 1275 \n")
 }
 
 
-func RicksSwitch() {    // the main if-then-else routine to select a calculation from the menu
+func RicksSwitch() {    // the main if-then-else routine to select an option from the menu
 
         iterInt64 = 0     // this will be used to count iterations and for modulus calculations 
         iterFloat64 = 0  // this is needed to calculate and display code lines per second 
@@ -100,11 +101,22 @@ func RicksSwitch() {    // the main if-then-else routine to select a calculation
     var num int 
     p := fmt.Println
 
-fmt.Print("Enter your selection from above, 1 - 6 \u00a9 2022, by Richard Hart Woolley [we have an echo]\n")
+fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley [we have an echo]\n")
 
 fmt.Scanf("%d", &num)  // pause and accept input from the user
 
+if num > 11 && num < 99 { num = 12 }  // to display a funny out-of-range message as case 12
+
 switch num {  // will do only the case selected by inputed variable "num"
+
+case 100:
+    content, err := ioutil.ReadFile("dataFromConstants2.txt")
+
+     if err != nil {
+          log.Fatal(err)
+     }
+
+    fmt.Println(string(content))
 
 case 1: // --- if inputed varible num was "1" then do case 1 ----------------------------------------------------
 p(" ")
@@ -308,21 +320,22 @@ p(" ")
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n   --- Case #%d ---  on %s \n", num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- case #%d on %s \n", num, Hostname)
                     check(err0)
                 _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
                     check(err2)
                 _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
                     check(err3)
-                _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
-
 //
     p("  -- If we ran 50 billion more iterations we still would get only those 14 digits :(\n") // =========
 //
                 p(" per option #", num, "  --  the Nilakantha Somayaji series, circa 1500 AD\n")
+                fmt.Println("Select 100 at menu to display prior results")
+
 
             }
             //
@@ -464,16 +477,18 @@ p(" ")
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n   --- Case #%d ---  on %s \n", num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gregory-Leibniz -- case #%d on %s \n", num, Hostname)
                     check(err0)
                 _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
                     check(err2)
                 _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
                     check(err3)
-                _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
+                fmt.Println("Select 100 at menu to display prior results")
+
             }
     }
 
@@ -481,7 +496,7 @@ case 4: // ---------------------------------------------------------------------
 
 p(" ")
 p(" ")
-p("You selected #", num, " Gottfried Leibniz formula  :  π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ... ")
+p("You selected #", num, " Gottfried Wilhelm Leibniz formula  :  π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ... ")
 p("   Infinitesimal calculus was developed independently in the late 17th century by Isaac Newton")
 p("    ... and Gottfried Wilhelm Leibniz")
 p("   4 Billion iterations will be executed ... ")
@@ -510,7 +525,7 @@ p(" ")
                 if iterInt64 == 100000000 {p("... 100,000,000 completed iterations ...")
                 p(" ")
                 p("   #1 2345678#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.1415926,53589793 is from the web") 
                 p("   #1 2345678 90123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
@@ -523,7 +538,7 @@ p(" ")
                 if iterInt64 == 200000000 {p("... 200,000,000 gets another digit ...")
                 p(" ")
                 p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.14159265,3589793 is from the web") 
                 p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
@@ -535,7 +550,7 @@ p(" ")
                 if iterInt64 == 400000000 {p("... 400,000,000 iterations completed, still at nine ...")
                 p(" ")
                 p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.14159265,3589793 is from the web") 
                 p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
@@ -547,7 +562,7 @@ p(" ")
                 if iterInt64 == 600000000 {p("... 600,000,000 iterations, still at nine ...")
                 p(" ")
                 p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.14159265,3589793 is from the web") 
                 p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
@@ -559,7 +574,7 @@ p(" ")
                 if iterInt64 == 1000000000 {p("... 1 Billion iterations completed, still nine ...")
                 p(" ")
                 p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.14159265,3589793 is from the web") 
                 p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
@@ -571,7 +586,7 @@ p(" ")
                 if iterInt64 == 2000000000 {p("... 2 Billion, and still just nine ...")
                 p(" ")
                 p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.14159265,3589793 is from the web") 
                 p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
@@ -585,14 +600,14 @@ p(" ")
                 p("... 4 Billion, gets us ten digits  ...")
                 p(" ")
                 p("   #1 234567890#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.141592653,589793 is from the web") 
                 p("   #1 234567890 123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
                 elapsed := t.Sub(start4)
                 fmt.Print("  4,000,000,000 iterations in ", elapsed, " yields 10 digits of π\n")
                 p(" ")
-                p(" per option #", num, "  --  the Gottfried Leibniz formula\n")
+                p(" per option #", num, "  --  the Gottfried Wilhelm Leibniz formula\n")
 
                 LinesPerIter = 14
                 fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
@@ -605,16 +620,17 @@ p(" ")
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n   --- Case #%d ---  on %s \n", num, Hostname)  
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- case #%d on %s \n", num, Hostname)  
                     check(err0)
                 _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
                     check(err2)
                 _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
                     check(err3)
-                _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
+                fmt.Println("Select 100 at menu to display prior results")
                 }
 
 /* we skip the rest
@@ -622,7 +638,7 @@ p(" ")
                 if iterInt64 == 6000000000 {p("... 6 Billion completed.  ...")
                 p(" ")
                 p("   #1 234567890#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.141592653,589793 is from the web") 
                 p("   #1 234567890 123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
@@ -634,7 +650,7 @@ p(" ")
                 if iterInt64 == 8000000000 {p("... 8 Billion completed. still ten ...")
                 p(" ")
                 p("   #1 234567890#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.141592653,589793 is from the web") 
                 p("   #1 234567890 123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
@@ -646,14 +662,14 @@ p(" ")
             if iterInt64 == 9000000000 {
                 p(" ")
                 p("   #1 234567890#")
-                p("   ",π, "was calculated by the Gottfried Leibniz formula") 
+                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.141592653,589793 is from the web") 
                 p("   #1 234567890 123456# :: counting the first 16 actual digits of π")
                 // fmt.Print("   ", iter) 
                 t := time.Now()
                 elapsed := t.Sub(start4)
                 fmt.Print("\n... 9B iterations in ", elapsed, " , but to get 10 digits we only needed 4B iterations\n\n") 
-                p(" per option #", num, "  --  the Gottfried Leibniz formula")
+                p(" per option #", num, "  --  the Gottfried Wilhelm Leibniz formula")
             }  
 */
     } // end of for
@@ -840,7 +856,7 @@ fmt.Println(arch) // prints the above rune
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n   --- Case #%d ---  on %s \n", num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Archimedes of Syracuse -- case #%d on %s \n", num, Hostname)
                     check(err0)
                 _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
                     check(err2)
@@ -850,6 +866,7 @@ fmt.Println(arch) // prints the above rune
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%.0f was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
+                fmt.Println("Select 100 at menu to display prior results")
     }
 }
 
@@ -888,7 +905,9 @@ fmt.Println("                          and reducing it thusly : ")
 fmt.Println("        (a+b)\u00b2 = 2ab + c\u00b2 ")
 fmt.Println(" a\u00b2 + 2ab + b\u00b2 = 2ab + c\u00b2 ")
 fmt.Println("       a\u00b2 + b\u00b2 = c\u00b2 \n")
-fmt.Println("... proves the Pythagorean per Garfield; though, obviously, many other proofs do exist.\n")
+fmt.Println("... proves the Pythagorean per Garfield; though, obviously, many other proofs do exist.\n\n")
+    fmt.Println("Select 100 at menu to display prior results")
+
 
 
 case 7: // ------------------------------------------------------------------------------
@@ -1166,7 +1185,7 @@ p("   π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ...")
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n   --- Case #%d ---  on %s \n", num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis -- case #%d on %s \n", num, Hostname)
                     check(err0)
                 _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
                     check(err2)
@@ -1176,6 +1195,7 @@ p("   π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ...")
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
+                fmt.Println("Select 100 at menu to display prior results")
         }
     }
 
@@ -1248,13 +1268,17 @@ fmt.Println(Ricks_rune_Paragraph)
 
 // ---------------------------------------------------------------------------------------------------
 
-case 9: fmt.Println(" ... So sorry, but #", num, "was not an option.")
+case 9: fmt.Println(" ... So sorry, but", num, "was not an option.")
 
 case 10: // ------------------------------------------------------------------------------------
-    fmt.Println("#", num, " was not an option! It was not on the menu, go fish!\n")
+    fmt.Println(num, " was not an option! It was not on the menu, go fish!\n")
 
 case 11: 
-    fmt.Println("#", num, " is right-out!  Go Fish!\n")
+    fmt.Println("Your selection of", num, " is right-out!  Go Fish!\n")
+
+case 12: // the num switched on is set to 12 for all selections greater than 11
+    fmt.Println("Your selection of", num, " is really-far-out!  Go Fish!\n")
+
 
 default: // ------------------------------------------------------------------------------
         p(" ")
@@ -1265,4 +1289,4 @@ default: // --------------------------------------------------------------------
 p(" ")
 fmt.Println("Oops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu")
 } // end of switch
-} // end of func RicksSwitch()
+} // end of func RicksSwitch(), and end of 28 pages, 8,325 words, 63,400 characters 
