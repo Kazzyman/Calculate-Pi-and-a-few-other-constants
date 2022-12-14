@@ -873,7 +873,7 @@ astronomer, and inventor from the ancient city of Syracuse in Sicily.`
 case 6:  // ---- display a review of the derivation of the Pythagorean --------------------------------------------------
 
 
-fmt.Println("\n\n\n -- You entered '", num, "' to review the derivation of the Pythagorean, which was needed in method #5. We will")
+fmt.Print("\n\n\n -- You entered '", num, "' to review the derivation of the Pythagorean, which was needed in method #5. We will\n")
 fmt.Println("be geometrically deriving the Pythagorean theorem according to the 12th century Indian, Bhaskara.")
 fmt.Println("    We begin with a square of area c\u00b2. We then partially fill that square with four congruent")
 fmt.Println("right triangles each with its right angle opposite to one of the sides 'c'. Each of the four congruent")
