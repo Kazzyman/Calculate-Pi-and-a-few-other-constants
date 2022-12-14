@@ -1,35 +1,56 @@
 package main
 import ("fmt")
 
+	var dimention = 10
+	var area = dimention * dimention
+  	var pairs = []int{dimention, area}
+  	var index = 0 
+
+
+
 func main() {
-	var dimention uint64
-	var area uint64 
 
-	dimention = 100
-	area = dimention * dimention
-	iter := 0
-  	index := 0
+  fmt.Printf("pairs from first index = %v %v \n", pairs[index], pairs[index+1])
 
-  pairs := []uint64{dimention, area}
+  buildTable()
 
-  for iter < 23 {
+  readTable()
 
-  	iter++
-  	dimention++
-
-  	area = dimention*dimention
-
-  pairs = append(pairs, dimention, area )  
-
-  fmt.Printf("pairs = %v %v \n", pairs[index], pairs[index+1])
-  	index = index+2
-
+  fmt.Printf("pairs from final index = %v %v \n", pairs[index], pairs[index+1])
+  fmt.Print(pairs)
 }
 
-//fmt.Print(pairs)
 
-//  fmt.Printf("pairs from last = %v %v \n", pairs[6], pairs[7])
 
-  //sliceManipulation.go
+func buildTable() {
 
+	iter := 0
+
+	  	for iter < 500 {
+
+  			iter++
+  			dimention++
+
+  			area = dimention*dimention
+
+  			pairs = append(pairs, dimention, area )  
+
+  			index = index+2
+		}
+}
+
+
+func readTable() {
+
+	iter := 0
+	index = 0
+
+	for iter < 490 {
+
+		iter++
+
+			fmt.Println(pairs[index], pairs[index+1])
+
+  		index = index+2
+	}
 }
