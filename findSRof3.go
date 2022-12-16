@@ -1,83 +1,94 @@
 package main
 import ("fmt")
 
-	var root = 10
+	var root = 100
 	var PerfectSquare = root * root
   	var sliceOfPerfectSquares = []int{PerfectSquare} // initialize slice with 100
   	var index = 0 
 
-  	var sliceOfP_diffs = []float32{99.9999}  // init with a large p_diff 
-
-
+  	var sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = []float32{99.9999}  // init with a large-ish p_diff_from_larger_hit
+  	var sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = []float32{88.888}
 
 func main() {
 
-  fmt.Printf("PerfectSquare from first index = %v and should be 100 \n", sliceOfPerfectSquares[index])
+  fmt.Printf("PerfectSquare from first index = %v and should be 10000 \n", sliceOfPerfectSquares[index])
 
   buildTableOfOnlyPerfectSquares()
 
   readTableOfPerfectSquares()  // 
 
-  lengthOfsliceOfPerfectSquares := len(sliceOfPerfectSquares )
+  lengthOfsliceOfPerfectSquares := len(sliceOfPerfectSquares)
   capOfsliceOfPerfectSquares := cap(sliceOfPerfectSquares)
 
-  fmt.Printf("length of slice is %v after bulid\n", lengthOfsliceOfPerfectSquares)
+  fmt.Printf("\nlength of slice is %v after bulid\n", lengthOfsliceOfPerfectSquares)
   fmt.Printf("cap of slice is %v after bulid\n", capOfsliceOfPerfectSquares)
 
 
-  fmt.Println(sliceOfP_diffs)  // dump the entire slice
+  fmt.Println(sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit)  // dump the entire slice
 }
-
 
 
 func buildTableOfOnlyPerfectSquares() {
 
 	iter := 0
 
-	  	for iter < 500 {
+	  	for iter < 2000 {
 
   			iter++
-  			root++
+  			root++ // began at 1,000 
 
   			PerfectSquare = root*root
 
-  			sliceOfPerfectSquares = append(sliceOfPerfectSquares, PerfectSquare )  
-
+  			sliceOfPerfectSquares = append(sliceOfPerfectSquares, PerfectSquare)  // update sliceOfPerfectSquares with another PerfectSquare
 		}
 }
-
 
 func readTableOfPerfectSquares() {  // read and print each perfect square on its own line
 
 	iter := 0
-	index = 0
+	index = 0 // a global variable 
+                                                                      // save a copy of smlr psqr 
+			smallerPerfectSquareOnce := sliceOfPerfectSquares[index]  // do this just once per func call 
 
-			smallerPerfectSquareOnce := sliceOfPerfectSquares[index]  // do this just once
-
-	for iter < 490 {
+	for iter < 1990 {
 
 		iter++
   		index++
-			largerPerfectSquare := sliceOfPerfectSquares[index]
-			if largerPerfectSquare >= smallerPerfectSquareOnce*3 {
-				if largerPerfectSquare == smallerPerfectSquareOnce*3 {
-					fmt.Println("It is a miricle, everyone was wrong! ")
+			largerPerfectSquare := sliceOfPerfectSquares[index]        // get next perfect square 
+				if largerPerfectSquare == smallerPerfectSquareOnce*3 { // or, in the case that it is a miricle ...
+					fmt.Println("It is a miricle, everyone was wrong! ") // praise god
+					break // does this exit the for loop ??? 
 				}
-			}
+			if largerPerfectSquare >= smallerPerfectSquareOnce*3 {     // if it is a candidate based on being just larger than 3x smlr psqr
 					ProspectiveHitOnLargeSide := largerPerfectSquare
-					p_diff := determinDiff(ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)  // a1, a2
+					p_diff_from_larger_hit:= determinDiff(ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)  // ProspectiveHitOnLargeSide_Par, smallerPerfectSquareOnce_T3
 
-					fmt.Println("print this ", p_diff, smallerPerfectSquareOnce, ProspectiveHitOnLargeSide) // this does execute 
+					Prospective_smaller_hit := sliceOfPerfectSquares[index-1]
 
-					sliceOfP_diffs = append(sliceOfP_diffs, p_diff)
-			
+					p_diff_from_smlr_hit := determinDiff(Prospective_smaller_hit, smallerPerfectSquareOnce*3)
+
+					sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit, p_diff_from_smlr_hit) // build a slice of ... // may not need this as a slice ????
+
+
+
+					//fmt.Println("p_diff, smlr_ps, Prospective_smaller_hit, p_hitOnlrgrSd, p_diff_from_smlr_hit :: ", p_diff, smallerPerfectSquareOnce, Prospective_smaller_hit, ProspectiveHitOnLargeSide, p_diff_from_smlr_hit)
+					fmt.Println("smlr_ps, Prospective_smaller_hit, p_diff_from_smlr_hit, ProspectiveHitOnLargeSide, p_diff_from_larger_hit:: ", smallerPerfectSquareOnce, Prospective_smaller_hit, p_diff_from_smlr_hit, ProspectiveHitOnLargeSide, p_diff_from_larger_hit)
+
+					sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit, p_diff_from_larger_hit)
+
+					break 
+			}
 	}
 }
 
-func determinDiff (a1 int, a2 int) float32 {
-	smallerPerfectSquareOnce3TF := float32(a2)
-	ProspectiveHitOnLargeSideF := float32(a1) 
-	return (smallerPerfectSquareOnce3TF/ProspectiveHitOnLargeSideF)  // (300/growing_squares) ... if this is close to 1.000 then it is a hit
+func determinDiff (ProspectiveHitOnLargeSide_Par int, smallerPerfectSquareOnce_T3 int) float32 {
+	smallerPerfectSquareOnce3TF := float32(smallerPerfectSquareOnce_T3)
+	ProspectiveHitOnLargeSideF := float32(ProspectiveHitOnLargeSide_Par) 
+
+		the_absolute_diff := ProspectiveHitOnLargeSideF - smallerPerfectSquareOnce3TF  // this begins as significant, and just grows to become rediculously large, as it should
+		fmt.Println("the absolute_diff is", the_absolute_diff)
+
+		return (the_absolute_diff/100)  // attempting to return the diff as a percent, and now we have it :) 
 }
 /*
 1: 
