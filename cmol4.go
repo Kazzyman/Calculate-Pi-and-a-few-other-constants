@@ -59,7 +59,8 @@ p("Enter 1 - 6 to execute one of the following methods for calculating π (pi) "
 p(" ")
 // Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was my initial inspiration for all of this ...
 // ... option 1 below having been discussed on his channel 
-p("1:   Contains a square root, and only yeilds 4 digits of π")
+p("1:   This compact method contains a square root of 3 (see selection 10), and it ")
+p("     only yeilds 4 digits of π")
 p("     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ...")
 p("                                    (1/8   * 1/5 * (1/2)exp5) - ...")
 p("                                    (1/16  * 1/7 * (1/2)exp7) - ...")
@@ -91,26 +92,23 @@ p("7:   An infinite series by John Wallis circa 1655")
 p("     π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
 p("       One-Billion iterations will be executed; option for 40 billion iterations")
 p("       9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
-p("8:   Euler's Number: \u2107 or \u2147 the natural logarithmic base\n")
+p("8:   Euler's Number: \u2107 or \u2147 the natural logarithmic base")
 p("       Explore the limit of interest")
 p(" ")
 p("9:   Display prior results from 2 through 7\n")
 // 
-p("10:  Square Root of 3 \n ")
-//
-//p(" ")
-//p("\n")
+p("10:  Calculate the Square Root of 3 from the first first-principles of")
+p("     geometry, i.e., from a ratio of 3:1 of perfect squares\n")
 
 //fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley\n")
 // the above commented line is definately not needed in a Linux environment
-fmt.Println("Ctrl-C to End/Exit  SLOC including comments and white space = 1292 \n")
+fmt.Println("Ctrl-C to End/Exit  SLOC including comments and white space = 1448 \n")
 }
 
 func RicksSwitch() {    // the main if-then-else routine to select an option from the menu
 
-        iterInt64 = 0     // this will be used to count iterations and for modulus calculations 
-        iterFloat64 = 0  // this is needed to calculate and display code lines per second 
-
+    iterInt64 = 0     // this will be used to count iterations and for modulus calculations 
+    iterFloat64 = 0  // this is needed to calculate and display code lines per second 
     var secondDenom float64  
     secondDenom = 3
     var four float64
@@ -123,15 +121,9 @@ func RicksSwitch() {    // the main if-then-else routine to select an option fro
 // the above may be needed in some environments (windows) along with the duplicate in RicksDisplayMenu()
 fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley \n")
 fmt.Scanf("%d", &num)  // pause and accept input from the user
-
-
     if num == 0 {
-        p(" ")
-        // fmt.Println("this is the switch default code after the break option ")
-        fmt.Println("You failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
+        fmt.Println("\nYou failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
     }
-
-
 
 // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- 
 if num > 14 && num < 100 { num = 15 }  // to display a funny out-of-range message as case 12
@@ -144,7 +136,6 @@ case 9: // read and display contents of prior results file ...
         } else {
             fmt.Println(string(content))
         }
-
 
 case 1: // --- if inputed varible num was "1" then only do case 1 ------------------------------------------
 p(" ")
@@ -359,7 +350,7 @@ p(" ")
     p("  -- If we ran 50 billion more iterations we still would get only those 14 digits :(\n") // =========
 //
                 p(" per option #", num, "  --  the Nilakantha Somayaji series, circa 1500 AD\n")
-                fmt.Println("Select 100 at menu to display prior results")
+                fmt.Println("Select 9 at menu to display prior results")
 // case 2
             }
             //
@@ -430,7 +421,7 @@ p(" ")
         iterFloat64 = iterFloat64 + 1
         nextOdd = nextOdd + 2
         tally = tally-(tally/nextOdd)
-        tally = tally+(tally/nextOdd) // pi is set equl to the sum of a subtraction and an addition, alternatively 
+        tally = tally+(tally/nextOdd) // pi (tally) is set equl to the sum of a subtraction and an addition, alternatively 
 
                 if iterInt64 == 10000000 {p("... 10,000,000 of three hundred million completed. still working, but ...")
                 p(" ")
@@ -510,7 +501,7 @@ p(" ")
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
-                fmt.Println("Select 100 at menu to display prior results")
+                fmt.Println("Select 9 at menu to display prior results")
 
             }
     }
@@ -655,7 +646,7 @@ p(" ")
                 _ , err7 := fmt.Fprintf(fileHandle, "Total runTime was %s \n", TotalRun)  // add total runtime of this calculation 
                     check(err7)
 
-                fmt.Println("Select 100 at menu to display prior results")
+                fmt.Println("Select 9 at menu to display prior results")
                 }
 //case 4 
 /* we skip the rest
@@ -893,7 +884,7 @@ astronomer, and inventor from the ancient city of Syracuse in Sicily.`
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%.0f was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
-                fmt.Println("Select 100 at menu to display prior results")
+                fmt.Println("Select 9 at menu to display prior results")
     }
 }
 
@@ -933,7 +924,7 @@ fmt.Println("        (a+b)\u00b2 = 2ab + c\u00b2 ")
 fmt.Println(" a\u00b2 + 2ab + b\u00b2 = 2ab + c\u00b2 ")
 fmt.Println("       a\u00b2 + b\u00b2 = c\u00b2 \n")
 fmt.Println("... proves the Pythagorean per Garfield; though, obviously, many other proofs do exist.\n\n")
-    fmt.Println("Select 100 at menu to display prior results")
+    fmt.Println("Select 9 at menu to display prior results")
 
 
 case 7: // ------------------------------------------------------------------------------
@@ -1225,7 +1216,7 @@ p("   π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ...")
                 TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
                 _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun)  // add total runtime of this calculation 
                     check(err7)
-                fmt.Println("Select 100 at menu to display prior results")
+                fmt.Println("Select 9 at menu to display prior results")
         }
     }
 
@@ -1329,6 +1320,7 @@ p(" ")
 fmt.Println("Oops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu")
 
 default: // ------------------------------------------------------------------------------
+    fmt.Println("this is the switch default code after the break option ")
 
 } // end of switch
 } // end of func RicksSwitch()
@@ -1447,5 +1439,3 @@ func readTableOfPerfectSquares(index2 int) {  //
         // if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { break } // break // end of if we have found a candidate, this break kills it too early 
     }  // END OF FOR LOOP after 96,000 index-d loops "iter-s" ----- IT SEEMS TO HANG AFTER DOING THE 96,000 ITERS ?????????????????????????????????????????????????????
 } // end of readTableOfPerfectSquares(index2 int)
-
-// 
