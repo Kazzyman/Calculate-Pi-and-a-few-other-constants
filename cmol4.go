@@ -12,6 +12,9 @@ import ("fmt"; "time"; "math"; "os"; "io/ioutil") // include additional packages
             var iterInt64 int64  // to be used primarily in selections which require modulus calculations 
             var iterFloat64 float64  // to be used in selections which do not require modulus calculations 
 
+            var SetBreakFlag1 int
+            var SetBreakFlag2 int
+
             // a Println("\\caf\u00e9 , 5*5 is 5\u00b2 , squareroot symbol is \u221A") // Prints \café
             // a Println("\u00b0 is degree symbol") // would demonstrate the degree symbol 
 
@@ -88,10 +91,15 @@ p("7:   An infinite series by John Wallis circa 1655")
 p("     π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
 p("       One-Billion iterations will be executed; option for 40 billion iterations")
 p("       9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
-p("8:   Euler's Number: \u2107 or \u2147 the natural logarithmic base")
+p("8:   Euler's Number: \u2107 or \u2147 the natural logarithmic base\n")
 p("       Explore the limit of interest")
 p(" ")
-p("100: Enter '100' to display prior results\n")
+p("9:   Display prior results from 2 through 7\n")
+// 
+p("10:  Square Root of 3 \n ")
+//
+//p(" ")
+//p("\n")
 
 //fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley\n")
 // the above commented line is definately not needed in a Linux environment
@@ -116,9 +124,20 @@ func RicksSwitch() {    // the main if-then-else routine to select an option fro
 fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley \n")
 fmt.Scanf("%d", &num)  // pause and accept input from the user
 
-if num > 14 && num < 100 { num = 12 }  // to display a funny out-of-range message as case 12
+
+    if num == 0 {
+        p(" ")
+        // fmt.Println("this is the switch default code after the break option ")
+        fmt.Println("You failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
+    }
+
+
+
+// --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- 
+if num > 14 && num < 100 { num = 15 }  // to display a funny out-of-range message as case 12
 switch num {  // will do only the case selected by inputed variable "num"
-case 100: // read and display contents of prior results file ... 
+
+case 9: // read and display contents of prior results file ... 
     content, err := ioutil.ReadFile("dataFromConstants.txt")
         if err != nil {   // if the file does not exist ... 
             fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
@@ -1279,46 +1298,45 @@ fmt.Println(Ricks_rune_Paragraph)
 
 // ----------------------------------------------------------------------------------------------------
 
-case 9: 
-    fmt.Println(" ... So sorry, but", num, "was not an option")
-
-case 10: // -------------------------------------------------------------------------------------------
-    fmt.Println(num, " was not an option! It was not on the menu, go fish!\n")
-
-case 11: 
-    fmt.Println("Your selection of", num, " is right-out!  Go Fish!\n")
-
-// the num switched-on is set to 12 for all selections greater than 11 & < 100 
-case 12: 
-    fmt.Println("Your selection is really-far-out!  Go Fish!\n")
-case 13:
-    //package main
-//import ("fmt"; "math")
-
+case 10:
  
-//func main() {
-  // fmt.Printf("Root and PerfectSquare from first indexing = %v and %v which should be 100 and 10000 \n", sliceOfPerfectSquares_and_their_roots[0+1], sliceOfPerfectSquares_and_their_roots[0])
-
         buildTableOfOnlyPerfectSquares()  // easy, no issues here
 
     var index = 0 // no-longer a global variable 
-    for index < 1000000 {
+    for index < 300000 {
         readTableOfPerfectSquares(index)  // pass-in the index // may need or want more than just one ???
         index = index + 2 
     }
-//}  // end main
-default: // ------------------------------------------------------------------------------
-        p(" ")
-        // fmt.Println("this is the switch default code after the break option ")
-        fmt.Println("You failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
-    break 
 
+
+    break 
+    // what is this break for, did it go with the above misplaced code that I have now commented out ?????????????????????????????????
+
+case 11: 
+    fmt.Println(" ... So sorry, but", num, "was not an option")
+
+case 12: // -------------------------------------------------------------------------------------------
+    fmt.Println(num, " was not an option! It was not on the menu, go fish!\n")
+
+case 13: 
+    fmt.Println("Your selection of", num, " is right-out!  Go Fish!\n")
+
+case 14: 
+    fmt.Println("Your selection is really-far-out!  Go Fish!\n")
+
+case 15: 
 p(" ")
 fmt.Println("Oops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu")
+
+default: // ------------------------------------------------------------------------------
 
 } // end of switch
 } // end of func RicksSwitch()
 
+func determinDiff (ProspectiveHit_Par int, smallerPerfectSquareOnce_T3 int) float32 {  
+        the_absolute_diff := float32(ProspectiveHit_Par) - float32(smallerPerfectSquareOnce_T3) 
+        return (the_absolute_diff/100) 
+}
 
 func buildTableOfOnlyPerfectSquares() {  // easy, no issues here
     iter := 0
@@ -1343,7 +1361,8 @@ func readTableOfPerfectSquares(index2 int) {  //
                     fmt.Println("It is a miricle, everyone was wrong! ") // praise god
                     break  // exit the for loop ?
                 }
-            if largerPerfectSquare >= smallerPerfectSquareOnce*3 {     // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3*smlr_PS
+// if loop 1
+            if largerPerfectSquare >= smallerPerfectSquareOnce*3 {     // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3*smlr_PS deal with that, else loop to the next potential 
 
                     ProspectiveHitOnLargeSide := largerPerfectSquare
                     p_diff_from_larger_hit:= determinDiff(ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)  // ProspectiveHitOnLargeSide_Par, smallerPerfectSquareOnce_T3
@@ -1359,41 +1378,74 @@ func readTableOfPerfectSquares(index2 int) {  //
                     sr_per_sm := (math.Sqrt(float64(Prospective_smaller_hit)) / math.Sqrt(float64(smallerPerfectSquareOnce)))  // a 3:1 ratio 
 
 
-if sr_per_sm > 1.7320508066 { if sr_per_sm < 1.7320508074 { fmt.Println(sr_per_sm, "is close at", iter, "iterations, hits are:", Prospective_smaller_hit, smallerPerfectSquareOnce)} 
-// break 
-}
-
+                if sr_per_sm > 1.7320508066 { if sr_per_sm < 1.7320508074 { fmt.Println(sr_per_sm, "from top, is close at", iter, "iterations, hits are:", Prospective_smaller_hit, smallerPerfectSquareOnce)} 
+/*
+                    if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { fmt.Println("\n caught a flag in top", SetBreakFlag1, SetBreakFlag2)  // THIS FAILED TO EXECUTE, or break because the flags are not set
+                        break 
+                    } 
+*/
+                }
 
                     if sr_per_sm > 1.73205080752 {
                         if sr_per_sm < 1.7320508077 {
                             fmt.Println("\nPer the smaller ps, the \u221A3 is ... ", sr_per_sm, "after", iter, "iterations") 
                             fmt.Println("which is ten correct digits via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
                             fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", Prospective_smaller_hit, "over the sqrt of", smallerPerfectSquareOnce, "\n")
-                             // break  // NOT exit the for loop ?
+/*                            SetBreakFlag1 = 1 
+
+
+                            if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { fmt.Println("\n caught a flag in 1aa", SetBreakFlag1, SetBreakFlag2)  // THIS does EXECUTE but only once 
+                                break 
+                            } 
+*/
                         } 
-                        // break 
                     }
-                    break // ok, but still run a long time ?? 
+
+/*
+                        if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { fmt.Println("\n caught a flag in 1a", SetBreakFlag1, SetBreakFlag2)  // these do not 
+                            break 
+                        } 
+
+                        if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { fmt.Println("\n caught a flag in 1b", SetBreakFlag1, SetBreakFlag2)  // these do not
+                            break 
+                        } 
+
+                    } // THIS BELONGS OUTSIDE OF THIS COMMENT BLOCK 
+
+                    if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { fmt.Println("caught a flag in 1c", SetBreakFlag1, SetBreakFlag2)  // THIS does execute repeatedly, does not break the loop ?????
+                        break 
+                    } 
+*/ 
+
 // should instead be deciding final answer based on closeness of fit, percent diff, to exactly 3x smaller perfect square. Not just checking to see if we have gotten this close to the known value of Sqrt of 3
+
                     sr_per_lg := (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce)))
                     if sr_per_lg > 1.73205080752 {
                         if sr_per_lg < 1.7320508077 {  // 1.73205080757 (so 1.73205080754 - 1.73205080759 )
                             fmt.Println("\nPer the larger ps, the \u221A3 is ... ", sr_per_sm,  "after", iter, "iterations") 
                             fmt.Println("which is ten correct digits via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
                             fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", Prospective_smaller_hit, "over the sqrt of", smallerPerfectSquareOnce)
-                             // break  // NOT exit the for loop ?
-                        }   
-                        // break 
-                    }  // end of local if 
-                     // break  // exit the for loop ? YES, either THIS or the one above IS ESSENTIAL, BUT WHY ?? -- it is within the if we have found a candidate 
-            }  
-            // break // end of if we have found a candidate, this break kills it too early 
-    }  // END OF FOR LOOP
-} // end of readTableOfPerfectSquares(index2 int)
+                            //SetBreakFlag2 = 2  
+                        }
+                    }
+/*
+                        if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { fmt.Println("\n caught a flag in 2a", SetBreakFlag1, SetBreakFlag2) // THIS FAILED TO EXECUTE !!! 
+                            break 
+                        }  
+                    }  // THIS BELONGS OUTSIDE THIS COMMENT BLOCK the above break breaks out of this 
 
-func determinDiff (ProspectiveHit_Par int, smallerPerfectSquareOnce_T3 int) float32 {  
-        the_absolute_diff := float32(ProspectiveHit_Par) - float32(smallerPerfectSquareOnce_T3) 
-        return (the_absolute_diff/100) 
-}
+                    if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { fmt.Println("\n caught a flag in 2b", SetBreakFlag1, SetBreakFlag2)  // THIS FAILED TO EXECUTE !!! AND YET THE NEXT DOES
+                        break 
+                    }      
+                    // the above break should break out of the "end if loop 1" block, below --- just as the break on the following line seems to do ??? 
+*/
+                    break // this break does make everything run pretty well, either THIS or some one above IS ESSENTIAL, BUT WHY ?? -- because, it is within the "if we have found a candidate" block 
+                    // without this break nothing displays, and the proc is eventually killed
+            }  // end if loop 1 "if we have found a candidate" we have already dealt with it so we need to break and get another potential from the for loop ???
+            // we seem to need to break out instead of just fall out of this if block ????????????????????????????????????
+
+        // if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { break } // break // end of if we have found a candidate, this break kills it too early 
+    }  // END OF FOR LOOP after 96,000 index-d loops "iter-s" ----- IT SEEMS TO HANG AFTER DOING THE 96,000 ITERS ?????????????????????????????????????????????????????
+} // end of readTableOfPerfectSquares(index2 int)
 
 // 
