@@ -55,8 +55,8 @@ func check(e error) {   // create a func named check which takes e of type error
 func RicksDisplayMenu() {
 p := fmt.Println  // define p as synonomous with the format Print line function
 p("")
-p("Enter 1 - 6 to execute one of the following methods for calculating π (pi) ")
-p(" ")
+p("Enter 1 - 7 to execute one of the following methods for calculating π (pi)")
+p("Enter 8 to explore Euler's Number; or 10 to calculate the Square Root of 3\n")
 // Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was my initial inspiration for all of this ...
 // ... option 1 below having been discussed on his channel 
 p("1:   This compact method contains a square root of 3 (see selection 10), and it ")
@@ -86,7 +86,7 @@ p(" ")
 p("5:   Archimedes' method (improved) of bisecting triangles, circa 200 BC")
 p("     π = begining with a hexagon, iteratively double its number of sides") 
 p("       26 iterations is all it will take to get the ... ")
-p("       16 digits of π -- v.fast     (enter '6' for Pythagorean theorem)")
+p("       16 digits of π -- v.fast   (ENTER '6' for Pythagorean theorem)")
 p("")
 p("7:   An infinite series by John Wallis circa 1655")
 p("     π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
@@ -95,7 +95,7 @@ p("       9 digits of π -- a billion loops, in seconds -- option for 10 digits\
 p("8:   Euler's Number: \u2107 or \u2147 the natural logarithmic base")
 p("       Explore the limit of interest")
 p(" ")
-p("9:   Display prior results from 2 through 7\n")
+p("9:   Display prior results from selections 2 through 7\n")
 // 
 p("10:  Calculate the Square Root of 3 from the first first-principles of")
 p("     geometry, i.e., from a ratio of 3:1 of perfect squares\n")
