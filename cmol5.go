@@ -1,49 +1,40 @@
 // compile with: "go build -o cmol4 cmol4.go"
 // ... thereafter you can run it with "/fullpathname/cmol4"
 // ... or, having first obtained the Go compiler, ... just run the source with: "go run cmol4.go"
-
 // One can obtain the Go Compiler from : https://go.dev/dl/
 
 package main
 import ("fmt"; "time"; "math"; "os"; "io/ioutil") // include additional packages 
-
-            var LinesPerSecond float64  // global variables defined outside any function
+// global variables defined outside (between) any function, anywhere in the package ======================
+            var LinesPerSecond float64  
             var LinesPerIter float64
             var iterInt64 int64  // to be used primarily in selections which require modulus calculations 
             var iterFloat64 float64  // to be used in selections which do not require modulus calculations 
-
-            var SetBreakFlag1 int
-            var SetBreakFlag2 int
-
-            // a Println("\\caf\u00e9 , 5*5 is 5\u00b2 , squareroot symbol is \u221A") // Prints \café
-            // a Println("\u00b0 is degree symbol") // would demonstrate the degree symbol 
-
-                   var root = 100
+            var root = 100
             var PerfectSquare = root * root
-
             var sliceOfPerfectSquares_and_their_roots = []int{PerfectSquare, root} // initialize slice with 100
             var sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = []float32{99.9999}  // init with a large-ish p_diff_from_larger_hit
             var sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = []float32{88.888}     //   "            "      p_diff_from_smlr_hit
-
+// global variables defined outside (between) any function, anywhere in the package ======================
 
 func main() {        // top-level program logic flow 
     for 1 == 1 {    // loop endlessly, or Ctrl-C to Exit
-        RicksDisplayMenu()   // displays the menu 
+        RicksDisplayMenuPi()   // displays the menu 
         RicksSwitch()       // contains a Scanf to input a menu selection 
 /*
-    // additional dummy pause -- which is not needed on a Linux System and seems to be the only mod needed on Win11
+    Additional kluge pause -- which is not needed on a Unix System, and seems to be the only mod needed on Windws-11
             var Pnum int // intended to be used only as a dummy 
             fmt.Println("Hit Enter/Return to redisplay the menu") 
             fmt.Scanf("%d", &Pnum) // often flys right-past this Scanf 
 */
-    // another dummy pause (the above block) is "needed" in some environments because they sometimes ... 
-    // ... fly rite-past the first and then redisplay the menu (Windows 11 does this)
-            var Mnum int
-            fmt.Println("Hit Enter/Return again to redisplay the menu") 
-            fmt.Scanf("%d", &Mnum) 
-
-    } // end of for 
-} // end of main, end of top-level program logic flow 
+// Another kluge pause (the above block) is also "needed" in some environments because they sometimes ... 
+// ... fly rite-past that first one and then redisplay the menu (Windows 11 does this)
+        fmt.Println("Hit Enter/Return again to redisplay the menu") 
+        var Mnum int // just a local kluge element 
+        fmt.Scanf("%d", &Mnum) // request input on command line (pause)
+// but even Unix style systems require a single kluge like this one. 
+    } // end of "endless" for loop
+} // end of main() func, top-level program logic flow 
 
 
 func check(e error) {   // create a func named check which takes e of type error 
@@ -52,12 +43,12 @@ func check(e error) {   // create a func named check which takes e of type error
     }
 }
 
-func RicksDisplayMenu() {
-p := fmt.Println  // define p as synonomous with the format Print line function
+func RicksDisplayMenuPi() {
+p := fmt.Println  // define p as synonomous with the format-Print-line function
 p("")
 p("Enter 1 - 7 to execute one of the following methods for calculating π (pi)")
 p("Enter 8 to explore Euler's Number; or 10 to calculate the Square Root of 3\n")
-// Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was my initial inspiration for all of this ...
+// Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the initial inspiration for all of this ...
 // ... option 1 below having been discussed on his channel 
 p("1:   This compact method contains a square root of 3 (see selection 10), and it ")
 p("     only yeilds 4 digits of π")
@@ -106,67 +97,57 @@ fmt.Println("Ctrl-C to End/Exit  SLOC including comments and white space = 1440 
 }
 
 func RicksSwitch() {    // the main if-then-else routine to select an option from the menu
-
     iterInt64 = 0     // this will be used to count iterations and for modulus calculations 
-    iterFloat64 = 0  // this is needed to calculate and display code lines per second 
+    iterFloat64 = 0  // this is used to calculate and display code lines per second 
     var secondDenom float64  
     secondDenom = 3
     var four float64
     four = 4
-    var π float64
+    var π float64  // a var can be any character 
     var num int 
-    p := fmt.Println
-
-//fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley [it's an echo]\n")
-// the above may be needed in some environments (windows) along with the duplicate in RicksDisplayMenu()
-fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley \n")
-fmt.Scanf("%d", &num)  // pause and accept input from the user
+    p := fmt.Println  // define p as synonomous with the format-Print-line function anywhere in RicksSwitch() func
+//fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley [it's an echo]\n")  // and a kluge
+// this kluge may be needed in some environments (windows) along with the duplicate in RicksDisplayMenuPi()
+        fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley \n")
+        fmt.Scanf("%d", &num)  // pause and request input from the user
     if num == 0 {
         fmt.Println("\nYou failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
     }
 
-// --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- 
-if num > 14 && num < 100 { num = 15 }  // to display a funny out-of-range message as case 12
+// --- the SWITCH follows --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- 
+if num > 14 && num < 100 { num = 15 }  // to display a funny out-of-range message as case 15:
 switch num {  // will do only the case selected by inputed variable "num"
 
-case 9: // read and display contents of prior results file ... 
-    content, err := ioutil.ReadFile("dataFromConstants.txt")
+case 9: // read and display contents of prior results file ... case numbers need not be ordinal 
+    content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
         if err != nil {   // if the file does not exist ... 
             fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
         } else {
-            fmt.Println(string(content))
+            fmt.Println(string(content))  // dump/display entire file to command line
         }
 
 case 1: // --- if inputed varible num was "1" then only do case 1 ------------------------------------------
-p(" ")
-p("You selected #", num)
-p(" ")
-p("     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ")
+p("\nYou selected #", num)
+p("\n     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ")
 p("                                    (1/8   * 1/5 * (1/2)exp5) - ")
 p("                                    (1/16  * 1/7 * (1/2)exp7) - ")
-p("                                    (1/128 * 1/9 * (1/2)exp9) - ... - Sqrt(3)/8) )")
-p(" ")
-
-var twelve float64
-twelve = 12
-var πViaNewton float64 
-var SumOfTerms float64 
-
-var initialDenomOfFirst float64
-initialDenomOfFirst = 2
-var nextDenomOfFirst float64 
-nextDenomOfFirst = 8
-
-var savedFirstDenom float64
-savedFirstDenom = 0.0
-
-var exponent float64 
-exponent = 3
-
-SumOfTerms = - ( (1/initialDenomOfFirst) * (1/secondDenom) * math.Pow(0.50,exponent) )  // 2 and 3 and 3
-
+p("                                    (1/128 * 1/9 * (1/2)exp9) - ... - Sqrt(3)/8) ) \n")
+    start := time.Now()
+        var twelve float64
+        twelve = 12
+        var πViaNewton float64 
+        var initialDenomOfFirst float64
+        initialDenomOfFirst = 2
+        var nextDenomOfFirst float64 
+        nextDenomOfFirst = 8
+        var savedFirstDenom float64
+        savedFirstDenom = 0.0
+        var exponent float64 
+        exponent = 3
+        var SumOfTerms float64 
+        SumOfTerms = - ( (1/initialDenomOfFirst) * (1/secondDenom) * math.Pow(0.50,exponent) )  // 2 and 3 and 3
     for iterInt64 < 6 {
-        iterInt64 = iterInt64 + 1 
+        iterInt64++ 
             exponent = exponent + 2.0
             secondDenom = secondDenom + 2.0
             SumOfTerms = (SumOfTerms - ( (1/nextDenomOfFirst) * (1/secondDenom) * math.Pow(0.50,exponent) ) )
@@ -219,54 +200,53 @@ SumOfTerms = - ( (1/initialDenomOfFirst) * (1/secondDenom) * math.Pow(0.50,expon
             p("  #1 234567890123456# :: counting the first 16 actual digits of π")
         }
     }
+            t := time.Now()
+            elapsed := t.Sub(start)
 
-p(" ")
-p("Newton also found π to 16 digits by the first 22 terms of :")
-p("3*Sqrt(3)/4 + 24*( 2/3*2^3 - 1/5*2^5 - 1/28*2^7 - 1/72*2^9 - 5/704*2^11 - 7/1664*2^13 )")  // this psudocode is emplemented below
+            fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                check(err1)                    // ... gets a file handle to dataFromConstants.txt
+                defer fileHandle.Close()      // It’s idiomatic to defer a Close immediately after opening a file.
+// case 1
+            Hostname, _ := os.Hostname()
+            _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Pi using sqrt of 3 -- case #%d on %s \n", num, Hostname)
+                check(err0)
+            _ , err3 := fmt.Fprintf(fileHandle, "%.06f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
+                check(err3)
 
+p("\nNewton also found π to 16 digits by the first 22 terms of :")
+p("3*Sqrt(3)/4 + 24*( 2/3*2^3 - 1/5*2^5 - 1/28*2^7 - 1/72*2^9 - 5/704*2^11 - 7/1664*2^13 )")  // that psudocode is emplemented below
 π = ( (3*math.Sqrt(3))/4) + ( 24* ( 2/(3*math.Pow(2,3)) - 1/(5*math.Pow(2,5)) - 1/(28*math.Pow(2,7)) - 1/(72*math.Pow(2,9)) - 5/(704*math.Pow(2,11)) - 7/(1664*math.Pow(2,13)) )  )
-p(π,"per the above formula (only six terms, of the supposed 22 terms he used)")
+p(π,"per the above formula (only six terms, of the supposed 22 terms that Newton purportedly had used)")
 p("3.141592653589793 is the value of π from the web\n") 
 
-//p(12.0*((1/2.0) - (1/2.0)*(1/3.0)*math.Pow(0.50,3) - (1/8.0)*(1/5.0)*math.Pow(0.50,5) - (1/16.0)*(1/7.0)*math.Pow(0.50,7) - math.Sqrt(3)/8.0), "straight (3-terms) calc via go" )
-//p(12.0*((1/2.0) - (1/2.0)*(1/3.0)*math.Pow(0.50,3) - (1/8.0)*(1/5.0)*math.Pow(0.50,5) - (1/16.0)*(1/7.0)*math.Pow(0.50,7) - (1/128.0)*(1/9.0)*math.Pow(0.5,9) - math.Sqrt(3)/8.0), "straight (4-terms) calc via go" )
-
-
 case 2: // ------------------------------------------------------------------------------------------------
-
-p(" ")
-p(" ")
-p("You selected #", num, " a series by Indian astronomer Nilakantha Somayaji circa 1500 AD")
+p("\n\nYou selected #", num, " a series by Indian astronomer Nilakantha Somayaji circa 1500 AD")
 p("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
-p("    One-Hundred-Million iterations will be executed ... working ...")
-p(" ")
-    start2 := time.Now()
-
-    var LeftOfMantissa float64 
-    LeftOfMantissa = 3
-    var digitone float64
-    digitone = 2
-    var digittwo float64
-    digittwo = 3
-    var digitthree float64
-    digitthree = 4
-    var firstsum float64
-    firstsum = LeftOfMantissa + (four / (digitone*digittwo*digitthree)) 
-    var nextterm float64
-
+p("    One-Hundred-Million iterations will be executed ... working ...\n")
+    start2 := time.Now()  // as this entire switch is local to only this one func there is actually no need for unique time vars 
+        var LeftOfMantissa float64 
+        LeftOfMantissa = 3
+        var digitone float64
+        digitone = 2
+        var digittwo float64
+        digittwo = 3
+        var digitthree float64
+        digitthree = 4
+        var firstsum float64
+        firstsum = LeftOfMantissa + (four / (digitone*digittwo*digitthree)) 
+        var nextterm float64
     for iterInt64 < 100000000 {
-        iterFloat64 = iterFloat64 + 1
-        iterInt64 = iterInt64 + 1
+        iterInt64++
+        iterFloat64++
         digitone = digitthree 
         digittwo = digitthree + 1
         digitthree = digitthree + 2 
         nextterm = four/(digitone*digittwo*digitthree)
-            if iterInt64 % 2 == 0 {
+            if iterInt64 % 2 == 0 {  // % is modulus operator 
                 firstsum = firstsum - nextterm 
             } else {
                 firstsum = firstsum + nextterm
             }
-
             if iterInt64 == 100 {
                 p("   #1 234567# ")
                 p("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
@@ -276,7 +256,6 @@ p(" ")
                 elapsed := t.Sub(start2)
                 p (iterInt64, " iterations were completed in ", elapsed, " yielding 7 digits of π\n") 
             }
-
             if iterInt64 == 500 {
                 p("   #1 23456789# ")
                 p("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
@@ -296,7 +275,6 @@ p(" ")
                 elapsed := t.Sub(start2)
                 p("10,000 iterations were completed in ", elapsed, " yielding 13 digits of π\n") 
             }
-            //
             if iterInt64 == 50000 {
                 p("   #1 2345678901234# ")
                 p("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
@@ -346,146 +324,125 @@ p(" ")
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
-//
-    p("  -- If we ran 50 billion more iterations we still would get only those 14 digits :(\n") // =========
-//
+            //
+                p("  -- If we ran 50 billion more iterations we still would get only those 14 digits :(\n") // =========
+            //
                 p(" per option #", num, "  --  the Nilakantha Somayaji series, circa 1500 AD\n")
                 fmt.Println("Select 9 at menu to display prior results")
 // case 2
-            }
-            //
+            }  // end of last if in for loop 
+//
             /*
             if iterInt64 == 1000000000 {
                 p("    1 2345678901234 ")
                 p("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
                 p("    3.1415926535897,93 is, again, the value of π from the web") 
                 p("    1 2345678901234 56 :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start2)
+                t := time.Now() ; elapsed := t.Sub(start2)
                 p (iterInt64, " iterations were completed in ", elapsed, " yielding still just 14 digits of π\n") 
-                p(" per option #3\n")
-
             }
             if iterInt64 == 5000000000 {
                 p("    1 2345678901234 ")
                 p("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
                 p("    3.1415926535897,93 is, again, the value of π from the web") 
                 p("    1 2345678901234 56 :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start2)
+                t := time.Now() ;  elapsed := t.Sub(start2)
                 p (iterInt64, " 5 billion iterations were completed in ", elapsed, " yielding still just 14 digits of π\n") 
-                p(" per option #3\n")
-// case 2 
+// case 2 optional code to show the futility of more iterations 
             }            
             if iterInt64 == 9000000000 {
                 p("    1 2345678901234 ")
                 p("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
                 p("    3.1415926535897,93 is, again, the value of π from the web") 
                 p("    1 2345678901234 56 :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start2)
+                t := time.Now() ;  elapsed := t.Sub(start2)
                 p (iterInt64, " 9 billion iterations were completed in ", elapsed, " yielding still just 14 digits of π\n") 
-                p(" per option #3\n")
-
             }
             if iterInt64 == 50000000000 {  // no additional digit are obtained even after 500 billion iterations
                 p("    1 2345678901234567 ")
                 p("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
                 p("    3.141592653589793 is, again, the value of π from the web") 
                 p("    1 2345678901234567 :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start2)
+                t := time.Now() ;  elapsed := t.Sub(start2)
                 p (iterInt64, " 50 billion iterations were completed in ", elapsed, " yielding still just 14 digits of π\n") 
-                p(" per option #", num, "\n")
             }
             */
-    }
+    } // end of for loop ======================================================================================
 
 case 3: // ----------------------------------------------------------------------------------------------
-
-p(" ")
-p(" ")
-p("You selected #", num, " the Gregory-Leibniz series ...")
+p("\n\nYou selected #", num, " the Gregory-Leibniz series ...")
 p("π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
-p("Three hundred million iterations are being executed ... working ...")
-p(" ")
-    start3 := time.Now()
-
+p("Three hundred million iterations are being executed ... working ...\n")
+    start := time.Now()
     var nextOdd float64
     nextOdd = 1
     var tally float64    // used in selection 3 only 
     tally = (four/nextOdd)
 
     for iterInt64 < 300000000 {
-        iterInt64 = iterInt64 + 1
-        iterFloat64 = iterFloat64 + 1
+        iterInt64++
+        iterFloat64++
         nextOdd = nextOdd + 2
         tally = tally-(tally/nextOdd)
         tally = tally+(tally/nextOdd) // pi (tally) is set equl to the sum of a subtraction and an addition, alternatively 
 
-                if iterInt64 == 10000000 {p("... 10,000,000 of three hundred million completed. still working, but ...")
-                p(" ")
-                p("   #1 234567#")
+            if iterInt64 == 10000000 { p("... 10,000,000 of three hundred million completed. still working, but ...")
+                p("\n   #1 234567#")
                 p("   ",tally, "was calculated by the Gregory-Leibniz series") 
                 p("    3.141592,653589793 is from the web") 
                 p("   #1 234567 890123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
-                elapsed := t.Sub(start3)
-                fmt.Print("  10,000,000 iterations in ", elapsed, " yields 7 digits of π\n")
-                p(" ")
-                }
+                elapsed := t.Sub(start)
+                fmt.Print("  10,000,000 iterations in ", elapsed, " yields 7 digits of π\n\n")
+            }
 // 7 digits per above
 // 8, next two ifs give eight digits
-                if iterInt64 == 50000000 {p("... 50,000,000 of three hundred million completed. still working, but ...")
-                p(" ")
-                p("   #1 2345678#")
+            if iterInt64 == 50000000 { p("... 50,000,000 of three hundred million completed. still working, but ...")
+                p("\n   #1 2345678#")
                 p("   ",tally, "was calculated by the Gregory-Leibniz series") 
                 p("    3.1415926,53589793 is from the web") 
                 p("   #1 2345678 90123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
-                elapsed := t.Sub(start3)
+                elapsed := t.Sub(start)
                 fmt.Print("  50,000,000 iterations in ", elapsed, " yields 8 digits of π\n")
                 p(" ")
-                }
-                if iterInt64 == 100000000 {p("... 100,000,000 of three hundred million completed. still working, but ...")
-                p(" ")
-                p("   #1 2345678#")
+            }
+            if iterInt64 == 100000000 { p("... 100,000,000 of three hundred million completed. still working, but ...")
+                p("\n   #1 2345678#")
                 p("   ",tally, "was calculated by the Gregory-Leibniz series") 
                 p("    3.1415926,53589793 is from the web") 
                 p("   #1 2345678 90123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
-                elapsed := t.Sub(start3)
-                fmt.Print("  100,000,000 iterations in ", elapsed, " yields 8 digits of π\n")
-                p(" ")
-                }
+                elapsed := t.Sub(start)
+                fmt.Print("  100,000,000 iterations in ", elapsed, " yields 8 digits of π\n\n")
+            }
 // case 3
-// 9
-            if iterInt64 == 200000000 {p("... 200,000,000 of three hundred million completed. still working, but ...")
-                p(" ")
-                p("   #1 23456789#")
+// 9 digits are found below 
+            if iterInt64 == 200000000 { p("... 200,000,000 of three hundred million completed. still working, but ...")
+                p("\n   #1 23456789#")
                 p("   ",tally, "was calculated by the Gregory-Leibniz series") 
                 p("    3.14159265,3589793 is from the web") 
                 p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
                 t := time.Now()
-                elapsed := t.Sub(start3)
+                elapsed := t.Sub(start)
                 fmt.Print("  200,000,000 iterations in ", elapsed, " yields 9 digits of π\n")
-                p(" ")
                 }
-            if iterInt64 == 300000000 {
+            if iterInt64 == 300000000 {  // last one, still 9 digits
+                p("\n   #1 23456789#")
                 fmt.Print ("    ", tally, " was calculated by the Gregory-Leibniz series")
                 p("\n    3.141592653589793 is from the web") 
                 t := time.Now()
-                elapsed := t.Sub(start3)
-                fmt.Print ("  300 million iterations still yields 9 digits, ")  
+                elapsed := t.Sub(start)
+                fmt.Print ("  300 million iterations still yields 9 digits, ") // no Println here
                 fmt.Print ("in ", elapsed, "\n\n") 
                 p(" per option #", num, "  --  the Gregory-Leibniz series, circa 1676\n")
 
-                LinesPerIter = 11
+                LinesPerIter = 11  // an estimate of the number of lines per iteration 
                 fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
                 LinesPerSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
                 fmt.Printf("       %.0f lines of code were executed per second \n", LinesPerSecond) 
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
-// 9
+//
                 fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
                     check(err1)                                // ... gets a file handle to dataFromConstants.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
@@ -502,31 +459,24 @@ p(" ")
                 _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
                 fmt.Println("Select 9 at menu to display prior results")
-
             }
     }
 
 case 4: // --------------------------------------------------------------------------------------
-
-p(" ")
-p(" ")
-p("You selected #", num, " Gottfried Wilhelm Leibniz formula  :  π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ... ")
+p("\n\nYou selected #", num, " Gottfried Wilhelm Leibniz formula  :  π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ... ")
 p("   Infinitesimal calculus was developed independently in the late 17th century by Isaac Newton")
 p("    ... and Gottfried Wilhelm Leibniz")
 p("   4 Billion iterations will be executed ... ")
 p("")
-p(" ... working ...")
-p(" ")
-    start4 := time.Now()
-
-    var denom float64
-    denom = 3
-    var sum float64
-    sum = 1-(1/denom)
-
+p(" ... working ...\n")
+        start4 := time.Now()
+        var denom float64
+        denom = 3
+        var sum float64
+        sum = 1-(1/denom)
     for iterInt64 < 4000000000 {
-        iterFloat64 = iterFloat64 + 1
-        iterInt64 = iterInt64 + 1 
+        iterFloat64++
+        iterInt64++
         denom = denom + 2
             if iterInt64 % 2 == 0 {
                 sum = sum + 1/denom 
@@ -535,124 +485,104 @@ p(" ")
             }
             π = 4 * sum 
                 if iterInt64 == 100000000 {p("... 100,000,000 completed iterations ...")
-                p(" ")
-                p("   #1 2345678#")
-                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
-                p("    3.1415926,53589793 is from the web") 
-                p("   #1 2345678 90123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start4)
-                fmt.Print("  100,000,000 iterations in ", elapsed, " yields 8 digits of π\n")
-                p(" ")
+                    p("\n   #1 2345678#")
+                    p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
+                    p("    3.1415926,53589793 is from the web") 
+                    p("   #1 2345678 90123456# :: counting the first 16 actual digits of π")
+                    t := time.Now()
+                    elapsed := t.Sub(start4)
+                    fmt.Print("  100,000,000 iterations in ", elapsed, " yields 8 digits of π\n\n")
                 }
-//
 // case 4
                 if iterInt64 == 200000000 {p("... 200,000,000 gets another digit ...")
-                p(" ")
-                p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
-                p("    3.14159265,3589793 is from the web") 
-                p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start4)
-                fmt.Print("  200,000,000 iterations in ", elapsed, " yields 9 digits of π\n")
-                p(" ")
+                    p("\n   #1 23456789#")
+                    p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
+                    p("    3.14159265,3589793 is from the web") 
+                    p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
+                    t := time.Now()
+                    elapsed := t.Sub(start4)
+                    fmt.Print("  200,000,000 iterations in ", elapsed, " yields 9 digits of π\n\n")
                 }
-//
                 if iterInt64 == 400000000 {p("... 400,000,000 iterations completed, still at nine ...")
-                p(" ")
-                p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
-                p("    3.14159265,3589793 is from the web") 
-                p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start4)
-                fmt.Print("  400,000,000 iterations in ", elapsed, " yields 9 digits of π\n")
-                p(" ")
+                    p("\n   #1 23456789#")
+                    p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
+                    p("    3.14159265,3589793 is from the web") 
+                    p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
+                    t := time.Now()
+                    elapsed := t.Sub(start4)
+                    fmt.Print("  400,000,000 iterations in ", elapsed, " yields 9 digits of π\n\n")
                 }
-//
                 if iterInt64 == 600000000 {p("... 600,000,000 iterations, still at nine ...")
-                p(" ")
-                p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
-                p("    3.14159265,3589793 is from the web") 
-                p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start4)
-                fmt.Print("  600,000,000 iterations in ", elapsed, " yields 9 digits of π\n")
-                p(" ")
+                    p("\n   #1 23456789#")
+                    p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
+                    p("    3.14159265,3589793 is from the web") 
+                    p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
+                    t := time.Now()
+                    elapsed := t.Sub(start4)
+                    fmt.Print("  600,000,000 iterations in ", elapsed, " yields 9 digits of π\n\n")
                 }
 // case 4
                 if iterInt64 == 1000000000 {p("... 1 Billion iterations completed, still nine ...")
-                p(" ")
-                p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
-                p("    3.14159265,3589793 is from the web") 
-                p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start4)
-                fmt.Print("  1,000,000,000 iterations in ", elapsed, " yields 9 digits of π\n")
-                p(" ")
+                    p("\n   #1 23456789#")
+                    p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
+                    p("    3.14159265,3589793 is from the web") 
+                    p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
+                    t := time.Now()
+                    elapsed := t.Sub(start4)
+                    fmt.Print("  1,000,000,000 iterations in ", elapsed, " yields 9 digits of π\n\n")
                 }
 //
                 if iterInt64 == 2000000000 {p("... 2 Billion, and still just nine ...")
-                p(" ")
-                p("   #1 23456789#")
-                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
-                p("    3.14159265,3589793 is from the web") 
-                p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start4)
-                fmt.Print("  2,000,000,000 iterations in ", elapsed, " yields 9 digits of π\n")
-                p(" ")
+                    p("\n   #1 23456789#")
+                    p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
+                    p("    3.14159265,3589793 is from the web") 
+                    p("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
+                    t := time.Now()
+                    elapsed := t.Sub(start4)
+                    fmt.Print("  2,000,000,000 iterations in ", elapsed, " yields 9 digits of π\n\n")
                 }
-//
-// case 4
-                if iterInt64 == 4000000000 {
-                p("... 4 Billion, gets us ten digits  ...")
-                p(" ")
-                p("   #1 234567890#")
-                p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
-                p("    3.141592653,589793 is from the web") 
-                p("   #1 234567890 123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start4)
-                fmt.Print("  4,000,000,000 iterations in ", elapsed, " yields 10 digits of π\n")
-                p(" ")
-                p(" per option #", num, "  --  the Gottfried Wilhelm Leibniz formula\n")
+// case 4, last one 
+                if iterInt64 == 4000000000 {  // last one
+                    p("\n... 4 Billion, gets us ten digits  ...")
+                    p("\n   #1 234567890#")
+                    p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
+                    p("    3.141592653,589793 is from the web") 
+                    p("   #1 234567890 123456# :: counting the first 16 actual digits of π")
+                    t := time.Now()
+                    elapsed := t.Sub(start4)
+                    fmt.Print("  4,000,000,000 iterations in ", elapsed, " yields 10 digits of π\n\n")
+                    p(" per option #", num, "  --  the Gottfried Wilhelm Leibniz formula\n")
 
-                LinesPerIter = 14
-                fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
-                LinesPerSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
-                fmt.Printf("Aprox %.0f lines of code were executed per second \n", LinesPerSecond) 
-                fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
-// case 4
-                fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataFromConstants.txt
-                    defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+                    LinesPerIter = 14
+                    fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
+                    LinesPerSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
+                    fmt.Printf("Aprox %.0f lines of code were executed per second \n", LinesPerSecond) 
+                    fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
+    // case 4
+                    fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataFromConstants.txt
+                        defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
-                Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- case #%d on %s \n", num, Hostname)  
-                    check(err0)
-                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
-                    check(err2)
-                _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
-                    check(err3)
-                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
-                    check(err4)
-                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
-                    check(err5)
-                TotalRun := elapsed.String() // cast time duration to a String type for Fprintf "formatted print"
-                _ , err7 := fmt.Fprintf(fileHandle, "Total runTime was %s \n", TotalRun)  // add total runtime of this calculation 
-                    check(err7)
+                    Hostname, _ := os.Hostname()
+                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- case #%d on %s \n", num, Hostname)  
+                        check(err0)
+                    _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
+                        check(err2)
+                    _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
+                        check(err3)
+                    _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                        check(err4)
+                    _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
+                        check(err5)
+                    TotalRun := elapsed.String() // cast time duration to a String type for Fprintf "formatted print"
+                    _ , err7 := fmt.Fprintf(fileHandle, "Total runTime was %s \n", TotalRun)  // add total runtime of this calculation 
+                        check(err7)
 
-                fmt.Println("Select 9 at menu to display prior results")
+                    fmt.Println("Select 9 at menu to display prior results")
                 }
 //case 4 
-/* we skip the rest
-
+/* we skip the rest for now 
                 if iterInt64 == 6000000000 {p("... 6 Billion completed.  ...")
-                p(" ")
                 p("   #1 234567890#")
                 p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.141592653,589793 is from the web") 
@@ -660,11 +590,9 @@ p(" ")
                 t := time.Now()
                 elapsed := t.Sub(start4)
                 fmt.Print("  6,000,000,000 iterations in ", elapsed, " still yields 10 digits of π\n")
-                p(" ")
                 }
 // case 4
                 if iterInt64 == 8000000000 {p("... 8 Billion completed. still ten ...")
-                p(" ")
                 p("   #1 234567890#")
                 p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.141592653,589793 is from the web") 
@@ -672,11 +600,9 @@ p(" ")
                 t := time.Now()
                 elapsed := t.Sub(start4)
                 fmt.Print("  8,000,000,000 iterations in ", elapsed, " still yields 10 digits of π\n")
-                p(" ")
                 }
 //
             if iterInt64 == 9000000000 {
-                p(" ")
                 p("   #1 234567890#")
                 p("   ",π, "was calculated by the Gottfried Wilhelm Leibniz formula") 
                 p("    3.141592653,589793 is from the web") 
@@ -690,16 +616,11 @@ p(" ")
 */
     } // end of for
 
-
 case 5:  // -----------------------------------------------------------------------------------------
-
-    start6 := time.Now()
-
-            p(" ")
-            p("You selected #", num, "  --  An improved version of Archimedes' method")
-            p("  -- enter \"6' at the main menu for the derivation and proof of the Pythagorean -- ")
-                        // the above escape does not seem to work as advertised ??
-
+    p("\nYou selected #", num, "  --  An improved version of Archimedes' method")
+    p("  -- enter \"6' at the main menu for the derivation and proof of the Pythagorean -- ")
+                // the above escape does not seem to work as advertised ??
+            start := time.Now()
             var r float64 // radius is a constant 1 
             var a float64 // height of bisected triangle 
             var s1 float64 // starts-out as 1
@@ -737,8 +658,8 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
 // case 5
 
 for iterInt64 < 27 {
-    iterInt64 = iterInt64 + 1 
-    iterFloat64 = iterFloat64 + 1
+    iterInt64++
+    iterFloat64++
     n = n*2
     s1 = s2 
     s1_2 = s1/2 
@@ -751,123 +672,106 @@ for iterInt64 < 27 {
     // 3.141592653589793238,46264338327950288419716939937510 -- is just way-too-much pie! 
 
     if iterInt64 == 2 {
-        fmt.Println(" ")
-                fmt.Println("   #1 2# :: counting the first 2 actual digits of π")
-                fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
-                fmt.Println("    3.141592653589793238 is the value of π from the web") 
-                fmt.Println("   #1 2# :: counting the first 3 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 2 digits of π\n") 
-                fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
+            fmt.Println("\n   #1 2# :: counting the first 2 actual digits of π")
+            fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
+            fmt.Println("    3.141592653589793238 is the value of π from the web") 
+            fmt.Println("   #1 2# :: counting the first 3 actual digits of π")
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 2 digits of π\n") 
+            fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
     }    
 // case 5
     if iterInt64 == 3 {
-        fmt.Println(" ")
-                fmt.Println("   #1 23# :: counting the first 3 actual digits of π")
-                fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
-                fmt.Println("    3.141592653589793238 is the value of π from the web") 
-                fmt.Println("   #1 23# :: counting the first 3 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 2 digits of π\n") 
-                fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
-
+            fmt.Println("\n   #1 23# :: counting the first 3 actual digits of π")
+            fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
+            fmt.Println("    3.141592653589793238 is the value of π from the web") 
+            fmt.Println("   #1 23# :: counting the first 3 actual digits of π")
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 2 digits of π\n") 
+            fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
     }    
     if iterInt64 == 7 {
-        fmt.Println(" ")
-                fmt.Println("   #1 23456# :: counting the first 6 actual digits of π")
-                fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
-                fmt.Println("    3.141592653589793238 is the value of π from the web") 
-                fmt.Println("   #1 23456# :: counting the first 6 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 5 digits of π\n") 
-                fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
+            fmt.Println("\n   #1 23456# :: counting the first 6 actual digits of π")
+            fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
+            fmt.Println("    3.141592653589793238 is the value of π from the web") 
+            fmt.Println("   #1 23456# :: counting the first 6 actual digits of π")
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 5 digits of π\n") 
+            fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
     }    
     if iterInt64 == 12 {
-        fmt.Println(" ")
-                fmt.Println("   #1 23456789# :: counting the first 9 actual digits of π")
-                fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
-                fmt.Println("    3.141592653589793238 is the value of π from the web") 
-                fmt.Println("   #1 23456789# :: counting the first 9 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 8 digits of π\n") 
-                fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
+            fmt.Println("\n   #1 23456789# :: counting the first 9 actual digits of π")
+            fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
+            fmt.Println("    3.141592653589793238 is the value of π from the web") 
+            fmt.Println("   #1 23456789# :: counting the first 9 actual digits of π")
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 8 digits of π\n") 
+            fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
     }    
     if iterInt64 == 17 {
-        fmt.Println(" ")
-                fmt.Println("   #1 23456789012# :: counting the first 12 actual digits of π")
-                fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
-                fmt.Println("    3.141592653589793238 is the value of π from the web") 
-                fmt.Println("   #1 23456789012# :: counting the first 12 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 12 digits of π\n") 
-                fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
+            fmt.Println("\n   #1 23456789012# :: counting the first 12 actual digits of π")
+            fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
+            fmt.Println("    3.141592653589793238 is the value of π from the web") 
+            fmt.Println("   #1 23456789012# :: counting the first 12 actual digits of π")
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 12 digits of π\n") 
+            fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
     }    
     if iterInt64 == 23 {
-        fmt.Println(" ")
-                fmt.Println("   #1 23456789012345# :: counting the first 15 actual digits of π")
-                fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
-                fmt.Println("    3.141592653589793238 is the value of π from the web") 
-                fmt.Println("   #1 23456789012345# :: counting the first 15 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 15 digits of π\n") 
-                fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
+            fmt.Println("\n   #1 23456789012345# :: counting the first 15 actual digits of π")
+            fmt.Println("   ", p_d, " is what we have calculated per Archimedes'") 
+            fmt.Println("    3.141592653589793238 is the value of π from the web") 
+            fmt.Println("   #1 23456789012345# :: counting the first 15 actual digits of π")
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 15 digits of π\n") 
+            fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
     }
 // case 5
-    if iterInt64 == 25 {
-        fmt.Println(" ")
-                fmt.Println("   #1 234567890123456# :: counting the first 16 actual digits of π")
-                fmt.Println("   ", p_d, " is what we have calculated per Archimedes' -- 16 -- digits") 
-                fmt.Println("    3.141592653589793238 is the value of π from the web") 
-                fmt.Println("   #1 234567890123456789# :: counting the first 19 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start6)
-                fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 16 digits of π\n") 
-                fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
-                
-                fmt.Printf("%.0f as parsed against ...\n", n)
-                fmt.Println("100000000 which is one-hundred-million, for comparison to the above line")
-                fmt.Println("... Which is to say a 201,326,592 sided polygon, Mr. A. would have wept\n")
-
-                fmt.Println(" per option #", num, "  --  an improved version of Archimedes' method\n")
-
-// Don't know what the   codes from WikiPedia were supposed to do? But they do not display or have any obvious consequence.
-/*arch := `Archimedes of Syracuse (c. 287 – c. 212 BC) was a Greek mathematician, physicist, engineer, 
-astronomer, and inventor from the ancient city of Syracuse in Sicily.`
-*/
-            arch := `Archimedes of Syracuse (287 – 212 BC) was a Greek mathematician, physicist, engineer, 
-            astronomer, and inventor from the ancient city of Syracuse in Sicily. He estimated π 
-            by drawing a larger regular hexagon outside a circle then a smaller regular hexagon inside
-            the circle, and progressively doubling the number of sides of each regular polygon, 
-            calculating the length of a side of each polygon at each step. As the number of sides 
-            increases, it becomes a more accurate approximation of a circle. After four such steps, 
-            when the polygons had 96 sides each, he was able to determine that the value of π lay between 
-            3+1/7 (approx. 3.1429) and 3+10/71 (approx. 3.1408), consistent with its actual value of 
-            approximately 3.1416 He also proved that the area of a circle was equal to π multiplied by the 
-            square of the radius of the circle.`
-            fmt.Println(arch) // prints the above rune
+    if iterInt64 == 25 {  // last one 
+            fmt.Println("\n   #1 234567890123456# :: counting the first 16 actual digits of π")
+            fmt.Println("   ", p_d, " is what we have calculated per Archimedes' -- 16 -- digits") 
+            fmt.Println("    3.141592653589793238 is the value of π from the web") 
+            fmt.Println("   #1 234567890123456789# :: counting the first 19 actual digits of π")
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println (iterInt64, " iterations were completed in ", elapsed, " yielding 16 digits of π\n") 
+            fmt.Printf("the above was estimated from a %.0f sided polygon\n", n)
+            fmt.Printf("%.0f as parsed against ...\n", n)
+            fmt.Println("100000000 which is one-hundred-million, for comparison to the above line")
+            fmt.Println("... Which is to say a 201,326,592 sided polygon, Mr. A. would have wept!\n")
+            fmt.Println(" per option #", num, "  --  an improved version of Archimedes' method\n")
+        arch := `Archimedes of Syracuse (287 – 212 BC) was a Greek mathematician, physicist, engineer, 
+        astronomer, and inventor from the ancient city of Syracuse in Sicily. He estimated π 
+        by drawing a larger regular hexagon outside a circle then a smaller regular hexagon inside
+        the circle, and progressively doubling the number of sides of each regular polygon, 
+        calculating the length of a side of each polygon at each step. As the number of sides 
+        increases, it becomes a more accurate approximation of a circle. After four such steps, 
+        when the polygons had 96 sides each, he was able to determine that the value of π lay between 
+        3+1/7 (approx. 3.1429) and 3+10/71 (approx. 3.1408), consistent with its actual value of 
+        approximately 3.1416 He also proved that the area of a circle was equal to π multiplied by the 
+        square of the radius of the circle.`
+        fmt.Println(arch) // prints the above rune
 //case 5
-                LinesPerIter = 18
-                fmt.Println("\nat aprox", LinesPerIter, "lines of code per iteration ...")
-                LinesPerSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
-                fmt.Printf("Aprox %.0f lines of code were executed per second \n\n", LinesPerSecond) 
-
-         fmt.Println("The above calculation was per the following psudo code ...\n")
-         fmt.Println("   let n = n * 2 // n is number of sides. After having begun with 6, then do 12, etc. ")
-         fmt.Println("   let s1 = s2  // s1 begins as 1, thereafter it adopts s2, base of unbisected triangle")
-         fmt.Println("   s1_2 = s1/2 // set the variable s1_2 to one half of s1")
-         fmt.Println("   a = \u221A( 1-(s1/2)\u00b2) ) // length of side 'a' is height of bisected triangle ")
-         fmt.Println("   b = 1-a                    // new short side ")
-         fmt.Println("   s2 = \u221A( (b)\u00b2 + (s1/2)\u00b2 )  // s2 is new hypotenuse, and New s1 ")
-         fmt.Println("   p = n * s1 // p is the length of the perimeter of the constructed polygon ")
-         fmt.Println("   p_d = p/2 // the diameter of the polygon is always two, so p/2 = π \n")
-         fmt.Println("   -- After hitting Return for menu redisplay, enter '6' for the derivation and proof of the Pythagorean")
-         fmt.Println(" ")
+            LinesPerIter = 18
+            fmt.Println("\nat aprox", LinesPerIter, "lines of code per iteration ...")
+            LinesPerSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
+            fmt.Printf("Aprox %.0f lines of code were executed per second \n\n", LinesPerSecond) 
+             fmt.Println("The above calculation was per the following psudo code ...\n")
+             fmt.Println("   let n = n * 2 // n is number of sides. After having begun with 6, then do 12, etc. ")
+             fmt.Println("   let s1 = s2  // s1 begins as 1, thereafter it adopts s2, base of unbisected triangle")
+             fmt.Println("   s1_2 = s1/2 // set the variable s1_2 to one half of s1")
+             fmt.Println("   a = \u221A( 1-(s1/2)\u00b2) ) // length of side 'a' is height of bisected triangle ")
+             fmt.Println("   b = 1-a                    // new short side ")
+             fmt.Println("   s2 = \u221A( (b)\u00b2 + (s1/2)\u00b2 )  // s2 is new hypotenuse, and New s1 ")
+             fmt.Println("   p = n * s1 // p is the length of the perimeter of the constructed polygon ")
+             fmt.Println("   p_d = p/2 // the diameter of the polygon is always two, so p/2 = π \n")
+             fmt.Println("   -- After hitting Return for menu redisplay, enter '6' for the derivation and proof of the Pythagorean\n")
 
                 fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
                     check(err1)                                // ... gets a file handle to dataFromConstants.txt
@@ -884,12 +788,11 @@ astronomer, and inventor from the ancient city of Syracuse in Sicily.`
                     check(err4)
                 _ , err5 := fmt.Fprintf(fileHandle, "%.0f was total Iterations from case %d \n", iterFloat64, num)
                     check(err5)
-                fmt.Println("Select 9 at menu to display prior results")
-    }
+            fmt.Println("Select 9 at menu to display prior results")
+    }  // end of last if
 }
 
 case 6:  // ---- display a review of the derivation of the Pythagorean --------------------------------------------------
-
 
 fmt.Print("\n\n\n -- You entered '", num, "' to review the derivation of the Pythagorean, which was needed in method #5. We will\n")
 fmt.Println("be geometrically deriving the Pythagorean theorem according to the 12th century Indian, Bhaskara.")
@@ -1061,7 +964,7 @@ p("   π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ...")
                 elapsed := t.Sub(start1)
                     p(elapsed)
                     fmt.Println(" ")
-                fmt.Println("Calculating 10th digit (40B iters) which takes a few min - Ctrl-C to End/Exit\n")
+                fmt.Println("Calculating 10th digit (40B iters) which takes a few min - Ctrl-C to End/Exit without saving results\n")
 
                 LinesPerIter = 36
                 fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
@@ -1424,14 +1327,12 @@ func readTableOfPerfectSquares(index2 int) {  //
                             fmt.Println("\nPer the larger ps, the \u221A3 is ... ", sr_per_sm,  "after", iter, "iterations") 
                             fmt.Println("which is ten correct digits via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
                             fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", Prospective_smaller_hit, "over the sqrt of", smallerPerfectSquareOnce)
-                            //SetBreakFlag2 = 2  
                         }
                     }
                     break // this break does make everything run pretty well, either THIS or some one above IS ESSENTIAL, BUT WHY ?? -- because, it is within the "if we have found a candidate" block 
                     // without this break nothing displays, and the proc is eventually killed
             }  // end if loop 1 "if we have found a candidate" we have already dealt with it so we need to break and get another potential from the for loop ???
               // we seem to need to break out instead of just fall out of this if block ????????????????????????????????????
-             // if SetBreakFlag1 == 1 || SetBreakFlag2 == 2 { break } // break // end of if we have found a candidate, this break kills it too early 
     }       // END OF FOR LOOP after 96,000 index-d loops "iter-s" ----- IT SEEMS TO HANG AFTER DOING THE 96,000 ITERS ?????????????????????????????????????????????????????
     TotalIterations = iter 
 } // end of readTableOfPerfectSquares(index2 int)
