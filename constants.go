@@ -1,6 +1,6 @@
-// compile with: "go build -o cmol4 cmol4.go"
-// ... thereafter you can run it with "/fullpathname/cmol4"
-// ... or, having first obtained the Go compiler, ... just run the source with: "go run cmol4.go"
+// compile with: "go build -o constants constants.go"
+// ... thereafter you can run it on a Unix system with "/fullpathname/constants"
+// ... or, having first obtained the Go compiler, ... just run the source with: "go run constants.go"
 // One can obtain the Go Compiler from : https://go.dev/dl/
 
 package main
