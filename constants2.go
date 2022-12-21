@@ -5,7 +5,7 @@
 
 package main
 import ("fmt"; "time"; "math"; "os"; "io/ioutil") // include additional packages 
-// global variables defined outside (between) any function, anywhere in the package ======================
+// global variables may be, and are, defined outside (between) any function, anywhere in the package ============
             var LinesPerSecond float64  
             var LinesPerIter float64
             var iterInt64 int64  // to be used primarily in selections which require modulus calculations 
@@ -15,7 +15,7 @@ import ("fmt"; "time"; "math"; "os"; "io/ioutil") // include additional packages
             var sliceOfPerfectSquares_and_their_roots = []int{PerfectSquare, root} // initialize slice with 100
             var sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = []float32{99.9999}  // init with a large-ish p_diff_from_larger_hit
             var sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = []float32{88.888}     //   "            "      p_diff_from_smlr_hit
-// global variables defined outside (between) any function, anywhere in the package ======================
+// global variables may be, and are, defined outside (between) any function, anywhere in the package ============
 
 func main() {        // top-level program logic flow 
     for 1 == 1 {    // loop endlessly, or Ctrl-C to Exit
@@ -32,20 +32,23 @@ func main() {        // top-level program logic flow
         fmt.Println("Hit Enter/Return again to redisplay the menu") 
         var Mnum int // just a local kluge element 
         fmt.Scanf("%d", &Mnum) // request input on command line (pause)
-// but even Unix style systems require a single kluge like this one. 
-    } // end of "endless" for loop
+        if Mnum > 0 && Mnum < 17 {  // the user has attempted to make a selection having failed to first "Hit Enter" as requested 
+            fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")  // so, rattle his chain
+        }
+// but even Unix style systems seem to require a single kluge like this one. 
+    } // end of "endless" for loop, use Ctrl-C to exit 
 } // end of main() func, top-level program logic flow 
 
 
-func check(e error) {   // create a func named check which takes e of type error 
+func check(e error) {   // create a func named check which takes one parameter "e" of type error 
     if e != nil {
-        panic(e)        // use panic to display error code 
+        panic(e)        // use panic() to display error code 
     }
 }
 
 func RicksDisplayMenuPi() {
-p := fmt.Println  // define p as synonomous with the format-Print-line function
-p("")
+p := fmt.Println  // define p as locally synonomous with the format-Print-line function
+p("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 p("Enter 1 - 7 to execute one of the following methods for calculating π (pi)")
 p("Enter 8 to explore Euler's Number; or 10 to calculate the Square Root of 3\n")
 // Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the initial inspiration for all of this ...
@@ -87,7 +90,7 @@ p("11:  Calculate the Erdős-Borwein constant from a breif infinite series\n")
 
 //fmt.Print("Enter your selection from above, 1 - 11 \u00a9 2022, by Richard Hart Woolley\n")
 // the above commented line is definately not needed in a Linux environment
-fmt.Println("Ctrl-C to End/Exit  SLOC = 1400 \n")
+fmt.Println("Ctrl-C to End/Exit  SLOC = 1404   \u00a9 2022, by Richard Hart Woolley \n")
 }
 
 func RicksSwitch() {    // the main if-then-else routine to select an option from the menu
@@ -97,19 +100,19 @@ func RicksSwitch() {    // the main if-then-else routine to select an option fro
     secondDenom = 3
     var four float64
     four = 4
-    var π float64  // a var can be any character 
+    var π float64  // a var can be any character, as in this Pi symbol/character 
     var num int 
     p := fmt.Println  // define p as synonomous with the format-Print-line function anywhere in RicksSwitch() func
 //fmt.Print("Enter your selection from above, 1 - 8 \u00a9 2022, by Richard Hart Woolley [it's an echo]\n")  // and a kluge
 // this kluge may be needed in some environments (windows) along with the duplicate in RicksDisplayMenuPi()
-        fmt.Print("Enter your selection from above, 1 - 11 \u00a9 2022, by Richard Hart Woolley \n")
+        fmt.Print("Enter your selection from above, 1 - 11 \n")
         fmt.Scanf("%d", &num)  // pause and request input from the user
     if num == 0 {
         fmt.Println("\nYou failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
     }
 
 // --- the SWITCH follows --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- // --- SWITCH --- 
-if num > 15 && num < 100 { num = 16 }  // to display a funny out-of-range message as case 15:
+if num > 15 && num < 100 { num = 16 }  // to display a funny out-of-range message as case 16:
 switch num {  // will do only the case selected by inputed variable "num"
 
 case 9: // read and display contents of prior results file ... case numbers need not be ordinal 
@@ -1026,7 +1029,8 @@ p("   π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ...")
                 t := time.Now()
                 elapsed := t.Sub(start1)
                 p(elapsed, "\n")
-                fmt.Println("Calculating 10th digit (40B iters) which takes a few min - Ctrl-C to End/Exit without saving results\n")
+                fmt.Println("Calculating 10th digit (40B iters) which takes a few min \n")
+                fmt.Println("- Ctrl-C to End/Exit without saving results\n")
                 LinesPerIter = 36 // an estimate 
                 fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
                 LinesPerSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
