@@ -59,9 +59,9 @@ func determinDiff (ProspectiveHit_Par int, smallerPerfectSquareOnce_T3 int) floa
 
 func calculatePi(precision float64) float64 {
   var pi float64
-  pi = 0
+      pi = 0
   var k float64
-  k = 0
+      k = 0
   for k < (precision-2) {
     pi += math.Pow(16, -k) * (4.0/(8*k+1) - 2.0/(8*k+4) - 1.0/(8*k+5) - 1.0/(8*k+6))
     fmt.Println(pi)
@@ -73,7 +73,7 @@ func calculatePi(precision float64) float64 {
 func BBPF(num int) {
     fmt.Println("\nYou selected #", num, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
     fmt.Println("How many digits of pi should we calculate? Enter one integer '4 to 16' ")
-    var numAi float64
+                 var numAi float64
     fmt.Scanf("%f", &numAi)
     fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
     fmt.Println("and Pi from the web is   : 3.141592653589793")
@@ -81,7 +81,7 @@ func BBPF(num int) {
 
 func buildTableOfOnlyPerfectSquares() { 
     root := 100
-    iter := 0
+            iter := 0
         for iter < 1000000 {
             iter++
             root++ 
@@ -92,8 +92,8 @@ func buildTableOfOnlyPerfectSquares() {
 }
 
 func readTableOfPerfectSquares(index2 int) {  
-    iter := 0
-            smallerPerfectSquareOnce := sliceOfPerfectSquares_and_their_roots[index2]  // save it, do this just-once per func call 
+    smallerPerfectSquareOnce := sliceOfPerfectSquares_and_their_roots[index2]  // save it, do this just-once per func call 
+        iter := 0
     for iter < 96000 {
         iter++
         index2 = index2 + 2 // index 
@@ -175,46 +175,44 @@ func squareRootOf3(num int) {
                 check(err1)                                // ... gets a file handle to dataFromConstants.txt
                 defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
             Hostname, _ := os.Hostname()
-            _ , err0 := fmt.Fprintf(fileHandle, "\n  -- sqrt of 3 geometrically -- case #%d on %s \n", num, Hostname)
+            _ , err0 := fmt.Fprintf(fileHandle, "\n  -- sqrt of 3 geometrically -- selection #%d on %s \n", num, Hostname)
                 check(err0)
             current_time := time.Now()
             _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
             check(err6)
-            _ , err2 := fmt.Fprintf(fileHandle, "%d was Lines/Second from case %d \n", LinesPerSecondInt, num) 
+            _ , err2 := fmt.Fprintf(fileHandle, "%d was Lines/Second \n", LinesPerSecondInt) 
                 check(err2)
-            _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
-                check(err3)
-            _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds from case %d \n", float64(TotalIterations)/float64(elapsed.Seconds()), num)
+            _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds \n", float64(TotalIterations)/float64(elapsed.Seconds()))
                 check(err4)
-            _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations from case %d \n", TotalIterations, num)
+            _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", TotalIterations)
                 check(err5)
             TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
-            _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun)  // add total runtime of this calculation 
+            _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                 check(err7)
 }
 
 func WorstMethod(num int){
-    fmt.Println("\nYou selected #", num)
-        fmt.Println("\n     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ...")
-        fmt.Println("                                    (1/8   * 1/5 * (1/2)exp5) - ...")
-        fmt.Println("                                    (1/16  * 1/7 * (1/2)exp7) - ...")
-        fmt.Println("                                    (1/128 * 1/9 * (1/2)exp9) - ... - (\u221A3)/8) )")
-    iterInt64 = 0
-    var secondDenom float64
-    secondDenom = 3
+    fmt.Println("\nYou selected #")
+    fmt.Println("\n     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ...")
+    fmt.Println("                                    (1/8   * 1/5 * (1/2)exp5) - ...")
+    fmt.Println("                                    (1/16  * 1/7 * (1/2)exp7) - ...")
+    fmt.Println("                                    (1/128 * 1/9 * (1/2)exp9) - ... - (\u221A3)/8) )")
+        var secondDenom float64
+            secondDenom = 3
         var twelve float64
-        twelve = 12
+            twelve = 12
         var πViaNewton float64 
         var initialDenomOfFirst float64
-        initialDenomOfFirst = 2
+            initialDenomOfFirst = 2
         var nextDenomOfFirst float64 
-        nextDenomOfFirst = 8
+            nextDenomOfFirst = 8
         var savedFirstDenom float64
-        savedFirstDenom = 0.0
+            savedFirstDenom = 0.0
         var exponent float64 
-        exponent = 3
+            exponent = 3
         var SumOfTerms float64 
-        SumOfTerms = - ( (1/initialDenomOfFirst) * (1/secondDenom) * math.Pow(0.50,exponent) )  // 2 and 3 and 3
+            SumOfTerms = - ( (1/initialDenomOfFirst) * (1/secondDenom) * math.Pow(0.50,exponent) )  // 2 and 3 and 3
+        iterInt64 = 0
     for iterInt64 < 6 {
         iterInt64++ 
             exponent = exponent + 2.0
@@ -282,7 +280,6 @@ func Nilakantha(num int){
     fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
     fmt.Println("    One-Hundred-Million iterations will be executed ... working ...\n")
     start := time.Now() 
-        iterInt64 = 1
         iterFloat64 = 0
         var LeftOfMantissa float64 
             LeftOfMantissa = 3
@@ -296,6 +293,7 @@ func Nilakantha(num int){
         var firstsum float64
             firstsum = LeftOfMantissa + (four / (digitone*digittwo*digitthree)) 
         var nextterm float64
+        iterInt64 = 1
     for iterInt64 < 100000000 {
         iterInt64++
         iterFloat64++
@@ -371,19 +369,20 @@ func Nilakantha(num int){
                     check(err1)                                // ... gets a file handle to dataFromConstants.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- case #%d on %s \n", num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- selection #%d on %s \n", num, Hostname)
                     check(err0)
                 current_time := time.Now()
                 _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
                 check(err6)
-                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
+                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second \n", LinesPerSecond) 
                     check(err2)
-                _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
-                    check(err3)
-                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds \n", iterFloat64/elapsed.Seconds())
                     check(err4)
-                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
+                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations \n", iterFloat64)
                     check(err5)
+                TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+                _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                    check(err7)
             //
                 fmt.Println("  -- If we ran 50 billion more iterations we still would get only those 14 digits :(\n") // =========
                 fmt.Println(" per option #", num, "  --  the Nilakantha Somayaji series, circa 1500 AD\n")
@@ -432,14 +431,13 @@ func GregoryLeibniz(num int){
     fmt.Println("π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
     fmt.Println("Three hundred million iterations are being executed ... working ...\n")
     start := time.Now()
-    iterInt64 = 0
     iterFloat64 = 0
     var nextOdd float64
-    nextOdd = 1
+        nextOdd = 1
     four = 4
     var tally float64 
-    tally = (four/nextOdd)
-
+        tally = (four/nextOdd)
+        iterInt64 = 0
     for iterInt64 < 300000000 {
         iterInt64++
         iterFloat64++
@@ -507,19 +505,20 @@ func GregoryLeibniz(num int){
                     check(err1)                                // ... gets a file handle to dataFromConstants.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gregory-Leibniz -- case #%d on %s \n", num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gregory-Leibniz -- selection #%d on %s \n", num, Hostname)
                     check(err0)
                 current_time := time.Now()
                 _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
                 check(err6)
-                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
+                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second  \n", LinesPerSecond) 
                     check(err2)
-                _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
-                    check(err3)
-                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds  \n", iterFloat64/elapsed.Seconds())
                     check(err4)
-                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
+                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations  \n", iterFloat64)
                     check(err5)
+                TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+                _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                    check(err7)
                 fmt.Println("Select 12 at menu to display prior results")
             }
     } 
@@ -533,12 +532,12 @@ func GottfriedWilhelmLeibniz(num int){
     fmt.Println("")
     fmt.Println(" ... working ...\n")
         start := time.Now()
-        iterInt64 = 1
         iterFloat64 = 0
         var denom float64
-        denom = 3
+            denom = 3
         var sum float64
-        sum = 1-(1/denom)
+            sum = 1-(1/denom)
+        iterInt64 = 1
     for iterInt64 < 4000000000 {
         iterFloat64++
         iterInt64++
@@ -624,23 +623,20 @@ func GottfriedWilhelmLeibniz(num int){
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
                     Hostname, _ := os.Hostname()
-                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- case #%d on %s \n", num, Hostname)  
+                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- selection #%d on %s \n", num, Hostname)  
                         check(err0)
                         current_time := time.Now()
                     _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
                         check(err6)
-                    _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
+                    _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second  \n", LinesPerSecond) 
                         check(err2)
-                    _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
-                        check(err3)
-                    _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                    _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds  \n", iterFloat64/elapsed.Seconds())
                         check(err4)
-                    _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
+                    _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations  \n", iterFloat64)
                         check(err5)
                     TotalRun := elapsed.String() // cast time duration to a String type for Fprintf "formatted print"
                     _ , err7 := fmt.Fprintf(fileHandle, "Total runTime was %s \n", TotalRun)  // add total runtime of this calculation 
                         check(err7)
-
                     fmt.Println("Select 12 at menu to display prior results")
                 }
 /* we skip the rest for now 
@@ -682,7 +678,6 @@ func Archimedes(num int){
     fmt.Println("  -- enter \"6' at the main menu for the derivation and proof of the Pythagorean -- ")
                 // the above escape does not seem to work as advertised ??
             start := time.Now()
-            iterInt64 = 0
             iterFloat64 = 0
             var r float64 // radius is a constant 1 
             var a float64 // height of bisected triangle 
@@ -717,7 +712,7 @@ s2 = math.Sqrt(math.Pow(b,2) + (math.Pow(s1/2,2))) // s2 is new hypotenuse : New
 p = n*s1    // p is the length of the perimeter of the constructed polygon
 p_d = p/2  // the diameter of the polygon is always two, so p/2 = π 
 */
-
+        iterInt64 = 0
     for iterInt64 < 27 {
         iterInt64++
         iterFloat64++
@@ -833,19 +828,20 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
                         check(err1)                                // ... gets a file handle to dataFromConstants.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
-                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Archimedes of Syracuse -- case #%d on %s \n", num, Hostname)
+                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Archimedes of Syracuse -- selection #%d on %s \n", num, Hostname)
                         check(err0)
                     current_time := time.Now()
                     _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
                     check(err6)
-                    _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
+                    _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second  \n", LinesPerSecond) 
                         check(err2)
-                    _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
-                        check(err3)
-                    _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                    _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds  \n", iterFloat64/elapsed.Seconds())
                         check(err4)
-                    _ , err5 := fmt.Fprintf(fileHandle, "%.0f was total Iterations from case %d \n", iterFloat64, num)
+                    _ , err5 := fmt.Fprintf(fileHandle, "%.0f was total Iterations  \n", iterFloat64)
                         check(err5)
+                    TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+                    _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                        check(err7)
                 fmt.Println("Select 12 at menu to display prior results")
         }  // end of last if
     }
@@ -894,16 +890,16 @@ func JohnWallis(num int){
     fmt.Println("   Up to 40 Billion iterations of the following formula will be executed ")
     fmt.Println("   π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ...")
     start := time.Now() 
-    iterInt64 = 0
     iterFloat64 = 0
-    var cumulativeProduct float64
     var numerators float64
+        numerators = 2
     var firstDenom float64
+        firstDenom = 1
     var secondDenom float64
-    numerators = 2
-    firstDenom = 1
-    secondDenom = 3
-    cumulativeProduct = (numerators/firstDenom) * (numerators/secondDenom)
+        secondDenom = 3
+    var cumulativeProduct float64
+        cumulativeProduct = (numerators/firstDenom) * (numerators/secondDenom)
+          iterInt64 = 0
       for iterInt64 < 40000000000 {
         iterInt64++
         iterFloat64++
@@ -1054,7 +1050,7 @@ func JohnWallis(num int){
             fmt.Println(elapsed)
         }
         if iterInt64 == 3000000000 {  // 3B completed
-            fmt.Println("  3B done, still working ... on another Billion iterations ... working ... Ctrl-C to End/Exit without saving results")
+            fmt.Println("  3B done, still working ... on another Billion iterations ... working ... Ctrl-C to End/Exit without saving stats")
                 t := time.Now()
                 elapsed := t.Sub(start)
             fmt.Println(elapsed)
@@ -1144,18 +1140,16 @@ func JohnWallis(num int){
                     check(err1)                                // ... gets a file handle to dataFromConstants.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis -- case #%d on %s \n", num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis -- selection #%d on %s \n", num, Hostname)
                     check(err0)
                 current_time := time.Now()
                 _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
                 check(err6)
-                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second from case %d \n", LinesPerSecond, num) 
+                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second  \n", LinesPerSecond) 
                     check(err2)
-                _ , err3 := fmt.Fprintf(fileHandle, "%.04f was total Elapsed Seconds from case %d \n", elapsed.Seconds(), num) 
-                    check(err3)
-                _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds from case %d \n", iterFloat64/elapsed.Seconds(), num)
+                _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds  \n", iterFloat64/elapsed.Seconds())
                     check(err4)
-                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations from case %d \n", iterFloat64, num)
+                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations  \n", iterFloat64)
                     check(err5)
                 TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
                 _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun)  // add total runtime of this calculation 
@@ -1166,57 +1160,48 @@ func JohnWallis(num int){
 }
 
 func EulersNumber(num int){
-        var n float64 
-        var Eulers float64
-        var sum float64
-
-        sum = 1 + 1/n 
-        Eulers = math.Pow(sum, n)
-
-        fmt.Println("\n\n\nEuler's Number \u2107 or \u2147 the natural logarithmic base")
-        fmt.Println("\u2147 = (1+1/n)^n")
-        fmt.Println("... the limit of an increasing value for n\n\n") 
+    var n float64 
+    var sum float64
+    var Eulers float64
+    fmt.Println("\n\n\nEuler's Number \u2107 or \u2147 the natural logarithmic base")
+    fmt.Println("\u2147 = (1+1/n)^n")
+    fmt.Println("... the limit of an increasing value for n\n\n") 
         n = 9
         sum = 1 + 1/n 
         Eulers = math.Pow(sum, n)
-        fmt.Print(Eulers)
-        fmt.Printf(" was calculated with an exponent of %0.f \n", n)
+    fmt.Print(Eulers)
+    fmt.Printf(" was calculated with an exponent of %0.f \n", n)
         n = 99
         sum = 1 + 1/n 
         Eulers = math.Pow(sum, n)
-        fmt.Print(Eulers)
-        fmt.Printf("  was calculated with an exponent of %0.f \n", n)
-        sum = 1 + 1/n 
-        Eulers = math.Pow(sum, n)
+    fmt.Print(Eulers)
+    fmt.Printf("  was calculated with an exponent of %0.f \n", n)
         n = 999
         sum = 1 + 1/n 
         Eulers = math.Pow(sum, n)
-        fmt.Print(Eulers)
-        fmt.Printf(" was calculated with an exponent of %0.f \n", n)
+    fmt.Print(Eulers)
+    fmt.Printf(" was calculated with an exponent of %0.f \n", n)
         n = 9999
         sum = 1 + 1/n 
         Eulers = math.Pow(sum, n)
-        fmt.Print(Eulers)
-        fmt.Printf(" was calculated with an exponent of %0.f \n", n)
+    fmt.Print(Eulers)
+    fmt.Printf(" was calculated with an exponent of %0.f \n", n)
         n = 99999999999
         sum = 1 + 1/n 
         Eulers = math.Pow(sum, n)
-        fmt.Print(Eulers)
-        fmt.Printf(" was calculated with an exponent of %0.f \n", n)
+    fmt.Print(Eulers)
+    fmt.Printf(" was calculated with an exponent of %0.f \n", n)
         fmt.Println("2.71828182845904523536028747135266249775724 is Euler's Number from the web")
         fmt.Println("2.718281828 is the dollar value of $1 compounded continuously for one year.")
         fmt.Println("2.714567 is from daily compound interest which is near-enough to continuous interest.\n")
-
         fmt.Println("An account starts with $1.00 and pays 100 percent interest per year. If the interest is credited once, ")
         fmt.Println("at the end of the year, the value of the account at year-end will be $2.00. What happens if the interest")
         fmt.Println("is computed and credited more frequently during the year?\n")
-
         fmt.Println("If the interest is credited twice in the year, the interest rate for each 6 months will be 50%, so the ")
         fmt.Println("initial $1 is multiplied by 1.5 twice, yielding $2.25 at the end of the year. Compounding quarterly")
         fmt.Println("yields $2.44140625, and compounding monthly yields $2.613035 = $1.00 × (1 + 1/12)^12 Generally, if there")
         fmt.Println("are n compounding intervals, the interest for each interval will be 100%/n and the value at the end of")
         fmt.Println("the year will be $1.00 × (1 + 1/n)^n.")
-//
 // And now, here comes a fun rune to print a multi-line "string"
 // ... define a rune with the ` :: back-quote character located on the ~ tilda key
 Ricks_rune_Paragraph := `  
@@ -1280,11 +1265,10 @@ fmt.Println("") // so as not to pad the following rune with an unwanted space
     fmt.Println(rune, "\n")
     fmt.Println("We calculate E as E = the sum of 1/((2^n)-1) as n grows from 1 to 'infinity'")
 
-var Erdos_Borwein float64
-Erdos_Borwein = 1
-var iter float64 
-iter = 1
-
+    var Erdos_Borwein float64
+        Erdos_Borwein = 1
+    var iter float64 
+        iter = 1
     for iter < 100 {
         iter++ // iter will therefore begin at 2
         Erdos_Borwein = Erdos_Borwein + (1/( (math.Pow(2,iter)) - 1) )
@@ -1358,38 +1342,38 @@ func RicksDisplayMenuPi() {
 fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 // Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the initial inspiration for all of this ...
 // ... option 1 below having been discussed on his channel 
-fmt.Println("1:  Calculate the Square Root of 3 from first-principles")
+fmt.Println("1:  Calculate the Square Root of 3 (\u221A3) from first-principles")
 fmt.Println("    ... i.e., from a ratio of 3:1 of perfect squares\n")
-fmt.Println("2:  Bailey–Borwein–Plouffe formula for π, discovered in 1995 (best method)\n")
-fmt.Println("3:  (worst method) requires calculating the square root of 3 (see selection 1)")
+fmt.Println("2:  Pi: Bailey–Borwein–Plouffe formula for π, discovered in 1995 (best method)\n")
+fmt.Println("3:  Pi: (worst method) requires calculating the \u221A3 (see selection 1)")
 fmt.Println("     ... as it only yeilds 4 digits of π \n")
-fmt.Println("4:   Archimedes' method (improved) of bisecting triangles, circa 200 BC")
-fmt.Println("     π = begining with a hexagon, iteratively double its number of sides") 
-fmt.Println("       26 iterations is all it will take to get the ... ")
-fmt.Println("       16 digits of π -- v.fast   (ENTER '11' for Pythagorean theorem)\n")
-fmt.Println("5:   An infinite series by Indian astronomer Nilakantha Somayaji circa 1500 ")
-fmt.Println("     ... this equation can be found in an ancient Sanskrit verse")
-fmt.Println("     π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
-fmt.Println("       One-Hundred-Million iterations will be executed -- in less than a second")
-fmt.Println("       14 digits of π -- VERY FAST -- gives 7 digits in just 100 iterations !!!\n")
-fmt.Println("6:   Gottfried Wilhelm Leibniz, late 17th century ( and by Isaac Newton )")
-fmt.Println("     π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...")
-fmt.Println("       4 Billion iterations will be executed")
-fmt.Println("       10 digits of π -- 8 digits in 100M iterations in under a minute \n")
-fmt.Println("7:   The Gregory-Leibniz series circa 1676")
-fmt.Println("     π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
-fmt.Println("       Three-Hundred-Million iterations will be executed")
-fmt.Println("       9 digits of π -- in seconds\n")
-fmt.Println("8:   An infinite series by John Wallis circa 1655")
-fmt.Println("     π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
-fmt.Println("       One-Billion iterations will be executed; option for 40 billion iterations")
-fmt.Println("       9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
-fmt.Println("9:   Euler's Number: \u2107 or \u2147 the natural logarithmic base")
-fmt.Println("       Explore the limit of interest\n")
+fmt.Println("4:  Pi: Archimedes' method (improved) of bisecting triangles, circa 200 BC")
+fmt.Println("    π = begining with a hexagon, iteratively double its number of sides") 
+fmt.Println("      26 iterations is all it will take to get the ... ")
+fmt.Println("      16 digits of π -- v.fast   (ENTER '11' for Pythagorean theorem)\n")
+fmt.Println("5:  Pi: An infinite series by Indian astronomer Nilakantha Somayaji circa 1500 ")
+fmt.Println("    ... this equation can be found in an ancient Sanskrit verse")
+fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
+fmt.Println("      One-Hundred-Million iterations will be executed -- in less than a second")
+fmt.Println("      14 digits of π -- VERY FAST -- gives 7 digits in just 100 iterations !!!\n")
+fmt.Println("6:  Pi: Gottfried Wilhelm Leibniz, late 17th century ( and by Isaac Newton )")
+fmt.Println("    π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...")
+fmt.Println("      4 Billion iterations will be executed")
+fmt.Println("      10 digits of π -- 8 digits in 100M iterations in under a minute \n")
+fmt.Println("7:  Pi: The Gregory-Leibniz series circa 1676")
+fmt.Println("    π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
+fmt.Println("      Three-Hundred-Million iterations will be executed")
+fmt.Println("      9 digits of π -- in seconds\n")
+fmt.Println("8:  Pi: An infinite series by John Wallis circa 1655")
+fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
+fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
+fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
+fmt.Println("9:   Calculate Euler's Number: \u2107 or \u2147 the natural logarithmic base")
+fmt.Println("        Explore the limit of interest\n")
 fmt.Println("10:  Calculate the Erdős-Borwein constant from a breif infinite series\n")
 fmt.Println("11:  Show a review of the derivation of the Pythagorean\n")
-fmt.Println("12:  Display prior execution times from long-running prior selections \n")
+fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
 //fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley\n")
 // the above kluge is definately not needed in a Linux environment
-fmt.Println("Ctrl-C to End/Exit  SLOC = 1395   \u00a9 2022, by Richard Hart Woolley \n")
+fmt.Println("Ctrl-C to End/Exit  SLOC = 1379   \u00a9 2022, by Richard Hart Woolley \n")
 }
