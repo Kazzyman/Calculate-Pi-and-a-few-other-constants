@@ -1433,6 +1433,31 @@ func delChar(s string, index int) string {
     tmp := []rune(s)
     return string(append(tmp[0:index], tmp[index+1:]...))
 }
+// hey gtp chatbot, see anything wrong with that code up thar? 
+/*
+to which it responds with its usual bullshit:
+
+"There are a few issues with the above code:
+
+    The boxes variable is being calculated using integer division, which will truncate the result. 
+    This can lead to an incorrect number of boxes being used in the calculations.
+
+    The remainders slice is being initialized with all elements equal to 2. This does not match the 
+    algorithm described in the code, and will likely result in incorrect digits being generated.
+
+    The digitsHeld variable is not being initialized to 0 at the start of the outer loop. This can 
+    cause unexpected behavior or errors.
+
+    The switch statement is not handling all possible cases. If q is not 9 or 10, the code will not e
+    xecute the default case and digitsHeld will not be set to 1. This can cause unexpected behavior or errors.
+
+    The delChar function is using index as the index of the character to delete in the string, 
+    but it is not being adjusted for the length of the string. This can cause the function to delete 
+    the wrong character or index out of bounds.
+
+    The function does not return an accurate value for pi. The spigot algorithm is a method for generating 
+    the digits of pi, but it does not converge to the true value of pi.""
+*/
 
 func showMagicBehindsquareRootOf3() {
     var squareRootOf3rune = `
@@ -2726,7 +2751,7 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
     var num int 
         //fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley [it's an echo]\n")  // a kluge
         // the above kluge may be needed in some environments (windows) along with the duplicate in RicksDisplayMenuPi()
-        fmt.Print("Enter your selection from above, 1 - 12 \n")
+        fmt.Print("Enter your selection, 1 - 19 (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n")
         fmt.Scanf("%d", &num)  // pause and request input from the user
         if num == 0 {
             fmt.Println("\nYou failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
@@ -2791,39 +2816,79 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }`
             fmt.Println(fileAccessRune)
-        case 33: 
-            showMagicBehindmainFunc()
 
-        case 19: 
-            TheSpigot()
-        case 20:
-            showTheMagic()
-        case 39:
-            showTheMagic()
+                    case 33: 
+                        showMagicBehindmainFunc()
+
+                            case 19: 
+                                TheSpigot()
+                            case 20:
+                                showTheMagic()
+                            case 39:
+                                showTheMagic()
 
         case 13: 
             fmt.Println(" ... So sorry, but", num, "was not an option")
         case 14: 
             fmt.Println(num, " was not an option! It was not on the menu, go fish!\n")
-        case 34:
-            /*
-            var precision int 
-            fmt.Println("what shall be thy precision ")
-            fmt.Scanf("%d", &precision) 
-            fmt.Println("result is ", calculatePispi(precision))
-            */
         case 15: 
             fmt.Println("Your selection of", num, " is right-out!  Go Fish!\n")
         case 16: 
             fmt.Println("Your selection is really-far-out!  Go Fish!\n")
         case 17: 
             fmt.Println("\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu")
-        case 18:
-            //fmt.Println("\n result via the spigot ... ", calculatePispi()) 
+                case 34:
+                    /* // a project that failed 
+                    var precision int 
+                    fmt.Println("what shall be thy precision ")
+                    fmt.Scanf("%d", &precision) 
+                    fmt.Println("result is ", calculatePispi(precision))
+                    */
     default: 
         fmt.Println("this is the switch default code, after a break option ??")
     } 
 } 
+
+func RicksDisplayMenuPi() {
+fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter 33 to see the the magic behind main (selector+20 for all others)\n") 
+// Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the initial inspiration for all of this ...
+// ... option 1 below having been discussed on his channel 
+fmt.Println("1:  Calculate the Square Root of 3 (\u221A3) from first-principles")
+fmt.Println("    ... i.e., from a ratio of 3:1 of perfect squares\n")
+fmt.Println("2:  Pi: Bailey–Borwein–Plouffe formula for π, discovered in 1995 (best method)\n")
+fmt.Println("3:  Pi: (worst method) requires calculating the \u221A3 (see selection 1)")
+fmt.Println("     ... as it only yeilds 4 digits of π \n")
+fmt.Println("4:  Pi: Archimedes' method (improved) of bisecting triangles, circa 200 BC")
+fmt.Println("    π = begining with a hexagon, iteratively double its number of sides") 
+fmt.Println("      26 iterations is all it will take to get the ... ")
+fmt.Println("      16 digits of π -- v.fast   (ENTER '11' for Pythagorean theorem)\n")
+fmt.Println("5:  Pi: An infinite series by Indian astronomer Nilakantha Somayaji circa 1500 ")
+fmt.Println("    ... this equation can be found in an ancient Sanskrit verse")
+fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
+fmt.Println("      One-Hundred-Million iterations will be executed -- in less than a second")
+fmt.Println("      14 digits of π -- VERY FAST -- gives 7 digits in just 100 iterations !!!\n")
+fmt.Println("6:  Pi: Gottfried Wilhelm Leibniz, late 17th century ( and by Isaac Newton )")
+fmt.Println("    π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...")
+fmt.Println("      4 Billion iterations will be executed")
+fmt.Println("      10 digits of π -- 8 digits in 100M iterations in under a minute \n")
+fmt.Println("7:  Pi: The Gregory-Leibniz series circa 1676")
+fmt.Println("    π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
+fmt.Println("      Three-Hundred-Million iterations will be executed")
+fmt.Println("      9 digits of π -- in seconds\n")
+fmt.Println("8:  Pi: An infinite series by John Wallis circa 1655")
+fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
+fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
+fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
+fmt.Println("9:   Calculate Euler's Number: \u2107 or \u2147 the natural logarithmic base")
+fmt.Println("        Explore the limit of interest\n")
+fmt.Println("10:  Calculate the Erdős-Borwein constant from a breif infinite series\n")
+fmt.Println("11:  Show a review of the derivation of the Pythagorean\n")
+fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
+fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly calculates way too much pie\n")
+//fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley\n")
+// the above kluge is definately not needed in a Linux environment
+fmt.Println("Ctrl-C to End/Exit  SLOC = 2850ish   \u00a9 2022, by Richard Hart Woolley \n")
+}
 
 /*
 // never got anything to work with this 
@@ -2869,44 +2934,3 @@ func calculatePispi(precision int) float64 {
     return result
 }
 */
-
-func RicksDisplayMenuPi() {
-fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter 33 to see the the magic behind main (selector+20 for all others)\n") 
-// Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the initial inspiration for all of this ...
-// ... option 1 below having been discussed on his channel 
-fmt.Println("1:  Calculate the Square Root of 3 (\u221A3) from first-principles")
-fmt.Println("    ... i.e., from a ratio of 3:1 of perfect squares\n")
-fmt.Println("2:  Pi: Bailey–Borwein–Plouffe formula for π, discovered in 1995 (best method)\n")
-fmt.Println("3:  Pi: (worst method) requires calculating the \u221A3 (see selection 1)")
-fmt.Println("     ... as it only yeilds 4 digits of π \n")
-fmt.Println("4:  Pi: Archimedes' method (improved) of bisecting triangles, circa 200 BC")
-fmt.Println("    π = begining with a hexagon, iteratively double its number of sides") 
-fmt.Println("      26 iterations is all it will take to get the ... ")
-fmt.Println("      16 digits of π -- v.fast   (ENTER '11' for Pythagorean theorem)\n")
-fmt.Println("5:  Pi: An infinite series by Indian astronomer Nilakantha Somayaji circa 1500 ")
-fmt.Println("    ... this equation can be found in an ancient Sanskrit verse")
-fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
-fmt.Println("      One-Hundred-Million iterations will be executed -- in less than a second")
-fmt.Println("      14 digits of π -- VERY FAST -- gives 7 digits in just 100 iterations !!!\n")
-fmt.Println("6:  Pi: Gottfried Wilhelm Leibniz, late 17th century ( and by Isaac Newton )")
-fmt.Println("    π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...")
-fmt.Println("      4 Billion iterations will be executed")
-fmt.Println("      10 digits of π -- 8 digits in 100M iterations in under a minute \n")
-fmt.Println("7:  Pi: The Gregory-Leibniz series circa 1676")
-fmt.Println("    π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
-fmt.Println("      Three-Hundred-Million iterations will be executed")
-fmt.Println("      9 digits of π -- in seconds\n")
-fmt.Println("8:  Pi: An infinite series by John Wallis circa 1655")
-fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
-fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
-fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
-fmt.Println("9:   Calculate Euler's Number: \u2107 or \u2147 the natural logarithmic base")
-fmt.Println("        Explore the limit of interest\n")
-fmt.Println("10:  Calculate the Erdős-Borwein constant from a breif infinite series\n")
-fmt.Println("11:  Show a review of the derivation of the Pythagorean\n")
-fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
-fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly calculates way too much pie\n")
-//fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley\n")
-// the above kluge is definately not needed in a Linux environment
-fmt.Println("Ctrl-C to End/Exit  SLOC = 2850   \u00a9 2022, by Richard Hart Woolley \n")
-}
