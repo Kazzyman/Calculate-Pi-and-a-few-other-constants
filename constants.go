@@ -4,7 +4,7 @@
 // One can obtain the Go Compiler from : https://go.dev/dl/
 
 package main
-import ("fmt"; "time"; "math"; "os"; "io/ioutil") // include additional packages 
+import ("fmt"; "time"; "math"; "os"; "io/ioutil"; "strconv") // include additional packages 
 func main() {        // top-level program logic flow 
     for 1 == 1 {    // loop endlessly, or Ctrl-C to Exit
         RicksDisplayMenuPi()   // displays the menu 
@@ -1283,6 +1283,214 @@ fmt.Println("") // so as not to pad the following rune with an unwanted space
 }
 
 
+func TheSpigot(){
+    var numberOfDigitsToCalc int
+    fmt.Println("How much pi can you handle?")
+    fmt.Println("How many digits of pi do you really want?")  
+                       fmt.Scanf("%d", &numberOfDigitsToCalc)
+    fmt.Println("The first line below was calculated via a Spigot Algorithm")
+    fmt.Println("The second line is the value of pi from the web")
+    fmt.Println("\n", Spigot(numberOfDigitsToCalc))
+
+fmt.Println(" 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679")
+fmt.Println(" 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
+fmt.Println("        ten    twenty        30        40        50        60        70        80        90       100 ")
+fmt.Print("This last trick made possible by a bit of code I mooched off of GitHub ...\n")
+fmt.Println("... to view the code with attribution Enter '20' at the main menu")
+}
+
+func showTheMagic() {
+fmt.Print("That last trick made possible by a bit of code I mooched off of GitHub:\n", spigotRune, "\n\n")
+}
+
+var spigotRune = `
+// shared by Ilya Sokolov i-redbyte, https://github.com/i-redbyte
+// https://github.com/TheAlgorithms/Go/blob/master/math/pi/spigotpi.go
+
+func Spigot(n int) string {
+    pi := ""
+    boxes := n * 10 / 3
+    remainders := make([]int, boxes)
+    for i := 0; i < boxes; i++ {
+        remainders[i] = 2
+    }
+    digitsHeld := 0
+    for i := 0; i < n; i++ {
+        carriedOver := 0
+        sum := 0
+        for j := boxes - 1; j >= 0; j-- {
+            remainders[j] *= 10
+            sum = remainders[j] + carriedOver
+            quotient := sum / (j*2 + 1)
+            remainders[j] = sum % (j*2 + 1)
+            carriedOver = quotient * j
+        }
+        remainders[0] = sum % 10
+        q := sum / 10
+        switch q {
+        case 9:
+            digitsHeld++
+        case 10:
+            q = 0
+            for k := 1; k <= digitsHeld; k++ {
+                replaced, _ := strconv.Atoi(pi[i-k : i-k+1])
+                if replaced == 9 {
+                    replaced = 0
+                } else {
+                    replaced++
+                }
+                pi = delChar(pi, i-k)
+                pi = pi[:i-k] + strconv.Itoa(replaced) + pi[i-k:]
+            }
+            digitsHeld = 1
+        default:
+            digitsHeld = 1
+        }
+        pi += strconv.Itoa(q)
+    }
+    return pi
+}
+
+func delChar(s string, index int) string {
+    tmp := []rune(s)
+    return string(append(tmp[0:index], tmp[index+1:]...))
+}
+
+// Generously shared by Ilya Sokolov i-redbyte, https://github.com/i-redbyte
+// https://github.com/TheAlgorithms/Go/blob/master/math/pi/spigotpi.go
+
+// to which I added my own hooks: 
+// ... 
+func TheSpigot(){
+    var numberOfDigitsToCalc int
+    fmt.Println("How much pi can you handle?")
+    fmt.Println("How many digits of pi do you really want?")  
+                       fmt.Scanf("%d", &numberOfDigitsToCalc)
+    fmt.Println("The first line below was calculated via a Spigot Algorithm")
+    fmt.Println("The second line is the value of pi from the web")
+    
+fmt.Println("\n", Spigot(numberOfDigitsToCalc))
+fmt.Println(" 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679")
+fmt.Println(" 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
+fmt.Println("        ten    twenty        30        40        50        60        70        80        90       100 ")
+fmt.Print("This last trick made possible by a bit of code I mooched off of GitHub:\n", spigotRune, "\n\n")
+}
+
+var spigotRune = 
+func Spigot(n int) string { ... `
+
+
+/*
+func calculatePiViaSpigot() float64 {
+    // Initialize variables to store the current and previous digits of pi
+    currentDigit := 0
+    previousDigit := 0
+
+    // Initialize a variable to store the result
+    result := 0.0
+
+    // Iterate through the digits of pi, starting with the most significant digit
+    for i := 1; i <= precision; i++ {
+        // Calculate the next digit of pi using the spigot algorithm
+        currentDigit = (previousDigit * 10) / (2 * i - 1)
+
+        // Update the result with the new digit
+        result = result + float64(currentDigit) / float64(10^i)
+
+        // Update the previous digit
+        previousDigit = currentDigit
+    }
+
+    // Return the result
+    return result
+}
+
+func calculatePispi() float64 {
+    // Initialize variables to store the current and previous digits of pi
+    currentDigit := 0.0
+    previousDigit := 3.0
+
+    // Initialize a variable to store the result
+    var result float64
+        result = 0.0
+    iters := 1.0
+        for iters < 7 {
+            i := 1.0
+            // Iterate through the digits of pi, starting with the most significant digit
+            for i <= 100 {
+                i++
+                // Calculate the next digit of pi using the spigot algorithm
+                currentDigit = (previousDigit * 10.0) / (2.0 * (i - 1.0))
+
+                // Update the result with the new digit
+                result = result + (float64(currentDigit) / (math.Pow(10, float64(i))))
+
+                // Update the previous digit
+                previousDigit = currentDigit
+                //i++
+            }
+            iters++
+            fmt.Print("\ncurrentl digit is ", currentDigit, "\n")
+            fmt.Println("previous digit is ", previousDigit, "\n") 
+            fmt.Println("iters is ", iters)
+        }
+    // Return the result
+    return result
+}
+// what is wrong with the above code?
+*/
+
+
+func Spigot(n int) string {
+    pi := ""
+    boxes := n * 10 / 3
+    remainders := make([]int, boxes)
+    for i := 0; i < boxes; i++ {
+        remainders[i] = 2
+    }
+    digitsHeld := 0
+    for i := 0; i < n; i++ {
+        carriedOver := 0
+        sum := 0
+        for j := boxes - 1; j >= 0; j-- {
+            remainders[j] *= 10
+            sum = remainders[j] + carriedOver
+            quotient := sum / (j*2 + 1)
+            remainders[j] = sum % (j*2 + 1)
+            carriedOver = quotient * j
+        }
+        remainders[0] = sum % 10
+        q := sum / 10
+        switch q {
+        case 9:
+            digitsHeld++
+        case 10:
+            q = 0
+            for k := 1; k <= digitsHeld; k++ {
+                replaced, _ := strconv.Atoi(pi[i-k : i-k+1])
+                if replaced == 9 {
+                    replaced = 0
+                } else {
+                    replaced++
+                }
+                pi = delChar(pi, i-k)
+                pi = pi[:i-k] + strconv.Itoa(replaced) + pi[i-k:]
+            }
+            digitsHeld = 1
+        default:
+            digitsHeld = 1
+        }
+        pi += strconv.Itoa(q)
+    }
+    return pi
+}
+
+func delChar(s string, index int) string {
+    tmp := []rune(s)
+    return string(append(tmp[0:index], tmp[index+1:]...))
+}
+
+
 func RicksSwitch() {    // the primary if-then-else routine to execute a selection from the menu
     var num int 
         //fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley [it's an echo]\n")  // a kluge
@@ -1292,7 +1500,7 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
         if num == 0 {
             fmt.Println("\nYou failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
         }
-    if num > 12 && num < 100 { num = 17 }  // to display a funny out-of-range message as case 17:
+    if num > 20 && num < 100 { num = 17 }  // to display a funny out-of-range message as case 17:
     switch num { 
         case 1:  // Calculate the square root of 3 from first principles of geometry
             squareRootOf3(num)
@@ -1323,6 +1531,10 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }
+        case 19: 
+            TheSpigot()
+        case 20:
+            showTheMagic()
         case 13: 
             fmt.Println(" ... So sorry, but", num, "was not an option")
         case 14: 
@@ -1333,13 +1545,15 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
             fmt.Println("Your selection is really-far-out!  Go Fish!\n")
         case 17: 
             fmt.Println("\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu")
+        case 18:
+            //fmt.Println("\n result via the spigot ... ", calculatePispi()) 
     default: 
         fmt.Println("this is the switch default code, after a break option ??")
     } 
 } 
 
 func RicksDisplayMenuPi() {
-fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n") 
 // Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the initial inspiration for all of this ...
 // ... option 1 below having been discussed on his channel 
 fmt.Println("1:  Calculate the Square Root of 3 (\u221A3) from first-principles")
@@ -1373,7 +1587,8 @@ fmt.Println("        Explore the limit of interest\n")
 fmt.Println("10:  Calculate the Erdős-Borwein constant from a breif infinite series\n")
 fmt.Println("11:  Show a review of the derivation of the Pythagorean\n")
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
+fmt.Println("19:  Open the 'Spigot' an algorithm to instantly calculate way too much pi\n")
 //fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley\n")
 // the above kluge is definately not needed in a Linux environment
-fmt.Println("Ctrl-C to End/Exit  SLOC = 1379   \u00a9 2022, by Richard Hart Woolley \n")
+fmt.Println("Ctrl-C to End/Exit  SLOC = 1500   \u00a9 2022, by Richard Hart Woolley \n")
 }
