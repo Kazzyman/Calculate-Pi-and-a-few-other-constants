@@ -87,7 +87,7 @@ func BBPF(num int) {
                  var numAi float64
     fmt.Scanf("%f", &numAi)
     fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
-    fmt.Println("and Pi from the web is   : 3.141592653589793")
+    fmt.Println("and Pi from the web is    : 3.141592653589793")
 }
 
 func buildTableOfOnlyPerfectSquares() { 
@@ -173,7 +173,7 @@ func squareRootOf3(num int) {
             }
         fmt.Println("a perfect bottom square from our initial list of perfect squares, times 3, is ...")
         fmt.Println(smallerPerfectSquareOnceSaved*3, " And the total iterations completed was ", TotalIterations)
-        fmt.Println(savedHit, " was the another perfect square which we found by searching for a one that would be nearly-exactly three times larger\n")
+        fmt.Println(savedHit, " was the other perfect square which we found by searching for a one that would be nearly-exactly three times larger\n")
         fmt.Println("... pretty close, I'd say\n")
 
             t := time.Now()
@@ -1307,7 +1307,7 @@ fmt.Println(" 314159265358979323846264338327950288419716939937510582097494459230
 fmt.Println(" 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
 fmt.Println("        ten    twenty        30        40        50        60        70        80        90       100 ")
 fmt.Print("This last trick made possible by a bit of code I mooched off of GitHub ...\n")
-fmt.Println("... to view the code with attribution Enter '20' at the main menu")
+fmt.Println("... to view the code with attribution Enter '20 or 39' at the main menu")
 }
 
 func showTheMagic() {
@@ -1385,7 +1385,7 @@ fmt.Println(" 314159265358979323846264338327950288419716939937510582097494459230
 fmt.Println(" 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
 fmt.Println("        ten    twenty        30        40        50        60        70        80        90       100 ")
 fmt.Print("This last trick made possible by a bit of code I mooched off of GitHub ...\n")
-fmt.Println("... to view the code with attribution Enter '20' at the main menu")
+fmt.Println("... to view the code with attribution Enter '20 or 39' at the main menu")
 }
 
 func showTheMagic() {
@@ -1482,7 +1482,7 @@ func squareRootOf3(num int) {
             }
         fmt.Println("a perfect bottom square from our initial list of perfect squares, times 3, is ...")
         fmt.Println(smallerPerfectSquareOnceSaved*3, " And the total iterations completed was ", TotalIterations)
-        fmt.Println(savedHit, " was the another perfect square which we found by searching for a one that would be nearly-exactly three times larger\n")
+        fmt.Println(savedHit, " was the other perfect square which we found by searching for a one that would be nearly-exactly three times larger\n")
         fmt.Println("... pretty close, I'd say\n")
 
             t := time.Now()
@@ -1589,6 +1589,14 @@ func readTableOfPerfectSquares(index2 int) {
 
 func showMagicBehindBBPF() {
 var BBPFrune = `
+func BBPF(num int) {
+    fmt.Println("\nYou selected #", num, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
+    fmt.Println("How many digits of pi should we calculate? Enter one integer '4 to 16' ")
+                 var numAi float64
+    fmt.Scanf("%f", &numAi)
+    fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
+    fmt.Println("and Pi from the web is   : 3.141592653589793")
+}
 func calculatePi(precision float64) float64 {
   var pi float64
       pi = 0
@@ -2765,7 +2773,7 @@ fmt.Println(mainFuncRune)
 // author(s): [red_byte](https://github.com/i-redbyte), [Paul Leydier] (https://github.com/paul-leydier)
 // see montecarlopi_test.go
 
-// 9999999999 as input to "func MonteCarloPiConcurrent(n int) (float64, error)" yeilds: 
+//  as input to "func MonteCarloPiConcurrent(n int) (float64, error)" yeilds: 
 // 3.141610315914161
 // 3.1415926535897932384626433832795028841971693993 is from the web
 // 1 2345 so this method is not even good for 4 digits of pi 
@@ -2798,7 +2806,11 @@ func MonteCarloPi(randomPoints int) float64 {
 // goroutines and channels to parallelize the computation.
 // More details on the Monte Carlo method available at https://en.wikipedia.org/wiki/Monte_Carlo_method.
 // More details on goroutines parallelization available at https://go.dev/doc/effective_go#parallel.
-func MonteCarloPiConcurrent(n int) (float64, error) {
+func MonteCarloPiConcurrent(n int, num int) (float64, error) {
+//begin Richard H. Woolley's code block
+    start := time.Now() 
+//end Richard H. Woolley's code block
+
     numCPU := runtime.GOMAXPROCS(0)
     c := make(chan int, numCPU)
     pointsToDraw, err := splitInt(n, numCPU) // split the task in sub-tasks of approximately equal sizes
@@ -2816,6 +2828,27 @@ func MonteCarloPiConcurrent(n int) (float64, error) {
     for i := 0; i < numCPU; i++ {
         inside += <-c
     }
+//begin Richard H. Woolley's code block
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println(elapsed)
+
+            fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                check(err1)                                // ... gets a file handle to dataFromConstants.txt
+                defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+            Hostname, _ := os.Hostname()
+            _ , err0 := fmt.Fprintf(fileHandle, "\n  -- MonteCarloPiConcurrent -- selection #%d on %s \n", num, Hostname)
+                check(err0)
+            current_time := time.Now()
+            _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+            check(err6)
+            _ , err8 := fmt.Fprint(fileHandle, "precision was: ", n, "\n")
+            check(err8)
+            TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+            _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                check(err7)
+//end Richard H. Woolley's code block
+
     return float64(inside) / float64(n) * 4, nil
 }
 
@@ -2899,7 +2932,11 @@ func MonteCarloPi(randomPoints int) float64 {
 // goroutines and channels to parallelize the computation.
 // More details on the Monte Carlo method available at https://en.wikipedia.org/wiki/Monte_Carlo_method.
 // More details on goroutines parallelization available at https://go.dev/doc/effective_go#parallel.
-func MonteCarloPiConcurrent(n int) (float64, error) {
+func MonteCarloPiConcurrent(n int, num int) (float64, error) {
+//begin Richard H. Woolley's code block
+    start := time.Now() 
+//end Richard H. Woolley's code block
+
     numCPU := runtime.GOMAXPROCS(0)
     c := make(chan int, numCPU)
     pointsToDraw, err := splitInt(n, numCPU) // split the task in sub-tasks of approximately equal sizes
@@ -2917,6 +2954,27 @@ func MonteCarloPiConcurrent(n int) (float64, error) {
     for i := 0; i < numCPU; i++ {
         inside += <-c
     }
+//begin Richard H. Woolley's code block
+            t := time.Now()
+            elapsed := t.Sub(start)
+            fmt.Println(elapsed)
+
+            fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                check(err1)                                // ... gets a file handle to dataFromConstants.txt
+                defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+            Hostname, _ := os.Hostname()
+            _ , err0 := fmt.Fprintf(fileHandle, "\n  -- MonteCarloPiConcurrent -- selection #%d on %s \n", num, Hostname)
+                check(err0)
+            current_time := time.Now()
+            _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+            check(err6)
+            _ , err8 := fmt.Fprint(fileHandle, "precision was: ", n, "\n")
+            check(err8)
+            TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+            _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                check(err7)
+//end Richard H. Woolley's code block
+
     return float64(inside) / float64(n) * 4, nil
 }
 
@@ -2958,6 +3016,133 @@ func splitInt(x int, n int) ([]int, error) {
     return split, nil
 }`
 fmt.Println(MonteCarloPiConcurrentRune)
+}
+
+func showMagicBehindSwitch(){
+    var RicksSwitchRune = `
+    func RicksSwitch() {    // the primary if-then-else routine to execute a selection from the menu
+    var num int 
+        //fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley [it's an echo]\n")  // a kluge
+        // the above kluge may be needed in some environments (windows) along with the duplicate in RicksDisplayMenuPi()
+        fmt.Print("Enter your selection, 1 - 19 (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n")
+        fmt.Scanf("%d", &num)  // pause and request input from the user
+        if num == 0 {
+            fmt.Println("\nYou failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
+        }
+    if num > 57 && num < 10000 { num = 17 }  // to display a funny out-of-range message as case 17:
+    switch num { 
+        case 1:  // Calculate the square root of 3 from first principles of geometry
+            squareRootOf3(num)
+        case 21: 
+            showMagicBehindsquareRootOf3()
+        case 2:  // CASE 2 (best method) the Bailey–Borwein–Plouffe formula for π, circa 1995 
+            BBPF(num)
+        case 22:
+            showMagicBehindBBPF() 
+        case 3: // (worst method)
+            WorstMethod(num)
+        case 23: 
+            showMagicBehindWorstMethod() 
+        case 4:  // An improved version of Archimedes' method
+            Archimedes(num)
+        case 24:
+            showMagicBehindArchimedes()
+        case 5: // a series by Indian astronomer Nilakantha Somayaji circa 1500 AD 
+            Nilakantha(num)
+        case 25:
+            showMagicBehindNilakantha()
+        case 6: // Gottfried Wilhelm Leibniz
+            GottfriedWilhelmLeibniz(num)
+        case 26:
+            showMagicBehindGottfriedWilhelmLeibniz()
+        case 7: // the Gregory-Leibniz series
+            GregoryLeibniz(num)
+        case 27:
+            showMagicBehindGregoryLeibniz()
+        case 8: // John Wallis circa 1655 --- runs very long 
+            JohnWallis(num)
+        case 28: 
+            showMagicBehindJohnWallis()
+        case 9: // Euler's Number
+            EulersNumber(num)
+        case 29:
+            showMagicBehindEulersNumber()
+        case 10: // Erdős–Borwein constant
+            ErdosBorwein(num)
+        case 30:
+            showMagicBehindErdosBorwein()
+        case 11:  // display a review of the derivation of the Pythagorean
+            DisplayPythagorean(num)
+        case 12: // display contents of prior results file
+            content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
+                if err != nil {   // if the file does not exist ... 
+                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
+                } else {
+                    fmt.Println(string(content))  // dump/display entire file to command line
+                }
+        case 32:
+            var fileAccessRune = [runeMark]
+    content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
+        if err != nil {   // if the file does not exist ... 
+            fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
+        } else {
+            fmt.Println(string(content))  // dump/display entire file to command line
+        }[runeMark]
+            fmt.Println(fileAccessRune)
+        case 34:
+            /* // a project that failed 
+            var precision int 
+            fmt.Println("what shall be thy precision ")
+            fmt.Scanf("%d", &precision) 
+            fmt.Println("result is ", calculatePispi(precision))
+            */
+        case 35:
+            showMagicBehindSwitch()
+        case 36:
+            fmt.Println("You have discovered 36, the MonteCarloPi method. 56 to see the code")
+                            numMC := 1
+            fmt.Println("Enter an integer to specify a precision, and make it BIG")
+            fmt.Scanf("%d", &numMC) 
+            fmt.Println(MonteCarloPiConcurrent(numMC, num))
+            //fmt.Println(MonteCarloPi(numMC, num))
+        case 56:
+            showMagicBehindMonteCarloPiConcurrent()
+        case 19: 
+            TheSpigot()
+        case 20:
+            showTheMagic()
+        case 39:
+            showTheMagic()
+        case 33: 
+            showMagicBehindmainFunc()
+        case 13: 
+            fmt.Println(" ... So sorry, but", num, "was not an option")
+        case 14: 
+            fmt.Println(num, " was not an option! It was not on the menu, go fish!\n")
+        case 15: 
+            fmt.Println("Your selection of", num, " is right-out!  Go Fish!\n")
+        case 16: 
+            fmt.Println("Your selection is really-far-out!  Go Fish!\n")
+        case 17: 
+            fmt.Println("\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu")
+
+    default: 
+        fmt.Println("this is the switch default code, after a break option ??")
+    } 
+} `
+    fmt.Println(RicksSwitchRune)
+}
+
+func ConcurrentMCpi(num int) {
+    fmt.Println("You have discovered 36, the MonteCarloPi method. 56 to see the code")
+    fmt.Println("Warning, it is maximally concurent and will fully utilize all processors")
+    fmt.Println("as such it has the potential to cook your cores if left running for too long")
+                    numMC := 1
+    fmt.Println("Enter an integer to specify a precision, and make it BIG, 9999999999 is reasonable")
+    fmt.Scanf("%d", &numMC) 
+    fmt.Println(MonteCarloPiConcurrent(numMC, num))
+    //fmt.Println(MonteCarloPi(numMC, num))
+
 }
 
 func RicksSwitch() {    // the primary if-then-else routine to execute a selection from the menu
@@ -3013,6 +3198,8 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
             showMagicBehindErdosBorwein()
         case 11:  // display a review of the derivation of the Pythagorean
             DisplayPythagorean(num)
+        case 31: 
+            DisplayPythagorean(num)
         case 12: // display contents of prior results file
             content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
                 if err != nil {   // if the file does not exist ... 
@@ -3022,24 +3209,21 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
                 }
         case 32:
             var fileAccessRune = `
-            content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
-                if err != nil {   // if the file does not exist ... 
-                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
-                } else {
-                    fmt.Println(string(content))  // dump/display entire file to command line
-                }`
+    content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
+        if err != nil {   // if the file does not exist ... 
+            fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
+        } else {
+            fmt.Println(string(content))  // dump/display entire file to command line
+        }`
             fmt.Println(fileAccessRune)
-
-                    case 33: 
-                        showMagicBehindmainFunc()
-
-                            case 19: 
-                                TheSpigot()
-                            case 20:
-                                showTheMagic()
-                            case 39:
-                                showTheMagic()
-
+        case 19: 
+            TheSpigot()
+        case 20:
+            showTheMagic()
+        case 39:
+            showTheMagic()
+        case 33: 
+            showMagicBehindmainFunc()
         case 13: 
             fmt.Println(" ... So sorry, but", num, "was not an option")
         case 14: 
@@ -3050,20 +3234,17 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
             fmt.Println("Your selection is really-far-out!  Go Fish!\n")
         case 17: 
             fmt.Println("\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu")
-                case 34:
-                    /* // a project that failed 
-                    var precision int 
-                    fmt.Println("what shall be thy precision ")
-                    fmt.Scanf("%d", &precision) 
-                    fmt.Println("result is ", calculatePispi(precision))
-                    */
+        case 34:
+            /* // a project that I failed at
+            var precision int 
+            fmt.Println("what shall be thy precision? ")
+            fmt.Scanf("%d", &precision) 
+            fmt.Println("result is ", calculatePispi(precision))
+            */
+        case 35:
+            showMagicBehindSwitch()
         case 36:
-            fmt.Println("You have discovered 36, the MonteCarloPi method. 56 to see the code")
-                            numMC := 1
-            fmt.Println("Enter an integer to specify a precision, and make it BIG")
-            fmt.Scanf("%d", &numMC) 
-            fmt.Println(MonteCarloPiConcurrent(numMC))
-            //fmt.Println(MonteCarloPi(numMC))
+            ConcurrentMCpi(num)
         case 56:
             showMagicBehindMonteCarloPiConcurrent()
     default: 
@@ -3072,14 +3253,15 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
 } 
 
 func RicksDisplayMenuPi() {
-fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter 33 to see the the magic behind main (selector+20 for all others)\n") 
+fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter 33 to see the the magic behind main (selector+20 for all others)") 
+fmt.Println("... 35 to see the code for the switch, or poke around for easter eggs\n\n")
 // Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the initial inspiration for all of this ...
 // ... option 1 below having been discussed on his channel 
 fmt.Println("1:  Calculate the Square Root of 3 (\u221A3) from first-principles")
 fmt.Println("    ... i.e., from a ratio of 3:1 of perfect squares\n")
 fmt.Println("2:  Pi: Bailey–Borwein–Plouffe formula for π, discovered in 1995 (best method)\n")
 fmt.Println("3:  Pi: (worst method) requires calculating the \u221A3 (see selection 1)")
-fmt.Println("     ... as it only yeilds 4 digits of π \n")
+fmt.Println("     ... only yeilds 4 digits of π \n")
 fmt.Println("4:  Pi: Archimedes' method (improved) of bisecting triangles, circa 200 BC")
 fmt.Println("    π = begining with a hexagon, iteratively double its number of sides") 
 fmt.Println("      26 iterations is all it will take to get the ... ")
@@ -3109,11 +3291,11 @@ fmt.Println("12:  Display prior execution times from longer-running prior select
 fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly calculates way too much pie\n")
 //fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley\n")
 // the above kluge is definately not needed in a Linux environment
-fmt.Println("Ctrl-C to End/Exit  SLOC = 3100ish   \u00a9 2022, by Richard Hart Woolley \n")
+fmt.Println("Ctrl-C to End/Exit  SLOC = 3250ish   \u00a9 2022, by Richard Hart Woolley \n")
 }
 
 /*
-// never got anything to work with this 
+// I never got anything to work with this 
 // 999999999 gives 0.06427714842
 // 99        gives 0.06427714842
 // 9         gives 246.5114231795
