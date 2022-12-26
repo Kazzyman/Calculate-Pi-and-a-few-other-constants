@@ -56,6 +56,10 @@ func main() {        // top-level program logic flow
         var sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = []float32{99.9999}  // init with a large-ish p_diff_from_larger_hit
         var sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = []float32{88.888}     //   "            "      p_diff_from_smlr_hit
         var sliceOfResults = []float64 {333.3} // init with 333.3
+        var diff1 int
+        var diff2 int
+        var diff3 int
+        var diff4 float64
 
 func check(e error) {   // create a func named check which takes one parameter "e" of type error 
     if e != nil {
@@ -89,12 +93,6 @@ func BBPF(num int) {
     fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
     fmt.Println("and Pi from the web is    : 3.141592653589793")
 }
-
-
-var diff1 int
-var diff2 int
-var diff3 int
-var diff4 float64
 
 func buildTableOfOnlyPerfectSquares() { 
     root := 100
@@ -3439,9 +3437,8 @@ fmt.Println("12:  Display prior execution times from longer-running prior select
 fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly calculates way too much pie\n")
 //fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley\n")
 // the above kluge is definately not needed in a Linux environment
-fmt.Println("Ctrl-C to End/Exit  SLOC = 3250ish   \u00a9 2022, by Richard Hart Woolley \n")
+fmt.Println("Ctrl-C to End/Exit  SLOC = 3400ish   \u00a9 2022, by Richard Hart Woolley \n")
 }
-
 /*
 // I never got anything to work with this 
 // 999999999 gives 0.06427714842
