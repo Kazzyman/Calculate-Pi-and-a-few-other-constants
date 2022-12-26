@@ -55,7 +55,7 @@ func main() {        // top-level program logic flow
         var sliceOfPerfectSquares_and_their_roots = []int{ PerfectSquare , root } // initialize slice with 100
         var sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = []float32{99.9999}  // init with a large-ish p_diff_from_larger_hit
         var sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = []float32{88.888}     //   "            "      p_diff_from_smlr_hit
-
+        var sliceOfResults = []float64 {333.3} // init with 333.3
 
 func check(e error) {   // create a func named check which takes one parameter "e" of type error 
     if e != nil {
@@ -90,6 +90,12 @@ func BBPF(num int) {
     fmt.Println("and Pi from the web is    : 3.141592653589793")
 }
 
+
+var diff1 int
+var diff2 int
+var diff3 int
+var diff4 float64
+
 func buildTableOfOnlyPerfectSquares() { 
     root := 100
             iter := 0
@@ -108,57 +114,90 @@ func readTableOfPerfectSquares(index2 int) {
     for iter < 96000 {
         iter++
         index2 = index2 + 2 // index 
-            largerPerfectSquare := sliceOfPerfectSquares_and_their_roots[index2]        // get next perfect square 
-            if largerPerfectSquare == smallerPerfectSquareOnce*3 { // ... in the case that it is a miricle ...
-                fmt.Println("It is a miricle, everyone was wrong! ") // praise god
-                break  // exit the for loop ????????????????
-            }
-            if largerPerfectSquare >= smallerPerfectSquareOnce*3 {     // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3*smlr_PS deal with that, else loop to the next potential 
-                
-                ProspectiveHitOnLargeSide = largerPerfectSquare
-                p_diff_from_larger_hit := determinDiff(ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)  // ProspectiveHitOnLargeSide_Par, smallerPerfectSquareOnce_T3
-                sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit, p_diff_from_larger_hit)
+        largerPerfectSquare := sliceOfPerfectSquares_and_their_roots[index2]        // get next perfect square 
+        if largerPerfectSquare == smallerPerfectSquareOnce*3 { // ... in the case that it is a miricle ...
+            fmt.Println("It is a miricle, everyone was wrong! ") // praise god
+            break  // exit the for loop ????????????????
+        }
+        if largerPerfectSquare >= smallerPerfectSquareOnce*3 {     // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3*smlr_PS deal with that, else loop to the next potential 
+            
+            ProspectiveHitOnLargeSide = largerPerfectSquare
+            p_diff_from_larger_hit := determinDiff(ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)  // ProspectiveHitOnLargeSide_Par, smallerPerfectSquareOnce_T3
+            sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit, p_diff_from_larger_hit)
 
-                Prospective_smaller_hit = sliceOfPerfectSquares_and_their_roots[index2-2]  // an int
-                p_diff_from_smlr_hit := determinDiff(Prospective_smaller_hit, smallerPerfectSquareOnce*3)
-                sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit, p_diff_from_smlr_hit) // build a slice of ... // may not need this as a slice ????
+            Prospective_smaller_hit = sliceOfPerfectSquares_and_their_roots[index2-2]  // an int
+            p_diff_from_smlr_hit := determinDiff(Prospective_smaller_hit, smallerPerfectSquareOnce*3)
+            sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit, p_diff_from_smlr_hit) // build a slice of ... // may not need this as a slice ????
 
-// and now we cheat just to see if this is working ... 
-                sr_per_sm := (math.Sqrt(float64(Prospective_smaller_hit)) / math.Sqrt(float64(smallerPerfectSquareOnce)))  // a 3:1 ratio 
-                if sr_per_sm > 1.7320508066 { 
-                    if sr_per_sm < 1.7320508074 { 
-                        fmt.Println(sr_per_sm, "from top, is close at", iter, "iterations, hits are:", Prospective_smaller_hit, smallerPerfectSquareOnce)
-                    } 
+// and now we cheat a bit, just to see if this is working ... 
+            sr_per_sm := (math.Sqrt(float64(Prospective_smaller_hit)) / math.Sqrt(float64(smallerPerfectSquareOnce)))  // a 3:1 ratio 
+            if sr_per_sm > 1.7320508066 { 
+                if sr_per_sm < 1.7320508074 { 
+                    fmt.Println("", sr_per_sm, "from top, is close at", iter, "iterations, hits are:", Prospective_smaller_hit, smallerPerfectSquareOnce*3)
+                    sliceOfResults = append(sliceOfResults, sr_per_sm)
                 } 
-                    if sr_per_sm > 1.73205080752 {
-                        if sr_per_sm < 1.7320508077 {
-                            fmt.Println("\nPer the smaller ps, the \u221A3 has been calculated to be ... \n", sr_per_sm, " compared to:\n", "1.73205080757, the actual, after", iter, "iterations") 
-                            fmt.Println("which is pretty good, and via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
-                            fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", Prospective_smaller_hit, "over the sqrt of", smallerPerfectSquareOnce, "\n")
-                            savedHit = Prospective_smaller_hit
-                            smallerPerfectSquareOnceSaved = smallerPerfectSquareOnce
-                        } 
-                    }
-
-// should instead be deciding final answer based on closeness of fit, percent diff, to exactly 3x smaller perfect square. Not just checking to see if we have gotten this close to the known value of Sqrt of 3
-
-                sr_per_lg := (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce)))
-                if sr_per_lg < 1.732050808 {
-                    if sr_per_lg > 1.73205080 { 
-                        fmt.Println(sr_per_lg, "from bottom, is close at", iter, "iterations, hits are:", ProspectiveHitOnLargeSide, smallerPerfectSquareOnce)
-                        } 
-                    } 
-                    if sr_per_lg < 1.7320508079 {
-                        if sr_per_lg > 1.73205080 {  // 1.73205080757 (so 1.73205080754 - 1.73205080759 )
-                            fmt.Println("\nPer the larger ps, the \u221A3 has been calculated to be ... \n", sr_per_lg, " compared to:\n", "1.73205080757, the actual, after", iter, "iterations") 
-                            fmt.Println("which is pretty good, and via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
-                            fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", ProspectiveHitOnLargeSide, "over the sqrt of", smallerPerfectSquareOnce, "\n")
-                            savedHitB = ProspectiveHitOnLargeSide
+            } 
+            if sr_per_sm > 1.73205080752 {
+                if sr_per_sm < 1.7320508077 {
+                    sliceOfResults = append(sliceOfResults, sr_per_sm)
+                    fmt.Println("\nPer the smaller ps, the \u221A3 has been calculated to be ... \n", sr_per_sm, "after", iter, "iterations, compared to:\n", "1.73205080757 <--the actual" ) 
+                    fmt.Println("which is pretty good, and via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
+                    fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", Prospective_smaller_hit, "over the sqrt of", smallerPerfectSquareOnce, "")
+                    fmt.Println("\n... A perfect bottom square from our initial list of perfect squares, times 3, is ...")
+                    fmt.Println(smallerPerfectSquareOnce*3, " And the total iterations completed was ", TotalIterations)
+                    fmt.Println(Prospective_smaller_hit, " was the other perfect square which we found by searching for one that would be nearly-exactly three times larger")
+                    diff1 = 0
+                    if smallerPerfectSquareOnce*3 < Prospective_smaller_hit {
+                            diff1 = Prospective_smaller_hit - smallerPerfectSquareOnce*3
+                    } else {
+                            diff1 = smallerPerfectSquareOnce*3 - Prospective_smaller_hit
                         }
-                    }
-                    break // this break gets us out of the for loop having found a candidate within the larger if
-                    // without this break nothing displays, and the proc is eventually killed
-            }  // end "break-out" of the loop because "if we have found a candidate" we have already dealt with it so we need to break and get another potential from the for loop
+                    if diff1 <= 3 {
+                            fmt.Println("... pretty close, I'd say, with a difference of", diff1, "\n\n")
+                    } else {
+                            fmt.Println("... not as close as we'd like, since the difference was", diff1, "\n\n")
+                        }
+                    savedHit = Prospective_smaller_hit
+                    smallerPerfectSquareOnceSaved = smallerPerfectSquareOnce
+                } 
+            }
+
+// we really should instead be deciding final answer based on closeness of fit, percent diff, to exactly 3x smaller perfect square. 
+// Not just checking to see if we have gotten this close to the known value of Sqrt of 3
+
+            sr_per_lg := (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce)))
+            if sr_per_lg < 1.732050808 {
+                if sr_per_lg > 1.73205080 { 
+                    fmt.Println("", sr_per_lg, "from bottom, is close at", iter, "iterations, hits are:", ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)
+                    sliceOfResults = append(sliceOfResults, sr_per_lg)
+                } 
+            } 
+            if sr_per_lg < 1.7320508079 {
+                    sliceOfResults = append(sliceOfResults, sr_per_sm)
+                if sr_per_lg > 1.73205080 {  // 1.73205080757 (so 1.73205080754 - 1.73205080759 )
+                    fmt.Println("\nPer the larger ps, the \u221A3 has been calculated to be ... \n", sr_per_lg, "after", iter, "iterations, compared to:\n", "1.73205080757 <--the actual" )
+                    fmt.Println("which is pretty good, and via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
+                    fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", ProspectiveHitOnLargeSide, "over the sqrt of", smallerPerfectSquareOnce, "")
+                    fmt.Println("\n... A perfect bottom square from our initial list of perfect squares, times 3, is ...")
+                    fmt.Println(smallerPerfectSquareOnce*3, " And the total iterations completed was ", TotalIterations)
+                    fmt.Println(ProspectiveHitOnLargeSide, " was the other perfect square which we found by searching for one that would be nearly-exactly three times larger")
+                    diff2 = 0
+                    if smallerPerfectSquareOnce*3 < ProspectiveHitOnLargeSide {
+                            diff2 = ProspectiveHitOnLargeSide - smallerPerfectSquareOnce*3
+                    } else {
+                            diff2 = smallerPerfectSquareOnce*3 - ProspectiveHitOnLargeSide
+                        }
+                    if diff2 <= 3 {
+                            fmt.Println("... pretty close, I'd say, with a difference of", diff2, "\n\n")
+                    } else {
+                            fmt.Println("... not as close as we'd like, since the difference was", diff2, "\n\n")
+                        }
+                    savedHitB = ProspectiveHitOnLargeSide
+                }
+            }
+                break // this break gets us out of the for loop having found a candidate within the larger if
+                // without this break nothing displays, and the proc is eventually killed
+        }  // end "break-out" of the loop because "if we have found a candidate" we have already dealt with it so we need to break and get another potential from the for loop
     }       // END OF FOR LOOP after 96,000 index-d loops "iter-s"
     TotalIterations = iter // a global var to also be used elsewhere 
 } 
@@ -171,35 +210,70 @@ func squareRootOf3(num int) {
                 readTableOfPerfectSquares(index)  // pass-in the index 
                 index = index + 2 
             }
-        fmt.Println("a perfect bottom square from our initial list of perfect squares, times 3, is ...")
+        fmt.Println("\n... A perfect bottom square from our initial list of perfect squares, times 3, is ...")
         fmt.Println(smallerPerfectSquareOnceSaved*3, " And the total iterations completed was ", TotalIterations)
-        fmt.Println(savedHit, " was the other perfect square which we found by searching for a one that would be nearly-exactly three times larger\n")
-        fmt.Println("... pretty close, I'd say\n")
+        fmt.Println(savedHit, " was the other perfect square which we found by searching for one that would be nearly-exactly three times larger")
 
-            t := time.Now()
-            elapsed := t.Sub(start)
-    fmt.Println(TotalIterations, " iterations were completed in ", elapsed, " yielding 10 digits of sqrt of 3 \n") 
+        if smallerPerfectSquareOnceSaved*3 < savedHit {
+            diff3 = savedHit - smallerPerfectSquareOnceSaved*3
+        } else {
+            diff3 = smallerPerfectSquareOnceSaved*3 - savedHit
+            }
+        
+        if diff3 <= 3 {
+            fmt.Println("... pretty close, I'd say, with a difference of", diff3, "\n\n")
+        } else {
+            fmt.Println("... not as close as we'd like, since the difference was", diff3, "\n\n")
+            }
+            //fmt.Println(sliceOfResults) // show whole slice
+            //fmt.Println("len is ", len(sliceOfResults)) // gives the length that we need
+            //fmt.Println("cap is ", cap(sliceOfResults)) // gave a larger irrelevant number
+        items := 0
+        for items < len(sliceOfResults) {
+            // compare item from sliceOfResults with 1.73205080757 which is the actual
+            sliceItem := sliceOfResults[items]
+            if sliceItem < 1.73205080757 {
+                diff4 = 1.73205080757 - sliceItem
+            } else {
+                diff4 = sliceItem - 1.73205080757 
+                }
+            if diff4 < 4.9e-11 {
+                    ts3 := time.Now()
+                    elapseds3 := ts3.Sub(start)
+                    fmt.Println(TotalIterations, " iterations were completed in ", elapseds3, " yielding 11 digits of the \u221A3 \n") 
+
+                    fmt.Println(smallerPerfectSquareOnceSaved*3, "Was our best perfect square from the initial list")
+                    fmt.Println(savedHit, " was the best perfect square which we found that would be nearly-exactly three times larger")
+                    fmt.Println("... that pair generated the closest calculated approximation to the actual value of \u221A3 \n")
+
+                    fmt.Println(sliceItem, "difference is ", diff4)
+                    fmt.Println(1.73205080757, "<--actual")
+            }
+            items++
+        }
+    t := time.Now()
+    elapsed := t.Sub(start)
     var LinesPerSecondInt int 
     LinesPerIter := 98 // an estimate 
-            LinesPerSecondInt = (int(LinesPerIter) * int(TotalIterations) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-            fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                check(err1)                                // ... gets a file handle to dataFromConstants.txt
-                defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
-            Hostname, _ := os.Hostname()
-            _ , err0 := fmt.Fprintf(fileHandle, "\n  -- sqrt of 3 geometrically -- selection #%d on %s \n", num, Hostname)
-                check(err0)
-            current_time := time.Now()
-            _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
-            check(err6)
-            _ , err2 := fmt.Fprintf(fileHandle, "%d was Lines/Second \n", LinesPerSecondInt) 
-                check(err2)
-            _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds \n", float64(TotalIterations)/float64(elapsed.Seconds()))
-                check(err4)
-            _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", TotalIterations)
-                check(err5)
-            TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
-            _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
-                check(err7)
+        LinesPerSecondInt = (int(LinesPerIter) * int(TotalIterations) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
+        fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataFromConstants.txt
+            defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+        Hostname, _ := os.Hostname()
+        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- sqrt of 3 geometrically -- selection #%d on %s \n", num, Hostname)
+            check(err0)
+        current_time := time.Now()
+        _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+        check(err6)
+        _ , err2 := fmt.Fprintf(fileHandle, "%d was Lines/Second \n", LinesPerSecondInt) 
+            check(err2)
+        _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds \n", float64(TotalIterations)/float64(elapsed.Seconds()))
+            check(err4)
+        _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", TotalIterations)
+            check(err5)
+        TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+        _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+            check(err7)
 }
 
 func WorstMethod(num int){
@@ -1472,44 +1546,11 @@ to which it responds with its usual bullshit:
 
 func showMagicBehindsquareRootOf3() {
     var squareRootOf3rune = `
-func squareRootOf3(num int) {
-    start := time.Now() // saved start time to be compared with end time t
-        buildTableOfOnlyPerfectSquares() 
-            var index = 0 
-            for index < 300000 {
-                readTableOfPerfectSquares(index)  // pass-in the index 
-                index = index + 2 
-            }
-        fmt.Println("a perfect bottom square from our initial list of perfect squares, times 3, is ...")
-        fmt.Println(smallerPerfectSquareOnceSaved*3, " And the total iterations completed was ", TotalIterations)
-        fmt.Println(savedHit, " was the other perfect square which we found by searching for a one that would be nearly-exactly three times larger\n")
-        fmt.Println("... pretty close, I'd say\n")
 
-            t := time.Now()
-            elapsed := t.Sub(start)
-    fmt.Println(TotalIterations, " iterations were completed in ", elapsed, " yielding 10 digits of sqrt of 3 \n") 
-    var LinesPerSecondInt int 
-    LinesPerIter := 98 // an estimate 
-            LinesPerSecondInt = (int(LinesPerIter) * int(TotalIterations) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-            fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                check(err1)                                // ... gets a file handle to dataFromConstants.txt
-                defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
-            Hostname, _ := os.Hostname()
-            _ , err0 := fmt.Fprintf(fileHandle, "\n  -- sqrt of 3 geometrically -- selection #%d on %s \n", num, Hostname)
-                check(err0)
-            current_time := time.Now()
-            _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
-            check(err6)
-            _ , err2 := fmt.Fprintf(fileHandle, "%d was Lines/Second \n", LinesPerSecondInt) 
-                check(err2)
-            _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds \n", float64(TotalIterations)/float64(elapsed.Seconds()))
-                check(err4)
-            _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", TotalIterations)
-                check(err5)
-            TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
-            _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
-                check(err7)
-}
+var diff1 int
+var diff2 int
+var diff3 int
+var diff4 float64
 
 func buildTableOfOnlyPerfectSquares() { 
     root := 100
@@ -1529,60 +1570,167 @@ func readTableOfPerfectSquares(index2 int) {
     for iter < 96000 {
         iter++
         index2 = index2 + 2 // index 
-            largerPerfectSquare := sliceOfPerfectSquares_and_their_roots[index2]        // get next perfect square 
-            if largerPerfectSquare == smallerPerfectSquareOnce*3 { // ... in the case that it is a miricle ...
-                fmt.Println("It is a miricle, everyone was wrong! ") // praise god
-                break  // exit the for loop ????????????????
-            }
-            if largerPerfectSquare >= smallerPerfectSquareOnce*3 {     // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3*smlr_PS deal with that, else loop to the next potential 
-                
-                ProspectiveHitOnLargeSide = largerPerfectSquare
-                p_diff_from_larger_hit := determinDiff(ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)  // ProspectiveHitOnLargeSide_Par, smallerPerfectSquareOnce_T3
-                sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit, p_diff_from_larger_hit)
+        largerPerfectSquare := sliceOfPerfectSquares_and_their_roots[index2]        // get next perfect square 
+        if largerPerfectSquare == smallerPerfectSquareOnce*3 { // ... in the case that it is a miricle ...
+            fmt.Println("It is a miricle, everyone was wrong! ") // praise god
+            break  // exit the for loop ????????????????
+        }
+        if largerPerfectSquare >= smallerPerfectSquareOnce*3 {     // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3*smlr_PS deal with that, else loop to the next potential 
+            
+            ProspectiveHitOnLargeSide = largerPerfectSquare
+            p_diff_from_larger_hit := determinDiff(ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)  // ProspectiveHitOnLargeSide_Par, smallerPerfectSquareOnce_T3
+            sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_largerOfProspectiveHit, p_diff_from_larger_hit)
 
-                Prospective_smaller_hit = sliceOfPerfectSquares_and_their_roots[index2-2]  // an int
-                p_diff_from_smlr_hit := determinDiff(Prospective_smaller_hit, smallerPerfectSquareOnce*3)
-                sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit, p_diff_from_smlr_hit) // build a slice of ... // may not need this as a slice ????
+            Prospective_smaller_hit = sliceOfPerfectSquares_and_their_roots[index2-2]  // an int
+            p_diff_from_smlr_hit := determinDiff(Prospective_smaller_hit, smallerPerfectSquareOnce*3)
+            sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit = append(sliceOfP_diffs_smlrT3_to_smlrOfProspectiveHit, p_diff_from_smlr_hit) // build a slice of ... // may not need this as a slice ????
 
-// and now we cheat just to see if this is working ... 
-                sr_per_sm := (math.Sqrt(float64(Prospective_smaller_hit)) / math.Sqrt(float64(smallerPerfectSquareOnce)))  // a 3:1 ratio 
-                if sr_per_sm > 1.7320508066 { 
-                    if sr_per_sm < 1.7320508074 { 
-                        fmt.Println(sr_per_sm, "from top, is close at", iter, "iterations, hits are:", Prospective_smaller_hit, smallerPerfectSquareOnce)
-                    } 
+// and now we cheat a bit, just to see if this is working ... 
+            sr_per_sm := (math.Sqrt(float64(Prospective_smaller_hit)) / math.Sqrt(float64(smallerPerfectSquareOnce)))  // a 3:1 ratio 
+            if sr_per_sm > 1.7320508066 { 
+                if sr_per_sm < 1.7320508074 { 
+                    fmt.Println("", sr_per_sm, "from top, is close at", iter, "iterations, hits are:", Prospective_smaller_hit, smallerPerfectSquareOnce*3)
+                    sliceOfResults = append(sliceOfResults, sr_per_sm)
                 } 
-                    if sr_per_sm > 1.73205080752 {
-                        if sr_per_sm < 1.7320508077 {
-                            fmt.Println("\nPer the smaller ps, the \u221A3 has been calculated to be ... \n", sr_per_sm, " compared to:\n", "1.73205080757, the actual, after", iter, "iterations") 
-                            fmt.Println("which is pretty good, and via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
-                            fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", Prospective_smaller_hit, "over the sqrt of", smallerPerfectSquareOnce, "\n")
-                            savedHit = Prospective_smaller_hit
-                            smallerPerfectSquareOnceSaved = smallerPerfectSquareOnce
-                        } 
-                    }
-
-// should instead be deciding final answer based on closeness of fit, percent diff, to exactly 3x smaller perfect square. Not just checking to see if we have gotten this close to the known value of Sqrt of 3
-
-                sr_per_lg := (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce)))
-                if sr_per_lg < 1.732050808 {
-                    if sr_per_lg > 1.73205080 { 
-                        fmt.Println(sr_per_lg, "from bottom, is close at", iter, "iterations, hits are:", ProspectiveHitOnLargeSide, smallerPerfectSquareOnce)
-                        } 
-                    } 
-                    if sr_per_lg < 1.7320508079 {
-                        if sr_per_lg > 1.73205080 {  // 1.73205080757 (so 1.73205080754 - 1.73205080759 )
-                            fmt.Println("\nPer the larger ps, the \u221A3 has been calculated to be ... \n", sr_per_lg, " compared to:\n", "1.73205080757, the actual, after", iter, "iterations") 
-                            fmt.Println("which is pretty good, and via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
-                            fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", ProspectiveHitOnLargeSide, "over the sqrt of", smallerPerfectSquareOnce, "\n")
-                            savedHitB = ProspectiveHitOnLargeSide
+            } 
+            if sr_per_sm > 1.73205080752 {
+                if sr_per_sm < 1.7320508077 {
+                    sliceOfResults = append(sliceOfResults, sr_per_sm)
+                    fmt.Println("\nPer the smaller ps, the \u221A3 has been calculated to be ... \n", sr_per_sm, "after", iter, "iterations, compared to:\n", "1.73205080757 <--the actual" ) 
+                    fmt.Println("which is pretty good, and via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
+                    fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", Prospective_smaller_hit, "over the sqrt of", smallerPerfectSquareOnce, "")
+                    fmt.Println("\n... A perfect bottom square from our initial list of perfect squares, times 3, is ...")
+                    fmt.Println(smallerPerfectSquareOnce*3, " And the total iterations completed was ", TotalIterations)
+                    fmt.Println(Prospective_smaller_hit, " was the other perfect square which we found by searching for one that would be nearly-exactly three times larger")
+                    diff1 = 0
+                    if smallerPerfectSquareOnce*3 < Prospective_smaller_hit {
+                            diff1 = Prospective_smaller_hit - smallerPerfectSquareOnce*3
+                    } else {
+                            diff1 = smallerPerfectSquareOnce*3 - Prospective_smaller_hit
                         }
-                    }
-                    break // this break gets us out of the for loop having found a candidate within the larger if
-                    // without this break nothing displays, and the proc is eventually killed
-            }  // end "break-out" of the loop because "if we have found a candidate" we have already dealt with it so we need to break and get another potential from the for loop
+                    if diff1 <= 3 {
+                            fmt.Println("... pretty close, I'd say, with a difference of", diff1, "\n\n")
+                    } else {
+                            fmt.Println("... not as close as we'd like, since the difference was", diff1, "\n\n")
+                        }
+                    savedHit = Prospective_smaller_hit
+                    smallerPerfectSquareOnceSaved = smallerPerfectSquareOnce
+                } 
+            }
+
+// we really should instead be deciding final answer based on closeness of fit, percent diff, to exactly 3x smaller perfect square. 
+// Not just checking to see if we have gotten this close to the known value of Sqrt of 3
+
+            sr_per_lg := (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce)))
+            if sr_per_lg < 1.732050808 {
+                if sr_per_lg > 1.73205080 { 
+                    fmt.Println("", sr_per_lg, "from bottom, is close at", iter, "iterations, hits are:", ProspectiveHitOnLargeSide, smallerPerfectSquareOnce*3)
+                    sliceOfResults = append(sliceOfResults, sr_per_lg)
+                } 
+            } 
+            if sr_per_lg < 1.7320508079 {
+                    sliceOfResults = append(sliceOfResults, sr_per_sm)
+                if sr_per_lg > 1.73205080 {  // 1.73205080757 (so 1.73205080754 - 1.73205080759 )
+                    fmt.Println("\nPer the larger ps, the \u221A3 has been calculated to be ... \n", sr_per_lg, "after", iter, "iterations, compared to:\n", "1.73205080757 <--the actual" )
+                    fmt.Println("which is pretty good, and via first-principles of geometry alone\n... having found two very large perfect squares where one of them is")
+                    fmt.Println("very-nearly exactly three times larger, i.e., the sqrt of", ProspectiveHitOnLargeSide, "over the sqrt of", smallerPerfectSquareOnce, "")
+                    fmt.Println("\n... A perfect bottom square from our initial list of perfect squares, times 3, is ...")
+                    fmt.Println(smallerPerfectSquareOnce*3, " And the total iterations completed was ", TotalIterations)
+                    fmt.Println(ProspectiveHitOnLargeSide, " was the other perfect square which we found by searching for one that would be nearly-exactly three times larger")
+                    diff2 = 0
+                    if smallerPerfectSquareOnce*3 < ProspectiveHitOnLargeSide {
+                            diff2 = ProspectiveHitOnLargeSide - smallerPerfectSquareOnce*3
+                    } else {
+                            diff2 = smallerPerfectSquareOnce*3 - ProspectiveHitOnLargeSide
+                        }
+                    if diff2 <= 3 {
+                            fmt.Println("... pretty close, I'd say, with a difference of", diff2, "\n\n")
+                    } else {
+                            fmt.Println("... not as close as we'd like, since the difference was", diff2, "\n\n")
+                        }
+                    savedHitB = ProspectiveHitOnLargeSide
+                }
+            }
+                break // this break gets us out of the for loop having found a candidate within the larger if
+                // without this break nothing displays, and the proc is eventually killed
+        }  // end "break-out" of the loop because "if we have found a candidate" we have already dealt with it so we need to break and get another potential from the for loop
     }       // END OF FOR LOOP after 96,000 index-d loops "iter-s"
     TotalIterations = iter // a global var to also be used elsewhere 
 } 
+
+func squareRootOf3(num int) {
+    start := time.Now() // saved start time to be compared with end time t
+        buildTableOfOnlyPerfectSquares() 
+            var index = 0 
+            for index < 300000 {
+                readTableOfPerfectSquares(index)  // pass-in the index 
+                index = index + 2 
+            }
+        fmt.Println("\n... A perfect bottom square from our initial list of perfect squares, times 3, is ...")
+        fmt.Println(smallerPerfectSquareOnceSaved*3, " And the total iterations completed was ", TotalIterations)
+        fmt.Println(savedHit, " was the other perfect square which we found by searching for one that would be nearly-exactly three times larger")
+
+        if smallerPerfectSquareOnceSaved*3 < savedHit {
+            diff3 = savedHit - smallerPerfectSquareOnceSaved*3
+        } else {
+            diff3 = smallerPerfectSquareOnceSaved*3 - savedHit
+            }
+        
+        if diff3 <= 3 {
+            fmt.Println("... pretty close, I'd say, with a difference of", diff3, "\n\n")
+        } else {
+            fmt.Println("... not as close as we'd like, since the difference was", diff3, "\n\n")
+            }
+            //fmt.Println(sliceOfResults) // show whole slice
+            //fmt.Println("len is ", len(sliceOfResults)) // gives the length that we need
+            //fmt.Println("cap is ", cap(sliceOfResults)) // gave a larger irrelevant number
+        items := 0
+        for items < len(sliceOfResults) {
+            // compare item from sliceOfResults with 1.73205080757 which is the actual
+            sliceItem := sliceOfResults[items]
+            if sliceItem < 1.73205080757 {
+                diff4 = 1.73205080757 - sliceItem
+            } else {
+                diff4 = sliceItem - 1.73205080757 
+                }
+            if diff4 < 4.9e-11 {
+                    ts3 := time.Now()
+                    elapseds3 := ts3.Sub(start)
+                    fmt.Println(TotalIterations, " iterations were completed in ", elapseds3, " yielding 11 digits of the \u221A3 \n") 
+
+                    fmt.Println(smallerPerfectSquareOnceSaved*3, "Was our best perfect square from the initial list")
+                    fmt.Println(savedHit, " was the best perfect square which we found that would be nearly-exactly three times larger")
+                    fmt.Println("... that pair generated the closest calculated approximation to the actual value of \u221A3 \n")
+
+                    fmt.Println(sliceItem, "difference is ", diff4)
+                    fmt.Println(1.73205080757, "<--actual")
+            }
+            items++
+        }
+    t := time.Now()
+    elapsed := t.Sub(start)
+    var LinesPerSecondInt int 
+    LinesPerIter := 98 // an estimate 
+        LinesPerSecondInt = (int(LinesPerIter) * int(TotalIterations) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
+        fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataFromConstants.txt
+            defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+        Hostname, _ := os.Hostname()
+        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- sqrt of 3 geometrically -- selection #%d on %s \n", num, Hostname)
+            check(err0)
+        current_time := time.Now()
+        _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+        check(err6)
+        _ , err2 := fmt.Fprintf(fileHandle, "%d was Lines/Second \n", LinesPerSecondInt) 
+            check(err2)
+        _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds \n", float64(TotalIterations)/float64(elapsed.Seconds()))
+            check(err4)
+        _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", TotalIterations)
+            check(err5)
+        TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+        _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+            check(err7)
+}
     `
     fmt.Println(squareRootOf3rune)
 }
