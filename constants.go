@@ -240,12 +240,12 @@ func squareRootOf3(num int) {
                     elapseds3 := ts3.Sub(start)
                     fmt.Println(TotalIterations, " iterations were completed in ", elapseds3, " yielding 11 digits of the \u221A3 \n") 
 
-                    fmt.Println(smallerPerfectSquareOnceSaved*3, "Was our best perfect square from the initial list")
-                    fmt.Println(savedHit, " was the best perfect square which we found that would be nearly-exactly three times larger")
+                    fmt.Println(smallerPerfectSquareOnceSaved*3, "Was our best perfect square from the initial list, times 3")
+                    fmt.Println(savedHit, "was the best perfect square which we found that would be nearly-exactly three times larger")
                     fmt.Println("... that pair generated the closest calculated approximation to the actual value of \u221A3 \n")
 
-                    fmt.Println(sliceItem, "difference is ", diff4)
-                    fmt.Println(1.73205080757, "<--actual")
+                    fmt.Println(sliceItem, "The difference being", diff4)
+                    fmt.Println(1.73205080757, "<--being the actual value of \u221A3 per my HP RMN HSTNJ-BC01 pocket calculator")
             }
             items++
         }
