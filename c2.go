@@ -3479,6 +3479,7 @@ func pi(an, bn, tn, pin []float64) []float64 {  // this func is all about append
 }
 
 var globalValue_in_juuso float64  // Rick's code 
+var exterior_catcher int 
 
 func main_juuso() {
     // initialize lists
@@ -3509,13 +3510,18 @@ func main_juuso() {
     // print results
     // this for loop runs 4 times, therefore range pin yielded _ and 4 ???? There are no ';'s after the for, so, ??
     // ... no, 'range' looks to be a partner to the for itself 
-    for _, value := range pin {  // skip initializing a counter? no!, not sure exactly all that 'range' does, but when appllied to pin fetches calculated Pi from pin and apparently also another return that is being tossed via _ ???
-        // above 'range' seems to tell the for to "range" accross pin and assign a successive element to 'value', there were 4 elements, so it runs 4 times -- still not sure what the _, is doing here though ???
+    // ran as ...
+    //for exterior_catcher, value := range pin { // with the two test prints below 
+    for _, value := range pin {  // skip initializing a counter? no!, not sure exactly all that 'range' does, but when appllied to pin fetches calculated Pi from pin and apparently also another return that is being tossed via _ 
+        // above 'range' seems to tell the for to "range" accross pin and assign a successive element to 'value', there were 4 elements, so it runs 4 times -- the _ catches the unneeded return from 'range' which starts at 0 and goes to 3 in this loop 
         fmt.Printf("pin is %.16f, and ... ", pin) // pin is an aray of calculated values for Pi  // Rick's code to discover same 
         fmt.Printf("%.16f Was calculated herewith\n", value)  // 'value' created on prior 'for' line and is set 4 times to a successive element of pin 
         globalValue_in_juuso = value // Rick's code to grab that final 'value' from last iteration 
+    //fmt.Printf("\n\nTop underscore is %d \n\n", exterior_catcher) it starts at 0 and goes to 3 
+
     }
         fmt.Println(globalValue_in_juuso) // Rick's code
+        //fmt.Printf("\n\nBottom underscore is %d \n\n", exterior_catcher) this exterior_catcher var is never touched by the for loop 
         fmt.Println("3.1415926535897932 <-- compared to the actual value of Pi")
         fmt.Println("1 23456789012345 so, 15 digits were calculated correctly")
         fmt.Println("   ... via the Gauss–Legendre algorithm ...")
