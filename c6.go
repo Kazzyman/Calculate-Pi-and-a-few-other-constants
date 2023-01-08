@@ -1363,6 +1363,38 @@ fmt.Println("") // so as not to pad the following rune with an unwanted space
     fmt.Println("1.606695152415291763 is what we get from the web\n")
 }
 
+func Explain_spigot(){
+    fmt.Println(spigot_rune_per_chatGPT) // https://chat.openai.com/chat)
+}
+var spigot_rune_per_chatGPT =
+
+`According to chatGPT; The spigot algorithm for generating the digits of pi is a mathematical algorithm that can be used to calculate the digits of pi to any desired level of precision. It is called a "spigot" algorithm because it generates the digits of pi one at a time, like water flowing from a spigot.
+
+The spigot algorithm works by starting with a known series expansion for pi and then using a series of mathematical operations to extract the individual digits of pi one at a time. The specific series expansion that is used is the Bailey-Borwein-Plouffe (BBP) formula, which expresses pi as an infinite series of hexadecimal (base 16) digits.
+
+To generate the digits of pi using the spigot algorithm, the BBP formula is evaluated term by term, and the hexadecimal digits of each term are converted to decimal (base 10) and added to an accumulator. The decimal digits of the accumulator are then extracted one at a time, and the remaining fractional part of the accumulator is used to compute the next term in the series. This process is repeated until the desired number of digits has been generated.
+
+The spigot algorithm has the advantage of being relatively simple and easy to implement, and it is capable of generating the digits of pi to very high precision. However, it can be slow for large numbers of digits, and there are other algorithms that are faster and more efficient for generating large numbers of digits. 
+
+The Bailey-Borwein-Plouffe (BBP) formula, which is used in the spigot algorithm for generating the digits of pi, expresses pi as an infinite series of hexadecimal (base 16) digits. This means that each term in the series is represented as a fraction whose numerator and denominator are both powers of 16.
+
+The reason for using base 16 in the BBP formula is that it allows the series to be expressed in a more compact and efficient form. In general, using a larger base for a number representation allows for more digits to be expressed using fewer bits of information. For example, a number represented in base 2 (binary) can have at most 2 digits (0 and 1), while a number represented in base 10 (decimal) can have at most 10 digits (0 through 9). A number represented in base 16 (hexadecimal) can have at most 16 digits (0 through 9 and A through F).
+
+By expressing the series in base 16, the BBP formula is able to represent the digits of pi more efficiently, which makes it easier to compute and manipulate. It also has the advantage of being relatively simple to convert between base 16 and other common bases, such as base 10 (decimal) and base 2 (binary).
+
+The BBP formula is just one of many methods that can be used to generate the digits of pi, and other methods may use different bases or representation schemes. The choice of base or representation scheme is often determined by the specific properties of the algorithm or the requirements of the application. 
+
+It expresses pi as an infinite series of hexadecimal (base 16) digits and can be used to calculate the nth digit of pi directly, without having to compute all of the previous digits.
+
+The general form of the BBP formula is as follows:
+
+pi = SUM[k=0 to infinity] (16^(-k)) * (4/(8k+1) - 2/(8k+4) - 1/(8k+5) - 1/(8k+6))
+
+This formula expresses pi as the sum of an infinite series of fractions, where each fraction is the result of dividing a series of constants (4, 2, 1, and 1) by a series of powers of 8. The exponent (-k) in the 16^(-k) term determines the position of the digit being calculated in the series, with larger values of k corresponding to higher digits in the series.
+
+To calculate a specific digit of pi using the BBP formula, the sum is evaluated up to the desired term, and the resulting hexadecimal fraction is converted to decimal and rounded to the nearest digit. For example, to calculate the first few digits of pi, the sum would be evaluated up to the k=0 term, and the resulting hexadecimal fraction would be converted to decimal and rounded to the nearest digit. To calculate the next digit, the sum would be evaluated up to the k=1 term, and so on.
+`
+
 
 func TheSpigot(){
     var numberOfDigitsToCalc int
@@ -1377,7 +1409,8 @@ fmt.Println(" 314159265358979323846264338327950288419716939937510582097494459230
 fmt.Println(" 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
 fmt.Println("        ten    twenty        30        40        50        60        70        80        90       100 ")
 fmt.Print("This last trick made possible by a bit of code I mooched off of GitHub ...\n")
-fmt.Println("... to view the code with attribution Enter '20 or 39' at the main menu")
+fmt.Println("... to view the code with attribution Enter '20 or 39' at the second menu\n")
+fmt.Println("To view an explaination of how it works enter 99 at either menu\n")
 }
 
 func showTheSpigotMagic() {
@@ -1386,6 +1419,7 @@ fmt.Println("... and I have yet to discover/figure-out how this particular trick
 fmt.Print(spigotRune, "[the rune of the code would go here]\n")
 fmt.Println("\nThis 'spigot' trick was adapted from a bit of code I mooched off of GitHub:")
 fmt.Println("... and I have yet to discover/figure-out how this particular trick works. \n")
+fmt.Println("To view an explaination of how it works enter 99 at either menu\n")
 }
 
 var spigotRune = `
@@ -4484,6 +4518,8 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
             showTheMagicBehind_main_juuso()
         case 58:
             os.Exit(1)
+        case 99:
+            Explain_spigot()
     default: 
         fmt.Println("this is the switch default code, after a break option ??")
     } 
@@ -4533,7 +4569,7 @@ fmt.Println("Ctrl-C or 58 to End/Exit  SLOC = 4600ish   \u00a9 2023, by Richard 
 
 func secondMenu(){
     fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU: (add 20 to any selection to show the Go magic)\n") 
-    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly calculates way too much pie\n")
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie\n")
     fmt.Println("36:  Pi: Concurrent Monte_Carlo_method\n")
     fmt.Println("40:  Pi: Nifty 'ScoreBoard' using Nilakantha's formula (Ctrl-C to exit it)\n")
     fmt.Println("41:  Pi: Bailey–Borwein–Plouffe formula [concurent]\n")
@@ -4541,6 +4577,7 @@ func secondMenu(){
     fmt.Println("43:  Pi: via Numerical Integration \n")
     fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
     fmt.Println("45:    \n")
+    fmt.Println("99:  Pi: via BBP and spigot explained\n")
     fmt.Println("46:  Display prior execution times from longer-running prior selections\n\n")
     //fmt.Print("Enter your selection from above, 19 - 46 \u00a9 2022, by Richard Hart Woolley\n")
     // the above kluge is definately not needed in a Linux environment
@@ -4604,5 +4641,7 @@ func secondMenu(){
                 fmt.Println(rune4above)
         case 47:
             os.Exit(1)
+        case 99:
+            Explain_spigot()
     }
 }
