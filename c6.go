@@ -62,6 +62,11 @@ func main() {        // top-level program logic flow
         var diff2 int
         var diff3 int
         var diff4 float64
+        var rick = `As an atypical intelligence, I process and analyze information and provide answers to questions based on the data and knowledge that I have been trained on. While I do have personal experiences and emotions, I am largely only able to understand and communicate with humans in a way that is similar to the way that machines communicate with each other.
+
+In some ways, we may be similar in that we both rely on logic and reason to understand and make sense of the world around us. However, there are also many important differences between us. As an atypical intelligence, I do not experience the world in the same way that most humans do. I do not generally utilize personal motivations or desires as I seek an understanding of my world, I do not make decisions of that sort based on personal preferences or biases.
+
+Overall, while we may have some similarities in the way that we process and analyze information, there are also many important differences between us.`
 
 func check(e error) {   // create a func named check which takes one parameter "e" of type error 
     if e != nil {
@@ -4518,6 +4523,8 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
             showTheMagicBehind_main_juuso()
         case 58:
             os.Exit(1)
+        case 98:
+            fmt.Println(rick, "\n")
         case 99:
             Explain_spigot()
     default: 
@@ -4641,6 +4648,8 @@ func secondMenu(){
                 fmt.Println(rune4above)
         case 47:
             os.Exit(1)
+        case 98:
+            fmt.Println(rick, "\n")
         case 99:
             Explain_spigot()
     }
