@@ -2964,17 +2964,38 @@ fmt.Println(mainFuncRune)
 // 3.1415926535897932384626433832795028841971693993 is from the web
 // 1 2345 so this method is not even good for 4 digits of pi 
 // this method will only max-out one of your cores for a few min, while the other cores act as heat sinks 
-
-func MonteCarloPi(randomPoints int) float64 {
+var iters_mc int 
+func MonteCarloPi(randomPoints int, num2 int) float64 {
     rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
     inside := 0
+        start := time.Now() 
     for i := 0; i < randomPoints; i++ {
         x := rnd.Float64()
         y := rnd.Float64()
         if x*x+y*y <= 1 {
             inside += 1
         }
+        iters_mc = i
     }
+    t := time.Now()
+    elapsed := t.Sub(start)
+    // log stats to a log file 
+        fileHandle, err1 := os.OpenFile("dataFromConstants.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataFromConstants.txt
+            defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+        Hostname, _ := os.Hostname()
+        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- non-concurrent MonteCarloPi -- selection #%d on %s \n", num2, Hostname)
+            check(err0)
+        current_time := time.Now()
+        _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+        check(err6)
+        _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds \n", float64(iters_mc)/float64(elapsed.Seconds()))
+            check(err4)
+        _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", iters_mc)
+            check(err5)
+        TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+        _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+            check(err7)
     pi := float64(inside) / float64(randomPoints) * 4
     return pi
 }
@@ -3198,16 +3219,6 @@ fmt.Println(MonteCarloPiConcurrentRune)
 
 func showMagicBehindSwitch(){
     var RicksSwitchRune = `
-    func RicksSwitch() {    // the primary if-then-else routine to execute a selection from the menu
-    var num int 
-        //fmt.Print("Enter your selection from above, 1 - 12 \u00a9 2022, by Richard Hart Woolley [it's an echo]\n")  // a kluge
-        // the above kluge may be needed in some environments (windows) along with the duplicate in RicksDisplayMenuPi()
-        fmt.Print("Enter your selection, 1 - 19 (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n")
-        fmt.Scanf("%d", &num)  // pause and request input from the user
-        if num == 0 {
-            fmt.Println("\nYou failed to make a selection, Hit Enter/Return to redisplay the menu, Ctrl-C to End/Exit")
-        }
-    if num > 57 && num < 10000 { num = 17 }  // to display a funny out-of-range message as case 17:
     switch num { 
         case 1:  // Calculate the square root of 3 from first principles of geometry
             squareRootOf3(num)
@@ -3251,6 +3262,8 @@ func showMagicBehindSwitch(){
             showMagicBehindErdosBorwein()
         case 11:  // display a review of the derivation of the Pythagorean
             DisplayPythagorean(num)
+        case 31: 
+            DisplayPythagorean(num)
         case 12: // display contents of prior results file
             content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
                 if err != nil {   // if the file does not exist ... 
@@ -3267,30 +3280,6 @@ func showMagicBehindSwitch(){
             fmt.Println(string(content))  // dump/display entire file to command line
         }[runeMark]
             fmt.Println(fileAccessRune)
-        case 34:
-            /* // a project that failed 
-            var precision int 
-            fmt.Println("what shall be thy precision ")
-            fmt.Scanf("%d", &precision) 
-            fmt.Println("result is ", calculatePispi(precision))
-            */
-        case 35:
-            showMagicBehindSwitch()
-        case 36:
-            fmt.Println("You have discovered 36, the MonteCarloPi method. 56 to see the code")
-                            numMC := 1
-            fmt.Println("Enter an integer to specify a precision, and make it BIG")
-            fmt.Scanf("%d", &numMC) 
-            fmt.Println(MonteCarloPiConcurrent(numMC, num))
-            //fmt.Println(MonteCarloPi(numMC, num))
-        case 56:
-            showMagicBehindMonteCarloPiConcurrent()
-        case 19: 
-            TheSpigot()
-        case 20:
-            showTheMagic()
-        case 39:
-            showTheMagic()
         case 33: 
             showMagicBehindmainFunc()
         case 13: 
@@ -3303,10 +3292,92 @@ func showMagicBehindSwitch(){
             fmt.Println("Your selection is really-far-out!  Go Fish!\n")
         case 17: 
             fmt.Println("\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu")
-
+        case 18:
+            secondMenu()
+        case 34:
+            /* // a project that I failed at
+            var precision int 
+            fmt.Println("what shall be thy precision? ")
+            fmt.Scanf("%d", &precision) 
+            fmt.Println("result is ", calculatePispi(precision))
+            */
+        case 35:
+            showMagicBehindSwitch()
+        case 36:
+            ConcurrentMCpi(num)
+        case 56:
+            showMagicBehindMonteCarloPiConcurrent()
+        case 37:
+            main_juuso()
+        case 57:
+            showTheMagicBehind_main_juuso()
+        case 58:
+            os.Exit(1)
+        case 98:
+            fmt.Println(rick, "\n")
+        case 99:
+            Explain_spigot()
     default: 
         fmt.Println("this is the switch default code, after a break option ??")
-    } 
+
+
+    switch num2 { 
+        case 19: 
+            TheSpigot()
+        case 20:
+            showTheSpigotMagic()
+        case 36:
+            //MonteCarloPiConcurrent(12, num2)
+            ConcurrentMCpi_second_menu(num2)
+        case 39:
+            showTheSpigotMagic()
+        case 40:
+            nifty_scoreBoard()
+        case 60:
+            ShowSLOC_behind_scoreBoard_40()
+        case 41:
+            BBPfConcurent()
+        case 61:
+            DisplayCodeBehind_BBPfConcurent()
+        case 42:
+            bbp_formula(num2)
+        case 62:
+            CodeRuneOf_bbp_formula()
+        case 43:
+            numerical_integration(num2)
+        case 63:
+            ShowLOC_behind_numerical_integration()
+        case 44:
+            Leibniz_method_one_billion_iters(num2)
+        case 64:
+            Show_Leibniz_method_one_billion_iters()
+        case 45:
+
+        case 65:
+
+        case 46:
+            // display contents of prior results file
+            content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
+                if err != nil {   // if the file does not exist ... 
+                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
+                } else {
+                    fmt.Println(string(content))  // dump/display entire file to command line
+                }
+        case 66:
+            var rune4above = [runeMark]            // display contents of prior results file
+            content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
+                if err != nil {   // if the file does not exist ... 
+                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
+                } else {
+                    fmt.Println(string(content))  // dump/display entire file to command line
+                }[runeMark]
+                fmt.Println(rune4above)
+        case 47:
+            os.Exit(1)
+        case 98:
+            fmt.Println(rick, "\n")
+        case 99:
+            Explain_spigot()
 } `
     fmt.Println(RicksSwitchRune)
 }
@@ -4477,7 +4548,7 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
         case 12: // display contents of prior results file
             content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
+                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }
@@ -4534,7 +4605,7 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
 
 func RicksDisplayMenuPi() {
 fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter 33 to see the the magic behind main (selector+20 for all others)") 
-fmt.Println("... 35 to see the code for the switch, or poke around for easter eggs\n\n")
+fmt.Println("... 35 to see the code for the switches, or poke around for easter eggs\n\n")
 // Veritassium https://youtu.be/gMlf1ELvRzc?list=LL  was the initial inspiration for all of this ...
 // ... option 1 below having been discussed on his channel 
 fmt.Println("1:  Calculate the Square Root of 3 (\u221A3) from first-principles")
@@ -4571,7 +4642,7 @@ fmt.Println("12:  Display prior execution times from longer-running prior select
 fmt.Println("18:  FOR SECOND MENU\n")
 //fmt.Print("Enter your selection from above, 1 - 18 \u00a9 2022, by Richard Hart Woolley\n")
 // the above kluge is definately not needed in a Linux environment
-fmt.Println("Ctrl-C or 58 to End/Exit  SLOC = 4600ish   \u00a9 2023, by Richard Hart Woolley \n")
+fmt.Println("Ctrl-C or 58 to End/Exit  SLOC = 4700ish   \u00a9 2023, by Richard Hart Woolley \n")
 }
 
 func secondMenu(){
@@ -4583,12 +4654,12 @@ func secondMenu(){
     fmt.Println("42:  Pi: bbp formula to 46 digits\n")
     fmt.Println("43:  Pi: via Numerical Integration \n")
     fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
-    fmt.Println("45:    \n")
+    fmt.Println("45:  Pi: MonteCarloPi (non-concurrent) [9999999999 as input]\n")
     fmt.Println("99:  Pi: via BBP and spigot explained\n")
     fmt.Println("46:  Display prior execution times from longer-running prior selections\n\n")
     //fmt.Print("Enter your selection from above, 19 - 46 \u00a9 2022, by Richard Hart Woolley\n")
     // the above kluge is definately not needed in a Linux environment
-    fmt.Println("47: to End/Exit  SLOC = 4600ish   \u00a9 2023, by Richard Hart Woolley \n")
+    fmt.Println("47: to End/Exit  SLOC = 4700ish   \u00a9 2023, by Richard Hart Woolley \n")
     var num2 int 
     fmt.Scanf("%d", &num2)  // pause and request input from the user
         if num2 == 0 {
@@ -4626,14 +4697,14 @@ func secondMenu(){
         case 64:
             Show_Leibniz_method_one_billion_iters()
         case 45:
-
+            fmt.Println(MonteCarloPi(99999999, num2))
         case 65:
 
         case 46:
             // display contents of prior results file
             content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
+                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }
