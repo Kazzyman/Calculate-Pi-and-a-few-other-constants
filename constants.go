@@ -3431,7 +3431,7 @@ func ConcurrentMCpi(num int) {
     fmt.Println("You have discovered 36, the MonteCarloPi method. 56 to see the code")
     fmt.Println("Warning, it is maximally concurent and will fully utilize all processors")
     fmt.Println("as such it has the potential to cook your cores if left running for too long")
-                    numMC := 1
+                     numMC := 1  // aligned to the value below 
     fmt.Println("Enter an integer to specify a precision, and make it BIG, 9999999999 is reasonable")
     fmt.Scanf("%d", &numMC) 
     fmt.Println(MonteCarloPiConcurrent(numMC, num))
@@ -3441,7 +3441,7 @@ func ConcurrentMCpi_second_menu(num2 int) {
     fmt.Println("You have discovered 36, the MonteCarloPi method. 56 to see the code")
     fmt.Println("Warning, it is maximally concurent and will fully utilize all processors")
     fmt.Println("as such it has the potential to cook your cores if left running for too long")
-                    numMC := 1
+                     numMC := 1  // aligned to the value below 
     fmt.Println("Enter an integer to specify a precision, and make it BIG, 9999999999 is reasonable")
     fmt.Scanf("%d", &numMC) 
     fmt.Println(MonteCarloPiConcurrent(numMC, num2))
@@ -3456,17 +3456,21 @@ func showTheMagicBehind_main_juuso(){
 // ... to do it one should begin by studying the Gauss–Legendre algorithm itself ?? 
 
 var globalValue_in_juuso float64  // Rick's code 
+var exterior_catcher int          // Rick's code 
 
-func main_juuso() {  // initialize lists
+func main_juuso() {
+    // initialize lists
     pin := []float64{}
     an  := []float64{1}
     pn  := []float64{1}
 
     tn := []float64{float64(1)/float64(4)}  // Rick's improved code, instead of the following ... 
+    // ... 
     //tn := []float64{}                      // should have been able to accomplish the next line here as in initialize, see above
     //tn = append(tn, float64(1)/float64(4)) // append the quotient of 1.0/4.0 to list tn
 
     bn := []float64{float64(1)/math.Sqrt(2)}  // Rick's improved code, instead of the following ... 
+    // ...
     //bn := []float64{}                         // should have been able to accomplish the next line here as in initialize, as above
     //bn = append(bn, float64(1)/math.Sqrt(2))  // append the quotient of 1.0/sqrt of 2 to list bn
 
@@ -3476,24 +3480,29 @@ func main_juuso() {  // initialize lists
         bn = b(an, bn)
         tn = t(an, bn, tn, pn) // calls func t and passes to it 4 []float64s 
         pn = p(pn)
-        pin = pi(an, bn, tn, pin) // pin array ends up containing the 4 values that were calculated for Pi -- each time pi is called it returns a new version of a []float64 array
+        pin = pi(an, bn, tn, pin) // pin array ends up containing the 4 values that were calculated for Pi 
+        // each time pi is called it returns a new version of a []float64 array
     }
 
     // print results
     // this for loop runs 4 times, therefore range pin yielded _ and 4 ???? There are no ';'s after the for, so, ??
     // ... no, 'range' looks to be a partner to the for itself 
-    for _, value := range pin {  // skip initializing a counter? no!, not sure exactly all that 'range' does, but when appllied to pin fetches calculated Pi from pin and apparently also another return that is being tossed via _ ???
-        // above 'range' seems to tell the for to "range" accross pin and assign a successive element to 'value', there were 4 elements, so it runs 4 times -- still not sure what the _, is doing here though ???
+    // ran as ...
+    //for exterior_catcher, value := range pin { // with the two test prints below 
+    for _, value := range pin {  // skip initializing a counter? no!, not sure exactly all that 'range' does, but when appllied to pin fetches calculated Pi from pin and apparently also another return that is being tossed via _ 
+        // above 'range' seems to tell the for to "range" accross pin and assign a successive element to 'value', there were 4 elements, so it runs 4 times -- the _ catches the unneeded return from 'range' which starts at 0 and goes to 3 in this loop 
         fmt.Printf("pin is %.16f, and ... ", pin) // pin is an aray of calculated values for Pi  // Rick's code to discover same 
         fmt.Printf("%.16f Was calculated herewith\n", value)  // 'value' created on prior 'for' line and is set 4 times to a successive element of pin 
         globalValue_in_juuso = value // Rick's code to grab that final 'value' from last iteration 
+    //fmt.Printf("\n\nTop underscore is %d \n\n", exterior_catcher) it starts at 0 and goes to 3 
+
     }
         fmt.Println(globalValue_in_juuso) // Rick's code
+        //fmt.Printf("\n\nBottom underscore is %d \n\n", exterior_catcher) this exterior_catcher var is never touched by the for loop 
         fmt.Println("3.1415926535897932 <-- compared to the actual value of Pi")
         fmt.Println("1 23456789012345 so, 15 digits were calculated correctly")
         fmt.Println("   ... via the Gauss–Legendre algorithm ...")
 } // end of main_juuso 
-
 func a(an, bn []float64) []float64 {           // func a accepts an and bn of type []float64, and returns a []float64
     a := (an[len(an)-1] + bn[len(bn)-1]) / float64(2) // create local 'a' = (element of an indexed by len of an-1) + (element of bn indexed by len of bn-1) ?? 
     an = append(an, a)                               // append a to an
@@ -3519,15 +3528,15 @@ func pi(an, bn, tn, pin []float64) []float64 {  // this func is all about append
     //                                             ^2
     pin = append(pin, pi)
     return pin
+}
 }`
     fmt.Println(juuso_Rune)
 }
 
 
 var globalValue_in_juuso float64  // Rick's code 
-var exterior_catcher int 
-    // an Easter Egg :) 
-func main_juuso() {
+var exterior_catcher int         // Rick's code 
+func main_juuso() {           // his code
     // initialize lists
     pin := []float64{}
     an  := []float64{1}
@@ -4585,19 +4594,20 @@ func RicksSwitch() {    // the primary if-then-else routine to execute a selecti
         case 12: // display contents of prior results file
             content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists\n")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataFromConstants.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }
         case 32:
             var fileAccessRune = `
-    content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
-        if err != nil {   // if the file does not exist ... 
-            fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
-        } else {
-            fmt.Println(string(content))  // dump/display entire file to command line
-        }`
-            fmt.Println(fileAccessRune)
+        case 12: // display contents of prior results file
+            content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
+                if err != nil {   // if the file does not exist ... 
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataFromConstants.txt'", string(colorCyan), "exists\n")
+                } else {
+                    fmt.Println(string(content))  // dump/display entire file to command line
+                }`
+            fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
         case 33: 
             showMagicBehindmainFunc()
         case 13: 
@@ -4706,7 +4716,7 @@ func secondMenu(){
     fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
     fmt.Println("45:  Pi: MonteCarloPi", string(colorCyan), "(non-concurrent)", string(colorReset), "\n")
     fmt.Println("99:  Pi: via BBP and spigot explained\n")
-    fmt.Println("46:  Display prior execution times from longer-running prior selections\n")
+    fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
     //fmt.Print("Enter your selection from above, 19 - 46 \u00a9 2022, by Richard Hart Woolley\n")
     // the above kluge is definately not needed in a Linux environment
     fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
@@ -4755,22 +4765,24 @@ func secondMenu(){
         case 65:
 
         case 46:
-            // display contents of prior results file
+
+        case 12: // display contents of prior results file
             content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists\n")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataFromConstants.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }
-        case 66:
-            var rune4above = `            // display contents of prior results file
+        case 32:
+            var fileAccessRune = `
+        case 12: // display contents of prior results file
             content, err := ioutil.ReadFile("dataFromConstants.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println("no prior results -- no log file dataFromConstants.txt exists")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataFromConstants.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }`
-                fmt.Println(rune4above)
+            fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
         case 47:
             os.Exit(1)
         case 97:
