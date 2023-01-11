@@ -12,11 +12,11 @@ package main
 import (
     "os"        // fetch the name of your system 
     "io/ioutil" // file access 
-    "fmt"       // Used for error formatting
+    "fmt"       // Used for printing etc. 
     "math"      // Used for math.Pow(base, exponent)
     "math/rand" // Used for random number generation in Monte Carlo method
     "runtime"   // Used to get information on available CPUs
-    "time"      // Used for seeding the random number generation
+    "time"      // Used for seeding random number generation; and calculating run times 
     "strconv"   // Used in Spigot 
     "sync"      // Used in Bailey–Borwein–Plouffe formula [concurent]
     "os/signal" // Used in *** nifty scoreboard *** concurrent computation of pi using Nilakantha's formula, by Diego Brener diegosilva13 on Github 
@@ -52,7 +52,7 @@ import (
         var diff2 int
         var diff3 int
         var diff4 float64
-    var num int 
+        var num int 
 
         var rick = `As an atypical intelligence, I process and analyze information and provide answers to questions based on the data and knowledge that I have been trained on; 
 and, while I do have personal experiences and emotions, I am largely only able to understand and communicate with humans in a way that is similar to the way that machines communicate with each other.
@@ -203,11 +203,21 @@ fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the 
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
 fmt.Println("18:", string(colorYellow), "FOR SECOND MENU", string(colorReset), " or just hit Enter/Return\n")
 fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset))  // prompt for input from the user
+    fmt.Scanf("%d", &num)  // pause and request input from the user
 universal_switch(1)
 }
 
-func DisplaySecondMenu(){
-    num = 0 
+func universal_switch(which_menu int) {
+    //fmt.Printf("which_menu is %d and num is %d", which_menu, num)
+    //var num int 
+        //fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset))  // prompt for input from the user
+        //fmt.Scanf("%d", &num)  // pause and request input from the user
+
+    if which_menu == 1 && num == 0 {
+        // this is the only way to display the second menu, execept case 18: 
+        //DisplaySecondMenu()  // if the user hits return he is given a second menu (this caused duplicate runs of cases proportionate to the "loops" of the switch)
+        // ... and reimplementing the second menu here within the switch fixed the issue 
     fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU: (add 20 to any selection to show the Go magic)\n") 
     fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n")
     fmt.Println("36:  Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
@@ -222,22 +232,17 @@ func DisplaySecondMenu(){
     fmt.Println("35:  Show the magic behind the Universal switch\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
     fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
-    universal_switch(2)
-}
 
-func universal_switch(which_menu int) {
-    //fmt.Printf("which_menu is %d and num is %d", which_menu, num)
-    //var num int 
         fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset))  // prompt for input from the user
         fmt.Scanf("%d", &num)  // pause and request input from the user
-
-    if which_menu == 1 && num == 0 {
-        DisplaySecondMenu()  // if the user hits return he is given a second menu 
     }
 
+/*
     if which_menu  == 2 && num == 0 { 
+        //which_menu = 0 
         DisplayFirstMenu() 
     }
+*/ 
 
     if num > 100 && num < 10000 { num = 17 }  // case 17: will display a "funny" out-of-range message as case 17:
 
@@ -342,7 +347,24 @@ func universal_switch(which_menu int) {
             fmt.Println(string(colorRed), "\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu", string(colorReset))
 
         case 18:
-            DisplaySecondMenu()
+            //DisplaySecondMenu() // this had cased problems when called from within the if at the top of this switch, so why risk it here? 
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU: (add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n")
+    fmt.Println("36:  Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
+    fmt.Println("37:  Pi: Gauss–Legendre algorithm \n")
+    fmt.Println("40:  Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)", string(colorReset), "\n")
+    fmt.Println("41:  Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
+    fmt.Println("42:  Pi: BBP formula to 46 digits\n")
+    fmt.Println("43:  Pi: via Numerical Integration \n")
+    fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
+    fmt.Println("45:  Pi: MonteCarloPi", string(colorCyan), "(non-concurrent)", string(colorReset), "\n")
+    fmt.Println("99:  Pi: via BBP and spigot explained\n")
+    fmt.Println("35:  Show the magic behind the Universal switch\n")
+    fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+
+        fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset))  // prompt for input from the user
+        fmt.Scanf("%d", &num)  // pause and request input from the user
 
         case 19: 
             TheSpigot()
@@ -399,7 +421,7 @@ func universal_switch(which_menu int) {
         case 99:
             Explain_spigot() // per case 19: 
     default:
-        fmt.Println("\n default at bottom of Universal switch\n")
+        //fmt.Println("\n default at bottom of Universal switch\n")
     }
 }
 func showMagicBehindUniversalSwitch() {
@@ -838,7 +860,6 @@ func readTableOfPerfectSquares(index2 int) {
         }  // end "break-out" of the loop because "if we have found a candidate" we have already dealt with it so we need to break and get another potential from the for loop
     }    // END OF FOR LOOP after 96,000 index-d loops "iter-s"
     TotalIterations = iter // store iter in a global var to also be used elsewhere 
-    //num = 99999
 } 
 func showMagicBehindsquareRootOf3() {
     var squareRootOf3rune = `
@@ -4836,3 +4857,27 @@ func Leibniz_method_one_billion_iters(num int){
             check(err7)
 }`
 
+/*
+func DisplaySecondMenu(){ // here by case 18: or by the if at the top of switch -- if by 18 all is well, if by switch all runs twice 
+    num = 0 
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU: (add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n")
+    fmt.Println("36:  Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
+    fmt.Println("37:  Pi: Gauss–Legendre algorithm \n")
+    fmt.Println("40:  Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)", string(colorReset), "\n")
+    fmt.Println("41:  Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
+    fmt.Println("42:  Pi: BBP formula to 46 digits\n")
+    fmt.Println("43:  Pi: via Numerical Integration \n")
+    fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
+    fmt.Println("45:  Pi: MonteCarloPi", string(colorCyan), "(non-concurrent)", string(colorReset), "\n")
+    fmt.Println("99:  Pi: via BBP and spigot explained\n")
+    fmt.Println("35:  Show the magic behind the Universal switch\n")
+    fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+
+        fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset))  // prompt for input from the user
+        fmt.Scanf("%d", &num)  // pause and request input from the user
+
+    universal_switch(2)
+}
+*/
