@@ -218,12 +218,13 @@ func universal_switch(which_menu int) {
         // this is the only way to display the second menu, execept case 18: 
         //DisplaySecondMenu()  // if the user hits return he is given a second menu (this caused duplicate runs of cases proportionate to the "loops" of the switch)
         // ... and reimplementing the second menu here within the switch fixed the issue 
-    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU: (add 20 to any selection to show the Go magic)\n") 
-    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n")
-    fmt.Println("36:  Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
-    fmt.Println("37:  Pi: Gauss–Legendre algorithm \n")
-    fmt.Println("40:  Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)", string(colorReset), "\n")
-    fmt.Println("41:  Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
+    fmt.Print(string(colorYellow))
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n", string(colorCyan))
+    fmt.Println("36:", string(colorReset), "Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
+    fmt.Println("37:  Pi: Gauss–Legendre algorithm \n", string(colorYellow))
+    fmt.Println("40:", string(colorReset), "Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)\n", string(colorCyan))
+    fmt.Println("41:", string(colorReset), "Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
     fmt.Println("42:  Pi: BBP formula to 46 digits\n")
     fmt.Println("43:  Pi: via Numerical Integration \n")
     fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
@@ -231,6 +232,7 @@ func universal_switch(which_menu int) {
     fmt.Println("99:  Pi: via BBP and spigot explained\n")
     fmt.Println("35:  Show the magic behind the Universal switch\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
+            // ("47:  to End/Exit vvvvvvvvvvvvvvvv
     fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
 
         fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset))  // prompt for input from the user
@@ -348,12 +350,13 @@ func universal_switch(which_menu int) {
 
         case 18:
             //DisplaySecondMenu() // this had cased problems when called from within the if at the top of this switch, so why risk it here? 
-    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU: (add 20 to any selection to show the Go magic)\n") 
-    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n")
-    fmt.Println("36:  Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
-    fmt.Println("37:  Pi: Gauss–Legendre algorithm \n")
-    fmt.Println("40:  Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)", string(colorReset), "\n")
-    fmt.Println("41:  Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
+    fmt.Print(string(colorYellow))
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n", string(colorCyan))
+    fmt.Println("36:", string(colorReset), "Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
+    fmt.Println("37:  Pi: Gauss–Legendre algorithm \n", string(colorYellow))
+    fmt.Println("40:", string(colorReset), "Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)\n", string(colorCyan))
+    fmt.Println("41:", string(colorReset), "Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
     fmt.Println("42:  Pi: BBP formula to 46 digits\n")
     fmt.Println("43:  Pi: via Numerical Integration \n")
     fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
@@ -361,6 +364,7 @@ func universal_switch(which_menu int) {
     fmt.Println("99:  Pi: via BBP and spigot explained\n")
     fmt.Println("35:  Show the magic behind the Universal switch\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
+            // ("47:  to End/Exit vvvvvvvvvvvvvvvv
     fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
 
         fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset))  // prompt for input from the user
