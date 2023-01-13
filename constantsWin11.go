@@ -65,9 +65,9 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
     for 1 == 1 {    // loop endlessly, or Ctrl-C, or case 47: to Exit
         DisplayFirstMenu() 
         // a forced pause is needed to prevent the menu from redisplaying after a case #: has been handeled 
-        var Mnum int //  vvvv
-        fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the menu", string(colorReset)) // this will be the last line of every case #: 
-        fmt.Scanf("%d", &Mnum) // request input on command line (pause)
+        Mnum = 0
+        fmt.Println(string(colorRed), "Enter any value to redisplay the menu", string(colorReset)) // this will be the last line of every case #: 
+        fmt.Scan(&Mnum) // request input on command line (pause)
     } 
 
 } 
@@ -101,6 +101,9 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
         var diff2 int
         var diff3 int
         var diff4 float64
+        var num int 
+        var Mnum int 
+
         // the following var is used in switch case 98: 
         var rick = [runeMark] As an atypical intelligence, I process and analyze information and provide answers to questions based on the data and knowledge that I have been trained on; 
 and, while I do have personal experiences and emotions, I am largely only able to understand and communicate with humans in a way that is similar to the way that machines communicate with each other.
@@ -149,6 +152,7 @@ fmt.Println("        Explore the limit of interest\n")
 fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant", string(colorReset), "from a breif infinite series\n")
 fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
+//           13:                  v v v v v v v v v v v 
 fmt.Println(string(colorYellow), "13:  FOR SECOND MENU\n", string(colorReset))
 fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 4,800", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
@@ -255,8 +259,6 @@ func universal_switch() {
                 }`
             fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
 
-        //case 13: 
-            //fmt.Println(" ... So sorry, but", num, "was not an option")
         case 33: 
             showMagicBehindmainFunc()
 
@@ -330,13 +332,12 @@ func universal_switch() {
         case 119: 
             displayCode4Explain_spigot()
     default:
-        //fmt.Println("\n default at bottom of Universal switch\n")
     }
 }
 func showMagicBehindUniversalSwitch() {  // case 35: 
     var RuneOfShowMagicBehindUniversalSwitch = `
-func universal_switch(which_menu int) {
-    if which_menu == 1 && num == 0 {
+func universal_switch() {
+    if num == 13 {
     fmt.Print(string(colorYellow))
     fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
     fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n", string(colorCyan))
@@ -352,9 +353,9 @@ func universal_switch(which_menu int) {
     fmt.Println("35:  Show the magic behind the Universal switch\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
-    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 4,800", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
-    fmt.Scanf("%d", &num)  // pause and request input from the user
+    fmt.Scan(&num)  // pause and request input from the user
     }
 
     if num > 119 && num < 10000 { num = 17 }  // case 17: will display a "funny" out-of-range message as case 17:
@@ -434,8 +435,6 @@ func universal_switch(which_menu int) {
                 } [runeMark]
             fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
 
-        case 13: 
-            fmt.Println(" ... So sorry, but", num, "was not an option")
         case 33: 
             showMagicBehindmainFunc()
 
@@ -494,6 +493,8 @@ func universal_switch(which_menu int) {
 
         case 45:
             fmt.Println(MonteCarloPi(99999999, num))
+        case 65:
+            showMagicOfNonConcurrentMonteCarloPi() 
 
         case 47:
             os.Exit(1)
@@ -504,8 +505,9 @@ func universal_switch(which_menu int) {
             fmt.Println(string(colorCyan), rick, string(colorReset), "\n")
         case 99:
             Explain_spigot() // per case 19: 
+        case 119: 
+            displayCode4Explain_spigot()
     default:
-        //fmt.Println("\n default at bottom of Universal switch\n")
     }
 }
     `
@@ -563,7 +565,7 @@ func BBPF(num int) {
     fmt.Println("\nYou selected #", num, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
     fmt.Println("How many digits of pi should we calculate? Enter one integer '4 to 16' ")
                  var numAi float64 // aligned with the value below
-    fmt.Scanf("%f", &numAi)
+    fmt.Scan(&numAi)
     fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
     fmt.Println("and Pi from the web is    : 3.141592653589793")
 }
@@ -3442,7 +3444,7 @@ var iters_mc int
 func MonteCarloPi(number_of_randomPoints int, num int) float64 {
     fmt.Println("\nPlease enter a value for number of random points\n")
     var par int 
-    fmt.Scanf("%d", &par)  // pause and request input from the user, else use 
+    fmt.Scan(&par)  // pause and request input from the user, else use 
         if par == 0 {
             fmt.Println("\nYou failed to make a selection, therefore we run with", number_of_randomPoints, "\n")
         } else { 
@@ -3612,7 +3614,7 @@ func ConcurrentMCpi(num int) { // case 36: and its code as case 56:
     fmt.Println("as such, it has the potential to cook your cores if left running for too long")
                      numMC := 1  // aligned to the value below 
     fmt.Println("Enter an integer to specify a precision, and make it BIG, 9999999999 is reasonable")
-    fmt.Scanf("%d", &numMC) 
+    fmt.Scan(&numMC) 
     fmt.Println(MonteCarloPiConcurrent(numMC, num))
 }
 /*
