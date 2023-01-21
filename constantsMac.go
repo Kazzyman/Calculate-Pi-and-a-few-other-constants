@@ -503,12 +503,25 @@ func calculatePi(precision float64) float64 {
     fmt.Println(BBPFrune)
 }
 
+    var workPiece int
+    var precisionOfSquare int 
 // case 1: 
 func squareRootOf3(num int) { 
+        fmt.Println("Enter any integer that you wish to find the Square Root of")
+    fmt.Scanf("%d", &workPiece)
     start := time.Now() // saved start time to be compared with end time t
+
+precisionOfSquare = 3
+if workPiece != 3 {
+    precisionOfSquare = 3
+    fmt.Println("workPiece is", workPiece, "and precision is", precisionOfSquare)
+}
+
+
+
         buildTableOfPerfectSquares() 
         var index = 0 
-        for index < 160000 { // the table has 300,000 entries, but we did not really need that many :) 
+        for index < 560000 { // the table has 300,000 entries, but we did not really need that many :) 160000
             readTheTableOfPS(index)  // pass-in the index to the table 
             index++ 
         }
@@ -542,32 +555,32 @@ func squareRootOf3(num int) {
 func readTheTableOfPS (index int) {                               // this gets called 160,000 times.                  // The first time it is called index is 0
     smallerPerfectSquareOnce := Table_of_perfect_squares[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 160,000
         iter := 0
-    for iter < 120000 { // 120,000 loops, but why do we need so many?, Because index may be 0 to 160,000 ?? and we need to read through 300,000 table entries 
+    for iter < 520000 { // 120,000 loops, but why do we need so many?, Because index may be 0 to 160,000 ?? and we need to read through 300,000 table entries 
         iter++
         index++ // index may now be 2, or up to 160,002  ... and the table has 300,000 entries :) 
         largerPerfectSquare := Table_of_perfect_squares[index]  // get next perfect square from table for testing to see if it is more than 3* bigger than smallerPerfectSquareOnce
-        if largerPerfectSquare > smallerPerfectSquareOnce*3 {  // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3* the smaller PS deal with that, else loop to the next potential 
+        if largerPerfectSquare > smallerPerfectSquareOnce*workPiece {  // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3* the smaller PS deal with that, else loop to the next potential 
             ProspectiveHitOnLargeSide := largerPerfectSquare  // make a copy under a more suitable name :) 
             ProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-1]  // save that smaller one too
-            diffOfLarger := ProspectiveHitOnLargeSide - 3*smallerPerfectSquareOnce
-            diffOfSmaller := -(ProspectiveHitOnSmallerSide - 3*smallerPerfectSquareOnce)
+            diffOfLarger := ProspectiveHitOnLargeSide - workPiece*smallerPerfectSquareOnce
+            diffOfSmaller := -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectSquareOnce)
 
-            if diffOfLarger < 3 {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
-                fmt.Println("small PS is", smallerPerfectSquareOnce, "and, slightly on the higher side of 3* that we have a PS of", ProspectiveHitOnLargeSide, "diff being only", diffOfLarger)
-                fmt.Println("And the Sqrt of 3 is calculated as", (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))))  // a 3:1 ratio )
+            if diffOfLarger < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
+                fmt.Println("small PS is", smallerPerfectSquareOnce, "and, slightly on the higher side of", workPiece, "* that we found a PS of", ProspectiveHitOnLargeSide, "diff being only", diffOfLarger)
+                fmt.Println("And the Sqrt of", workPiece, "is calculated as", (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))))  // a 3:1 ratio )
             }
-            if diffOfSmaller < 3 {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
-                fmt.Println("small PS is", smallerPerfectSquareOnce, "and, slightly on the lesser side of 3* that we have a PS of", ProspectiveHitOnSmallerSide, "diff being only", diffOfSmaller)
-                fmt.Println("And the Sqrt of 3 is calculated as", (math.Sqrt(float64(ProspectiveHitOnSmallerSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))))  // a 3:1 ratio )
+            if diffOfSmaller < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
+                fmt.Println("small PS is", smallerPerfectSquareOnce, "and, slightly on the lesser side of", workPiece, "* that we found a PS of", ProspectiveHitOnSmallerSide, "diff being only", diffOfSmaller)
+                fmt.Println("And the Sqrt of", workPiece, "is calculated as", (math.Sqrt(float64(ProspectiveHitOnSmallerSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))))  // a 3:1 ratio )
             }
             break // out of the for loop if we found any prospects using the current index value 
         }
     }
 }
 func buildTableOfPerfectSquares() { 
-    root := 100000 // an initial root of 100,000 sets a rather high bar, but we only want really big perfect squares :) 
+    root := 1000 // an initial root of 100,000 sets a rather high bar, but we only want really big perfect squares :) 
             iter := 0
-        for iter < 300000 { // a table of 300,000 PSs ought to do it !!
+        for iter < 3000000 { // a table of 300,000 PSs ought to do it !!
             iter++
             root++ 
             PerfectSquare := root*root
