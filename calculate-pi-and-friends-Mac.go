@@ -86,7 +86,7 @@ func squareRootOf3(num int) {
                     TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
                     _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                         check(err7)
-                    num = 99999 // done as noted per the first line of this func 
+//                    num = 99999 // done as noted per the first line of this func 
             }
 }
 
@@ -292,7 +292,7 @@ fmt.Println("        Explore the limit of interest\n")
 fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant", string(colorReset), "from a breif infinite series\n")
 fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
-fmt.Println(string(colorYellow), "FOR SECOND MENU", string(colorReset), "just hit Enter/Return\n")
+fmt.Println(string(colorYellow), "FOR SECOND MENU", string(colorReset), "just hit Enter|Return\n")
 fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 4,993", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scanf("%d", &num)  // pause and request input from the user
