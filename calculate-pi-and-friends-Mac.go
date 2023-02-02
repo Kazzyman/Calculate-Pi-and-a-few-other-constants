@@ -410,7 +410,7 @@ func xRootOfy(num int) {
                         check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
-                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Root of %d by a ratio of perfect Products -- selection #%d on %s \n", workPiece, num, Hostname)
+                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
                         check(err0)
                     current_time := time.Now()
                     _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
@@ -590,7 +590,7 @@ func xRootOfy(num int) {
                         check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
-                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Root of %d by a ratio of perfect Products -- selection #%d on %s \n", workPiece, num, Hostname)
+                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
                         check(err0)
                     current_time := time.Now()
                     _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
