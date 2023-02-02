@@ -10,7 +10,7 @@ One can obtain the Go Compiler from : https://go.dev/dl/
 package main
 
 import (
-    "sort"
+    "sort"      // Used in case 18: 
     "os"        // fetch the name of your system 
     "io/ioutil" // file access 
     "fmt"       // Used for printing etc. 
@@ -60,7 +60,6 @@ func squareRootOf3(num int) {
                 fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
                 break 
             }
-            //index++ 
             index = index + 2
         }
         t := time.Now()
@@ -99,38 +98,19 @@ func readTheTableOfPS (index int, start2 time.Time) {             // this gets c
         iter := 0
     for iter < 210000 { // 210,000 loops. Why do we need so many?, Because index may be 0 to 180,000 ?? and we need to read through 400,000 table entries (180+210=390)
         iter++
-        //index++ // index may now be 2, or up to 180,002  ... and the table has 400,000 entries :) 
         index = index + 2 // 2 instead of one because we added roots to the slice
         largerPerfectSquare := Table_of_perfect_squares[index]  // get next perfect square from table for testing to see if it is more than workPiece * bigger than smallerPerfectSquareOnce
 
         if largerPerfectSquare > smallerPerfectSquareOnce*workPiece {  // if largerPerfectSquare is a candidate based on it being just-a-bit larger than workPiece * the smaller PS deal with that, else loop to the next potential 
 
-            //fmt.Println("\n smallerPerfectSquareOnce is", smallerPerfectSquareOnce, "\n")
-            //fmt.Println("\n rootOfSmallerPerfectSquareOnce is", rootOfSmallerPerfectSquareOnce, "\n")
-            
             ProspectiveHitOnLargeSide := largerPerfectSquare  // make a copy under a more suitable name :) 
-            //fmt.Println("\n ProspectiveHitOnLargeSide is", ProspectiveHitOnLargeSide, "\n")
             rootOfProspectiveHitOnLargeSide := Table_of_perfect_squares[index+1] // the current value of index plus one holds the root of largerPerfectSquare hence the root of ProspectiveHitOnLargeSide
-            //fmt.Println("\n rootOfProspectiveHitOnLargeSide is", rootOfProspectiveHitOnLargeSide, "\n")
             
             ProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-2]  // save that smaller one too // 2 now instead of 1 because we have added roots to the slice
-            //fmt.Println("\n ProspectiveHitOnSmallerSide is", ProspectiveHitOnSmallerSide, "\n")
             rootOfProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-1]
-            //fmt.Println("\n rootOfProspectiveHitOnSmallerSide is", rootOfProspectiveHitOnSmallerSide, "\n")
-
-
-
-            //fmt.Println("\nlargerPerfectSquare was > smallerPerfectSquareOnce*workPiece; the latter being", smallerPerfectSquareOnce*workPiece, "\n")
-
-
-
 
             diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectSquareOnce // always has 1 as value on every other pass
-            //fmt.Println("\n diffOfLarger is", diffOfLarger, "\n")
             diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectSquareOnce) // all ints 
-            //fmt.Println("\n diffOfSmaller is", diffOfSmaller, "\n")
-
-
 
             if diffOfLarger == 0 || diffOfSmaller == 0 { // then the workPiece is itself a perfect square because the numerator is exactly workPiece times the denominator 
                 //fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
@@ -140,14 +120,9 @@ func readTheTableOfPS (index int, start2 time.Time) {             // this gets c
                 break // out of for loop because the workPiece is itself a perfect square 
             }
 
-
-
-
             if diffOfLarger < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of workPiece
                 fmt.Println("small PS is", string(colorCyan), smallerPerfectSquareOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PS of", string(colorCyan),
                  ProspectiveHitOnLargeSide, string(colorReset), "diff being only", diffOfLarger)
-                //fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))),
-                 //string(colorReset), "\n")  // an x:1 ratio )   //                                                         index + 2                                       index ( original )
                 fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(rootOfSmallerPerfectSquareOnce),
                  string(colorReset), "\n")  // an x:1 ratio )
                 t2 = time.Now()
@@ -155,11 +130,7 @@ func readTheTableOfPS (index int, start2 time.Time) {             // this gets c
                 if float64(elapsed2.Seconds()) > 0.17  {
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
-                //break // no effect
-                //fmt.Println("\n rootOfProspectiveHitOnLargeSide and rootOfSmallerPerfectSquareOnce are", rootOfProspectiveHitOnLargeSide, rootOfSmallerPerfectSquareOnce, "\n")
-                //os.Exit(1)
             }
-
 
             if diffOfSmaller < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
                 fmt.Println("small PS is", string(colorCyan), smallerPerfectSquareOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PS of", string(colorCyan),
@@ -173,9 +144,6 @@ func readTheTableOfPS (index int, start2 time.Time) {             // this gets c
                 if float64(elapsed2.Seconds()) > 1.1  {
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
-                //break // no effect
-                //fmt.Println("\n rootOfProspectiveHitOnSmallerSide and rootOfSmallerPerfectSquareOnce are", rootOfProspectiveHitOnSmallerSide, rootOfSmallerPerfectSquareOnce, "\n")
-                //os.Exit(1)
             }
             break // out of the for loop if we found any prospects using the current index value 
         } // end of if
@@ -213,7 +181,6 @@ func squareRootOf3(num int) {
                 fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
                 break 
             }
-            //index++ 
             index = index + 2
         }
         t := time.Now()
@@ -252,38 +219,19 @@ func readTheTableOfPS (index int, start2 time.Time) {             // this gets c
         iter := 0
     for iter < 210000 { // 210,000 loops. Why do we need so many?, Because index may be 0 to 180,000 ?? and we need to read through 400,000 table entries (180+210=390)
         iter++
-        //index++ // index may now be 2, or up to 180,002  ... and the table has 400,000 entries :) 
         index = index + 2 // 2 instead of one because we added roots to the slice
         largerPerfectSquare := Table_of_perfect_squares[index]  // get next perfect square from table for testing to see if it is more than workPiece * bigger than smallerPerfectSquareOnce
 
         if largerPerfectSquare > smallerPerfectSquareOnce*workPiece {  // if largerPerfectSquare is a candidate based on it being just-a-bit larger than workPiece * the smaller PS deal with that, else loop to the next potential 
 
-            //fmt.Println("\n smallerPerfectSquareOnce is", smallerPerfectSquareOnce, "\n")
-            //fmt.Println("\n rootOfSmallerPerfectSquareOnce is", rootOfSmallerPerfectSquareOnce, "\n")
-            
             ProspectiveHitOnLargeSide := largerPerfectSquare  // make a copy under a more suitable name :) 
-            //fmt.Println("\n ProspectiveHitOnLargeSide is", ProspectiveHitOnLargeSide, "\n")
             rootOfProspectiveHitOnLargeSide := Table_of_perfect_squares[index+1] // the current value of index plus one holds the root of largerPerfectSquare hence the root of ProspectiveHitOnLargeSide
-            //fmt.Println("\n rootOfProspectiveHitOnLargeSide is", rootOfProspectiveHitOnLargeSide, "\n")
             
             ProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-2]  // save that smaller one too // 2 now instead of 1 because we have added roots to the slice
-            //fmt.Println("\n ProspectiveHitOnSmallerSide is", ProspectiveHitOnSmallerSide, "\n")
             rootOfProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-1]
-            //fmt.Println("\n rootOfProspectiveHitOnSmallerSide is", rootOfProspectiveHitOnSmallerSide, "\n")
-
-
-
-            //fmt.Println("\nlargerPerfectSquare was > smallerPerfectSquareOnce*workPiece; the latter being", smallerPerfectSquareOnce*workPiece, "\n")
-
-
-
 
             diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectSquareOnce // always has 1 as value on every other pass
-            //fmt.Println("\n diffOfLarger is", diffOfLarger, "\n")
             diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectSquareOnce) // all ints 
-            //fmt.Println("\n diffOfSmaller is", diffOfSmaller, "\n")
-
-
 
             if diffOfLarger == 0 || diffOfSmaller == 0 { // then the workPiece is itself a perfect square because the numerator is exactly workPiece times the denominator 
                 //fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
@@ -293,14 +241,9 @@ func readTheTableOfPS (index int, start2 time.Time) {             // this gets c
                 break // out of for loop because the workPiece is itself a perfect square 
             }
 
-
-
-
             if diffOfLarger < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of workPiece
                 fmt.Println("small PS is", string(colorCyan), smallerPerfectSquareOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PS of", string(colorCyan),
                  ProspectiveHitOnLargeSide, string(colorReset), "diff being only", diffOfLarger)
-                //fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))),
-                 //string(colorReset), "\n")  // an x:1 ratio )   //                                                         index + 2                                       index ( original )
                 fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(rootOfSmallerPerfectSquareOnce),
                  string(colorReset), "\n")  // an x:1 ratio )
                 t2 = time.Now()
@@ -308,11 +251,7 @@ func readTheTableOfPS (index int, start2 time.Time) {             // this gets c
                 if float64(elapsed2.Seconds()) > 0.17  {
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
-                //break // no effect
-                //fmt.Println("\n rootOfProspectiveHitOnLargeSide and rootOfSmallerPerfectSquareOnce are", rootOfProspectiveHitOnLargeSide, rootOfSmallerPerfectSquareOnce, "\n")
-                //os.Exit(1)
             }
-
 
             if diffOfSmaller < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
                 fmt.Println("small PS is", string(colorCyan), smallerPerfectSquareOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PS of", string(colorCyan),
@@ -326,9 +265,6 @@ func readTheTableOfPS (index int, start2 time.Time) {             // this gets c
                 if float64(elapsed2.Seconds()) > 1.1  {
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
-                //break // no effect
-                //fmt.Println("\n rootOfProspectiveHitOnSmallerSide and rootOfSmallerPerfectSquareOnce are", rootOfProspectiveHitOnSmallerSide, rootOfSmallerPerfectSquareOnce, "\n")
-                //os.Exit(1)
             }
             break // out of the for loop if we found any prospects using the current index value 
         } // end of if
@@ -426,7 +362,7 @@ func xRootOfy(num int) {
                         check(err7)
             }
 // bug fix kluge ===================================================================================================================================
-            fmt.Println("\n a bug exists in this #18 proc such that I am bailing out after each run until I find the bug. \n")
+            fmt.Println("\n a bug exists in this #18 proc such that I am bailing out after each run of the #18 proc until I find the bug. \n")
             os.Exit(1)
 }
 
@@ -746,7 +682,7 @@ fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant",
 fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
 fmt.Println(string(colorYellow), "FOR SECOND MENU", string(colorReset), "just hit Enter|Return\n")
-fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5,464", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5400", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scanf("%d", &num)  // pause and request input from the user
 universal_switch(1)
@@ -771,7 +707,7 @@ func universal_switch(which_menu int) {
     fmt.Println("35:  Show the magic behind the Universal switch\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
-    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,464", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5400", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scanf("%d", &num)  // pause and request input from the user
     }
@@ -4861,7 +4797,7 @@ func numerical_integration (num int){ // case 43:
             check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
-        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- calculate pi using a numerical integration -- selection #%d on %s \n", num, Hostname)
+        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Calculate pi using a numerical integration -- selection #%d on %s \n", num, Hostname)
             check(err0)
         current_time := time.Now()
         _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
@@ -4962,7 +4898,7 @@ func numerical_integration (num int){
             check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
-        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- calculate pi using a numerical integration -- selection #%d on %s \n", num, Hostname)
+        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Calculate pi using a numerical integration -- selection #%d on %s \n", num, Hostname)
             check(err0)
         current_time := time.Now()
         _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
