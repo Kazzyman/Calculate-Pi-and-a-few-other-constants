@@ -10,7 +10,7 @@ One can obtain the Go Compiler from : https://go.dev/dl/
 package main
 
 import (
-    "sort"      // Used in case 18: 
+    //"sort"      // Used in case 18: 
     "os"        // fetch the name of your system 
     "io/ioutil" // file access 
     "fmt"       // Used for printing etc. 
@@ -286,7 +286,7 @@ func buildTableOfPerfectSquares() {
 }
 
 // case 18: 
-var SortedSliceOf_pDiffs = []float64{900} // and may then become 901, 902, 903, or 904 
+//var SortedSliceOf_pDiffs = []float64{900} // and may then become 901, 902, 903, or 904 
 
 func xRootOfy(num int) { 
         var precisionOfRoot int 
@@ -300,13 +300,19 @@ func xRootOfy(num int) {
     start := time.Now() // saved start time to be compared with end time t 
 
     if radical_index == 3 {
-        precisionOfRoot = 100
-            if workPiece == 4  || workPiece == 5 || workPiece > 9 {
-                precisionOfRoot = 660 
-                fmt.Println("\n ... setting precision to 660 \n")
+            if workPiece > 4 {
+                precisionOfRoot = 1700
+                fmt.Println("\n Default precision is 1700 \n")
+            }
+            if workPiece == 2 || workPiece == 11 || workPiece == 17 {
+                precisionOfRoot = 600
+                fmt.Println("\n resetting precision to 600 \n")
+            }
+            if workPiece == 3 || workPiece == 4 || workPiece == 14 {
+                precisionOfRoot = 900
+                fmt.Println("\n resetting precision to 900 \n")
             }
     }
-
     if radical_index == 2 {
         precisionOfRoot = 4
     }
@@ -319,21 +325,19 @@ func xRootOfy(num int) {
             start2 = time.Now() // start2 is a global var and so it was initially 0 
             readTheTableOfPP(radical_index, index, start, workPiece, precisionOfRoot)  // pass-in the index to the table 
 
-// this if block is odd ?? 
+// this if block is a bit queer/odd ?? 
             if diffOfLarger == 0 || diffOfSmaller == 0 { 
-                SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(901))
-                //fmt.Println(string(colorCyan), "\n The top == ", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
-                //fmt.Println(string(colorCyan), "\n The top == ", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")               
-                break 
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(901))
+               break 
             }
 
             index = index + 2
         }
 
-    sort.Float64s(SortedSliceOf_pDiffs)
-    fmt.Println(string(colorRed), "find", string(colorReset), SortedSliceOf_pDiffs[0], string(colorRed), "in the above hits.", string(colorReset), "The value below it in green is the best estimate \n\n")
-    SortedSliceOf_pDiffs = nil
-    SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(902))
+    //sort.Float64s(SortedSliceOf_pDiffs)
+    //fmt.Println(string(colorRed), "find", string(colorReset), SortedSliceOf_pDiffs[0], string(colorRed), "in the above hits.", string(colorReset), "The value below it in green is the best estimate \n\n")
+    //SortedSliceOf_pDiffs = nil
+    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(902))
 
         t := time.Now()
         elapsed := t.Sub(start)
@@ -361,9 +365,6 @@ func xRootOfy(num int) {
                     _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                         check(err7)
             }
-// bug fix kluge ===================================================================================================================================
-            fmt.Println("\n a bug exists in this #18 proc such that I am bailing out after each run of the #18 proc until I find the bug. \n")
-            os.Exit(1)
 }
 
 
@@ -389,12 +390,12 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
             diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectProductOnce)
 
             if diffOfLarger == 0 {
-                SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(903)) // 
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(903)) // 
                 fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
                 break // out of the for loop because the workPiece is itself a perfect square
             }
             if diffOfSmaller == 0 {
-                SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(904))
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(904))
                 fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
                 break // out of the for loop because the workPiece is itself a perfect square
             }
@@ -405,9 +406,9 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
                 fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PP of", string(colorCyan),
                  ProspectiveHitOnLargeSide, string(colorReset), "a difference of", diffOfLarger)
 
-                    pDiffL = float64(diffOfLarger)*100 / float64(ProspectiveHitOnLargeSide) // looking for the smallest pDiff 
-                    fmt.Println("\n", pDiffL, "\n")
-                    SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffL)
+                    //pDiffL = float64(diffOfLarger)*100 / float64(ProspectiveHitOnLargeSide) // looking for the smallest pDiff 
+                    //fmt.Println("\n", pDiffL, "\n")
+                    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffL)
 
                 fmt.Println(radical_index, "root of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
                  string(colorReset), "\n")  // an x:1 ratio )
@@ -424,9 +425,9 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
                 fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PP of", string(colorCyan),
                  ProspectiveHitOnSmallerSide, string(colorReset), "a difference of", diffOfSmaller)
 
-                    pDiffS = float64(diffOfSmaller)*100 / float64(ProspectiveHitOnSmallerSide) // looking for the smallest pDiff 
-                    fmt.Println("\n", pDiffS, "\n")
-                    SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffS)
+                    //pDiffS = float64(diffOfSmaller)*100 / float64(ProspectiveHitOnSmallerSide) // looking for the smallest pDiff 
+                    //fmt.Println("\n", pDiffS, "\n")
+                    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffS)
 
                 fmt.Println(radical_index, "root of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
                  string(colorReset), "\n")  // an x:1 ratio )
@@ -442,11 +443,12 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
     }
 }
 
-var pDiffS float64 
-var pDiffL float64 
+//var pDiffS float64 
+//var pDiffL float64 
 
 func buildTableOfPerfectProducts(radical_index int) {
     var PerfectProduct int 
+    Table_of_perfect_Products = nil // this fixed my bug 
     root := 10 
             iter := 0
         for iter < 810000 { // a table of 810,000 pairs of PPs with their roots ought to do it !!
@@ -466,7 +468,7 @@ func buildTableOfPerfectProducts(radical_index int) {
 func showMagicBehindxRootOfy() { // case 38: 
     var xRootOfyrune = `
 // case 18: 
-var SortedSliceOf_pDiffs = []float64{900} // and may then become 901, 902, 903, or 904 
+//var SortedSliceOf_pDiffs = []float64{900} // and may then become 901, 902, 903, or 904 
 
 func xRootOfy(num int) { 
         var precisionOfRoot int 
@@ -480,13 +482,19 @@ func xRootOfy(num int) {
     start := time.Now() // saved start time to be compared with end time t 
 
     if radical_index == 3 {
-        precisionOfRoot = 100
-            if workPiece == 4  || workPiece == 5 || workPiece > 9 {
-                precisionOfRoot = 660 
-                fmt.Println("\n ... setting precision to 660 \n")
+            if workPiece > 4 {
+                precisionOfRoot = 1700
+                fmt.Println("\n Default precision is 1700 \n")
+            }
+            if workPiece == 2 || workPiece == 11 || workPiece == 17 {
+                precisionOfRoot = 600
+                fmt.Println("\n resetting precision to 600 \n")
+            }
+            if workPiece == 3 || workPiece == 4 || workPiece == 14 {
+                precisionOfRoot = 900
+                fmt.Println("\n resetting precision to 900 \n")
             }
     }
-
     if radical_index == 2 {
         precisionOfRoot = 4
     }
@@ -499,21 +507,19 @@ func xRootOfy(num int) {
             start2 = time.Now() // start2 is a global var and so it was initially 0 
             readTheTableOfPP(radical_index, index, start, workPiece, precisionOfRoot)  // pass-in the index to the table 
 
-// this if block is odd ?? 
+// this if block is a bit queer/odd ?? 
             if diffOfLarger == 0 || diffOfSmaller == 0 { 
-                SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(901))
-                //fmt.Println(string(colorCyan), "\n The top == ", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
-                //fmt.Println(string(colorCyan), "\n The top == ", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")               
-                break 
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(901))
+               break 
             }
 
             index = index + 2
         }
 
-    sort.Float64s(SortedSliceOf_pDiffs)
-    fmt.Println(string(colorRed), "find", string(colorReset), SortedSliceOf_pDiffs[0], string(colorRed), "in the above hits.", string(colorReset), "The value below it in green is the best estimate \n\n")
-    SortedSliceOf_pDiffs = nil
-    SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(902))
+    //sort.Float64s(SortedSliceOf_pDiffs)
+    //fmt.Println(string(colorRed), "find", string(colorReset), SortedSliceOf_pDiffs[0], string(colorRed), "in the above hits.", string(colorReset), "The value below it in green is the best estimate \n\n")
+    //SortedSliceOf_pDiffs = nil
+    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(902))
 
         t := time.Now()
         elapsed := t.Sub(start)
@@ -541,9 +547,6 @@ func xRootOfy(num int) {
                     _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                         check(err7)
             }
-// bug fix kluge ===================================================================================================================================
-            fmt.Println("\n a bug exists in this #18 proc such that I am bailing out after each run until I find the bug. \n")
-            os.Exit(1)
 }
 
 
@@ -569,12 +572,12 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
             diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectProductOnce)
 
             if diffOfLarger == 0 {
-                SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(903)) // 
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(903)) // 
                 fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
                 break // out of the for loop because the workPiece is itself a perfect square
             }
             if diffOfSmaller == 0 {
-                SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(904))
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(904))
                 fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
                 break // out of the for loop because the workPiece is itself a perfect square
             }
@@ -585,9 +588,9 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
                 fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PP of", string(colorCyan),
                  ProspectiveHitOnLargeSide, string(colorReset), "a difference of", diffOfLarger)
 
-                    pDiffL = float64(diffOfLarger)*100 / float64(ProspectiveHitOnLargeSide) // looking for the smallest pDiff 
-                    fmt.Println("\n", pDiffL, "\n")
-                    SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffL)
+                    //pDiffL = float64(diffOfLarger)*100 / float64(ProspectiveHitOnLargeSide) // looking for the smallest pDiff 
+                    //fmt.Println("\n", pDiffL, "\n")
+                    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffL)
 
                 fmt.Println(radical_index, "root of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
                  string(colorReset), "\n")  // an x:1 ratio )
@@ -604,9 +607,9 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
                 fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PP of", string(colorCyan),
                  ProspectiveHitOnSmallerSide, string(colorReset), "a difference of", diffOfSmaller)
 
-                    pDiffS = float64(diffOfSmaller)*100 / float64(ProspectiveHitOnSmallerSide) // looking for the smallest pDiff 
-                    fmt.Println("\n", pDiffS, "\n")
-                    SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffS)
+                    //pDiffS = float64(diffOfSmaller)*100 / float64(ProspectiveHitOnSmallerSide) // looking for the smallest pDiff 
+                    //fmt.Println("\n", pDiffS, "\n")
+                    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffS)
 
                 fmt.Println(radical_index, "root of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
                  string(colorReset), "\n")  // an x:1 ratio )
@@ -622,11 +625,12 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
     }
 }
 
-var pDiffS float64 
-var pDiffL float64 
+//var pDiffS float64 
+//var pDiffL float64 
 
 func buildTableOfPerfectProducts(radical_index int) {
     var PerfectProduct int 
+    Table_of_perfect_Products = nil // this fixed my bug 
     root := 10 
             iter := 0
         for iter < 810000 { // a table of 810,000 pairs of PPs with their roots ought to do it !!
