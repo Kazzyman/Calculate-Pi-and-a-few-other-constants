@@ -10,7 +10,7 @@ One can obtain the Go Compiler from : https://go.dev/dl/
 package main
 
 import (
-    //"sort"      // Used in case 18: 
+    //"sort"      // was used in case 18: until it was not
     "os"        // fetch the name of your system 
     "io/ioutil" // file access 
     "fmt"       // Used for printing etc. 
@@ -29,10 +29,10 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
     for 1 == 1 {    // loop endlessly, or Ctrl-C, or case 47: to Exit
         DisplayFirstMenu() 
         if num == 0 {
-            fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the menu", string(colorReset)) // this will be the last line of every case #:             
+            fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the main menu", string(colorReset)) // this will be the last line of every case #:             
         } else {
             fmt.Println(string(colorYellow), "... my work is done ...")
-            fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the menu", string(colorReset)) // this will be the last line of every case #: 
+            fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the main menu", string(colorReset)) // this will be the last line of every case #: 
         }
         // a forced pause is needed to prevent the menu from redisplaying after a case #: has been handeled 
         var Mnum int //  vvvv
@@ -69,8 +69,8 @@ func squareRootOf3(num int) {
                 var LinesPerSecondInt int 
                 LinesPerIter := 28 // an estimate 
                     LinesPerSecondInt = (int(LinesPerIter) * int(index) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Sqrt of %d by a ratio of perfect squares -- selection #%d on %s \n", workPiece, num, Hostname)
@@ -162,6 +162,9 @@ func buildTableOfPerfectSquares() {
 }
 func showMagicBehindsquareRootOf3() {  // case 21: 
     var squareRootOf3rune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 // case 1: 
 func squareRootOf3(num int) { 
         precisionOfSquare = 3
@@ -190,8 +193,8 @@ func squareRootOf3(num int) {
                 var LinesPerSecondInt int 
                 LinesPerIter := 28 // an estimate 
                     LinesPerSecondInt = (int(LinesPerIter) * int(index) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Sqrt of %d by a ratio of perfect squares -- selection #%d on %s \n", workPiece, num, Hostname)
@@ -346,8 +349,8 @@ func xRootOfy(num int) {
                 var LinesPerSecondInt int 
                 LinesPerIter := 28 // an estimate 
                     LinesPerSecondInt = (int(LinesPerIter) * int(index) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
@@ -467,6 +470,9 @@ func buildTableOfPerfectProducts(radical_index int) {
 
 func showMagicBehindxRootOfy() { // case 38: 
     var xRootOfyrune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 // case 18: 
 //var SortedSliceOf_pDiffs = []float64{900} // and may then become 901, 902, 903, or 904 
 
@@ -528,8 +534,8 @@ func xRootOfy(num int) {
                 var LinesPerSecondInt int 
                 LinesPerIter := 28 // an estimate 
                     LinesPerSecondInt = (int(LinesPerIter) * int(index) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
@@ -654,8 +660,10 @@ func DisplayFirstMenu() {
     num = 0
 fmt.Println(string(colorRed), "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter 33 to see the the magic behind main (selector+20 for all others)") 
 fmt.Println(string(colorReset), "... 35 to see the code for the switches, or poke around for Easter Eggs :)\n\n")
+fmt.Println("95:  About this app \n")
+fmt.Println("96:  Using this app \n")
 fmt.Println("1:  Calculate", string(colorCyan), "the Square Root of x (\u221Ax)", string(colorReset), "from first-principles")
-fmt.Println("    ... i.e., from a ratio of x:1 of perfect squares\n")
+fmt.Println("    ... i.e., from a ratio of x:1 of perfect squares (faster version of #18)\n")
 fmt.Println("2:", string(colorCyan), "Pi:", string(colorReset), "Bailey–Borwein–Plouffe formula for π, discovered in 1995", string(colorYellow), "(best method)", string(colorReset), "\n")
 fmt.Println("3:", string(colorCyan), "Pi:", string(colorYellow), "(worst method)", string(colorReset), "requires calculating the", string(colorCyan), "\u221A3 (see selection 1)", string(colorReset))
 fmt.Println("     ... only yeilds 4 digits of π \n")
@@ -676,17 +684,9 @@ fmt.Println("7:", string(colorCyan), "Pi:", string(colorReset), "The Gregory-Lei
 fmt.Println("    π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
 fmt.Println("      Three-Hundred-Million iterations will be executed")
 fmt.Println("      9 digits of π -- in seconds\n")
-fmt.Println("8:", string(colorCyan), "Pi:", string(colorReset), "An infinite series by John Wallis circa 1655")
-fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
-fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
-fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
-fmt.Println("9:   Calculate", string(colorGreen), "Euler's Number: \u2107 or \u2147", string(colorReset), "the natural logarithmic base")
-fmt.Println("        Explore the limit of interest\n")
-fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant", string(colorReset), "from a breif infinite series\n")
-fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
 fmt.Println(string(colorYellow), "FOR SECOND MENU", string(colorReset), "just hit Enter|Return\n")
-fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5400", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scanf("%d", &num)  // pause and request input from the user
 universal_switch(1)
@@ -695,11 +695,20 @@ universal_switch(1)
 func universal_switch(which_menu int) { 
     if which_menu == 1 && num == 0 {
     fmt.Print(string(colorYellow))
-    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
     fmt.Println("18:  Calculate", string(colorCyan), "the second or third Root of y (x\u221Ay)", string(colorReset), "from first-principles")
-    fmt.Println("    ... i.e., from a ratio of y:1 of perfect products\n")
-    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n", string(colorCyan))
+    fmt.Println("    ... via the ratio of y:1 of perfect products (slower general ver of #1)\n")
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)")
+    fmt.Println("    ... Can easily spit out 10,000 digits of π !!!!!\n", string(colorCyan))
     fmt.Println("36:", string(colorReset), "Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
+    fmt.Println("8:", string(colorCyan), "Pi:", string(colorReset), "An infinite series by John Wallis circa 1655")
+    fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
+    fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
+    fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
+    fmt.Println("9:   Calculate", string(colorGreen), "Euler's Number: \u2107 or \u2147", string(colorReset), "the natural logarithmic base")
+    fmt.Println("        Explore the limit of interest\n")
+    fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant", string(colorReset), "from a breif infinite series\n")
+    fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
     fmt.Println("37:  Pi: Gauss–Legendre algorithm \n", string(colorYellow))
     fmt.Println("40:", string(colorReset), "Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)\n", string(colorCyan))
     fmt.Println("41:", string(colorReset), "Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
@@ -707,11 +716,10 @@ func universal_switch(which_menu int) {
     fmt.Println("43:  Pi: via Numerical Integration \n")
     fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
     fmt.Println("45:  Pi: MonteCarloPi", string(colorCyan), "(non-concurrent)", string(colorReset), "\n")
-    fmt.Println("99:  Pi: via BBP and spigot explained\n")
-    fmt.Println("35:  Show the magic behind the Universal switch\n")
+    fmt.Println("99:  Explanation of the BBP algorithm and the spigot algorithm\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
-    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5400", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scanf("%d", &num)  // pause and request input from the user
     }
@@ -776,18 +784,18 @@ func universal_switch(which_menu int) {
             DisplayPythagoreanCode()
 
         case 12: // display contents of prior results file
-            content, err := ioutil.ReadFile("dataLogFrom-calculate-pi-and-friends.txt")  // 
+            content, err := ioutil.ReadFile("dataLog-From_calculate-pi-and-friends.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLogFrom-calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }
         case 32:
             var fileAccessRune = `
         case 12: // display contents of prior results file
-            content, err := ioutil.ReadFile("dataLogFrom-calculate-pi-and-friends.txt")  // 
+            content, err := ioutil.ReadFile("dataLog-From_calculate-pi-and-friends.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLogFrom-calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }`
@@ -864,6 +872,11 @@ func universal_switch(which_menu int) {
         case 47:
             os.Exit(1)
 
+        case 95:
+            About_this_app()
+        case 96:
+            Using_this_app()
+
         case 97:
             testC()
         case 98:
@@ -876,6 +889,32 @@ func universal_switch(which_menu int) {
         //fmt.Println("\n default at bottom of Universal switch\n")
     }
 }
+
+func About_this_app() {  // case 95: 
+    fmt.Print(string(colorCyan))
+    var rune_About_this_app = `
+The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions given in selection #95 (Using this app:) 
+
+Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, it being intended mainly for Unix variants. Which is Ok because Linux and Mac Os are my preferred programming environments. 
+
+I then got a bit carried away, and a few thousand lines of code later here we are. 
+
+The sections that I am the most proud of are #1, #18, and #4. Two variants of brute forcing the extraction of irrational roots|Radicals|radicalis, and the geometric derivation of Pi respectively. 
+`
+    fmt.Println(rune_About_this_app, string(colorReset))
+}
+
+func Using_this_app() {
+    fmt.Print(string(colorCyan))
+    var rune_Using_this_app = `
+Any selection from either menu can be made at either menu. 
+
+Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 28 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
+    `
+    fmt.Println(rune_Using_this_app, string(colorReset))
+}
+
+
 func showMagicBehindUniversalSwitch() {  // case 35: 
     var RuneOfShowMagicBehindUniversalSwitch = `
 func universal_switch(which_menu int) { 
@@ -962,18 +1001,18 @@ func universal_switch(which_menu int) {
             DisplayPythagoreanCode()
 
         case 12: // display contents of prior results file
-            content, err := ioutil.ReadFile("dataLogFrom-calculate-pi-and-friends.txt")  // 
+            content, err := ioutil.ReadFile("dataLog-From_calculate-pi-and-friends.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLogFrom-calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }
         case 32:
             var fileAccessRune = [runeMark]
         case 12: // display contents of prior results file
-            content, err := ioutil.ReadFile("dataLogFrom-calculate-pi-and-friends.txt")  // 
+            content, err := ioutil.ReadFile("dataLog-From_calculate-pi-and-friends.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLogFrom-calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 } [runeMark]
@@ -1222,6 +1261,9 @@ func WorstMethod(num int){  // case 3:
 }
 func showMagicBehindWorstMethod() {  // case 23: 
     var WorstMethodRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func WorstMethod(num int){
     fmt.Printf("\nYou selected #%d \n", num)
     fmt.Println(string(colorCyan), "\n     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ...")
@@ -1399,8 +1441,8 @@ func Nilakantha(num int){  // case 5:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- selection #%d on %s \n", num, Hostname)
@@ -1501,8 +1543,8 @@ func Nilakantha(num int){  // case 5:
                 t := time.Now() ;  elapsed := t.Sub(start)
 
             // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji 50B-- selection #%d on %s \n", num, Hostname)
@@ -1525,6 +1567,9 @@ func Nilakantha(num int){  // case 5:
 }
 func showMagicBehindNilakantha() {  // case 25: 
 var NilakanthaRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func Nilakantha(num int){  // case 5: 
     fmt.Println("\n\nYou selected #", num, " a series by Indian astronomer Nilakantha Somayaji circa 1500 AD")
     fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
@@ -1616,8 +1661,8 @@ func Nilakantha(num int){  // case 5:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- selection #%d on %s \n", num, Hostname)
@@ -1718,8 +1763,8 @@ func Nilakantha(num int){  // case 5:
                 t := time.Now() ;  elapsed := t.Sub(start)
 
             // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji 50B-- selection #%d on %s \n", num, Hostname)
@@ -1820,8 +1865,8 @@ func GregoryLeibniz(num int){  // case 7:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gregory-Leibniz -- selection #%d on %s \n", num, Hostname)
@@ -1844,6 +1889,9 @@ func GregoryLeibniz(num int){  // case 7:
 }
 func showMagicBehindGregoryLeibniz(){  // case 27: 
 var GregoryLeibnizRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func GregoryLeibniz(num int){
     fmt.Println("\n\nYou selected #", num, " the Gregory-Leibniz series ...")
     fmt.Println("π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
@@ -1920,8 +1968,8 @@ func GregoryLeibniz(num int){
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gregory-Leibniz -- selection #%d on %s \n", num, Hostname)
@@ -2042,8 +2090,8 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
                     fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- selection #%d on %s \n", num, Hostname)  
@@ -2138,8 +2186,8 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
                     fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz (cont.) -- selection #%d on %s \n", num, Hostname)  
@@ -2165,6 +2213,9 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
 }
 func showMagicBehindGottfriedWilhelmLeibniz(){  // case 26: 
 var GottfriedWilhelmLeibnizRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func GottfriedWilhelmLeibniz(num int){  // case 6: 
     fmt.Println("\n\nYou selected #", num, " Gottfried Wilhelm Leibniz formula  :  π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ... ")
     fmt.Println("   Infinitesimal calculus was developed independently in the late 17th century by Isaac Newton")
@@ -2261,8 +2312,8 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
                     fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- selection #%d on %s \n", num, Hostname)  
@@ -2357,8 +2408,8 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
                     fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz (cont.) -- selection #%d on %s \n", num, Hostname)  
@@ -2544,8 +2595,8 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
                 fmt.Println("   -- After hitting Return for menu redisplay, enter '11' for the derivation and proof of the Pythagorean\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Archimedes of Syracuse -- selection #%d on %s \n", num, Hostname)
@@ -2568,6 +2619,9 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
 }
 func showMagicBehindArchimedes() { // case 24: 
     var ArchimedesRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func Archimedes(num int){
     fmt.Println("\nYou selected #", num, "  --  An improved version of Archimedes' method")
     fmt.Println("  -- enter \"11' at the main menu for the derivation and proof of the Pythagorean -- ")
@@ -2726,8 +2780,8 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
                 fmt.Println("   -- After hitting Return for menu redisplay, enter '11' for the derivation and proof of the Pythagorean\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Archimedes of Syracuse -- selection #%d on %s \n", num, Hostname)
@@ -2789,6 +2843,9 @@ fmt.Println("... proves the Pythagorean per Garfield; though, obviously, many ot
 }
 func DisplayPythagoreanCode() {  // case 31: 
     var DisplayPythagoreanRune = `
+
+This section was conceived of and written entirely by yours-truly. 
+
 func DisplayPythagorean(num int){
     fmt.Print("\n\n\n -- You entered '", num, "' to review the derivation of the Pythagorean, which was needed in method #4. We will\n")
 fmt.Println("be geometrically deriving the Pythagorean theorem according to the 12th century Indian, Bhaskara.")
@@ -2982,8 +3039,8 @@ func JohnWallis(num int){  // case 8:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis -- selection #%d on %s \n", num, Hostname)
@@ -3123,8 +3180,8 @@ fmt.Println("\n ... 39 Billion additional loops now ensue, just to get one addit
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis (cont.) -- selection #%d on %s \n", num, Hostname)
@@ -3148,6 +3205,9 @@ fmt.Println("\n ... 39 Billion additional loops now ensue, just to get one addit
 }
 func showMagicBehindJohnWallis() {  // case 28: 
 var JohnWallisRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func JohnWallis(num int){  // case 8: 
     fmt.Println("\n   You selected #", num, " A Go language exercize which can be used to test the speed of your hardware.")
     fmt.Println("   We will calculate π to a maximum of ten digits of accuracy using an infinite series by John Wallis circa 1655")
@@ -3301,8 +3361,8 @@ func JohnWallis(num int){  // case 8:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis -- selection #%d on %s \n", num, Hostname)
@@ -3442,8 +3502,8 @@ fmt.Println("\n ... 39 Billion additional loops now ensue, just to get one addit
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis (cont.) -- selection #%d on %s \n", num, Hostname)
@@ -3524,6 +3584,9 @@ fmt.Println(Ricks_rune_Paragraph, string(colorReset))
 }
 func showMagicBehindEulersNumber(){  // case 29: 
 var EulersNumberRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func EulersNumber(num int){
     var n float64 
     var sum float64
@@ -3649,6 +3712,9 @@ fmt.Println("") // so as not to pad the following rune with an unwanted space
 }
 func showMagicBehindErdosBorwein() {  // case 30: 
 var ErdosBorweinRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func ErdosBorwein(num int){
     rune := [runeMark] The Erdős–Borwein constant is the sum of the reciprocals of the Mersenne numbers. 
 It is named after Paul Erdős and Peter Borwein. 
@@ -3790,11 +3856,11 @@ func TheSpigot(){  // case 19:
     fmt.Println("How much pi can you handle?")
     fmt.Println("How many digits of pi do you really want? Enter that number now:")  // prompt the user
         fmt.Scanf("%d", &numberOfDigitsToCalc)
-    fmt.Println("\nThe first line below was calculated via a Spigot Algorithm")
-    fmt.Println("The second line is the value of pi from the web")
+    fmt.Println("\nThe first line below was calculated via the Spigot Algorithm")
+    fmt.Println("The second line is the first 100 digits of pi from the web")
     fmt.Println("\n", Spigot(numberOfDigitsToCalc))  // calls the next func 
                 //    ^^^^^^ and we call the next func 
-    fmt.Println(" 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679")
+    fmt.Println("\n 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679")
     fmt.Println(" 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
     fmt.Println("        ten    twenty        30        40        50        60        70        80        90       100 ")
     fmt.Print("\nThis trick made possible by a bit of code I mooched off of GitHub ...\n")
@@ -3946,8 +4012,8 @@ func MonteCarloPi(number_of_randomPoints int, num int) float64 {  // case 45:
     t := time.Now()
     elapsed := t.Sub(start)
     // log stats to a log file 
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- non-concurrent MonteCarloPi -- selection #%d on %s \n", num, Hostname)
@@ -3972,8 +4038,10 @@ func showMagicOfNonConcurrentMonteCarloPi(){  // case 65:
     description: Calculating pi by the Monte Carlo method
     details:
     implementations of Monte Carlo Algorithm for the calculating of Pi - [Monte Carlo method](https://en.wikipedia.org/wiki/Monte_Carlo_method)
-    author(s): [red_byte](https://github.com/i-redbyte), [Paul Leydier] (https://github.com/paul-leydier)
+    
+    author(s): [red_byte] (https://github.com/i-redbyte), [Paul Leydier] (https://github.com/paul-leydier)
 
+// my code follows: 
     9999999999 as input to "func MonteCarloPi(number_of_randomPoints int) float64 {" yeilds: 
     3.1416128591141614
     3.1415926535897932384626433832795028841971693993 is from the web
@@ -4005,8 +4073,8 @@ func MonteCarloPi(number_of_randomPoints int, num int) float64 {
     t := time.Now()
     elapsed := t.Sub(start)
     // log stats to a log file 
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- non-concurrent MonteCarloPi -- selection #%d on %s \n", num, Hostname)
@@ -4080,8 +4148,8 @@ func MonteCarloPiConcurrent(n int, num int) (float64, error) { // case 36:
         elapsed := t.Sub(start)
         fmt.Println(elapsed)
 
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- MonteCarloPiConcurrent -- selection #%d on %s \n", num, Hostname)
@@ -4187,8 +4255,8 @@ func MonteCarloPiConcurrent(n int, num int) (float64, error) {
         elapsed := t.Sub(start)
         fmt.Println(elapsed)
 
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- MonteCarloPiConcurrent -- selection #%d on %s \n", num, Hostname)
@@ -4797,8 +4865,8 @@ func numerical_integration (num int){ // case 43:
     var LinesPerSecondInt int 
     LinesPerIter := 2 // an estimate 
         LinesPerSecondInt = (int(LinesPerIter) * int(i) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Calculate pi using a numerical integration -- selection #%d on %s \n", num, Hostname)
@@ -4898,8 +4966,8 @@ func numerical_integration (num int){
     var LinesPerSecondInt int 
     LinesPerIter := 2 // an estimate 
         LinesPerSecondInt = (int(LinesPerIter) * int(i) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Calculate pi using a numerical integration -- selection #%d on %s \n", num, Hostname)
@@ -4949,8 +5017,8 @@ iters_bbp := 1
 // log run stats to a log file
     t := time.Now()
     elapsed := t.Sub(start)
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- calculate pi using the bbp formula -- selection #%d on %s \n", num, Hostname)
@@ -5046,8 +5114,8 @@ iters_bbp := 1
 // log run stats to a log file
     t := time.Now()
     elapsed := t.Sub(start)
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- calculate pi using the bbp formula -- selection #%d on %s \n", num, Hostname)
@@ -5180,8 +5248,8 @@ func Leibniz_method_one_billion_iters(num int){ // case 44:
     var LinesPerSecondInt int 
     LinesPerIter := 6 // an estimate 
         LinesPerSecondInt = (int(LinesPerIter) * int(iters) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Approximation of PI using Leibniz method -- selection #%d on %s \n", num, Hostname)
@@ -5274,8 +5342,8 @@ func Leibniz_method_one_billion_iters(num int){
     var LinesPerSecondInt int 
     LinesPerIter := 6 // an estimate 
         LinesPerSecondInt = (int(LinesPerIter) * int(iters) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Approximation of PI using Leibniz method -- selection #%d on %s \n", num, Hostname)
@@ -5343,6 +5411,7 @@ One can obtain the Go Compiler from : https://go.dev/dl/
 package main
 
 import (
+    //"sort"      // was used in case 18: until it was not
     "os"        // fetch the name of your system 
     "io/ioutil" // file access 
     "fmt"       // Used for printing etc. 
@@ -5360,13 +5429,16 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
 
     for 1 == 1 {    // loop endlessly, or Ctrl-C, or case 47: to Exit
         DisplayFirstMenu() 
-        fmt.Println(string(colorYellow), "... my work is done ...")
-        fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the menu", string(colorReset)) // this will be the last line of every case #: 
+        if num == 0 {
+            fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the main menu", string(colorReset)) // this will be the last line of every case #:             
+        } else {
+            fmt.Println(string(colorYellow), "... my work is done ...")
+            fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the main menu", string(colorReset)) // this will be the last line of every case #: 
+        }
         // a forced pause is needed to prevent the menu from redisplaying after a case #: has been handeled 
         var Mnum int //  vvvv
         fmt.Scanf("%d", &Mnum) // request input on command line (pause)
     } 
-
 } 
         var colorReset = "\033[0m"          // gloabl vars for use in multiple localized sections of code 
         var colorRed = "\033[31m"
