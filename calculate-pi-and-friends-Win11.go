@@ -1,4 +1,6 @@
-/* the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
+/* Revised Feb 4 2023 at 12:06 PM
+
+the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
 
 compile with: "go build -o calculate-pi-and-friends.exe calculate-pi-and-friends.go"
 ... or, having first obtained the Go compiler, ... just run the source with: "go run calculate-pi-and-friends.go"
@@ -9,6 +11,7 @@ One can obtain the Go Compiler from : https://go.dev/dl/
 package main
 
 import (
+    //"sort"      // was used in case 18: until it was not
     "os"        // fetch the name of your system 
     "io/ioutil" // file access 
     "fmt"       // Used for printing etc. 
@@ -46,14 +49,14 @@ func squareRootOf3(num int) {
     buildTableOfPerfectSquares() 
 
     var index = 0 
-        for index < 180000 { // the table has 400,000 entries
+        for index < 180000 { // 180,000 iters because the table has 400,000 entries
             start2 = time.Now() // start2 is a global var and so it was initially 0 
-            readTheTableOfPS(index, start)  // pass-in the index to the table 
+            readTheTableOfPS(index, start)  // pass-in the initial index to the table 
             if diffOfLarger == 0 || diffOfSmaller == 0 { 
                 fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
                 break 
             }
-            index++ 
+            index = index + 2
         }
         t := time.Now()
         elapsed := t.Sub(start)
@@ -62,8 +65,8 @@ func squareRootOf3(num int) {
                 var LinesPerSecondInt int 
                 LinesPerIter := 28 // an estimate 
                     LinesPerSecondInt = (int(LinesPerIter) * int(index) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Sqrt of %d by a ratio of perfect squares -- selection #%d on %s \n", workPiece, num, Hostname)
@@ -84,29 +87,39 @@ func squareRootOf3(num int) {
             }
 }
 
-func readTheTableOfPS (index int, start2 time.Time) {                               // this gets called 180,000 times.                  // The first time it is called index is 0
-    smallerPerfectSquareOnce := Table_of_perfect_squares[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 160,000
+//var rootOfSmallerPerfectSquareOnce int 
+func readTheTableOfPS (index int, start2 time.Time) {             // this gets called 180,000 times.                   // The first time it is called index is 0
+    smallerPerfectSquareOnce := Table_of_perfect_squares[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 180,000
+    rootOfSmallerPerfectSquareOnce := Table_of_perfect_squares[index+1]
         iter := 0
-    for iter < 210000 { // 210,000 loops. Why do we need so many?, Because index may be 0 to 180,000 ?? and we need to read through 400,000 table entries 
+    for iter < 210000 { // 210,000 loops. Why do we need so many?, Because index may be 0 to 180,000 ?? and we need to read through 400,000 table entries (180+210=390)
         iter++
-        index++ // index may now be 2, or up to 180,002  ... and the table has 400,000 entries :) 
-        largerPerfectSquare := Table_of_perfect_squares[index]  // get next perfect square from table for testing to see if it is more than 3* bigger than smallerPerfectSquareOnce
+        index = index + 2 // 2 instead of one because we added roots to the slice
+        largerPerfectSquare := Table_of_perfect_squares[index]  // get next perfect square from table for testing to see if it is more than workPiece * bigger than smallerPerfectSquareOnce
 
-        if largerPerfectSquare > smallerPerfectSquareOnce*workPiece {  // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3* the smaller PS deal with that, else loop to the next potential 
+        if largerPerfectSquare > smallerPerfectSquareOnce*workPiece {  // if largerPerfectSquare is a candidate based on it being just-a-bit larger than workPiece * the smaller PS deal with that, else loop to the next potential 
+
             ProspectiveHitOnLargeSide := largerPerfectSquare  // make a copy under a more suitable name :) 
-            ProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-1]  // save that smaller one too
-            diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectSquareOnce
-            diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectSquareOnce)
+            rootOfProspectiveHitOnLargeSide := Table_of_perfect_squares[index+1] // the current value of index plus one holds the root of largerPerfectSquare hence the root of ProspectiveHitOnLargeSide
+            
+            ProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-2]  // save that smaller one too // 2 now instead of 1 because we have added roots to the slice
+            rootOfProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-1]
 
-            if diffOfLarger == 0 || diffOfSmaller == 0 { 
+            diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectSquareOnce // always has 1 as value on every other pass
+            diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectSquareOnce) // all ints 
+
+            if diffOfLarger == 0 || diffOfSmaller == 0 { // then the workPiece is itself a perfect square because the numerator is exactly workPiece times the denominator 
+                //fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
+                                                                                               // however, this ^^^ ^^^^ is cheating !!! as are/were the following two instances of same 
                 fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
+                                                                                               // but this   ^^^^^^^^^ is really not so bad because we did first prove that workPiece is a PS
                 break // out of for loop because the workPiece is itself a perfect square 
             }
 
-            if diffOfLarger < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
+            if diffOfLarger < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of workPiece
                 fmt.Println("small PS is", string(colorCyan), smallerPerfectSquareOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PS of", string(colorCyan),
                  ProspectiveHitOnLargeSide, string(colorReset), "diff being only", diffOfLarger)
-                fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))),
+                fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(rootOfSmallerPerfectSquareOnce),
                  string(colorReset), "\n")  // an x:1 ratio )
                 t2 = time.Now()
                 elapsed2 := t2.Sub(start2)
@@ -114,11 +127,14 @@ func readTheTableOfPS (index int, start2 time.Time) {                           
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
             }
+
             if diffOfSmaller < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
                 fmt.Println("small PS is", string(colorCyan), smallerPerfectSquareOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PS of", string(colorCyan),
                  ProspectiveHitOnSmallerSide, string(colorReset), "diff being only", diffOfSmaller)
-                fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), (math.Sqrt(float64(ProspectiveHitOnSmallerSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))),
-                 string(colorReset), "\n")  // an x:1 ratio )
+                //fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), (math.Sqrt(float64(ProspectiveHitOnSmallerSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))),
+                 //string(colorReset), "\n")  // an x:1 ratio ) //                                                            index - 2                                        index ( original )
+                fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(rootOfSmallerPerfectSquareOnce),
+                 string(colorReset), "\n")  // an x:1 ratio ) 
                 t2 = time.Now()
                 elapsed2 := t2.Sub(start2)
                 if float64(elapsed2.Seconds()) > 1.1  {
@@ -126,8 +142,8 @@ func readTheTableOfPS (index int, start2 time.Time) {                           
                 }
             }
             break // out of the for loop if we found any prospects using the current index value 
-        }
-    }
+        } // end of if
+    } // end of for
 }
 func buildTableOfPerfectSquares() { 
     root := 10000 // an initial root of 10,000 sets a high bar, but we only want big perfect squares :) 
@@ -137,16 +153,19 @@ func buildTableOfPerfectSquares() {
             root++ 
             PerfectSquare := root*root
             Table_of_perfect_squares = append(Table_of_perfect_squares, PerfectSquare ) 
+            Table_of_perfect_squares = append(Table_of_perfect_squares, root ) // the root of the prior PS
         }
 }
 func showMagicBehindsquareRootOf3() {  // case 21: 
     var squareRootOf3rune = `
 
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 // case 1: 
 func squareRootOf3(num int) { 
         precisionOfSquare = 3
     fmt.Println("\n\n\n\n\nEnter any integer that you wish to find the Square Root of")
-    fmt.Scan(&workPiece)
+    fmt.Scanf("%d", &workPiece)
 
     start := time.Now() // saved start time to be compared with end time t 
 
@@ -154,14 +173,14 @@ func squareRootOf3(num int) {
     buildTableOfPerfectSquares() 
 
     var index = 0 
-        for index < 180000 { // the table has 400,000 entries
+        for index < 180000 { // 180,000 iters because the table has 400,000 entries
             start2 = time.Now() // start2 is a global var and so it was initially 0 
-            readTheTableOfPS(index, start)  // pass-in the index to the table 
+            readTheTableOfPS(index, start)  // pass-in the initial index to the table 
             if diffOfLarger == 0 || diffOfSmaller == 0 { 
                 fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
                 break 
             }
-            index++ 
+            index = index + 2
         }
         t := time.Now()
         elapsed := t.Sub(start)
@@ -170,8 +189,8 @@ func squareRootOf3(num int) {
                 var LinesPerSecondInt int 
                 LinesPerIter := 28 // an estimate 
                     LinesPerSecondInt = (int(LinesPerIter) * int(index) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Sqrt of %d by a ratio of perfect squares -- selection #%d on %s \n", workPiece, num, Hostname)
@@ -188,33 +207,43 @@ func squareRootOf3(num int) {
                     TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
                     _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                         check(err7)
-                    num = 99999 // done as noted per the first line of this func 
+//                    num = 99999 // done as noted per the first line of this func 
             }
 }
 
-func readTheTableOfPS (index int, start2 time.Time) {                               // this gets called 180,000 times.                  // The first time it is called index is 0
-    smallerPerfectSquareOnce := Table_of_perfect_squares[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 160,000
+//var rootOfSmallerPerfectSquareOnce int 
+func readTheTableOfPS (index int, start2 time.Time) {             // this gets called 180,000 times.                   // The first time it is called index is 0
+    smallerPerfectSquareOnce := Table_of_perfect_squares[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 180,000
+    rootOfSmallerPerfectSquareOnce := Table_of_perfect_squares[index+1]
         iter := 0
-    for iter < 210000 { // 210,000 loops. Why do we need so many?, Because index may be 0 to 180,000 ?? and we need to read through 400,000 table entries 
+    for iter < 210000 { // 210,000 loops. Why do we need so many?, Because index may be 0 to 180,000 ?? and we need to read through 400,000 table entries (180+210=390)
         iter++
-        index++ // index may now be 2, or up to 180,002  ... and the table has 400,000 entries :) 
-        largerPerfectSquare := Table_of_perfect_squares[index]  // get next perfect square from table for testing to see if it is more than 3* bigger than smallerPerfectSquareOnce
+        index = index + 2 // 2 instead of one because we added roots to the slice
+        largerPerfectSquare := Table_of_perfect_squares[index]  // get next perfect square from table for testing to see if it is more than workPiece * bigger than smallerPerfectSquareOnce
 
-        if largerPerfectSquare > smallerPerfectSquareOnce*workPiece {  // if largerPerfectSquare is a candidate based on it being just-a-bit larger than 3* the smaller PS deal with that, else loop to the next potential 
+        if largerPerfectSquare > smallerPerfectSquareOnce*workPiece {  // if largerPerfectSquare is a candidate based on it being just-a-bit larger than workPiece * the smaller PS deal with that, else loop to the next potential 
+
             ProspectiveHitOnLargeSide := largerPerfectSquare  // make a copy under a more suitable name :) 
-            ProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-1]  // save that smaller one too
-            diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectSquareOnce
-            diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectSquareOnce)
+            rootOfProspectiveHitOnLargeSide := Table_of_perfect_squares[index+1] // the current value of index plus one holds the root of largerPerfectSquare hence the root of ProspectiveHitOnLargeSide
+            
+            ProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-2]  // save that smaller one too // 2 now instead of 1 because we have added roots to the slice
+            rootOfProspectiveHitOnSmallerSide := Table_of_perfect_squares[index-1]
 
-            if diffOfLarger == 0 || diffOfSmaller == 0 { 
+            diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectSquareOnce // always has 1 as value on every other pass
+            diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectSquareOnce) // all ints 
+
+            if diffOfLarger == 0 || diffOfSmaller == 0 { // then the workPiece is itself a perfect square because the numerator is exactly workPiece times the denominator 
+                //fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
+                                                                                               // however, this ^^^ ^^^^ is cheating !!! as are/were the following two instances of same 
                 fmt.Println(string(colorCyan), "\n The square root of", workPiece, "is", string(colorGreen), math.Sqrt(float64(workPiece)), string(colorReset), "\n")
+                                                                                               // but this   ^^^^^^^^^ is really not so bad because we did first prove that workPiece is a PS
                 break // out of for loop because the workPiece is itself a perfect square 
             }
 
-            if diffOfLarger < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
+            if diffOfLarger < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of workPiece
                 fmt.Println("small PS is", string(colorCyan), smallerPerfectSquareOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PS of", string(colorCyan),
                  ProspectiveHitOnLargeSide, string(colorReset), "diff being only", diffOfLarger)
-                fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), (math.Sqrt(float64(ProspectiveHitOnLargeSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))),
+                fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(rootOfSmallerPerfectSquareOnce),
                  string(colorReset), "\n")  // an x:1 ratio )
                 t2 = time.Now()
                 elapsed2 := t2.Sub(start2)
@@ -222,11 +251,14 @@ func readTheTableOfPS (index int, start2 time.Time) {                           
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
             }
+
             if diffOfSmaller < precisionOfSquare {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
                 fmt.Println("small PS is", string(colorCyan), smallerPerfectSquareOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PS of", string(colorCyan),
                  ProspectiveHitOnSmallerSide, string(colorReset), "diff being only", diffOfSmaller)
-                fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), (math.Sqrt(float64(ProspectiveHitOnSmallerSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))),
-                 string(colorReset), "\n")  // an x:1 ratio )
+                //fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), (math.Sqrt(float64(ProspectiveHitOnSmallerSide)) / math.Sqrt(float64(smallerPerfectSquareOnce))),
+                 //string(colorReset), "\n")  // an x:1 ratio ) //                                                            index - 2                                        index ( original )
+                fmt.Println("And the Sqrt of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(rootOfSmallerPerfectSquareOnce),
+                 string(colorReset), "\n")  // an x:1 ratio ) 
                 t2 = time.Now()
                 elapsed2 := t2.Sub(start2)
                 if float64(elapsed2.Seconds()) > 1.1  {
@@ -234,8 +266,8 @@ func readTheTableOfPS (index int, start2 time.Time) {                           
                 }
             }
             break // out of the for loop if we found any prospects using the current index value 
-        }
-    }
+        } // end of if
+    } // end of for
 }
 func buildTableOfPerfectSquares() { 
     root := 10000 // an initial root of 10,000 sets a high bar, but we only want big perfect squares :) 
@@ -245,18 +277,389 @@ func buildTableOfPerfectSquares() {
             root++ 
             PerfectSquare := root*root
             Table_of_perfect_squares = append(Table_of_perfect_squares, PerfectSquare ) 
+            Table_of_perfect_squares = append(Table_of_perfect_squares, root ) // the root of the prior PS
         }
 }
     `
     fmt.Println(squareRootOf3rune)
 }
 
+// case 18: 
+//var SortedSliceOf_pDiffs = []float64{900} // and may then become 901, 902, 903, or 904 
+
+func xRootOfy(num int) { 
+        var precisionOfRoot int 
+        var radical_index int 
+        var workPiece int 
+    fmt.Println("\n\n\n\nEnter 2 for SquareRoot or 3 for CubeRoot")
+    fmt.Scan(&radical_index)
+    fmt.Println("\n\n\n\nEnter any integer that you wish to find that Root of")
+    fmt.Scan(&workPiece)
+
+    start := time.Now() // saved start time to be compared with end time t 
+
+    if radical_index == 3 {
+            if workPiece > 4 {
+                precisionOfRoot = 1700
+                fmt.Println("\n Default precision is 1700 \n")
+            }
+            if workPiece == 2 || workPiece == 11 || workPiece == 17 {
+                precisionOfRoot = 600
+                fmt.Println("\n resetting precision to 600 \n")
+            }
+            if workPiece == 3 || workPiece == 4 || workPiece == 14 {
+                precisionOfRoot = 900
+                fmt.Println("\n resetting precision to 900 \n")
+            }
+    }
+    if radical_index == 2 {
+        precisionOfRoot = 4
+    }
+
+    buildTableOfPerfectProducts(radical_index) 
+
+    var index = 0 
+        for index < 380000 { // the table has 800,000 entries
+
+            start2 = time.Now() // start2 is a global var and so it was initially 0 
+            readTheTableOfPP(radical_index, index, start, workPiece, precisionOfRoot)  // pass-in the index to the table 
+
+// this if block is a bit queer/odd ?? 
+            if diffOfLarger == 0 || diffOfSmaller == 0 { 
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(901))
+               break 
+            }
+
+            index = index + 2
+        }
+
+    //sort.Float64s(SortedSliceOf_pDiffs)
+    //fmt.Println(string(colorRed), "find", string(colorReset), SortedSliceOf_pDiffs[0], string(colorRed), "in the above hits.", string(colorReset), "The value below it in green is the best estimate \n\n")
+    //SortedSliceOf_pDiffs = nil
+    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(902))
+
+        t := time.Now()
+        elapsed := t.Sub(start)
+        // only if 
+            if int(elapsed.Seconds()) != 0 {
+                var LinesPerSecondInt int 
+                LinesPerIter := 28 // an estimate 
+                    LinesPerSecondInt = (int(LinesPerIter) * int(index) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                        defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+                    Hostname, _ := os.Hostname()
+                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
+                        check(err0)
+                    current_time := time.Now()
+                    _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+                    check(err6)
+                    _ , err2 := fmt.Fprintf(fileHandle, "%d was Lines/Second \n", LinesPerSecondInt) 
+                        check(err2)
+                    _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds \n", float64(index)/float64(elapsed.Seconds()))
+                        check(err4)
+                    _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", index)
+                        check(err5)
+                    TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+                    _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                        check(err7)
+            }
+}
+
+
+func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece int, precisionOfRoot int) {                               // this gets called 380,000 times.                  // The first time it is called index is 0
+    smallerPerfectProductOnce := Table_of_perfect_Products[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 380,000
+    RootOfsmallerPerfectProductOnce := Table_of_perfect_Products[index+1]
+        iter := 0
+    for iter < 420000 { // 420,000 loops. Why do we need so many?, Because index may be 0 to 380,000 ?? and we need to read through 830,000 table entries 
+        iter++
+
+        index = index + 2
+        largerPerfectProduct := Table_of_perfect_Products[index]  // get next perfect square from table for testing to see if it is more than 3* bigger than smallerPerfectProductOnce
+
+        if largerPerfectProduct > smallerPerfectProductOnce*workPiece {  // if largerPerfectProduct is a candidate based on it being just-a-bit larger than workPiece* the smaller PP deal with that, else loop to the next potential 
+
+            ProspectiveHitOnLargeSide := largerPerfectProduct  // make a copy under a more suitable name :) 
+            rootOfProspectiveHitOnLargeSide := Table_of_perfect_Products[index+1] // the current value of index plus one holds the root of largerPerfectSquare hence the root of ProspectiveHitOnLargeSide
+
+            ProspectiveHitOnSmallerSide := Table_of_perfect_Products[index-2]  // save that smaller one too // 2 now instead of 1 because we have added roots to the slice
+            rootOfProspectiveHitOnSmallerSide := Table_of_perfect_Products[index-1]
+
+            diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectProductOnce
+            diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectProductOnce)
+
+            if diffOfLarger == 0 {
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(903)) // 
+                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
+                break // out of the for loop because the workPiece is itself a perfect square
+            }
+            if diffOfSmaller == 0 {
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(904))
+                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
+                break // out of the for loop because the workPiece is itself a perfect square
+            }
+
+
+
+            if diffOfLarger < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
+                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PP of", string(colorCyan),
+                 ProspectiveHitOnLargeSide, string(colorReset), "a difference of", diffOfLarger)
+
+                    //pDiffL = float64(diffOfLarger)*100 / float64(ProspectiveHitOnLargeSide) // looking for the smallest pDiff 
+                    //fmt.Println("\n", pDiffL, "\n")
+                    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffL)
+
+                fmt.Println(radical_index, "root of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
+                 string(colorReset), "\n")  // an x:1 ratio )
+                t2 = time.Now()
+                elapsed2 := t2.Sub(start2)
+
+                if float64(elapsed2.Seconds()) > 0.14  {
+                    fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
+                }
+            }
+
+
+            if diffOfSmaller < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
+                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PP of", string(colorCyan),
+                 ProspectiveHitOnSmallerSide, string(colorReset), "a difference of", diffOfSmaller)
+
+                    //pDiffS = float64(diffOfSmaller)*100 / float64(ProspectiveHitOnSmallerSide) // looking for the smallest pDiff 
+                    //fmt.Println("\n", pDiffS, "\n")
+                    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffS)
+
+                fmt.Println(radical_index, "root of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
+                 string(colorReset), "\n")  // an x:1 ratio )
+                t2 = time.Now()
+                elapsed2 := t2.Sub(start2)
+
+                if float64(elapsed2.Seconds()) > 0.14  {
+                    fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
+                }
+            }
+            break // out of the for loop if we found any prospects using the current index value 
+        }
+    }
+}
+
+//var pDiffS float64 
+//var pDiffL float64 
+
+func buildTableOfPerfectProducts(radical_index int) {
+    var PerfectProduct int 
+    Table_of_perfect_Products = nil // this fixed my bug 
+    root := 10 
+            iter := 0
+        for iter < 810000 { // a table of 810,000 pairs of PPs with their roots ought to do it !!
+            iter++
+            root++ 
+            if radical_index == 3 {
+                PerfectProduct = root*root*root 
+            }
+            if radical_index == 2 {
+                PerfectProduct = root*root
+            }
+            Table_of_perfect_Products = append(Table_of_perfect_Products, PerfectProduct ) 
+            Table_of_perfect_Products = append(Table_of_perfect_Products, root ) // the root of the prior PP
+        }
+}
+
+func showMagicBehindxRootOfy() { // case 38: 
+    var xRootOfyrune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
+// case 18: 
+//var SortedSliceOf_pDiffs = []float64{900} // and may then become 901, 902, 903, or 904 
+
+func xRootOfy(num int) { 
+        var precisionOfRoot int 
+        var radical_index int 
+        var workPiece int 
+    fmt.Println("\n\n\n\nEnter 2 for SquareRoot or 3 for CubeRoot")
+    fmt.Scanf("%d", &radical_index)
+    fmt.Println("\n\n\n\nEnter any integer that you wish to find that Root of")
+    fmt.Scanf("%d", &workPiece)
+
+    start := time.Now() // saved start time to be compared with end time t 
+
+    if radical_index == 3 {
+            if workPiece > 4 {
+                precisionOfRoot = 1700
+                fmt.Println("\n Default precision is 1700 \n")
+            }
+            if workPiece == 2 || workPiece == 11 || workPiece == 17 {
+                precisionOfRoot = 600
+                fmt.Println("\n resetting precision to 600 \n")
+            }
+            if workPiece == 3 || workPiece == 4 || workPiece == 14 {
+                precisionOfRoot = 900
+                fmt.Println("\n resetting precision to 900 \n")
+            }
+    }
+    if radical_index == 2 {
+        precisionOfRoot = 4
+    }
+
+    buildTableOfPerfectProducts(radical_index) 
+
+    var index = 0 
+        for index < 380000 { // the table has 800,000 entries
+
+            start2 = time.Now() // start2 is a global var and so it was initially 0 
+            readTheTableOfPP(radical_index, index, start, workPiece, precisionOfRoot)  // pass-in the index to the table 
+
+// this if block is a bit queer/odd ?? 
+            if diffOfLarger == 0 || diffOfSmaller == 0 { 
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(901))
+               break 
+            }
+
+            index = index + 2
+        }
+
+    //sort.Float64s(SortedSliceOf_pDiffs)
+    //fmt.Println(string(colorRed), "find", string(colorReset), SortedSliceOf_pDiffs[0], string(colorRed), "in the above hits.", string(colorReset), "The value below it in green is the best estimate \n\n")
+    //SortedSliceOf_pDiffs = nil
+    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(902))
+
+        t := time.Now()
+        elapsed := t.Sub(start)
+        // only if 
+            if int(elapsed.Seconds()) != 0 {
+                var LinesPerSecondInt int 
+                LinesPerIter := 28 // an estimate 
+                    LinesPerSecondInt = (int(LinesPerIter) * int(index) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                        defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+                    Hostname, _ := os.Hostname()
+                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
+                        check(err0)
+                    current_time := time.Now()
+                    _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+                    check(err6)
+                    _ , err2 := fmt.Fprintf(fileHandle, "%d was Lines/Second \n", LinesPerSecondInt) 
+                        check(err2)
+                    _ , err4 := fmt.Fprintf(fileHandle, "%.02f was Iterations/Seconds \n", float64(index)/float64(elapsed.Seconds()))
+                        check(err4)
+                    _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", index)
+                        check(err5)
+                    TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+                    _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                        check(err7)
+            }
+}
+
+
+func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece int, precisionOfRoot int) {                               // this gets called 380,000 times.                  // The first time it is called index is 0
+    smallerPerfectProductOnce := Table_of_perfect_Products[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 380,000
+    RootOfsmallerPerfectProductOnce := Table_of_perfect_Products[index+1]
+        iter := 0
+    for iter < 420000 { // 420,000 loops. Why do we need so many?, Because index may be 0 to 380,000 ?? and we need to read through 830,000 table entries 
+        iter++
+
+        index = index + 2
+        largerPerfectProduct := Table_of_perfect_Products[index]  // get next perfect square from table for testing to see if it is more than 3* bigger than smallerPerfectProductOnce
+
+        if largerPerfectProduct > smallerPerfectProductOnce*workPiece {  // if largerPerfectProduct is a candidate based on it being just-a-bit larger than workPiece* the smaller PP deal with that, else loop to the next potential 
+
+            ProspectiveHitOnLargeSide := largerPerfectProduct  // make a copy under a more suitable name :) 
+            rootOfProspectiveHitOnLargeSide := Table_of_perfect_Products[index+1] // the current value of index plus one holds the root of largerPerfectSquare hence the root of ProspectiveHitOnLargeSide
+
+            ProspectiveHitOnSmallerSide := Table_of_perfect_Products[index-2]  // save that smaller one too // 2 now instead of 1 because we have added roots to the slice
+            rootOfProspectiveHitOnSmallerSide := Table_of_perfect_Products[index-1]
+
+            diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectProductOnce
+            diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectProductOnce)
+
+            if diffOfLarger == 0 {
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(903)) // 
+                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
+                break // out of the for loop because the workPiece is itself a perfect square
+            }
+            if diffOfSmaller == 0 {
+                //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, float64(904))
+                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
+                break // out of the for loop because the workPiece is itself a perfect square
+            }
+
+
+
+            if diffOfLarger < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
+                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PP of", string(colorCyan),
+                 ProspectiveHitOnLargeSide, string(colorReset), "a difference of", diffOfLarger)
+
+                    //pDiffL = float64(diffOfLarger)*100 / float64(ProspectiveHitOnLargeSide) // looking for the smallest pDiff 
+                    //fmt.Println("\n", pDiffL, "\n")
+                    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffL)
+
+                fmt.Println(radical_index, "root of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
+                 string(colorReset), "\n")  // an x:1 ratio )
+                t2 = time.Now()
+                elapsed2 := t2.Sub(start2)
+
+                if float64(elapsed2.Seconds()) > 0.14  {
+                    fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
+                }
+            }
+
+
+            if diffOfSmaller < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
+                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PP of", string(colorCyan),
+                 ProspectiveHitOnSmallerSide, string(colorReset), "a difference of", diffOfSmaller)
+
+                    //pDiffS = float64(diffOfSmaller)*100 / float64(ProspectiveHitOnSmallerSide) // looking for the smallest pDiff 
+                    //fmt.Println("\n", pDiffS, "\n")
+                    //SortedSliceOf_pDiffs = append(SortedSliceOf_pDiffs, pDiffS)
+
+                fmt.Println(radical_index, "root of", workPiece, "is calculated as", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
+                 string(colorReset), "\n")  // an x:1 ratio )
+                t2 = time.Now()
+                elapsed2 := t2.Sub(start2)
+
+                if float64(elapsed2.Seconds()) > 0.14  {
+                    fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
+                }
+            }
+            break // out of the for loop if we found any prospects using the current index value 
+        }
+    }
+}
+
+//var pDiffS float64 
+//var pDiffL float64 
+
+func buildTableOfPerfectProducts(radical_index int) {
+    var PerfectProduct int 
+    Table_of_perfect_Products = nil // this fixed my bug 
+    root := 10 
+            iter := 0
+        for iter < 810000 { // a table of 810,000 pairs of PPs with their roots ought to do it !!
+            iter++
+            root++ 
+            if radical_index == 3 {
+                PerfectProduct = root*root*root 
+            }
+            if radical_index == 2 {
+                PerfectProduct = root*root
+            }
+            Table_of_perfect_Products = append(Table_of_perfect_Products, PerfectProduct ) 
+            Table_of_perfect_Products = append(Table_of_perfect_Products, root ) // the root of the prior PP
+        }
+}
+    `
+    fmt.Println(xRootOfyrune)
+}
+
 func DisplayFirstMenu() {
     num = 0
 fmt.Println(string(colorRed), "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter 33 to see the the magic behind main (selector+20 for all others)") 
 fmt.Println(string(colorReset), "... 35 to see the code for the switches, or poke around for Easter Eggs :)\n\n")
+fmt.Println("95:  About this app \n")
+fmt.Println("96:  Using this app \n")
 fmt.Println("1:  Calculate", string(colorCyan), "the Square Root of x (\u221Ax)", string(colorReset), "from first-principles")
-fmt.Println("    ... i.e., from a ratio of x:1 of perfect squares\n")
+fmt.Println("    ... i.e., from a ratio of x:1 of perfect squares (faster version of #18)\n")
 fmt.Println("2:", string(colorCyan), "Pi:", string(colorReset), "Bailey–Borwein–Plouffe formula for π, discovered in 1995", string(colorYellow), "(best method)", string(colorReset), "\n")
 fmt.Println("3:", string(colorCyan), "Pi:", string(colorYellow), "(worst method)", string(colorReset), "requires calculating the", string(colorCyan), "\u221A3 (see selection 1)", string(colorReset))
 fmt.Println("     ... only yeilds 4 digits of π \n")
@@ -277,18 +680,10 @@ fmt.Println("7:", string(colorCyan), "Pi:", string(colorReset), "The Gregory-Lei
 fmt.Println("    π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
 fmt.Println("      Three-Hundred-Million iterations will be executed")
 fmt.Println("      9 digits of π -- in seconds\n")
-fmt.Println("8:", string(colorCyan), "Pi:", string(colorReset), "An infinite series by John Wallis circa 1655")
-fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
-fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
-fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
-fmt.Println("9:   Calculate", string(colorGreen), "Euler's Number: \u2107 or \u2147", string(colorReset), "the natural logarithmic base")
-fmt.Println("        Explore the limit of interest\n")
-fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant", string(colorReset), "from a breif infinite series\n")
-fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
 //           13:                  v v v v v v v v v v v 
 fmt.Println(string(colorYellow), "13:  FOR SECOND MENU\n", string(colorReset))
-fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 4,989", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5507", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scan(&num)  // pause and request input from the user
 universal_switch()
@@ -297,9 +692,20 @@ universal_switch()
 func universal_switch() {
     if num == 13 {
     fmt.Print(string(colorYellow))
-    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
-    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n", string(colorCyan))
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("18:  Calculate", string(colorCyan), "the second or third Root of y (x\u221Ay)", string(colorReset), "from first-principles")
+    fmt.Println("    ... via the ratio of y:1 of perfect products (slower general ver of #1)\n")
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)")
+    fmt.Println("    ... Can easily spit out 10,000 digits of π !!!!!\n", string(colorCyan))
     fmt.Println("36:", string(colorReset), "Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
+    fmt.Println("8:", string(colorCyan), "Pi:", string(colorReset), "An infinite series by John Wallis circa 1655")
+    fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
+    fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
+    fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
+    fmt.Println("9:   Calculate", string(colorGreen), "Euler's Number: \u2107 or \u2147", string(colorReset), "the natural logarithmic base")
+    fmt.Println("        Explore the limit of interest\n")
+    fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant", string(colorReset), "from a breif infinite series\n")
+    fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
     fmt.Println("37:  Pi: Gauss–Legendre algorithm \n", string(colorYellow))
     fmt.Println("40:", string(colorReset), "Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)\n", string(colorCyan))
     fmt.Println("41:", string(colorReset), "Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
@@ -307,7 +713,230 @@ func universal_switch() {
     fmt.Println("43:  Pi: via Numerical Integration \n")
     fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
     fmt.Println("45:  Pi: MonteCarloPi", string(colorCyan), "(non-concurrent)", string(colorReset), "\n")
-    fmt.Println("99:  Pi: via BBP and spigot explained\n")
+    fmt.Println("99:  Explanation of the BBP algorithm and the spigot algorithm\n")
+    fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
+            // ("47:  to End/Exit vvvvvvvvvvvvvvvv
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5507", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
+    fmt.Scan(&num)  // pause and request input from the user
+    }
+
+    if num > 119 && num < 10000 { num = 17 }  // case 17: will display a "funny" out-of-range message as case 17:
+
+    switch num { 
+
+        case 1:  // Calculate the square root of 3 from first principles of geometry
+            squareRootOf3(num)
+        case 21: 
+            showMagicBehindsquareRootOf3()
+
+        case 2:  // (best method) the Bailey–Borwein–Plouffe formula for π, circa 1995 
+            BBPF(num)
+        case 22:
+            showMagicBehindBBPF() 
+
+        case 3: // (worst method)
+            WorstMethod(num)
+        case 23: 
+            showMagicBehindWorstMethod() 
+
+        case 4:  // An improved version of Archimedes' method
+            Archimedes(num)
+        case 24:
+            showMagicBehindArchimedes()
+
+        case 5: // a series by Indian astronomer Nilakantha Somayaji circa 1500 AD 
+            Nilakantha(num)
+        case 25:
+            showMagicBehindNilakantha()
+
+        case 6: // Gottfried Wilhelm Leibniz
+            GottfriedWilhelmLeibniz(num)
+        case 26:
+            showMagicBehindGottfriedWilhelmLeibniz()
+
+        case 7: // the Gregory-Leibniz series
+            GregoryLeibniz(num)
+        case 27:
+            showMagicBehindGregoryLeibniz()
+
+        case 8: // John Wallis circa 1655 --- runs very long 
+            JohnWallis(num)
+        case 28: 
+            showMagicBehindJohnWallis()
+
+        case 9: // Euler's Number
+            EulersNumber(num)
+        case 29:
+            showMagicBehindEulersNumber()
+
+        case 10: // Erdős–Borwein constant
+            ErdosBorwein(num)
+        case 30:
+            showMagicBehindErdosBorwein()
+
+        case 11:  // display a review of the derivation of the Pythagorean
+            DisplayPythagorean(num)
+        case 31: 
+            DisplayPythagoreanCode()
+
+        case 12: // display contents of prior results file
+            content, err := ioutil.ReadFile("dataLog-From_calculate-pi-and-friends.txt")  // 
+                if err != nil {   // if the file does not exist ... 
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
+                } else {
+                    fmt.Println(string(content))  // dump/display entire file to command line
+                }
+        case 32:
+            var fileAccessRune = `
+        case 12: // display contents of prior results file
+            content, err := ioutil.ReadFile("dataLog-From_calculate-pi-and-friends.txt")  // 
+                if err != nil {   // if the file does not exist ... 
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
+                } else {
+                    fmt.Println(string(content))  // dump/display entire file to command line
+                }`
+            fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
+
+        case 13: 
+            fmt.Println(" ... So sorry, but", num, "was not an option")
+        case 33: 
+            showMagicBehindmainFunc()
+
+        case 14: 
+            fmt.Println(num, " was not an option! It was not on the menu, go fish!\n")
+        
+        case 15: 
+            fmt.Println("Your selection of", num, " is right-out!  Go Fish!\n")
+        case 35:
+            showMagicBehindUniversalSwitch()
+
+        case 16: 
+            fmt.Println("Your selection is really-far-out!  Go Fish!\n")
+        case 17: 
+            fmt.Println(string(colorRed), "\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu", string(colorReset))
+        
+        case 18:
+            xRootOfy(num) 
+        case 38:
+            showMagicBehindxRootOfy() 
+        
+        case 19: 
+            TheSpigot()
+        case 39:
+            showTheSpigotMagic()
+
+        case 36:
+            ConcurrentMCpi(num)
+        case 56:
+            showMagicBehindMonteCarloPiConcurrent()
+
+        case 37:
+            main_juuso()
+        case 57:
+            showTheMagicBehind_main_juuso()
+
+        case 40:
+            nifty_scoreBoard()
+        case 60:
+            ShowSLOC_behind_scoreBoard_40()
+
+        case 41:
+            BBPfConcurent()
+        case 61:
+            DisplayCodeBehind_BBPfConcurent()
+
+        case 42:
+            bbp_formula(num)
+        case 62:
+            CodeRuneOf_bbp_formula()
+
+        case 43:
+            numerical_integration(num)
+        case 63:
+            ShowLOC_behind_numerical_integration()
+
+        case 44:
+            Leibniz_method_one_billion_iters(num)
+        case 64:
+            Show_Leibniz_method_one_billion_iters()
+
+        case 45:
+            fmt.Println(MonteCarloPi(99999999, num))
+        case 65:
+            showMagicOfNonConcurrentMonteCarloPi() 
+
+        case 47:
+            os.Exit(1)
+
+        case 95:
+            About_this_app()
+        case 96:
+            Using_this_app()
+
+        case 97:
+            testC()
+        case 98:
+            fmt.Println(string(colorCyan), rick, string(colorReset), "\n")
+        case 99:
+            Explain_spigot() // per case 19: 
+        case 119: 
+            displayCode4Explain_spigot()
+    default:
+        //fmt.Println("\n default at bottom of Universal switch\n")
+    }
+}
+
+func About_this_app() {  // case 95: 
+    fmt.Print(string(colorCyan))
+    var rune_About_this_app = `
+The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions given in selection #95 (Using this app:) 
+
+Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, it being intended mainly for Unix variants. Which is Ok because Linux and Mac Os are my preferred programming environments. 
+
+I then got a bit carried away, and a few thousand lines of code later here we are. 
+
+The sections that I am the most proud of are #1, #18, and #4. Two variants of brute forcing the extraction of irrational roots|Radicals|radicalis, and the geometric derivation of Pi respectively. 
+`
+    fmt.Println(rune_About_this_app, string(colorReset))
+}
+
+func Using_this_app() {
+    fmt.Print(string(colorCyan))
+    var rune_Using_this_app = `
+Any selection from either menu can be made at either menu. 
+
+Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 28 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
+    `
+    fmt.Println(rune_Using_this_app, string(colorReset))
+}
+func showMagicBehindUniversalSwitch() {  // case 35: 
+    var RuneOfShowMagicBehindUniversalSwitch = `
+func universal_switch() {
+    if num == 13 {
+    fmt.Print(string(colorYellow))
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("18:  Calculate", string(colorCyan), "the second or third Root of y (x\u221Ay)", string(colorReset), "from first-principles")
+    fmt.Println("    ... via the ratio of y:1 of perfect products (slower general ver of #1)\n")
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)")
+    fmt.Println("    ... Can easily spit out 10,000 digits of π !!!!!\n", string(colorCyan))
+    fmt.Println("36:", string(colorReset), "Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
+    fmt.Println("8:", string(colorCyan), "Pi:", string(colorReset), "An infinite series by John Wallis circa 1655")
+    fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
+    fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
+    fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
+    fmt.Println("9:   Calculate", string(colorGreen), "Euler's Number: \u2107 or \u2147", string(colorReset), "the natural logarithmic base")
+    fmt.Println("        Explore the limit of interest\n")
+    fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant", string(colorReset), "from a breif infinite series\n")
+    fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
+    fmt.Println("37:  Pi: Gauss–Legendre algorithm \n", string(colorYellow))
+    fmt.Println("40:", string(colorReset), "Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)\n", string(colorCyan))
+    fmt.Println("41:", string(colorReset), "Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
+    fmt.Println("42:  Pi: BBP formula to 46 digits\n")
+    fmt.Println("43:  Pi: via Numerical Integration \n")
+    fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
+    fmt.Println("45:  Pi: MonteCarloPi", string(colorCyan), "(non-concurrent)", string(colorReset), "\n")
+    fmt.Println("99:  Explanation of the BBP algorithm and the spigot algorithm\n")
     fmt.Println("35:  Show the magic behind the Universal switch\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
@@ -376,21 +1005,21 @@ func universal_switch() {
             DisplayPythagoreanCode()
 
         case 12: // display contents of prior results file
-            content, err := ioutil.ReadFile("dataLogFrom-calculate-pi-and-friends.txt")  // 
+            content, err := ioutil.ReadFile("dataLog-From_calculate-pi-and-friends.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLogFrom-calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
                 }
         case 32:
-            var fileAccessRune = `
+            var fileAccessRune = [runeMark]
         case 12: // display contents of prior results file
-            content, err := ioutil.ReadFile("dataLogFrom-calculate-pi-and-friends.txt")  // 
+            content, err := ioutil.ReadFile("dataLog-From_calculate-pi-and-friends.txt")  // 
                 if err != nil {   // if the file does not exist ... 
-                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLogFrom-calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
+                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
-                }`
+                }[runeMark]
             fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
 
         case 13: 
@@ -410,7 +1039,12 @@ func universal_switch() {
             fmt.Println("Your selection is really-far-out!  Go Fish!\n")
         case 17: 
             fmt.Println(string(colorRed), "\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu", string(colorReset))
-
+        
+        case 18:
+            xRootOfy(num) 
+        case 38:
+            showMagicBehindxRootOfy() 
+        
         case 19: 
             TheSpigot()
         case 39:
@@ -459,6 +1093,11 @@ func universal_switch() {
         case 47:
             os.Exit(1)
 
+        case 95:
+            About_this_app()
+        case 96:
+            Using_this_app()
+
         case 97:
             testC()
         case 98:
@@ -471,180 +1110,29 @@ func universal_switch() {
         //fmt.Println("\n default at bottom of Universal switch\n")
     }
 }
-func showMagicBehindUniversalSwitch() {  // case 35: 
-    var RuneOfShowMagicBehindUniversalSwitch = `
-func universal_switch(which_menu int) {
-    if which_menu == 1 && num == 0 {
-    fmt.Print(string(colorYellow))
-    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
-    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n", string(colorCyan))
-    fmt.Println("36:", string(colorReset), "Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
-    fmt.Println("37:  Pi: Gauss–Legendre algorithm \n", string(colorYellow))
-    fmt.Println("40:", string(colorReset), "Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)\n", string(colorCyan))
-    fmt.Println("41:", string(colorReset), "Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
-    fmt.Println("42:  Pi: BBP formula to 46 digits\n")
-    fmt.Println("43:  Pi: via Numerical Integration \n")
-    fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
-    fmt.Println("45:  Pi: MonteCarloPi", string(colorCyan), "(non-concurrent)", string(colorReset), "\n")
-    fmt.Println("99:  Pi: via BBP and spigot explained\n")
-    fmt.Println("35:  Show the magic behind the Universal switch\n")
-    fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
-            // ("47:  to End/Exit vvvvvvvvvvvvvvvv
-    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5,000ish", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
-    fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
-    fmt.Scan(&num)  // pause and request input from the user
-    }
 
-    if num > 119 && num < 10000 { num = 17 }  // case 17: will display a "funny" out-of-range message as case 17:
+func About_this_app() {  // case 95: 
+    fmt.Print(string(colorCyan))
+    var rune_About_this_app = [runeMark]
+The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions given in selection #95 (Using this app:) 
 
-    switch num { 
+Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, it being intended mainly for Unix variants. Which is Ok because Linux and Mac Os are my preferred programming environments. 
 
-        case 1:  // Calculate the square root of 3 from first principles of geometry
-            squareRootOf3(num)
-        case 21: 
-            showMagicBehindsquareRootOf3()
+I then got a bit carried away, and a few thousand lines of code later here we are. 
 
-        case 2:  // (best method) the Bailey–Borwein–Plouffe formula for π, circa 1995 
-            BBPF(num)
-        case 22:
-            showMagicBehindBBPF() 
+The sections that I am the most proud of are #1, #18, and #4. Two variants of brute forcing the extraction of irrational roots|Radicals|radicalis, and the geometric derivation of Pi respectively. 
+[runMark]
+    fmt.Println(rune_About_this_app, string(colorReset))
+}
 
-        case 3: // (worst method)
-            WorstMethod(num)
-        case 23: 
-            showMagicBehindWorstMethod() 
+func Using_this_app() {
+    fmt.Print(string(colorCyan))
+    var rune_Using_this_app = [runeMark]
+Any selection from either menu can be made at either menu. 
 
-        case 4:  // An improved version of Archimedes' method
-            Archimedes(num)
-        case 24:
-            showMagicBehindArchimedes()
-
-        case 5: // a series by Indian astronomer Nilakantha Somayaji circa 1500 AD 
-            Nilakantha(num)
-        case 25:
-            showMagicBehindNilakantha()
-
-        case 6: // Gottfried Wilhelm Leibniz
-            GottfriedWilhelmLeibniz(num)
-        case 26:
-            showMagicBehindGottfriedWilhelmLeibniz()
-
-        case 7: // the Gregory-Leibniz series
-            GregoryLeibniz(num)
-        case 27:
-            showMagicBehindGregoryLeibniz()
-
-        case 8: // John Wallis circa 1655 --- runs very long 
-            JohnWallis(num)
-        case 28: 
-            showMagicBehindJohnWallis()
-
-        case 9: // Euler's Number
-            EulersNumber(num)
-        case 29:
-            showMagicBehindEulersNumber()
-
-        case 10: // Erdős–Borwein constant
-            ErdosBorwein(num)
-        case 30:
-            showMagicBehindErdosBorwein()
-
-        case 11:  // display a review of the derivation of the Pythagorean
-            DisplayPythagorean(num)
-        case 31: 
-            DisplayPythagoreanCode()
-
-        case 12: // display contents of prior results file
-            content, err := ioutil.ReadFile("dataLogFrom-calculate-pi-and-friends.txt")  // 
-                if err != nil {   // if the file does not exist ... 
-                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLogFrom-calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
-                } else {
-                    fmt.Println(string(content))  // dump/display entire file to command line
-                }
-        case 32:
-            var fileAccessRune = [runeMark]
-        case 12: // display contents of prior results file
-            content, err := ioutil.ReadFile("dataLogFrom-calculate-pi-and-friends.txt")  // 
-                if err != nil {   // if the file does not exist ... 
-                    fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLogFrom-calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
-                } else {
-                    fmt.Println(string(content))  // dump/display entire file to command line
-                } [runeMark]
-            fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
-
-        case 13: 
-            fmt.Println(" ... So sorry, but", num, "was not an option")
-        case 33: 
-            showMagicBehindmainFunc()
-
-        case 14: 
-            fmt.Println(num, " was not an option! It was not on the menu, go fish!\n")
-        
-        case 15: 
-            fmt.Println("Your selection of", num, " is right-out!  Go Fish!\n")
-        case 35:
-            showMagicBehindUniversalSwitch()
-
-        case 16: 
-            fmt.Println("Your selection is really-far-out!  Go Fish!\n")
-        case 17: 
-            fmt.Println(string(colorRed), "\nOops, how'd we get here? Hit Enter/Return again to possibly redisplay the menu", string(colorReset))
-
-        case 19: 
-            TheSpigot()
-        case 39:
-            showTheSpigotMagic()
-
-        case 36:
-            ConcurrentMCpi(num)
-        case 56:
-            showMagicBehindMonteCarloPiConcurrent()
-
-        case 37:
-            main_juuso()
-        case 57:
-            showTheMagicBehind_main_juuso()
-
-        case 40:
-            nifty_scoreBoard()
-        case 60:
-            ShowSLOC_behind_scoreBoard_40()
-
-        case 41:
-            BBPfConcurent()
-        case 61:
-            DisplayCodeBehind_BBPfConcurent()
-
-        case 42:
-            bbp_formula(num)
-        case 62:
-            CodeRuneOf_bbp_formula()
-
-        case 43:
-            numerical_integration(num)
-        case 63:
-            ShowLOC_behind_numerical_integration()
-
-        case 44:
-            Leibniz_method_one_billion_iters(num)
-        case 64:
-            Show_Leibniz_method_one_billion_iters()
-
-        case 45:
-            fmt.Println(MonteCarloPi(99999999, num))
-
-        case 47:
-            os.Exit(1)
-
-        case 97:
-            testC()
-        case 98:
-            fmt.Println(string(colorCyan), rick, string(colorReset), "\n")
-        case 99:
-            Explain_spigot() // per case 19: 
-    default:
-        //fmt.Println("\n default at bottom of Universal switch\n")
-    }
+Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 28 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
+    [runeMark]
+    fmt.Println(rune_Using_this_app, string(colorReset))
 }
     `
     fmt.Println(RuneOfShowMagicBehindUniversalSwitch)
@@ -806,6 +1294,9 @@ func WorstMethod(num int){  // case 3:
 }
 func showMagicBehindWorstMethod() {  // case 23: 
     var WorstMethodRune = `
+
+    This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func WorstMethod(num int){
     fmt.Printf("\nYou selected #%d \n", num)
     fmt.Println(string(colorCyan), "\n     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ...")
@@ -1109,6 +1600,9 @@ func Nilakantha(num int){  // case 5:
 }
 func showMagicBehindNilakantha() {  // case 25: 
 var NilakanthaRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func Nilakantha(num int){  // case 5: 
     fmt.Println("\n\nYou selected #", num, " a series by Indian astronomer Nilakantha Somayaji circa 1500 AD")
     fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
@@ -1428,6 +1922,9 @@ func GregoryLeibniz(num int){  // case 7:
 }
 func showMagicBehindGregoryLeibniz(){  // case 27: 
 var GregoryLeibnizRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func GregoryLeibniz(num int){
     fmt.Println("\n\nYou selected #", num, " the Gregory-Leibniz series ...")
     fmt.Println("π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - (4/15) ...")
@@ -1749,6 +2246,9 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
 }
 func showMagicBehindGottfriedWilhelmLeibniz(){  // case 26: 
 var GottfriedWilhelmLeibnizRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func GottfriedWilhelmLeibniz(num int){  // case 6: 
     fmt.Println("\n\nYou selected #", num, " Gottfried Wilhelm Leibniz formula  :  π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ... ")
     fmt.Println("   Infinitesimal calculus was developed independently in the late 17th century by Isaac Newton")
@@ -2152,6 +2652,9 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
 }
 func showMagicBehindArchimedes() { // case 24: 
     var ArchimedesRune = `
+
+    This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func Archimedes(num int){
     fmt.Println("\nYou selected #", num, "  --  An improved version of Archimedes' method")
     fmt.Println("  -- enter \"11' at the main menu for the derivation and proof of the Pythagorean -- ")
@@ -2373,6 +2876,9 @@ fmt.Println("... proves the Pythagorean per Garfield; though, obviously, many ot
 }
 func DisplayPythagoreanCode() {  // case 31: 
     var DisplayPythagoreanRune = `
+
+    This section was conceived of and written entirely by yours-truly. 
+
 func DisplayPythagorean(num int){
     fmt.Print("\n\n\n -- You entered '", num, "' to review the derivation of the Pythagorean, which was needed in method #4. We will\n")
 fmt.Println("be geometrically deriving the Pythagorean theorem according to the 12th century Indian, Bhaskara.")
@@ -2732,6 +3238,9 @@ fmt.Println("\n ... 39 Billion additional loops now ensue, just to get one addit
 }
 func showMagicBehindJohnWallis() {  // case 28: 
 var JohnWallisRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func JohnWallis(num int){  // case 8: 
     fmt.Println("\n   You selected #", num, " A Go language exercize which can be used to test the speed of your hardware.")
     fmt.Println("   We will calculate π to a maximum of ten digits of accuracy using an infinite series by John Wallis circa 1655")
@@ -3108,6 +3617,9 @@ fmt.Println(Ricks_rune_Paragraph, string(colorReset))
 }
 func showMagicBehindEulersNumber(){  // case 29: 
 var EulersNumberRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func EulersNumber(num int){
     var n float64 
     var sum float64
@@ -3233,6 +3745,9 @@ fmt.Println("") // so as not to pad the following rune with an unwanted space
 }
 func showMagicBehindErdosBorwein() {  // case 30: 
 var ErdosBorweinRune = `
+
+This entire algorithm was conceived of and written entirely by yours-truly. 
+
 func ErdosBorwein(num int){
     rune := [runeMark] The Erdős–Borwein constant is the sum of the reciprocals of the Mersenne numbers. 
 It is named after Paul Erdős and Peter Borwein. 
@@ -3375,10 +3890,10 @@ func TheSpigot(){  // case 19:
     fmt.Println("How many digits of pi do you really want? Enter that number now:")  // prompt the user
         fmt.Scan(&numberOfDigitsToCalc)
     fmt.Println("\nThe first line below was calculated via a Spigot Algorithm")
-    fmt.Println("The second line is the value of pi from the web")
+    fmt.Println("The second line is the first 100 digits of pi from the web")
     fmt.Println("\n", Spigot(numberOfDigitsToCalc))  // calls the next func 
                 //    ^^^^^^ and we call the next func 
-    fmt.Println(" 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679")
+    fmt.Println("\n 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679")
     fmt.Println(" 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
     fmt.Println("        ten    twenty        30        40        50        60        70        80        90       100 ")
     fmt.Print("\nThis trick made possible by a bit of code I mooched off of GitHub ...\n")
@@ -3556,8 +4071,10 @@ func showMagicOfNonConcurrentMonteCarloPi(){  // case 65:
     description: Calculating pi by the Monte Carlo method
     details:
     implementations of Monte Carlo Algorithm for the calculating of Pi - [Monte Carlo method](https://en.wikipedia.org/wiki/Monte_Carlo_method)
-    author(s): [red_byte](https://github.com/i-redbyte), [Paul Leydier] (https://github.com/paul-leydier)
+    
+    author(s): [red_byte] (https://github.com/i-redbyte), [Paul Leydier] (https://github.com/paul-leydier)
 
+// my code follows: 
     9999999999 as input to "func MonteCarloPi(number_of_randomPoints int) float64 {" yeilds: 
     3.1416128591141614
     3.1415926535897932384626433832795028841971693993 is from the web
@@ -4895,6 +5412,7 @@ func Leibniz_method_one_billion_iters(num int){
         var iterInt64 int64  // to be used primarily in selections which require modulus calculations 
         var iterFloat64 float64  // to be used in selections which do not require modulus calculations 
         var Table_of_perfect_squares = []int{}
+        var Table_of_perfect_Products = []int{}
         var num int 
         var diffOfLarger int // the following are used in the SquareRoot of x selection #1 case 1: 
         var diffOfSmaller int 
