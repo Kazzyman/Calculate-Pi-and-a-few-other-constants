@@ -1,4 +1,6 @@
-/* the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
+/* Revised Feb 4 2023 at noonish 
+
+the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
 
 compile with: "go build -o calculate-pi-and-friends calculate-pi-and-friends.go"
 ... thereafter you can run it on a Unix system with "/fullpathname/calculate-pi-and-friends"
@@ -920,11 +922,20 @@ func showMagicBehindUniversalSwitch() {  // case 35:
 func universal_switch(which_menu int) { 
     if which_menu == 1 && num == 0 {
     fmt.Print(string(colorYellow))
-    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
     fmt.Println("18:  Calculate", string(colorCyan), "the second or third Root of y (x\u221Ay)", string(colorReset), "from first-principles")
-    fmt.Println("    ... i.e., from a ratio of y:1 of perfect products\n")
-    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)\n", string(colorCyan))
+    fmt.Println("    ... via the ratio of y:1 of perfect products (slower general ver of #1)\n")
+    fmt.Println("19:  Pi: Open the 'Spigot' algorithm, instantly bakes way too much pie :)")
+    fmt.Println("    ... Can easily spit out 10,000 digits of π !!!!!\n", string(colorCyan))
     fmt.Println("36:", string(colorReset), "Pi:", string(colorCyan), "Concurrent", string(colorReset), "Monte_Carlo_method\n")
+    fmt.Println("8:", string(colorCyan), "Pi:", string(colorReset), "An infinite series by John Wallis circa 1655")
+    fmt.Println("    π = 2 * ((2/1)*(2/3)) * ((4/3)*(4/5)) * ((6/5)*(6/7)) ... ")
+    fmt.Println("      One-Billion iterations will be executed; option for 40 billion iterations")
+    fmt.Println("      9 digits of π -- a billion loops, in seconds -- option for 10 digits\n")
+    fmt.Println("9:   Calculate", string(colorGreen), "Euler's Number: \u2107 or \u2147", string(colorReset), "the natural logarithmic base")
+    fmt.Println("        Explore the limit of interest\n")
+    fmt.Println("10:  Calculate the", string(colorGreen), "Erdős-Borwein constant", string(colorReset), "from a breif infinite series\n")
+    fmt.Println("11:  Show a review of the derivation of", string(colorGreen), "the Pythagorean", string(colorReset), "\n")
     fmt.Println("37:  Pi: Gauss–Legendre algorithm \n", string(colorYellow))
     fmt.Println("40:", string(colorReset), "Pi: Nifty 'ScoreBoard' using Nilakantha's formula", string(colorYellow), "(Ctrl-C to exit it)\n", string(colorCyan))
     fmt.Println("41:", string(colorReset), "Pi: Bailey–Borwein–Plouffe formula", string(colorCyan), "[concurent]", string(colorReset), "\n")
@@ -932,11 +943,10 @@ func universal_switch(which_menu int) {
     fmt.Println("43:  Pi: via Numerical Integration \n")
     fmt.Println("44:  Pi: via Leibniz method in one billion iterations [runs a while]\n")
     fmt.Println("45:  Pi: MonteCarloPi", string(colorCyan), "(non-concurrent)", string(colorReset), "\n")
-    fmt.Println("99:  Pi: via BBP and spigot explained\n")
-    fmt.Println("35:  Show the magic behind the Universal switch\n")
+    fmt.Println("99:  Explanation of the BBP algorithm and the spigot algorithm\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
-    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 4,993", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scanf("%d", &num)  // pause and request input from the user
     }
@@ -1015,7 +1025,7 @@ func universal_switch(which_menu int) {
                     fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
-                } [runeMark]
+                }[runeMark]
             fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
 
         case 13: 
@@ -1089,6 +1099,11 @@ func universal_switch(which_menu int) {
         case 47:
             os.Exit(1)
 
+        case 95:
+            About_this_app()
+        case 96:
+            Using_this_app()
+
         case 97:
             testC()
         case 98:
@@ -1100,6 +1115,30 @@ func universal_switch(which_menu int) {
     default:
         //fmt.Println("\n default at bottom of Universal switch\n")
     }
+}
+
+func About_this_app() {  // case 95: 
+    fmt.Print(string(colorCyan))
+    var rune_About_this_app = [runeMark]
+The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions given in selection #95 (Using this app:) 
+
+Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, it being intended mainly for Unix variants. Which is Ok because Linux and Mac Os are my preferred programming environments. 
+
+I then got a bit carried away, and a few thousand lines of code later here we are. 
+
+The sections that I am the most proud of are #1, #18, and #4. Two variants of brute forcing the extraction of irrational roots|Radicals|radicalis, and the geometric derivation of Pi respectively. 
+[runMark]
+    fmt.Println(rune_About_this_app, string(colorReset))
+}
+
+func Using_this_app() {
+    fmt.Print(string(colorCyan))
+    var rune_Using_this_app = [runeMark]
+Any selection from either menu can be made at either menu. 
+
+Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 28 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
+    [runeMark]
+    fmt.Println(rune_Using_this_app, string(colorReset))
 }
     `
     fmt.Println(RuneOfShowMagicBehindUniversalSwitch)
