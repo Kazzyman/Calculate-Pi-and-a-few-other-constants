@@ -1,4 +1,4 @@
-// Revised Feb 4 2023 at 12:06 PM
+// Revised Feb 4 2023 at 4:20 PM
 
 // the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
 
@@ -677,7 +677,7 @@ fmt.Println("      9 digits of π -- in seconds\n")
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
 //           13:                  v v v v v v v v v v v 
 fmt.Println(string(colorYellow), "13:  FOR SECOND MENU\n", string(colorReset))
-fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5507", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5495", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scan(&num)  // pause and request input from the user
 universal_switch()
@@ -710,7 +710,7 @@ func universal_switch() {
     fmt.Println("99:  Explanation of the BBP algorithm and the spigot algorithm\n")
     fmt.Println("12:  Display prior execution times from longer-running prior selections\n")
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
-    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5507", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5495", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scan(&num)  // pause and request input from the user
     }
@@ -900,7 +900,7 @@ func Using_this_app() {
     var rune_Using_this_app = `
 Any selection from either menu can be made at either menu. 
 
-Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 28 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
+Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 38 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
     `
     fmt.Println(rune_Using_this_app, string(colorReset))
 }
