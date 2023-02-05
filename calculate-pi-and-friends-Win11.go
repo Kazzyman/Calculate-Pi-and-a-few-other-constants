@@ -1468,8 +1468,8 @@ func Nilakantha(num int){  // case 5:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- selection #%d on %s \n", num, Hostname)
@@ -1570,8 +1570,8 @@ func Nilakantha(num int){  // case 5:
                 t := time.Now() ;  elapsed := t.Sub(start)
 
             // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji 50B-- selection #%d on %s \n", num, Hostname)
@@ -1688,8 +1688,8 @@ func Nilakantha(num int){  // case 5:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- selection #%d on %s \n", num, Hostname)
@@ -1790,8 +1790,8 @@ func Nilakantha(num int){  // case 5:
                 t := time.Now() ;  elapsed := t.Sub(start)
 
             // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji 50B-- selection #%d on %s \n", num, Hostname)
@@ -1892,8 +1892,8 @@ func GregoryLeibniz(num int){  // case 7:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gregory-Leibniz -- selection #%d on %s \n", num, Hostname)
@@ -1995,8 +1995,8 @@ func GregoryLeibniz(num int){
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gregory-Leibniz -- selection #%d on %s \n", num, Hostname)
@@ -2117,8 +2117,8 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
                     fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- selection #%d on %s \n", num, Hostname)  
@@ -2213,8 +2213,8 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
                     fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz (cont.) -- selection #%d on %s \n", num, Hostname)  
@@ -2339,8 +2339,8 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
                     fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz -- selection #%d on %s \n", num, Hostname)  
@@ -2435,8 +2435,8 @@ func GottfriedWilhelmLeibniz(num int){  // case 6:
                     fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Gottfried Wilhelm Leibniz (cont.) -- selection #%d on %s \n", num, Hostname)  
@@ -2622,8 +2622,8 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
                 fmt.Println("   -- After hitting Return for menu redisplay, enter '11' for the derivation and proof of the Pythagorean\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Archimedes of Syracuse -- selection #%d on %s \n", num, Hostname)
@@ -2807,8 +2807,8 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
                 fmt.Println("   -- After hitting Return for menu redisplay, enter '11' for the derivation and proof of the Pythagorean\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                    fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                     Hostname, _ := os.Hostname()
                     _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Archimedes of Syracuse -- selection #%d on %s \n", num, Hostname)
@@ -3066,8 +3066,8 @@ func JohnWallis(num int){  // case 8:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis -- selection #%d on %s \n", num, Hostname)
@@ -3207,8 +3207,8 @@ fmt.Println("\n ... 39 Billion additional loops now ensue, just to get one addit
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis (cont.) -- selection #%d on %s \n", num, Hostname)
@@ -3388,8 +3388,8 @@ func JohnWallis(num int){  // case 8:
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis -- selection #%d on %s \n", num, Hostname)
@@ -3529,8 +3529,8 @@ fmt.Println("\n ... 39 Billion additional loops now ensue, just to get one addit
                 fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
 
     // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
                 Hostname, _ := os.Hostname()
                 _ , err0 := fmt.Fprintf(fileHandle, "\n  -- John Wallis (cont.) -- selection #%d on %s \n", num, Hostname)
@@ -4039,8 +4039,8 @@ func MonteCarloPi(number_of_randomPoints int, num int) float64 {  // case 45:
     t := time.Now()
     elapsed := t.Sub(start)
     // log stats to a log file 
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- non-concurrent MonteCarloPi -- selection #%d on %s \n", num, Hostname)
@@ -4100,8 +4100,8 @@ func MonteCarloPi(number_of_randomPoints int, num int) float64 {
     t := time.Now()
     elapsed := t.Sub(start)
     // log stats to a log file 
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- non-concurrent MonteCarloPi -- selection #%d on %s \n", num, Hostname)
@@ -4175,8 +4175,8 @@ func MonteCarloPiConcurrent(n int, num int) (float64, error) { // case 36:
         elapsed := t.Sub(start)
         fmt.Println(elapsed)
 
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- MonteCarloPiConcurrent -- selection #%d on %s \n", num, Hostname)
@@ -4282,8 +4282,8 @@ func MonteCarloPiConcurrent(n int, num int) (float64, error) {
         elapsed := t.Sub(start)
         fmt.Println(elapsed)
 
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- MonteCarloPiConcurrent -- selection #%d on %s \n", num, Hostname)
@@ -4892,8 +4892,8 @@ func numerical_integration (num int){ // case 43:
     var LinesPerSecondInt int 
     LinesPerIter := 2 // an estimate 
         LinesPerSecondInt = (int(LinesPerIter) * int(i) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- calculate pi using a numerical integration -- selection #%d on %s \n", num, Hostname)
@@ -4993,8 +4993,8 @@ func numerical_integration (num int){
     var LinesPerSecondInt int 
     LinesPerIter := 2 // an estimate 
         LinesPerSecondInt = (int(LinesPerIter) * int(i) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- calculate pi using a numerical integration -- selection #%d on %s \n", num, Hostname)
@@ -5044,8 +5044,8 @@ iters_bbp := 1
 // log run stats to a log file
     t := time.Now()
     elapsed := t.Sub(start)
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- calculate pi using the bbp formula -- selection #%d on %s \n", num, Hostname)
@@ -5141,8 +5141,8 @@ iters_bbp := 1
 // log run stats to a log file
     t := time.Now()
     elapsed := t.Sub(start)
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- calculate pi using the bbp formula -- selection #%d on %s \n", num, Hostname)
@@ -5275,8 +5275,8 @@ func Leibniz_method_one_billion_iters(num int){ // case 44:
     var LinesPerSecondInt int 
     LinesPerIter := 6 // an estimate 
         LinesPerSecondInt = (int(LinesPerIter) * int(iters) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Approximation of PI using Leibniz method -- selection #%d on %s \n", num, Hostname)
@@ -5369,8 +5369,8 @@ func Leibniz_method_one_billion_iters(num int){
     var LinesPerSecondInt int 
     LinesPerIter := 6 // an estimate 
         LinesPerSecondInt = (int(LinesPerIter) * int(iters) ) / int(elapsed.Seconds()) // .Seconds() returns a float64
-        fileHandle, err1 := os.OpenFile("dataLogFrom-calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err1)                                // ... gets a file handle to dataLogFrom-calculate-pi-and-friends.txt
+        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
         Hostname, _ := os.Hostname()
         _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Approximation of PI using Leibniz method -- selection #%d on %s \n", num, Hostname)
