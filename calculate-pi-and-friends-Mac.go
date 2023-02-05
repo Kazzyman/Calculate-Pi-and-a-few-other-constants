@@ -911,7 +911,7 @@ func Using_this_app() {
     var rune_Using_this_app = `
 Any selection from either menu can be made at either menu. 
 
-Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 28 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
+Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 38 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
     `
     fmt.Println(rune_Using_this_app, string(colorReset))
 }
