@@ -1,12 +1,6 @@
-/* Revised Feb 4 2023 at 12:06 PM
+// Revised Feb 4 2023 at 12:06 PM
 
-the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
-
-compile with: "go build -o calculate-pi-and-friends.exe calculate-pi-and-friends.go"
-... or, having first obtained the Go compiler, ... just run the source with: "go run calculate-pi-and-friends.go"
-
-One can obtain the Go Compiler from : https://go.dev/dl/
-*/
+// the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
 
 package main
 
@@ -5434,13 +5428,7 @@ Overall, while we may have some similarities in the way that we process and anal
 
 func showMagicBehindmainFunc() { // case 33:
 var mainFuncRune = `
-/* the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
-
-compile with: "go build -o calculate-pi-and-friends.exe calculate-pi-and-friends.go"
-... or, having first obtained the Go compiler, ... just run the source with: "go run calculate-pi-and-friends.go"
-
-One can obtain the Go Compiler from : https://go.dev/dl/
-*/
+// the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
 
 package main
 
