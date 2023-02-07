@@ -1,4 +1,4 @@
-/* Revised Feb 4 2023 at noonish 
+/* Revised Feb 6 2023 at 2229
 
 the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
 
@@ -37,6 +37,7 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
             fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the main menu", string(colorReset)) // this will be the last line of every case #: 
         }
         // a forced pause is needed to prevent the menu from redisplaying after a case #: has been handeled 
+        // However, if a float was entered earlier, say in option #1, then the fractional part will be gobbled here and no forced pause will happen, which is buggy on the part of Go 
         var Mnum int //  vvvv
         fmt.Scanf("%d", &Mnum) // request input on command line (pause)
     } 
@@ -46,8 +47,17 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
 // case 1: 
 func squareRootOf3(num int) { 
         precisionOfSquare = 3
-    fmt.Println("\n\n\n\n\nEnter any integer that you wish to find the Square Root of")
-    fmt.Scanf("%d", &workPiece)
+        fmt.Println("\n\n\n You selected option #1, finding square roots by brute forcing an optimal ratio of perfect squares")
+    for 1 == 1 {
+        fmt.Println("\nEnter any integer that you wish to find the Square Root of")
+        fmt.Scan(&workPiece)
+
+        if workPiece == 0 || workPiece == 1 {
+            fmt.Println(string(colorRed), "\n You must enter an integer greater than one", string(colorReset))
+        } else {
+            break 
+        }
+    }
 
     start := time.Now() // saved start time to be compared with end time t 
 
@@ -89,11 +99,9 @@ func squareRootOf3(num int) {
                     TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
                     _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                         check(err7)
-//                    num = 99999 // done as noted per the first line of this func 
             }
 }
 
-//var rootOfSmallerPerfectSquareOnce int 
 func readTheTableOfPS (index int, start2 time.Time) {             // this gets called 180,000 times.                   // The first time it is called index is 0
     smallerPerfectSquareOnce := Table_of_perfect_squares[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 180,000
     rootOfSmallerPerfectSquareOnce := Table_of_perfect_squares[index+1]
@@ -170,8 +178,17 @@ This entire algorithm was conceived of and written entirely by yours-truly.
 // case 1: 
 func squareRootOf3(num int) { 
         precisionOfSquare = 3
-    fmt.Println("\n\n\n\n\nEnter any integer that you wish to find the Square Root of")
-    fmt.Scanf("%d", &workPiece)
+        fmt.Println("\n\n\n You selected option #1, finding square roots by brute forcing an optimal ratio of perfect squares")
+    for 1 == 1 {
+        fmt.Println("\nEnter any integer that you wish to find the Square Root of")
+        fmt.Scan(&workPiece)
+
+        if workPiece == 0 || workPiece == 1 {
+            fmt.Println(string(colorRed), "\n You must enter an integer greater than one", string(colorReset))
+        } else {
+            break 
+        }
+    }
 
     start := time.Now() // saved start time to be compared with end time t 
 
@@ -213,11 +230,9 @@ func squareRootOf3(num int) {
                     TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
                     _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                         check(err7)
-//                    num = 99999 // done as noted per the first line of this func 
             }
 }
 
-//var rootOfSmallerPerfectSquareOnce int 
 func readTheTableOfPS (index int, start2 time.Time) {             // this gets called 180,000 times.                   // The first time it is called index is 0
     smallerPerfectSquareOnce := Table_of_perfect_squares[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 180,000
     rootOfSmallerPerfectSquareOnce := Table_of_perfect_squares[index+1]
@@ -296,13 +311,41 @@ func buildTableOfPerfectSquares() {
 func xRootOfy(num int) { 
         var precisionOfRoot int 
         var radical_index int 
+            radical_index = 2
         var workPiece int 
-    fmt.Println("\n\n\n\nEnter 2 for SquareRoot or 3 for CubeRoot")
-    fmt.Scanf("%d", &radical_index)
-    fmt.Println("\n\n\n\nEnter any integer that you wish to find that Root of")
-    fmt.Scanf("%d", &workPiece)
+        var skip_redoing_loop int 
+            skip_redoing_loop = 0 
 
     start := time.Now() // saved start time to be compared with end time t 
+
+    for radical_index > 1 && skip_redoing_loop == 0 { // radical_index will initially be 2, and the skip flag will be initially 0, therefore we will initially enter this loop 
+        fmt.Println("\n\nEnter 2 for SquareRoot or 3 for CubeRoot")
+        fmt.Scan(&radical_index) // just hitting enter will leave radical_index set as 2 
+
+        for radical_index > 0 { // if we entered any value for radical_index 
+            if radical_index < 2 || radical_index > 3 { // only then do we check to see if it is a 2 or a 3
+                fmt.Println(string(colorPurple), "\n No, for the radical, enter either 2 or 3, just a 2 or a 3, \n ... no other number for the radical please \n", string(colorReset))
+                radical_index = 2 // an entered 2 or 3 would have bypassed this, but this value of 2 is needed to re-enter/continue the outer for loop 
+                break // out of inner loop only, and with skip flag still set to 0 
+            } else { // if a 2 or a 3 was entered go ahead and prompt for a workPiece 
+                    for 1 == 1 {
+                        fmt.Println("\n\nEnter any integer that you wish to find the", radical_index, "Root of")
+                        fmt.Scan(&workPiece) // if a float was entered earlier for radical_index, the fractional part will be assigned to workPiece, without prompting (which is buggy on the part of Go)
+                        if workPiece == 0 || workPiece == 1 {
+                            fmt.Println(string(colorRed), "\n You must enter an integer greater than one", string(colorReset))
+                        } else {
+                            break // prompt for a valid workPiece and loop back to re scan, or break out of said loop herein
+                        }
+                    }
+                skip_redoing_loop = 1 
+                break // thus sending us back to the outer loop with the directive to skip redoing it 
+            }
+        }
+        if radical_index < 1 { // 
+            fmt.Println(string(colorPurple), "\n Zero is dopey, for the radical, enter either 2 or 3, just a 2 or a 3, \n ... no other number for the radical please \n", string(colorReset))
+            radical_index = 2 // go fish 
+        }
+    }
 
     if radical_index == 3 {
             if workPiece > 4 {
@@ -371,8 +414,6 @@ func xRootOfy(num int) {
                         check(err7)
             }
 }
-
-
 func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece int, precisionOfRoot int) {                               // this gets called 380,000 times.                  // The first time it is called index is 0
     smallerPerfectProductOnce := Table_of_perfect_Products[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 380,000
     RootOfsmallerPerfectProductOnce := Table_of_perfect_Products[index+1]
@@ -404,7 +445,6 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
                 fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
                 break // out of the for loop because the workPiece is itself a perfect square
             }
-
 
 
             if diffOfLarger < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
@@ -481,13 +521,41 @@ This entire algorithm was conceived of and written entirely by yours-truly.
 func xRootOfy(num int) { 
         var precisionOfRoot int 
         var radical_index int 
+            radical_index = 2
         var workPiece int 
-    fmt.Println("\n\n\n\nEnter 2 for SquareRoot or 3 for CubeRoot")
-    fmt.Scanf("%d", &radical_index)
-    fmt.Println("\n\n\n\nEnter any integer that you wish to find that Root of")
-    fmt.Scanf("%d", &workPiece)
+        var skip_redoing_loop int 
+            skip_redoing_loop = 0 
 
     start := time.Now() // saved start time to be compared with end time t 
+
+    for radical_index > 1 && skip_redoing_loop == 0 { // radical_index will initially be 2, and the skip flag will be initially 0, therefore we will initially enter this loop 
+        fmt.Println("\n\nEnter 2 for SquareRoot or 3 for CubeRoot")
+        fmt.Scan(&radical_index) // just hitting enter will leave radical_index set as 2 
+
+        for radical_index > 0 { // if we entered any value for radical_index 
+            if radical_index < 2 || radical_index > 3 { // only then do we check to see if it is a 2 or a 3
+                fmt.Println(string(colorPurple), "\n No, for the radical, enter either 2 or 3, just a 2 or a 3, \n ... no other number for the radical please \n", string(colorReset))
+                radical_index = 2 // an entered 2 or 3 would have bypassed this, but this value of 2 is needed to re-enter/continue the outer for loop 
+                break // out of inner loop only, and with skip flag still set to 0 
+            } else { // if a 2 or a 3 was entered go ahead and prompt for a workPiece 
+                    for 1 == 1 {
+                        fmt.Println("\n\nEnter any integer that you wish to find the", radical_index, "Root of")
+                        fmt.Scan(&workPiece) // if a float was entered earlier for radical_index, the fractional part will be assigned to workPiece, without prompting (which is buggy on the part of Go)
+                        if workPiece == 0 || workPiece == 1 {
+                            fmt.Println(string(colorRed), "\n You must enter an integer greater than one", string(colorReset))
+                        } else {
+                            break // prompt for a valid workPiece and loop back to re scan, or break out of said loop herein
+                        }
+                    }
+                skip_redoing_loop = 1 
+                break // thus sending us back to the outer loop with the directive to skip redoing it 
+            }
+        }
+        if radical_index < 1 { // 
+            fmt.Println(string(colorPurple), "\n Zero is dopey, for the radical, enter either 2 or 3, just a 2 or a 3, \n ... no other number for the radical please \n", string(colorReset))
+            radical_index = 2 // go fish 
+        }
+    }
 
     if radical_index == 3 {
             if workPiece > 4 {
@@ -556,8 +624,6 @@ func xRootOfy(num int) {
                         check(err7)
             }
 }
-
-
 func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece int, precisionOfRoot int) {                               // this gets called 380,000 times.                  // The first time it is called index is 0
     smallerPerfectProductOnce := Table_of_perfect_Products[index]  // save it locally, do this just-once per func call. // ... index may be 0 up to 380,000
     RootOfsmallerPerfectProductOnce := Table_of_perfect_Products[index+1]
@@ -589,7 +655,6 @@ func readTheTableOfPP (radical_index int, index int, start2 time.Time, workPiece
                 fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
                 break // out of the for loop because the workPiece is itself a perfect square
             }
-
 
 
             if diffOfLarger < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
@@ -661,7 +726,7 @@ func buildTableOfPerfectProducts(radical_index int) {
 func DisplayFirstMenu() {
     num = 0
 fmt.Println(string(colorRed), "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter 33 to see the the magic behind main (selector+20 for all others)") 
-fmt.Println(string(colorReset), "... 35 to see the code for the switches, or poke around for Easter Eggs :)\n\n")
+fmt.Println(string(colorReset), "... 35 to see the code for the switches, or poke around for Easter Eggs :)\n")
 fmt.Println("95:  About this app \n")
 fmt.Println("96:  Using this app \n")
 fmt.Println("1:  Calculate", string(colorCyan), "the Square Root of x (\u221Ax)", string(colorReset), "from first-principles")
@@ -690,7 +755,7 @@ fmt.Println("12:  Display prior execution times from longer-running prior select
 fmt.Println(string(colorYellow), "FOR SECOND MENU", string(colorReset), "just hit Enter|Return\n")
 fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
-    fmt.Scanf("%d", &num)  // pause and request input from the user
+    fmt.Scanf("%d", &num)  // pause and request input from the user // Scan does not work the same here as does Scanf 
 universal_switch(1)
 }
 
@@ -723,7 +788,7 @@ func universal_switch(which_menu int) {
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
     fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
-    fmt.Scanf("%d", &num)  // pause and request input from the user
+    fmt.Scanf("%d", &num)  // pause and request input from the user // Scan does not work the same here as does Scanf
     }
 
     if num > 119 && num < 10000 { num = 17 }  // case 17: will display a "funny" out-of-range message as case 17:
@@ -842,7 +907,25 @@ func universal_switch(which_menu int) {
             showTheMagicBehind_main_juuso()
 
         case 40:
+            start := time.Now() // saved start time to be compared with end time t 
             nifty_scoreBoard()
+            t := time.Now()
+            elapsed := t.Sub(start)
+            // only if 
+                if int(elapsed.Seconds()) != 0 {
+                        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                            defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+                        Hostname, _ := os.Hostname()
+                        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- ScoreBoard -- selection #%d on %s \n", num, Hostname)
+                            check(err0)
+                        current_time := time.Now()
+                        _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+                        check(err6)
+                        TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+                        _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                            check(err7)
+                }
         case 60:
             ShowSLOC_behind_scoreBoard_40()
 
@@ -888,7 +971,7 @@ func universal_switch(which_menu int) {
         case 119: 
             displayCode4Explain_spigot()
     default:
-        //fmt.Println("\n default at bottom of Universal switch\n")
+        fmt.Println("\n ... You entered a value that is", string(colorRed), "not a valid option", string(colorReset), "go fish\n")
     }
 }
 
@@ -897,7 +980,7 @@ func About_this_app() {  // case 95:
     var rune_About_this_app = `
 The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions given in selection #95 (Using this app:) 
 
-Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, it being intended mainly for Unix variants. Which is Ok because Linux and Mac Os are my preferred programming environments. 
+Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, Go being intended mainly for use on Unix variants. Which is Ok because Linux and Mac are my preferred programming environments. 
 
 I then got a bit carried away, and a few thousand lines of code later here we are. 
 
@@ -915,7 +998,6 @@ Each selection has a corresponding selector which displays the source code for t
     `
     fmt.Println(rune_Using_this_app, string(colorReset))
 }
-
 
 func showMagicBehindUniversalSwitch() {  // case 35: 
     var RuneOfShowMagicBehindUniversalSwitch = `
@@ -948,7 +1030,7 @@ func universal_switch(which_menu int) {
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
     fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
-    fmt.Scanf("%d", &num)  // pause and request input from the user
+    fmt.Scanf("%d", &num)  // pause and request input from the user // Scan does not work the same here as does Scanf
     }
 
     if num > 119 && num < 10000 { num = 17 }  // case 17: will display a "funny" out-of-range message as case 17:
@@ -1067,7 +1149,25 @@ func universal_switch(which_menu int) {
             showTheMagicBehind_main_juuso()
 
         case 40:
+            start := time.Now() // saved start time to be compared with end time t 
             nifty_scoreBoard()
+            t := time.Now()
+            elapsed := t.Sub(start)
+            // only if 
+                if int(elapsed.Seconds()) != 0 {
+                        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                            defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+                        Hostname, _ := os.Hostname()
+                        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- ScoreBoard -- selection #%d on %s \n", num, Hostname)
+                            check(err0)
+                        current_time := time.Now()
+                        _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+                        check(err6)
+                        TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+                        _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                            check(err7)
+                }
         case 60:
             ShowSLOC_behind_scoreBoard_40()
 
@@ -1113,32 +1213,8 @@ func universal_switch(which_menu int) {
         case 119: 
             displayCode4Explain_spigot()
     default:
-        //fmt.Println("\n default at bottom of Universal switch\n")
+        fmt.Println("\n ... You entered a value that is", string(colorRed), "not a valid option", string(colorReset), "go fish\n")
     }
-}
-
-func About_this_app() {  // case 95: 
-    fmt.Print(string(colorCyan))
-    var rune_About_this_app = [runeMark]
-The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions given in selection #95 (Using this app:) 
-
-Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, it being intended mainly for Unix variants. Which is Ok because Linux and Mac Os are my preferred programming environments. 
-
-I then got a bit carried away, and a few thousand lines of code later here we are. 
-
-The sections that I am the most proud of are #1, #18, and #4. Two variants of brute forcing the extraction of irrational roots|Radicals|radicalis, and the geometric derivation of Pi respectively. 
-[runMark]
-    fmt.Println(rune_About_this_app, string(colorReset))
-}
-
-func Using_this_app() {
-    fmt.Print(string(colorCyan))
-    var rune_Using_this_app = [runeMark]
-Any selection from either menu can be made at either menu. 
-
-Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 28 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
-    [runeMark]
-    fmt.Println(rune_Using_this_app, string(colorReset))
 }
     `
     fmt.Println(RuneOfShowMagicBehindUniversalSwitch)
@@ -1191,7 +1267,7 @@ func calculatePi(precision float64) float64 {
 }
 func showMagicBehindBBPF() {  // case 22: 
 var BBPFrune = `
-func BBPF(num int) { 
+func BBPF(num int) { // case 2: 
     fmt.Println("\nYou selected #", num, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
     fmt.Println("How many digits of pi should we calculate? Enter one integer '4 to 16' ")
                  var numAi float64 // aligned with the value below
@@ -1213,7 +1289,6 @@ func calculatePi(precision float64) float64 {
 }`
     fmt.Println(BBPFrune)
 }
-
 
 func WorstMethod(num int){  // case 3: 
     fmt.Printf("\nYou selected #%d \n", num)
@@ -1303,7 +1378,7 @@ func showMagicBehindWorstMethod() {  // case 23:
 
 This entire algorithm was conceived of and written entirely by yours-truly. 
 
-func WorstMethod(num int){
+func WorstMethod(num int){  // case 3: 
     fmt.Printf("\nYou selected #%d \n", num)
     fmt.Println(string(colorCyan), "\n     π = 12 * ( 1/2 - (1/2  * 1/3 * (1/2)exp3) - ...")
     fmt.Println("                                    (1/8   * 1/5 * (1/2)exp5) - ...")
@@ -2606,15 +2681,15 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
                 fmt.Println(" per option #", num, "  --  an improved version of Archimedes' method\n")
 
             arch := `Archimedes of Syracuse (287 – 212 BC) was a Greek mathematician, physicist, engineer, 
-            astronomer, and inventor from the ancient city of Syracuse in Sicily. He estimated π 
-            by drawing a larger regular hexagon outside a circle then a smaller regular hexagon inside
-            the circle, and progressively doubling the number of sides of each regular polygon, 
-            calculating the length of a side of each polygon at each step. As the number of sides 
-            increases, it becomes a more accurate approximation of a circle. After four such steps, 
-            when the polygons had 96 sides each, he was able to determine that the value of π lay between 
-            3+1/7 (approx. 3.1429) and 3+10/71 (approx. 3.1408), consistent with its actual value of 
-            approximately 3.1416 He also proved that the area of a circle was equal to π multiplied by the 
-            square of the radius of the circle.`
+    astronomer, and inventor from the ancient city of Syracuse in Sicily. He estimated π 
+    by drawing a larger regular hexagon outside a circle then a smaller regular hexagon inside
+    the circle, and progressively doubling the number of sides of each regular polygon, 
+    calculating the length of a side of each polygon at each step. As the number of sides 
+    increases, it becomes a more accurate approximation of a circle. After four such steps, 
+    when the polygons had 96 sides each, he was able to determine that the value of π lay between 
+    3+1/7 (approx. 3.1429) and 3+10/71 (approx. 3.1408), consistent with its actual value of 
+    approximately 3.1416 He also proved that the area of a circle was equal to π multiplied by the 
+    square of the radius of the circle.`
             fmt.Println(string(colorCyan), arch, string(colorReset)) // prints the above rune
 
                 LinesPerIter = 18  // an estimate
@@ -2661,7 +2736,7 @@ func showMagicBehindArchimedes() { // case 24:
 
 This entire algorithm was conceived of and written entirely by yours-truly. 
 
-func Archimedes(num int){
+func Archimedes(num int){ // case 4: 
     fmt.Println("\nYou selected #", num, "  --  An improved version of Archimedes' method")
     fmt.Println("  -- enter \"11' at the main menu for the derivation and proof of the Pythagorean -- ")
                             // the above escape does not seem to work as advertised ??
@@ -2791,15 +2866,15 @@ p_d = p/2  // the diameter of the polygon is always two, so p/2 = π
                 fmt.Println(" per option #", num, "  --  an improved version of Archimedes' method\n")
 
             arch := [runeMark] Archimedes of Syracuse (287 – 212 BC) was a Greek mathematician, physicist, engineer, 
-            astronomer, and inventor from the ancient city of Syracuse in Sicily. He estimated π 
-            by drawing a larger regular hexagon outside a circle then a smaller regular hexagon inside
-            the circle, and progressively doubling the number of sides of each regular polygon, 
-            calculating the length of a side of each polygon at each step. As the number of sides 
-            increases, it becomes a more accurate approximation of a circle. After four such steps, 
-            when the polygons had 96 sides each, he was able to determine that the value of π lay between 
-            3+1/7 (approx. 3.1429) and 3+10/71 (approx. 3.1408), consistent with its actual value of 
-            approximately 3.1416 He also proved that the area of a circle was equal to π multiplied by the 
-            square of the radius of the circle. [runeMark]
+    astronomer, and inventor from the ancient city of Syracuse in Sicily. He estimated π 
+    by drawing a larger regular hexagon outside a circle then a smaller regular hexagon inside
+    the circle, and progressively doubling the number of sides of each regular polygon, 
+    calculating the length of a side of each polygon at each step. As the number of sides 
+    increases, it becomes a more accurate approximation of a circle. After four such steps, 
+    when the polygons had 96 sides each, he was able to determine that the value of π lay between 
+    3+1/7 (approx. 3.1429) and 3+10/71 (approx. 3.1408), consistent with its actual value of 
+    approximately 3.1416 He also proved that the area of a circle was equal to π multiplied by the 
+    square of the radius of the circle.[runeMark]
             fmt.Println(string(colorCyan), arch, string(colorReset)) // prints the above rune
 
                 LinesPerIter = 18  // an estimate
@@ -3690,18 +3765,18 @@ It is named after Paul Erdős and Peter Borwein.
 Paul Erdős was a Hungarian mathematician. He was one of the most prolific mathematicians 
 and producers of mathematical conjectures of the 20th century. Erdős pursued and proposed 
 problems in discrete mathematics, graph theory, number theory, mathematical analysis, 
-approximation theory, set theory, and probability theory.[4] Much of his work centered 
+approximation theory, set theory, and probability theory. Much of his work centered 
 around discrete mathematics, cracking many previously unsolved problems in the field. 
 He championed and contributed to Ramsey theory, which studies the conditions in which 
 order necessarily appears. Overall, his work leaned towards solving previously open 
 problems, rather than developing or exploring new areas of mathematics.
 
 Erdős published around 1,500 mathematical papers during his lifetime, a figure that
-remains unsurpassed.[5] He firmly believed mathematics to be a social activity, 
+remains unsurpassed. He firmly believed mathematics to be a social activity, 
 living an itinerant lifestyle with the sole purpose of writing mathematical papers 
 with other mathematicians. He was known both for his social practice of mathematics, 
 working with more than 500 collaborators, and for his eccentric lifestyle; Time magazine 
-called him "The Oddball's Oddball".[6] He devoted his waking hours to mathematics, even 
+called him "The Oddball's Oddball". He devoted his waking hours to mathematics, even 
 into his later years—indeed, his death came only hours after he solved a geometry 
 problem at a conference in Warsaw. Erdős's prolific output with co-authors prompted 
 the creation of the Erdős number, the number of steps in the shortest path between a 
@@ -3723,7 +3798,7 @@ After completing a Bachelor of Science in Honours Math at the University of West
 Ontario in 1974, he went on to complete an MSc and Ph.D. at the University of British 
 Columbia. He joined the Department of Mathematics at Dalhousie University. While he 
 was there, he, his brother Jonathan Borwein and David H. Bailey of NASA wrote the 1989 
-paper[1] that outlined and popularized a proof for computing one billion digits of π. 
+paper that outlined and popularized a proof for computing one billion digits of π. 
 The authors won the 1993 Chauvenet Prize and Merten M. Hasse Prize for this paper.
 
 In 1993, he moved to Simon Fraser University, joining his brother Jonathan in establishing 
@@ -3751,55 +3826,6 @@ fmt.Println("") // so as not to pad the following rune with an unwanted space
 }
 func showMagicBehindErdosBorwein() {  // case 30: 
 var ErdosBorweinRune = `
-
-This entire algorithm was conceived of and written entirely by yours-truly. 
-
-func ErdosBorwein(num int){
-    rune := [runeMark] The Erdős–Borwein constant is the sum of the reciprocals of the Mersenne numbers. 
-It is named after Paul Erdős and Peter Borwein. 
-
-Paul Erdős was a Hungarian mathematician. He was one of the most prolific mathematicians 
-and producers of mathematical conjectures of the 20th century. Erdős pursued and proposed 
-problems in discrete mathematics, graph theory, number theory, mathematical analysis, 
-approximation theory, set theory, and probability theory.[4] Much of his work centered 
-around discrete mathematics, cracking many previously unsolved problems in the field. 
-He championed and contributed to Ramsey theory, which studies the conditions in which 
-order necessarily appears. Overall, his work leaned towards solving previously open 
-problems, rather than developing or exploring new areas of mathematics.
-
-Erdős published around 1,500 mathematical papers during his lifetime, a figure that
-remains unsurpassed.[5] He firmly believed mathematics to be a social activity, 
-living an itinerant lifestyle with the sole purpose of writing mathematical papers 
-with other mathematicians. He was known both for his social practice of mathematics, 
-working with more than 500 collaborators, and for his eccentric lifestyle; Time magazine 
-called him "The Oddball's Oddball".[6] He devoted his waking hours to mathematics, even 
-into his later years—indeed, his death came only hours after he solved a geometry 
-problem at a conference in Warsaw. Erdős's prolific output with co-authors prompted 
-the creation of the Erdős number, the number of steps in the shortest path between a 
-mathematician and Erdős in terms of co-authorships. 
-
-
-Peter Benjamin Borwein (born St. Andrews, Scotland, May 10, 1953 – 23 August 2020) 
-was a Canadian mathematician and a professor at Simon Fraser University. He is known 
-as a co-author of the paper which presented the Bailey–Borwein–Plouffe algorithm 
-(discovered by Simon Plouffe) for computing π. 
-
-Borwein was born into a Jewish family. He became interested in number theory and classical 
-analysis during his second year of university. He had not previously been interested in 
-math, although his father was the head of the University of Western Ontario's mathematics 
-department and his mother is associate dean of medicine there. Borwein and his two siblings 
-majored in mathematics. 
-
-After completing a Bachelor of Science in Honours Math at the University of Western 
-Ontario in 1974, he went on to complete an MSc and Ph.D. at the University of British 
-Columbia. He joined the Department of Mathematics at Dalhousie University. While he 
-was there, he, his brother Jonathan Borwein and David H. Bailey of NASA wrote the 1989 
-paper[1] that outlined and popularized a proof for computing one billion digits of π. 
-The authors won the 1993 Chauvenet Prize and Merten M. Hasse Prize for this paper.
-
-In 1993, he moved to Simon Fraser University, joining his brother Jonathan in establishing 
-the Centre for Experimental and Constructive Mathematics (CECM) where he developed the 
-Inverse Symbolic Calculator. [runeMark]
 fmt.Println("") // so as not to pad the following rune with an unwanted space 
     fmt.Println(string(colorCyan), rune, "\n", string(colorReset))
     fmt.Println("We calculate E as E = the sum of 1/((2^n)-1) as n grows from 1 to 'infinity'")
@@ -3854,7 +3880,7 @@ This formula expresses pi as the sum of an infinite series of fractions, where e
 
 To calculate a specific digit of pi using the BBP formula, the sum is evaluated up to the desired term, and the resulting hexadecimal fraction is converted to decimal and rounded to the nearest digit. For example, to calculate the first few digits of pi, the sum would be evaluated up to the k=0 term, and the resulting hexadecimal fraction would be converted to decimal and rounded to the nearest digit. To calculate the next digit, the sum would be evaluated up to the k=1 term, and so on.
 `
-func displayCode4Explain_spigot(){ // case 119: 
+func displayCode4Explain_spigot(){ // case 119: // (99+20=119)
     var runeOf_Explain_spigot = `
 func Explain_spigot(){
     fmt.Println(string(colorCyan), spigot_rune_per_chatGPT, string(colorReset)) // https://chat.openai.com/chat)
@@ -3894,7 +3920,7 @@ func TheSpigot(){  // case 19:
     var numberOfDigitsToCalc int
     fmt.Println("How much pi can you handle?")
     fmt.Println("How many digits of pi do you really want? Enter that number now:")  // prompt the user
-        fmt.Scanf("%d", &numberOfDigitsToCalc)
+        fmt.Scan(&numberOfDigitsToCalc)
     fmt.Println("\nThe first line below was calculated via the Spigot Algorithm")
     fmt.Println("The second line is the first 100 digits of pi from the web")
     fmt.Println("\n", Spigot(numberOfDigitsToCalc))  // calls the next func 
@@ -3956,7 +3982,7 @@ func delChar(s string, index int) string {
 
 func showTheSpigotMagic() { // case 39: 
     fmt.Println("\n\nThis 'spigot' trick was adapted from a bit of code I mooched off of GitHub:\n")
-    fmt.Print(spigotRune, "[the rune of the code would go here]\n")
+    fmt.Print(spigotRune, "\n")
     fmt.Println("\nThis 'spigot' trick was adapted from a bit of code I mooched off of GitHub:\n")
     fmt.Println("To view an explaination of how it works enter 99 at either menu\n")
 }
@@ -3964,6 +3990,22 @@ var spigotRune = `
 // Generously shared by Ilya Sokolov i-redbyte, https://github.com/i-redbyte
 // https://github.com/TheAlgorithms/Go/blob/master/math/pi/spigotpi.go
 
+func TheSpigot(){  // case 19: 
+    var numberOfDigitsToCalc int
+    fmt.Println("How much pi can you handle?")
+    fmt.Println("How many digits of pi do you really want? Enter that number now:")  // prompt the user
+        fmt.Scan(&numberOfDigitsToCalc)
+    fmt.Println("\nThe first line below was calculated via the Spigot Algorithm")
+    fmt.Println("The second line is the first 100 digits of pi from the web")
+    fmt.Println("\n", Spigot(numberOfDigitsToCalc))  // calls the next func 
+                //    ^^^^^^ and we call the next func 
+    fmt.Println("\n 31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679")
+    fmt.Println(" 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901")
+    fmt.Println("        ten    twenty        30        40        50        60        70        80        90       100 ")
+    fmt.Print("\nThis trick made possible by a bit of code I mooched off of GitHub ...\n")
+    fmt.Println("... to view the code with attribution Enter '39' at either menu\n")
+    fmt.Println("To view an explaination of how it works enter 99 at either menu\n")
+}
 func Spigot(n int) string { // called by the previous func 
     pi := "" // allocate a string var "pi" 
     boxes := n * 10 / 3
@@ -4030,7 +4072,7 @@ var iters_mc int
 func MonteCarloPi(number_of_randomPoints int, num int) float64 {  // case 45: 
     fmt.Println("\nPlease enter a value for number of random points\n")
     var par int 
-    fmt.Scanf("%d", &par)  // pause and request input from the user, else use 
+    fmt.Scan(&par)  // pause and request input from the user, else use 
         if par == 0 {
             fmt.Println("\nYou failed to make a selection, therefore we run with", number_of_randomPoints, "\n")
         } else { 
@@ -4088,10 +4130,10 @@ func showMagicOfNonConcurrentMonteCarloPi(){  // case 65:
     this non-concurrent method will only max-out one of your cores for a few min, while the other cores act as heat sinks 
 */
 var iters_mc int 
-func MonteCarloPi(number_of_randomPoints int, num int) float64 {
+func MonteCarloPi(number_of_randomPoints int, num int) float64 {  // case 45: 
     fmt.Println("\nPlease enter a value for number of random points\n")
     var par int 
-    fmt.Scanf("%d", &par)  // pause and request input from the user, else use 
+    fmt.Scan(&par)  // pause and request input from the user, else use 
         if par == 0 {
             fmt.Println("\nYou failed to make a selection, therefore we run with", number_of_randomPoints, "\n")
         } else { 
@@ -4150,7 +4192,7 @@ func ConcurrentMCpi(num int) { // case 36: and its code as case 56:
     fmt.Println("as such, it has the potential to cook your cores if left running for too long")
                      numMC := 1  // aligned to the value below 
     fmt.Println("Enter an integer to specify a precision, and make it BIG, 9999999999 is reasonable")
-    fmt.Scanf("%d", &numMC) 
+    fmt.Scan(&numMC) 
     fmt.Println(MonteCarloPiConcurrent(numMC, num))
 }
 /*
@@ -4257,7 +4299,7 @@ func ConcurrentMCpi(num int) { // case 36: and its code as case 56:
     fmt.Println("as such, it has the potential to cook your cores if left running for too long")
                      numMC := 1  // aligned to the value below 
     fmt.Println("Enter an integer to specify a precision, and make it BIG, 9999999999 is reasonable")
-    fmt.Scanf("%d", &numMC) 
+    fmt.Scan(&numMC) 
     fmt.Println(MonteCarloPiConcurrent(numMC, num))
 }
 /*
@@ -4267,7 +4309,7 @@ func ConcurrentMCpi(num int) { // case 36: and its code as case 56:
     More details on the Monte Carlo method available at https://en.wikipedia.org/wiki/Monte_Carlo_method.
     More details on goroutines parallelization available at https://go.dev/doc/effective_go#parallel.
 */
-func MonteCarloPiConcurrent(n int, num int) (float64, error) {
+func MonteCarloPiConcurrent(n int, num int) (float64, error) { // case 36: 
         //begin Richard H. Woolley's code block
             start := time.Now() 
         //end Richard H. Woolley's code block
@@ -4351,9 +4393,10 @@ func splitInt(x int, n int) ([]int, error) {
 fmt.Println(string(colorCyan), MonteCarloPiConcurrentRune, string(colorReset))
 }
 
+// case 37:
 var globalValue_in_juuso float64  // Rick's code 
 var exterior_catcher int         // Rick's code 
-func main_juuso() {           // his code, his meaning juuso's // case 37: 
+func main_juuso() {           // his code, his meaning juuso's  
     // initialize lists
     pin := []float64{}
     an  := []float64{1}
@@ -4431,10 +4474,10 @@ func showTheMagicBehind_main_juuso(){ // case 57:
 // I am affraid that it would be far too much trouble to figure out all the math that is being implemented here ... 
 // ... to do it one should begin by studying the Gauss–Legendre algorithm itself ?? 
 
+// case 37:
 var globalValue_in_juuso float64  // Rick's code 
-var exterior_catcher int          // Rick's code 
-
-func main_juuso() {           // his code, his meaning juuso's 
+var exterior_catcher int         // Rick's code 
+func main_juuso() {           // his code, his meaning juuso's  
     // initialize lists
     pin := []float64{}
     an  := []float64{1}
@@ -4561,7 +4604,7 @@ func DisplayCodeBehind_BBPfConcurent(){ // case 61:
     fmt.Println(DisplayCodeBehind_BBPfConcurentRune)
 }
 var DisplayCodeBehind_BBPfConcurentRune = `
-func BBPfConcurent(){
+func BBPfConcurent(){ // case 41: 
     //pi := PiMultiThread(4, 1024)
     pi := PiMultiThread(4, 512)
     fmt.Println("Calculated π vs actual:\n", pi, " <-- Calculated")
@@ -4723,7 +4766,7 @@ var rune_of_scoreBoard = `
 // A concurrent computation of pi using Nilakantha's formula.
 // by Diego Brener diegosilva13 on Github 
 // ******* nifty scoreboard ***********************************
-func nifty_scoreBoard (){
+func nifty_scoreBoard (){ // case 40: 
         // We use a ticker to specify the interval to update the values
         // on the scoreboard
         ticker := time.NewTicker(time.Millisecond * 108)
@@ -4824,7 +4867,33 @@ func nifty_scoreBoard (){
             } else {
                 ch <- -4.0 / (j * (j + 1) * (j + 2))
             }
-        }`
+        }
+/*
+// and from the switch:
+        case 40:
+            start := time.Now() // saved start time to be compared with end time t 
+            nifty_scoreBoard()
+            t := time.Now()
+            elapsed := t.Sub(start)
+            // only if 
+                if int(elapsed.Seconds()) != 0 {
+                        fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                            check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                            defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+                        Hostname, _ := os.Hostname()
+                        _ , err0 := fmt.Fprintf(fileHandle, "\n  -- ScoreBoard -- selection #%d on %s \n", num, Hostname)
+                            check(err0)
+                        current_time := time.Now()
+                        _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+                        check(err6)
+                        TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+                        _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                            check(err7)
+                }
+        case 60:
+            ShowSLOC_behind_scoreBoard_40()
+*/
+`
 
 func numerical_integration (num int){ // case 43: 
         /* Testpad here: http://tour.golang.org/basics/13
@@ -5475,11 +5544,15 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
             fmt.Println(string(colorRed), "Hit Enter/Return again to redisplay the main menu", string(colorReset)) // this will be the last line of every case #: 
         }
         // a forced pause is needed to prevent the menu from redisplaying after a case #: has been handeled 
+        // However, if a float was entered earlier, say in option #1, then the fractional part will be gobbled here and no forced pause will happen, which is buggy on the part of Go 
         var Mnum int //  vvvv
         fmt.Scanf("%d", &Mnum) // request input on command line (pause)
     } 
+
 } 
-        var colorReset = "\033[0m"          // gloabl vars for use in multiple localized sections of code 
+// gloabl vars for use in multiple localized sections of code 
+        var which_menu int 
+        var colorReset = "\033[0m"          
         var colorRed = "\033[31m"
         var colorGreen = "\033[32m"
         var colorYellow = "\033[33m"
@@ -5495,6 +5568,7 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
         var iterInt64 int64  // to be used primarily in selections which require modulus calculations 
         var iterFloat64 float64  // to be used in selections which do not require modulus calculations 
         var Table_of_perfect_squares = []int{}
+        var Table_of_perfect_Products = []int{}
         var num int 
         var diffOfLarger int // the following are used in the SquareRoot of x selection #1 case 1: 
         var diffOfSmaller int 
