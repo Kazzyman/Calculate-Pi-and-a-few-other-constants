@@ -1,13 +1,14 @@
-/* Revised Feb 6 2023 at 2229
+// Revised Feb 6 2023 at 2229
 
-the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
+//the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
 
+/* Unix variant
 compile with: "go build -o calculate-pi-and-friends calculate-pi-and-friends.go"
 ... thereafter you can run it on a Unix system with "/fullpathname/calculate-pi-and-friends"
 ... or, having first obtained the Go compiler, ... just run the source with: "go run calculate-pi-and-friends.go"
 
 One can obtain the Go Compiler from : https://go.dev/dl/
-*/
+Unix variant */
 
 package main
 
@@ -26,6 +27,7 @@ import (
     "math/big"  // Used in bpp formula with mods by rick.woolley@gmail.com (pi calculator from https://github.com/karan/Projects)
 )
 
+// /* Unix variant
 func main() {       // top-level program logic flow -- explore SEVENTEEN ways to calculate Pi, plus THREE other constants
 
     for 1 == 1 {    // loop endlessly, or Ctrl-C, or case 47: to Exit
@@ -43,6 +45,21 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
     } 
 
 } 
+// Unix variant */ 
+
+/* Windows variant
+func main() {       // top-level program logic flow -- explore SEVENTEEN ways to calculate Pi, plus THREE other constants
+
+    for 1 == 1 {    // loop endlessly, or Ctrl-C, or case 47: to Exit
+        DisplayFirstMenu() 
+        // a forced pause is needed to prevent the menu from redisplaying after a case #: has been handeled 
+        Mnum = 0
+        fmt.Println(string(colorRed), "Enter any value to redisplay the menu", string(colorReset)) // this will be the last line of every case #: 
+        fmt.Scan(&Mnum) // request input on command line (pause)
+    } 
+
+} 
+Windows variant */
 
 // case 1: 
 func squareRootOf3(num int) { 
@@ -50,7 +67,7 @@ func squareRootOf3(num int) {
         fmt.Println("\n\n\n You selected option #1, finding square roots by brute forcing an optimal ratio of perfect squares")
     for 1 == 1 {
         fmt.Println("\nEnter any integer that you wish to find the Square Root of")
-        fmt.Scan(&workPiece)
+        fmt.Scan(&workPiece) // same in Unix or Windows variants 
 
         if workPiece == 0 || workPiece == 1 {
             fmt.Println(string(colorRed), "\n You must enter an integer greater than one", string(colorReset))
@@ -181,7 +198,7 @@ func squareRootOf3(num int) {
         fmt.Println("\n\n\n You selected option #1, finding square roots by brute forcing an optimal ratio of perfect squares")
     for 1 == 1 {
         fmt.Println("\nEnter any integer that you wish to find the Square Root of")
-        fmt.Scan(&workPiece)
+        fmt.Scan(&workPiece)  // same in Unix or Windows variants 
 
         if workPiece == 0 || workPiece == 1 {
             fmt.Println(string(colorRed), "\n You must enter an integer greater than one", string(colorReset))
@@ -320,7 +337,7 @@ func xRootOfy(num int) {
 
     for radical_index > 1 && skip_redoing_loop == 0 { // radical_index will initially be 2, and the skip flag will be initially 0, therefore we will initially enter this loop 
         fmt.Println("\n\nEnter 2 for SquareRoot or 3 for CubeRoot")
-        fmt.Scan(&radical_index) // just hitting enter will leave radical_index set as 2 
+        fmt.Scan(&radical_index) // just hitting enter will leave radical_index set as 2  // same in Unix or Windows variants 
 
         for radical_index > 0 { // if we entered any value for radical_index 
             if radical_index < 2 || radical_index > 3 { // only then do we check to see if it is a 2 or a 3
@@ -331,6 +348,7 @@ func xRootOfy(num int) {
                     for 1 == 1 {
                         fmt.Println("\n\nEnter any integer that you wish to find the", radical_index, "Root of")
                         fmt.Scan(&workPiece) // if a float was entered earlier for radical_index, the fractional part will be assigned to workPiece, without prompting (which is buggy on the part of Go)
+                        // the above is the same in Unix or Windows variants 
                         if workPiece == 0 || workPiece == 1 {
                             fmt.Println(string(colorRed), "\n You must enter an integer greater than one", string(colorReset))
                         } else {
@@ -530,7 +548,7 @@ func xRootOfy(num int) {
 
     for radical_index > 1 && skip_redoing_loop == 0 { // radical_index will initially be 2, and the skip flag will be initially 0, therefore we will initially enter this loop 
         fmt.Println("\n\nEnter 2 for SquareRoot or 3 for CubeRoot")
-        fmt.Scan(&radical_index) // just hitting enter will leave radical_index set as 2 
+        fmt.Scan(&radical_index) // just hitting enter will leave radical_index set as 2  // same in Unix or Windows variants 
 
         for radical_index > 0 { // if we entered any value for radical_index 
             if radical_index < 2 || radical_index > 3 { // only then do we check to see if it is a 2 or a 3
@@ -541,6 +559,7 @@ func xRootOfy(num int) {
                     for 1 == 1 {
                         fmt.Println("\n\nEnter any integer that you wish to find the", radical_index, "Root of")
                         fmt.Scan(&workPiece) // if a float was entered earlier for radical_index, the fractional part will be assigned to workPiece, without prompting (which is buggy on the part of Go)
+                        // the above is the same in Unix or Windows variants 
                         if workPiece == 0 || workPiece == 1 {
                             fmt.Println(string(colorRed), "\n You must enter an integer greater than one", string(colorReset))
                         } else {
@@ -752,15 +771,43 @@ fmt.Println("    π = (4/1) - (4/3) + (4/5) - (4/7) + (4/9) - (4/11) + (4/13) - 
 fmt.Println("      Three-Hundred-Million iterations will be executed")
 fmt.Println("      9 digits of π -- in seconds\n")
 fmt.Println("12:  Display prior execution times from longer-running prior selections \n")
+
+// /* Unix
 fmt.Println(string(colorYellow), "FOR SECOND MENU", string(colorReset), "just hit Enter|Return\n")
+// Unix */  
+
+/* Windows 
+//           13:                  v v v v v v v v v v v 
+fmt.Println(string(colorYellow), "13:  FOR SECOND MENU\n", string(colorReset))
+Windows */ 
+
 fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
     fmt.Scanf("%d", &num)  // pause and request input from the user // Scan does not work the same here as does Scanf 
+
+// /* Unix 
 universal_switch(1)
+// Unix */ 
+
+/* Windows 
+universal_switch()
+Windows */ 
+
 }
 
+
+
+
+// /* Unix 
 func universal_switch(which_menu int) { 
     if which_menu == 1 && num == 0 {
+// Unix */ 
+
+/* Windows 
+func universal_switch() {
+    if num == 13 {
+Windows */ 
+
     fmt.Print(string(colorYellow))
     fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
     fmt.Println("18:  Calculate", string(colorCyan), "the second or third Root of y (x\u221Ay)", string(colorReset), "from first-principles")
@@ -788,7 +835,15 @@ func universal_switch(which_menu int) {
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
     fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
+
+// /* Unix
     fmt.Scanf("%d", &num)  // pause and request input from the user // Scan does not work the same here as does Scanf
+// Unix */ 
+
+/* Windows 
+    fmt.Scan(&num)  // pause and request input from the user
+Windows */
+
     }
 
     if num > 119 && num < 10000 { num = 17 }  // case 17: will display a "funny" out-of-range message as case 17:
@@ -1001,8 +1056,16 @@ Each selection has a corresponding selector which displays the source code for t
 
 func showMagicBehindUniversalSwitch() {  // case 35: 
     var RuneOfShowMagicBehindUniversalSwitch = `
+// /* Unix 
 func universal_switch(which_menu int) { 
     if which_menu == 1 && num == 0 {
+// Unix */ 
+
+/* Windows 
+func universal_switch() {
+    if num == 13 {
+Windows */ 
+
     fmt.Print(string(colorYellow))
     fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
     fmt.Println("18:  Calculate", string(colorCyan), "the second or third Root of y (x\u221Ay)", string(colorReset), "from first-principles")
@@ -1030,7 +1093,15 @@ func universal_switch(which_menu int) {
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
     fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5474", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
+
+// /* Unix
     fmt.Scanf("%d", &num)  // pause and request input from the user // Scan does not work the same here as does Scanf
+// Unix */ 
+
+/* Windows 
+    fmt.Scan(&num)  // pause and request input from the user
+Windows */
+
     }
 
     if num > 119 && num < 10000 { num = 17 }  // case 17: will display a "funny" out-of-range message as case 17:
@@ -1107,7 +1178,7 @@ func universal_switch(which_menu int) {
                     fmt.Println(string(colorCyan), "\nNo prior results -- no log file", string(colorWhite), "'dataLog-From_calculate-pi-and-friends.txt'", string(colorCyan), "exists\n")
                 } else {
                     fmt.Println(string(content))  // dump/display entire file to command line
-                }[runeMark]
+                } [runeMark]
             fmt.Println(string(colorCyan), fileAccessRune, string(colorReset))
 
         case 13: 
@@ -1248,8 +1319,18 @@ func testC(){  // case 97:
 func BBPF(num int) { // case 2: 
     fmt.Println("\nYou selected #", num, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
     fmt.Println("How many digits of pi should we calculate? Enter one integer '4 to 16' ")
+
+// /* Unix variant 
                  var numAi float64 // aligned with the value below
     fmt.Scanf("%f", &numAi)
+// Unix variant */ 
+
+/* Windows variant 
+          var numAi float64 // aligned with the value below
+    fmt.Scan(&numAi)
+Windows variant */ 
+
+
     fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
     fmt.Println("and Pi from the web is    : 3.141592653589793")
 }
@@ -1270,8 +1351,18 @@ var BBPFrune = `
 func BBPF(num int) { // case 2: 
     fmt.Println("\nYou selected #", num, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
     fmt.Println("How many digits of pi should we calculate? Enter one integer '4 to 16' ")
+
+// /* Unix variant 
                  var numAi float64 // aligned with the value below
     fmt.Scanf("%f", &numAi)
+// Unix variant */ 
+
+/* Windows variant 
+          var numAi float64 // aligned with the value below
+    fmt.Scan(&numAi)
+Windows variant */ 
+
+
     fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
     fmt.Println("and Pi from the web is    : 3.141592653589793")
 }
@@ -5495,6 +5586,13 @@ func Leibniz_method_one_billion_iters(num int){
         var precisionOfSquare int 
         var t2 time.Time 
         var start2 time.Time
+
+/* Windows variant
+        var Mnum int 
+Windows variant 
+*/
+
+
         // the following var is used in switch case 98: 
         var rick = `As an atypical intelligence, I process and analyze information and provide answers to questions based on the data and knowledge that I have been trained on; 
 and, while I do have personal experiences and emotions, I am largely only able to understand and communicate with humans in a way that is similar to the way that machines communicate with each other.
@@ -5533,6 +5631,7 @@ import (
     "math/big"  // Used in bpp formula with mods by rick.woolley@gmail.com (pi calculator from https://github.com/karan/Projects)
 )
 
+// /* Unix
 func main() {       // top-level program logic flow -- explore SEVENTEEN ways to calculate Pi, plus THREE other constants
 
     for 1 == 1 {    // loop endlessly, or Ctrl-C, or case 47: to Exit
@@ -5550,6 +5649,20 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
     } 
 
 } 
+// */ Unix 
+/* Windows
+func main() {       // top-level program logic flow -- explore SEVENTEEN ways to calculate Pi, plus THREE other constants
+
+    for 1 == 1 {    // loop endlessly, or Ctrl-C, or case 47: to Exit
+        DisplayFirstMenu() 
+        // a forced pause is needed to prevent the menu from redisplaying after a case #: has been handeled 
+        Mnum = 0
+        fmt.Println(string(colorRed), "Enter any value to redisplay the menu", string(colorReset)) // this will be the last line of every case #: 
+        fmt.Scan(&Mnum) // request input on command line (pause)
+    } 
+
+} 
+Windows */
 // gloabl vars for use in multiple localized sections of code 
         var which_menu int 
         var colorReset = "\033[0m"          
@@ -5576,6 +5689,12 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
         var precisionOfSquare int 
         var t2 time.Time 
         var start2 time.Time
+
+/* Windows variant
+        var Mnum int 
+Windows variant 
+*/
+
         // the following var is used in switch case 98: 
         var rick = [runeMark] As an atypical intelligence, I process and analyze information and provide answers to questions based on the data and knowledge that I have been trained on; 
 and, while I do have personal experiences and emotions, I am largely only able to understand and communicate with humans in a way that is similar to the way that machines communicate with each other.
