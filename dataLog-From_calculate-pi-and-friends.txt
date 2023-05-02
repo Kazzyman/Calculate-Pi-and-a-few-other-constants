@@ -316,3 +316,213 @@ was run on: Tue May  2 13:32:28 2023
 99999998 was total Iterations 
 Total run was 460.608ms 
  
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 14:39:08 2023
+207383 was Lines/Second  
+11521.27 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 2.1699ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 14:42:08 2023
+258235 was Lines/Second  
+14346.38 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 1.7426ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 14:47:23 2023
+55741 was Lines/Second  
+3096.70 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 8.0731ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 14:47:59 2023
+142617 was Lines/Second  
+7923.18 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 3.1553ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 14:53:45 2023
+292892 was Lines/Second  
+16271.80 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 1.5364ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 14:54:54 2023
+123711 was Lines/Second  
+6872.85 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 3.6375ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:00:48 2023
+270921 was Lines/Second  
+15051.17 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 1.661ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:07:03 2023
+164336 was Lines/Second  
+9129.75 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 2.7383ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:09:51 2023
+266083 was Lines/Second  
+14782.40 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 1.6912ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:21:13 2023
+168105 was Lines/Second  
+9339.16 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 2.6769ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:24:12 2023
+116354 was Lines/Second  
+6464.12 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 3.8675ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:25:06 2023
+207106 was Lines/Second  
+11505.89 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 2.1728ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:27:00 2023
+204397 was Lines/Second  
+11355.38 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 2.2016ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:31:26 2023
+294041 was Lines/Second  
+16335.60 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 1.5304ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:32:17 2023
+118462 was Lines/Second  
+6581.20 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 3.7987ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:33:29 2023
+286442 was Lines/Second  
+15913.43 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 1.571ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:34:31 2023
+118368 was Lines/Second  
+6576.01 was Iterations/Seconds  
+25 was total Iterations  
+Total run was 3.8017ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:39:18 2023
+1927823 was Lines/Second  
+107101.28 was Iterations/Seconds  
+230 was total Iterations  
+Total run was 2.1475ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:47:10 2023
+11121937 was Lines/Second  
+617885.41 was Iterations/Seconds  
+2600 was total Iterations  
+Total run was 4.2079ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:48:38 2023
+1695820 was Lines/Second  
+94212.23 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 3.1843ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:51:48 2023
+713653 was Lines/Second  
+39647.40 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 7.5667ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:53:39 2023
+1164973 was Lines/Second  
+64720.73 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 4.6353ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:55:55 2023
+1560107 was Lines/Second  
+86672.64 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 3.4613ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 15:58:00 2023
+2458569 was Lines/Second  
+136587.14 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.1964ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:00:19 2023
+2359418 was Lines/Second  
+131078.78 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.2887ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:01:42 2023
+1008516 was Lines/Second  
+56028.69 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 5.3544ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:07:33 2023
+2512212 was Lines/Second  
+139567.34 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.1495ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:08:35 2023
+1936317 was Lines/Second  
+107573.15 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.7888ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:19:04 2023
+1935068 was Lines/Second  
+107503.76 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.7906ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:22:22 2023
+1452589 was Lines/Second  
+80699.39 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 3.7175ms 
+ 
