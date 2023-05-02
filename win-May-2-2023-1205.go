@@ -109,7 +109,7 @@ Unix variant */
 fmt.Println(string(colorYellow), "13:  FOR SECOND MENU\n", string(colorReset))
 // Windows variant */ 
 
-fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5782", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5794", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
 
 /* Unix variant
@@ -176,7 +176,7 @@ func universal_switch() {
 // Windows variant */ 
 
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
-    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5782", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Println(string(colorRed), "47: to End/Exit", string(colorCyan), " SLOC = 5794", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
 
 /* Unix variant 
@@ -1064,13 +1064,24 @@ func buildTableOfPerfectProducts(radical_index int) {
 func About_this_app() {  // case 95: 
     fmt.Print(string(colorCyan))
     var rune_About_this_app = `
-The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions given in selection #95 (Using this app:) 
+The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 
+and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions 
+given in selection #95 (Using this app:) 
 
-Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, Go being intended mainly for use on Unix variants. Which is Ok because Linux and Mac are my preferred programming environments. 
+Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any 
+software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. 
+Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go 
+within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to
+get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how 
+many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical 
+prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing 
+around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, Go being intended mainly for use 
+on Unix variants. Which is Ok because Linux and Mac are my preferred programming environments. 
 
 I then got a bit carried away, and a few thousand lines of code later here we are. 
 
-The sections that I am the most proud of are #1, #18, and #4. Two variants of brute forcing the extraction of irrational roots|Radicals|radicalis, and the geometric derivation of Pi respectively. 
+The sections that I am the most proud of are #1, #18, and #4. Two variants of brute forcing the extraction of irrational roots|Radicals|radicalis, 
+and the geometric derivation of Pi respectively. 
 `
     fmt.Println(rune_About_this_app, string(colorReset))
 }
@@ -1080,7 +1091,8 @@ func Using_this_app() {  // case 96:
     var rune_Using_this_app = `
 Any selection from either menu can be made at either menu. 
 
-Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for selection #18 one simply enters 38 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
+Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code for 
+selection #18 one simply enters 38 at either menu – one reason that you might want to do this is to discover the section’s authorship. 
     `
     fmt.Println(rune_Using_this_app, string(colorReset))
 }
