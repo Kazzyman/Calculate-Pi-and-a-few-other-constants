@@ -526,3 +526,96 @@ was run on: Tue May  2 16:22:22 2023
 300 was total Iterations  
 Total run was 3.7175ms 
  
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:26:10 2023
+1985148 was Lines/Second  
+110286.01 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.7202ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:41:10 2023
+2001334 was Lines/Second  
+111185.23 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.6982ms 
+ 
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 16:47:28 2023
+2098799 was Lines/Second  
+116599.95 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.5729ms 
+ 
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 20:47:51 2023
+Total run was 507.7µs 
+ 
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 20:48:28 2023
+Total run was 0s 
+ 
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 20:48:41 2023
+Total run was 2.3601099s 
+ 
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 20:49:21 2023
+Total run was 5.5554ms 
+ 
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:03:25 2023
+Total run was 754.1µs 
+ To calculate Pi to 200 digits
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:03:35 2023
+Total run was 3.4997ms 
+ To calculate Pi to 400 digits
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:04:58 2023
+Total run was 0s 
+To calculate Pi to 88 digits
+
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:05:06 2023
+Total run was 503.4µs 
+To calculate Pi to 190 digits
+
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:05:12 2023
+Total run was 2.2035ms 
+To calculate Pi to 300 digits
+
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:05:29 2023
+Total run was 1.7114ms 
+To calculate Pi to 300 digits
+
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:05:34 2023
+Total run was 4.9118ms 
+To calculate Pi to 500 digits
+
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:05:42 2023
+Total run was 27.036ms 
+To calculate Pi to 1200 digits
+
+  -- Spigot -- selection #19 on Ricks-EVO 
+was run on: Tue May  2 21:05:51 2023
+Total run was 180.5399ms 
+To calculate Pi to 3000 digits
+
+  -- Archimedes of Syracuse -- selection #4 on Ricks-EVO 
+was run on: Tue May  2 21:07:11 2023
+2562278 was Lines/Second  
+142348.75 was Iterations/Seconds  
+300 was total Iterations  
+Total run was 2.1075ms 
+ 
+  -- calculate pi using the bbp formula -- selection #42 on Ricks-EVO 
+was run on: Tue May  2 21:08:29 2023
+89268.00 was Iterations/Seconds 
+45 was total Iterations 
+Total run was 504.1µs 
+ 
