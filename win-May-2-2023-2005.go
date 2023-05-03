@@ -4171,10 +4171,12 @@ func Spigot(n int) string { // called by the previous func
             check(err0)
         current_time := time.Now()
         _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
-        check(err6)
+            check(err6)
         TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
-        _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+        _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n", TotalRun) 
             check(err7)
+        _ , err8 := fmt.Fprintf(fileHandle, "To calculate Pi to %d digits\n", n)
+            check(err8)
     return pi // and that is all there is to it!!!
 }
 func delChar(s string, index int) string {
