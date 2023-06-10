@@ -112,7 +112,7 @@ Unix variant */
 fmt.Println(string(colorYellow), "13:  FOR SECOND MENU\n", string(colorReset))
 // Windows variant */ 
 
-fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 5894", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+fmt.Println("47:  to End/Exit", string(colorCyan), " SLOC = 6308", string(colorPurple), "  \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
 
 /* Unix variant
@@ -150,7 +150,7 @@ func universal_switch() {
 // Windows variant */ 
 
     fmt.Print(string(colorYellow))
-    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorReset), "(add 20 to any selection to show the Go magic)\n") 
+    fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\nSECOND MENU:", string(colorRed), "Enter your selection from below, or 96 for notes on using this app", string(colorReset), "\n") 
     fmt.Println("18:  Calculate", string(colorGreen), "the second or third Root of y (x\u221Ay)", string(colorReset), "from first-principles")
     fmt.Println("    ... via the ratio of y:1 of perfect products (slower general ver of #1)\n")
     fmt.Println("19:", string(colorGreen), "Pi:", string(colorReset), "Open the 'Spigot' algorithm, instantly bakes way too much pie :)")
@@ -179,7 +179,7 @@ func universal_switch() {
 // Windows variant */ 
 
             // ("47:  to End/Exit vvvvvvvvvvvvvvvv
-    fmt.Println("47: to End/Exit", string(colorCyan), " SLOC = 5894", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
+    fmt.Println("47: to End/Exit", string(colorCyan), " SLOC = 6308", string(colorPurple), " \u00a9 2023, by Richard Hart Woolley \n", string(colorReset))
     fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MAXIMIZED?  Well, do it!)\n", string(colorReset)) 
 
 /* Unix variant 
@@ -361,7 +361,7 @@ Unix variant */
             os.Exit(1)
 
         case 95:
-            About_this_app()
+            Using_this_app()
         case 96:
             Using_this_app()
 
@@ -982,6 +982,9 @@ a complete list of every perfect square between 100,000,000 and 168,100,000,000)
 And, then, with a bit of enginuity, we devise an algorithm to locate two elements from our array ... 
 ... such that one of them is very-nearly x * the other. (in our example x was 12)
 
+
+
+// And, here is the go magic: 
 // case 18: 
 //var SortedSliceOf_pDiffs = []float64{900} // and may then become 901, 902, 903, or 904 
 
@@ -1230,31 +1233,6 @@ And, then, with a bit of enginuity, we devise an algorithm to locate two element
 }
 
 
-func About_this_app() {  // case 95: 
-    fmt.Print(string(colorCyan))
-    var rune_About_this_app = `
-The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 
-and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions 
-given in selection #95 (Using this app:) 
-
-Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any 
-software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. 
-Fortran, and Python were on my bucket list. I had also been hearing a lot of good things about Google’s new language go.lang (simply Go 
-within the inner circles at Google). Revisiting Lisp (both the Emacs and the Common variants) had also been on my mind but I’ve yet to
-get around to it. I had also always wanted to try constructing an algorithm that would calculate Pi. I was especially curious to see how 
-many digits one could easily calculate from first principles using a home computer and a simple algorithm. I coded up an identical 
-prototype in the three languages that were new to me and found that Go was so much better in every way that I can now not imagine messing 
-around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, Go being intended mainly for use 
-on Unix variants. Which is Ok because Linux and Mac are my preferred programming environments. 
-
-I then got a bit carried away, and a few thousand lines of code later here we are. 
-
-The sections that I am the most proud of are #1, #18, and #4. Two variants of brute forcing the extraction of irrational roots|Radicals|radicalis, 
-and the geometric derivation of Pi respectively. 
-`
-    fmt.Println(rune_About_this_app, string(colorReset))
-}
-
 func Using_this_app() {  // case 96: 
     fmt.Print(string(colorCyan))
     var rune_Using_this_app = `
@@ -1272,7 +1250,7 @@ About this app:
 
 The majority of the source code which comprises this app was conceived of, designed, and implemented by Richard (Rick) Hart Wolley in late 2022 
 and early 2023. Sections of code that were mooched off GitHub or other sites have proper attributions which are viewable as per the instructions 
-given in selection #95 (Using this app:) 
+given above.  
 
 Why does this app exist? Well, it was a rather rainy day sometime late in October and I had some time to kill. I had not done any 
 software engineering for a few years and there were two languages that I had never really tried before, so that seemed like fun. 
