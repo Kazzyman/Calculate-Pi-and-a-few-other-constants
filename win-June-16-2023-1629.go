@@ -1,4 +1,4 @@
-// Revised May 10 2023 at 21:04
+// Revised May 16 2023 --- on line 1342 
 
 //the initial inspiration for all of this was : Veritassium https://youtu.be/gMlf1ELvRzc?list=LL
 
@@ -99,6 +99,7 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
 
     // the following globals, are used in multiple funcs of case 18: calculate either square or cube root of any integer 
     //------------------------------------------------------------------------------------------------------------------
+        var Tim_win float64
         var sortedResults = []Results{} // sortedResults is an array of type Results as defined at the top of this file 
         var Table_of_perfect_Products = []int{}  
         var diffOfLarger int 
@@ -106,7 +107,7 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
         var perfectResult2 float64 // will contain the square root result if the workpiece was itself a perfect square 
         var perfectResult3 float64 // will contain the cube root result if the workpiece was itself a perfect cube 
         var precisionOfRoot int // this being global means we do not need to pass it in to the read func 
-        var radical_index int // 2 for square roots, 3 for cube roots, no need to pass this one around either  
+        //var radical_index int // 2 for square roots, 3 for cube roots, no need to pass this one around either  
         var workPiece int // the square or cube of which we are to find a root 
         var skip_redoing_loop int 
             // the following three arrays were my original method of logging my results and the nearness of fit 
@@ -1344,82 +1345,95 @@ func xRootOfy(num int) { // calculates either square or cube root of any integer
 
     var index = 0 // counter used in the for loop in this func :: is also passed to the pricipal func readTheTableOfPP // cannot be a global
 
-    getInputFromUserAndSetPrecision() // sets radical index also 
+        startFromTop := time.Now()
 
-        start := time.Now() // saved start time to be compared with end time t (why have two start times, this local one, and a second global one?)
+    radical_index := getInputFromUserAndSetPrecision() 
 
-    buildTableOfPerfectProducts() 
-
+    buildTableOfPerfectProducts(radical_index) // 800,000 entries, 400,000 pairs 
 
 // The following section consists of the principal for loop with a conditional break ------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
-    for index < 380000 { // the table has 800,000 entries
+        startBeforeCall := time.Now()
 
-        readTheTableOfPP(index, start)  // pass-in the index to the table and start time  
+    for index < 380000 { // the table has 800,000 entries, 400,000 pairs; so index increments by 2 at the bottom of this loop 
+
+
+        readTheTableOfPP(index, startBeforeCall, radical_index) // pass-in an index to the table: 380,000 indexs corresponding to the number of pairs of entries 
 
 // the next sub-section detects, traps, and reports the detection of either a perfect square of a perfect cube ------------------
-// ... it also is responsible for causing the algorithm to terminate if workpiece was a perfect square or cube 
+// ... it also is responsible for causing the algorithm to terminate via a break if workpiece was a perfect square or cube 
 //-------------------------------------------------------------------------------------------------------------------------------
         if diffOfLarger == 0 || diffOfSmaller == 0 {  // Then, it was a perfect square or cube 
-            t := time.Now()          // t is current time
-            elapsed := t.Sub(start) // initial start time (start) is used to calculate and log final run time as compared to t 
 
-            fmt.Println("Total run time was:", float64(elapsed.Seconds()), "seconds.\n")
+            t_s1 := time.Now() 
+            elapsed_s1 := t_s1.Sub(startFromTop)
 
                 fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) 
                     check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of PerfectProducts -- selection #%d on %s \n", radical_index, 
-                    workPiece, num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of PerfectProducts -- selection #%d on %s \n", 
+                    radical_index, workPiece, num, Hostname)
                     check(err0)
+
                 current_time := time.Now()
                 _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
                 check(err6)
-                TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+
+                TotalRun := elapsed_s1.String() // cast time durations to a String type for Fprintf "formatted print"
                 _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                     check(err7)
+
                     if radical_index == 2 {
                         _ , err8 := fmt.Fprintf(fileHandle, "the %d root of %d is %0.2f \n", radical_index, workPiece, perfectResult2)
                             check (err8)
                     }
                     if radical_index == 3 {
-                        _ , err8 := fmt.Fprintf(fileHandle, "the %d root of %d is %0.2f \n", radical_index, workPiece, perfectResult3)
-                            check (err8)
+                        _ , err38 := fmt.Fprintf(fileHandle, "the %d root of %d is %0.2f \n", radical_index, workPiece, perfectResult3)
+                            check (err38)
                     }
 
-            break // break out of the for loop because we are done : the workpiece was either a perfect square of a perfect cube 
+            break // break out of the for loop because we are done : the workpiece was either a perfect square or a perfect cube 
 
-        } // end of if
-        index = index + 2 // 
-    } // end of for loop // the above break statement is NOT the only way to exit this for loop, it terminates after 380,000 iterations per index 
-
+        } // end of if :: if it was a perfect square or cube 
 //-------------------------------------------------------------------------------------------------------------------------------
 
 
-// the remaining section is only reached after having exited the primary for loop above via a break statement or an exaustive reading of the table --------------
+        index = index + 2 // increment the index and read the table again 
+    } // end of for loop // the above break statement is NOT the only way to exit this for loop, it also terminates after 380,000 iterations of index 
+
+
+// the remaining sections are only reached after having exited the primary for loop above via a break statement or an exaustive reading of the table ------------
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // calculate elapsed time 
-        t := time.Now()
-        elapsed := t.Sub(start)
+        t_s2 := time.Now()
+        elapsed_s2 := t_s2.Sub(startFromTop)
 
-// the following section logs the results to a text file ----------------------------------------------------------------------------------------------
-                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
-                        defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
-                    Hostname, _ := os.Hostname()
-                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
-                        check(err0)
-                    current_time := time.Now()
-                    _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
-                    check(err6)
-                    _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", index)
-                        check(err5)
 
-        // Sort the slice sortedResults by its pdiff field : 
-        //-------------------------------------------------------------------------------------------------------------------------------
-            sort.Slice(sortedResults, func(i, j int) bool { return sortedResults[i].pdiff < sortedResults[j].pdiff})
+// the following sub-section logs the final results to a text file ------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+        fileHandle, err31 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err31)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+            defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+
+        Hostname, _ := os.Hostname()
+        _ , err30 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
+            check(err30)
+
+        current_time := time.Now()
+        _ , err36 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+        check(err36)
+
+        // index = index 
+        _ , err35 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", index)
+            check(err35)
+
+
+    // Sort the slice sortedResults by its pdiff field : 
+    //-----------------------------------------------------------------------------------------------------------
+        sort.Slice(sortedResults, func(i, j int) bool { return sortedResults[i].pdiff < sortedResults[j].pdiff})
 
                                 /*
                                 // print the sorted slice twice; once for each field 
@@ -1437,55 +1451,58 @@ func xRootOfy(num int) { // calculates either square or cube root of any integer
                                     }
                                 */ 
 
-        // print the best fitting result based solely on the lowest pdiff
-        //---------------------------------------------------------------
-                if radical_index == 2 {
+    // display and print the best-fitting result based solely on the lowest pdiff :
+    //-----------------------------------------------------------------------------
+
+        // display the best fitting result :
+            if radical_index == 2 {
                 fmt.Printf("%0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
+            }
+            if radical_index == 3 {
+                fmt.Printf("%0.9f, is the best approximation for the  Cube  Root of %d \n", sortedResults[0].result, workPiece)
+            }
+
+            // Fprint/log the best fitting result :
+                if radical_index == 2 {
+                    _ , err48 := fmt.Fprintf(fileHandle, "%0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
+                    check(err48)
                 }
                 if radical_index == 3 {
-                        fmt.Printf("%0.9f, is the best approximation for the Cube Root of %d \n", sortedResults[0].result, workPiece)
+                    _ , err49 := fmt.Fprintf(fileHandle, "%0.9f, is the best approximation for the  Cube  Root of %d \n", sortedResults[0].result, workPiece)
+                    check(err49)
                 }
-                    // print the best fitting result 
-                    if radical_index == 2 {
-                        _ , err8 := fmt.Fprintf(fileHandle, "%0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
-                        check(err8)
-                    }
-                    if radical_index == 3 {
-                        _ , err9 := fmt.Fprintf(fileHandle, "%0.9f, is the best approximation for the Cube Root of %d \n", sortedResults[0].result, workPiece)
-                        check(err9)
-                    }
-        //---------------------------------------------------------------
-
-                    TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
-                    _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
-                        check(err7)
+    //-----------------------------------------------------------------------------
 
 
-        /*
-        // all this crap with these 3 arrays is cute, but it does not sort as a record with fields, so it is not what I want 
-                    array_len := len(List_of_2_results_case18)
-                    _ , err8 := fmt.Fprintf(fileHandle, "%d was len of array \n", array_len)
-                        check(err8)
-                    if array_len > 0 {
-                        index := 0
-                        for array_len > 0 {
-                            result_from_array := List_of_2_results_case18[index]
-                            array_len--
-                             _ , err9 := fmt.Fprintf(fileHandle, "%0.16f with a diff of %d, percent diff of %0.4f percent\n", 
-                                result_from_array, corresponding_diffs[index], diffs_as_percent[index]*100000)
-                                    check(err9)
-                            index++
-                        }
-                    }
-                    List_of_2_results_case18 = nil 
-                    corresponding_diffs = nil 
-        */
-// -------------------------------------------------------------------------------------------------------------------------------------------------------
+        TotalRun := elapsed_s2.String() // cast time durations to a String type for Fprintf "formatted print"
+        _ , err57 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+            check(err57)
 
-            
+
+                    /*
+                    // all this crap with these 3 arrays is cute, but it does not sort as a record with fields, so it is not what I want 
+                                array_len := len(List_of_2_results_case18)
+                                _ , err8 := fmt.Fprintf(fileHandle, "%d was len of array \n", array_len)
+                                    check(err8)
+                                if array_len > 0 {
+                                    index := 0
+                                    for array_len > 0 {
+                                        result_from_array := List_of_2_results_case18[index]
+                                        array_len--
+                                         _ , err9 := fmt.Fprintf(fileHandle, "%0.16f with a diff of %d, percent diff of %0.4f percent\n", 
+                                            result_from_array, corresponding_diffs[index], diffs_as_percent[index]*100000)
+                                                check(err9)
+                                        index++
+                                    }
+                                }
+                                List_of_2_results_case18 = nil 
+                                corresponding_diffs = nil 
+                    */
 }
 
-func readTheTableOfPP (index int, start time.Time) {  // this gets called 380,000 times. 
+
+func readTheTableOfPP (index int, startBeforeCall time.Time, radical_index int) {  // this gets called 380,000 times. 
+
     // The first time it is called index is 0
 
     // read it ...
@@ -1511,35 +1528,42 @@ func readTheTableOfPP (index int, start time.Time) {  // this gets called 380,00
             rootOfProspectiveHitOnLargeSide := Table_of_perfect_Products[index+1] // the current value of index plus one holds the root of largerPerfectSquare hence the root of ProspectiveHitOnLargeSide
 
             ProspectiveHitOnSmallerSide := Table_of_perfect_Products[index-2]  
-            // save that smaller one too //                               ^^ 2 now instead of 1 because we have added roots to the slice
+        // save that smaller one too //                               ^^ 2 now instead of 1 because we have added roots to the slice
             rootOfProspectiveHitOnSmallerSide := Table_of_perfect_Products[index-1]
 
             diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectProductOnce
-            //diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectProductOnce) // this was dumb ?? 
+                //diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectProductOnce) // this was dumb ?? 
             diffOfSmaller = workPiece*smallerPerfectProductOnce - ProspectiveHitOnSmallerSide
 
 // detect perfect squares and set global vars to their roots -----------------------------------------------
             if diffOfLarger == 0 {
-                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
-                perfectResult2 = (math.Sqrt(float64(workPiece)))
+                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), 
+                float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
+
+                perfectResult2 = (math.Sqrt(float64(workPiece))) // these global values are used later to Fprint to a log file
                 perfectResult3 = math.Cbrt(float64(workPiece)) 
                 break // out of the for loop because the workPiece is itself a perfect square
             }
             if diffOfSmaller == 0 {
-                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
-                perfectResult2 = (math.Sqrt(float64(workPiece)))
+                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), 
+                float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
+
+                perfectResult2 = (math.Sqrt(float64(workPiece))) // these global values are used later to Fprint to a log file
                 perfectResult3 = math.Cbrt(float64(workPiece)) 
                 break // out of the for loop because the workPiece is itself a perfect square
             }
 // ---------------------------------------------------------------------------------------------------------
 
-            if diffOfLarger < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
-                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PP of", string(colorCyan),
-                 ProspectiveHitOnLargeSide, string(colorReset), "a difference of", diffOfLarger)
+
+// larger side section: ----------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+            if diffOfLarger < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt or Cbrt 
+                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the higher side of", workPiece, 
+                "* that we found a PP of", string(colorCyan), ProspectiveHitOnLargeSide, string(colorReset), "a difference of", diffOfLarger)
 
                 fmt.Println("the ", radical_index, " root of ", workPiece, " is calculated as ", string(colorGreen), 
-                float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
-                 string(colorReset))
+                float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset))
 
                 fmt.Printf("with pdiff of %0.4f \n", (float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide))*100000)
 
@@ -1548,30 +1572,35 @@ func readTheTableOfPP (index int, start time.Time) {  // this gets called 380,00
                 //corresponding_diffs = append(corresponding_diffs, diffOfLarger)
                 //diffs_as_percent = append(diffs_as_percent, float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide))
 
-// in the next five lines we load (append) a record into/to the file (array) of Results 
-Result1 := Results{
-    result: float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
-    pdiff: float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide),
-}
+                // in the next five lines we load (append) a record into/to the file (array) of Results 
+                Result1 := Results{
+                    result: float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
+                    pdiff: float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide),
+                }
                 sortedResults = append(sortedResults, Result1)
 
-
                 t2 := time.Now()
-                elapsed2 := t2.Sub(start)
-// if needed, notify the user that we are still working 
-                if float64(elapsed2.Seconds()) > 0.14  {
+                elapsed2 := t2.Sub(startBeforeCall)
+                // if needed, notify the user that we are still working 
+                    Tim_win = 0.188
+                    if radical_index == 3 {
+                        Tim_win = 0.0033 
+                    }
+                if float64(elapsed2.Seconds()) > Tim_win {
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
             }
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+// smaller side section: ----------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
             if diffOfSmaller < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt or Cbrt 
-                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PP of", string(colorCyan),
-                 ProspectiveHitOnSmallerSide, string(colorReset), "a difference of", diffOfSmaller)
+                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, 
+                "* that we found a PP of", string(colorCyan), ProspectiveHitOnSmallerSide, string(colorReset), "a difference of", diffOfSmaller)
 
                 fmt.Println("the ", radical_index, " root of ", workPiece, " is calculated as ", string(colorGreen), 
-                float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
-                 string(colorReset))
+                float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset))
 
                 fmt.Printf("with pdiff of %0.4f \n", (float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide))*100000)
 
@@ -1580,28 +1609,34 @@ Result1 := Results{
                 //corresponding_diffs = append(corresponding_diffs, diffOfSmaller)
                 //diffs_as_percent = append(diffs_as_percent, float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide))
 
-// in the next five lines we load (append) a record into/to the file (array) of Results 
-Result1 := Results{
-    result: float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
-    pdiff: float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide),
-}
+                // in the next five lines we load (append) a record into/to the file (array) of Results 
+                Result1 := Results{
+                    result: float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
+                    pdiff: float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide),
+                }
                 sortedResults = append(sortedResults, Result1)
 
-
                 t2 := time.Now()
-                elapsed2 := t2.Sub(start)
-// if needed, notify the user that we are still working 
-                if float64(elapsed2.Seconds()) > 0.14  {
+                elapsed2 := t2.Sub(startBeforeCall)
+                // if needed, notify the user that we are still working 
+                    Tim_win = 0.188
+                    if radical_index == 3 {
+                        Tim_win = 0.0033 
+                    }
+                if float64(elapsed2.Seconds()) > Tim_win  {
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
             }
-            break // out of the for loop if we found any prospects using the current index value 
-        }
-    }
-}
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-func getInputFromUserAndSetPrecision() {
-    radical_index = 2
+            break // each time we find a prospect we break out of the for loop --- if we found any prospects using the current index value we break 
+        } // end of if :: if largerPerfectProduct > smallerPerfectProductOnce*workPiece  //  we only handle reads that were big enough to be prospects 
+    } // this is the end of the afforementioned for loop that we break out of each time we have found a prospect and handled it 
+} // the end of the readTheTableOfPP func that gets called 380,000 times
+
+
+func getInputFromUserAndSetPrecision() int {
+    radical_index := 2 // we set it to 2 becuase if the user just hits enter we want radical_index set as 2 by default 
     skip_redoing_loop = 0 
     for radical_index > 1 && skip_redoing_loop == 0 { 
         // radical_index will initially be 2, and the skip flag will be initially 0, therefore we will initially enter this for loop 
@@ -1652,13 +1687,14 @@ func getInputFromUserAndSetPrecision() {
     if radical_index == 2 { // if doing a square root we just use a tolerance of 4 for all workpieces. 
         precisionOfRoot = 4
     }
+return radical_index 
 }
 
 
 // Build a table of 810,000 pairs of PPs with their roots, does either squares or cubes:
 //--------------------------------------------------------------------------------------
 
-func buildTableOfPerfectProducts() {
+func buildTableOfPerfectProducts(radical_index int) {
 
     var PerfectProduct int 
     Table_of_perfect_Products = nil // this fixed my bug 
@@ -1725,82 +1761,95 @@ func xRootOfy(num int) { // calculates either square or cube root of any integer
 
     var index = 0 // counter used in the for loop in this func :: is also passed to the pricipal func readTheTableOfPP // cannot be a global
 
-    getInputFromUserAndSetPrecision() // sets radical index also 
+        startFromTop := time.Now()
 
-        start := time.Now() // saved start time to be compared with end time t (why have two start times, this local one, and a second global one?)
+    radical_index := getInputFromUserAndSetPrecision() 
 
-    buildTableOfPerfectProducts() 
-
+    buildTableOfPerfectProducts(radical_index) // 800,000 entries, 400,000 pairs 
 
 // The following section consists of the principal for loop with a conditional break ------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
-    for index < 380000 { // the table has 800,000 entries
+        startBeforeCall := time.Now()
 
-        readTheTableOfPP(index, start)  // pass-in the index to the table and start time  
+    for index < 380000 { // the table has 800,000 entries, 400,000 pairs; so index increments by 2 at the bottom of this loop 
+
+
+        readTheTableOfPP(index, startBeforeCall, radical_index) // pass-in an index to the table: 380,000 indexs corresponding to the number of pairs of entries 
 
 // the next sub-section detects, traps, and reports the detection of either a perfect square of a perfect cube ------------------
-// ... it also is responsible for causing the algorithm to terminate if workpiece was a perfect square or cube 
+// ... it also is responsible for causing the algorithm to terminate via a break if workpiece was a perfect square or cube 
 //-------------------------------------------------------------------------------------------------------------------------------
         if diffOfLarger == 0 || diffOfSmaller == 0 {  // Then, it was a perfect square or cube 
-            t := time.Now()          // t is current time
-            elapsed := t.Sub(start) // initial start time (start) is used to calculate and log final run time as compared to t 
 
-            fmt.Println("Total run time was:", float64(elapsed.Seconds()), "seconds.\n")
+            t_s1 := time.Now() 
+            elapsed_s1 := t_s1.Sub(startFromTop)
 
                 fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) 
                     check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+
                 Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of PerfectProducts -- selection #%d on %s \n", radical_index, 
-                    workPiece, num, Hostname)
+                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of PerfectProducts -- selection #%d on %s \n", 
+                    radical_index, workPiece, num, Hostname)
                     check(err0)
+
                 current_time := time.Now()
                 _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
                 check(err6)
-                TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+
+                TotalRun := elapsed_s1.String() // cast time durations to a String type for Fprintf "formatted print"
                 _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
                     check(err7)
+
                     if radical_index == 2 {
                         _ , err8 := fmt.Fprintf(fileHandle, "the %d root of %d is %0.2f \n", radical_index, workPiece, perfectResult2)
                             check (err8)
                     }
                     if radical_index == 3 {
-                        _ , err8 := fmt.Fprintf(fileHandle, "the %d root of %d is %0.2f \n", radical_index, workPiece, perfectResult3)
-                            check (err8)
+                        _ , err38 := fmt.Fprintf(fileHandle, "the %d root of %d is %0.2f \n", radical_index, workPiece, perfectResult3)
+                            check (err38)
                     }
 
-            break // break out of the for loop because we are done : the workpiece was either a perfect square of a perfect cube 
+            break // break out of the for loop because we are done : the workpiece was either a perfect square or a perfect cube 
 
-        } // end of if
-        index = index + 2 // 
-    } // end of for loop // the above break statement is NOT the only way to exit this for loop, it terminates after 380,000 iterations per index 
-
+        } // end of if :: if it was a perfect square or cube 
 //-------------------------------------------------------------------------------------------------------------------------------
 
 
-// the remaining section is only reached after having exited the primary for loop above via a break statement or an exaustive reading of the table --------------
+        index = index + 2 // increment the index and read the table again 
+    } // end of for loop // the above break statement is NOT the only way to exit this for loop, it also terminates after 380,000 iterations of index 
+
+
+// the remaining sections are only reached after having exited the primary for loop above via a break statement or an exaustive reading of the table ------------
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // calculate elapsed time 
-        t := time.Now()
-        elapsed := t.Sub(start)
+        t_s2 := time.Now()
+        elapsed_s2 := t_s2.Sub(startFromTop)
 
-// the following section logs the results to a text file ----------------------------------------------------------------------------------------------
-                    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
-                        defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
-                    Hostname, _ := os.Hostname()
-                    _ , err0 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
-                        check(err0)
-                    current_time := time.Now()
-                    _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
-                    check(err6)
-                    _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", index)
-                        check(err5)
 
-        // Sort the slice sortedResults by its pdiff field : 
-        //-------------------------------------------------------------------------------------------------------------------------------
-            sort.Slice(sortedResults, func(i, j int) bool { return sortedResults[i].pdiff < sortedResults[j].pdiff})
+// the following sub-section logs the final results to a text file ------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+        fileHandle, err31 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err31)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+            defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+
+        Hostname, _ := os.Hostname()
+        _ , err30 := fmt.Fprintf(fileHandle, "\n  -- %d root of %d by a ratio of perfect Products -- selection #%d on %s \n", radical_index, workPiece, num, Hostname)
+            check(err30)
+
+        current_time := time.Now()
+        _ , err36 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+        check(err36)
+
+        // index = index 
+        _ , err35 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", index)
+            check(err35)
+
+
+    // Sort the slice sortedResults by its pdiff field : 
+    //-----------------------------------------------------------------------------------------------------------
+        sort.Slice(sortedResults, func(i, j int) bool { return sortedResults[i].pdiff < sortedResults[j].pdiff})
 
                                 /*
                                 // print the sorted slice twice; once for each field 
@@ -1818,55 +1867,58 @@ func xRootOfy(num int) { // calculates either square or cube root of any integer
                                     }
                                 */ 
 
-        // print the best fitting result based solely on the lowest pdiff
-        //---------------------------------------------------------------
-                if radical_index == 2 {
+    // display and print the best-fitting result based solely on the lowest pdiff :
+    //-----------------------------------------------------------------------------
+
+        // display the best fitting result :
+            if radical_index == 2 {
                 fmt.Printf("%0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
+            }
+            if radical_index == 3 {
+                fmt.Printf("%0.9f, is the best approximation for the  Cube  Root of %d \n", sortedResults[0].result, workPiece)
+            }
+
+            // Fprint/log the best fitting result :
+                if radical_index == 2 {
+                    _ , err48 := fmt.Fprintf(fileHandle, "%0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
+                    check(err48)
                 }
                 if radical_index == 3 {
-                        fmt.Printf("%0.9f, is the best approximation for the Cube Root of %d \n", sortedResults[0].result, workPiece)
+                    _ , err49 := fmt.Fprintf(fileHandle, "%0.9f, is the best approximation for the  Cube  Root of %d \n", sortedResults[0].result, workPiece)
+                    check(err49)
                 }
-                    // print the best fitting result 
-                    if radical_index == 2 {
-                        _ , err8 := fmt.Fprintf(fileHandle, "%0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
-                        check(err8)
-                    }
-                    if radical_index == 3 {
-                        _ , err9 := fmt.Fprintf(fileHandle, "%0.9f, is the best approximation for the Cube Root of %d \n", sortedResults[0].result, workPiece)
-                        check(err9)
-                    }
-        //---------------------------------------------------------------
-
-                    TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
-                    _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
-                        check(err7)
+    //-----------------------------------------------------------------------------
 
 
-        /*
-        // all this crap with these 3 arrays is cute, but it does not sort as a record with fields, so it is not what I want 
-                    array_len := len(List_of_2_results_case18)
-                    _ , err8 := fmt.Fprintf(fileHandle, "%d was len of array \n", array_len)
-                        check(err8)
-                    if array_len > 0 {
-                        index := 0
-                        for array_len > 0 {
-                            result_from_array := List_of_2_results_case18[index]
-                            array_len--
-                             _ , err9 := fmt.Fprintf(fileHandle, "%0.16f with a diff of %d, percent diff of %0.4f percent\n", 
-                                result_from_array, corresponding_diffs[index], diffs_as_percent[index]*100000)
-                                    check(err9)
-                            index++
-                        }
-                    }
-                    List_of_2_results_case18 = nil 
-                    corresponding_diffs = nil 
-        */
-// -------------------------------------------------------------------------------------------------------------------------------------------------------
+        TotalRun := elapsed_s2.String() // cast time durations to a String type for Fprintf "formatted print"
+        _ , err57 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+            check(err57)
 
-            
+
+                    /*
+                    // all this crap with these 3 arrays is cute, but it does not sort as a record with fields, so it is not what I want 
+                                array_len := len(List_of_2_results_case18)
+                                _ , err8 := fmt.Fprintf(fileHandle, "%d was len of array \n", array_len)
+                                    check(err8)
+                                if array_len > 0 {
+                                    index := 0
+                                    for array_len > 0 {
+                                        result_from_array := List_of_2_results_case18[index]
+                                        array_len--
+                                         _ , err9 := fmt.Fprintf(fileHandle, "%0.16f with a diff of %d, percent diff of %0.4f percent\n", 
+                                            result_from_array, corresponding_diffs[index], diffs_as_percent[index]*100000)
+                                                check(err9)
+                                        index++
+                                    }
+                                }
+                                List_of_2_results_case18 = nil 
+                                corresponding_diffs = nil 
+                    */
 }
 
-func readTheTableOfPP (index int, start time.Time) {  // this gets called 380,000 times. 
+
+func readTheTableOfPP (index int, startBeforeCall time.Time, radical_index int) {  // this gets called 380,000 times. 
+
     // The first time it is called index is 0
 
     // read it ...
@@ -1892,35 +1944,42 @@ func readTheTableOfPP (index int, start time.Time) {  // this gets called 380,00
             rootOfProspectiveHitOnLargeSide := Table_of_perfect_Products[index+1] // the current value of index plus one holds the root of largerPerfectSquare hence the root of ProspectiveHitOnLargeSide
 
             ProspectiveHitOnSmallerSide := Table_of_perfect_Products[index-2]  
-            // save that smaller one too //                               ^^ 2 now instead of 1 because we have added roots to the slice
+        // save that smaller one too //                               ^^ 2 now instead of 1 because we have added roots to the slice
             rootOfProspectiveHitOnSmallerSide := Table_of_perfect_Products[index-1]
 
             diffOfLarger = ProspectiveHitOnLargeSide - workPiece*smallerPerfectProductOnce
-            //diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectProductOnce) // this was dumb ?? 
+                //diffOfSmaller = -(ProspectiveHitOnSmallerSide - workPiece*smallerPerfectProductOnce) // this was dumb ?? 
             diffOfSmaller = workPiece*smallerPerfectProductOnce - ProspectiveHitOnSmallerSide
 
 // detect perfect squares and set global vars to their roots -----------------------------------------------
             if diffOfLarger == 0 {
-                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
-                perfectResult2 = (math.Sqrt(float64(workPiece)))
+                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), 
+                float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
+
+                perfectResult2 = (math.Sqrt(float64(workPiece))) // these global values are used later to Fprint to a log file
                 perfectResult3 = math.Cbrt(float64(workPiece)) 
                 break // out of the for loop because the workPiece is itself a perfect square
             }
             if diffOfSmaller == 0 {
-                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
-                perfectResult2 = (math.Sqrt(float64(workPiece)))
+                fmt.Println(string(colorCyan), "\n The", radical_index, "root of", workPiece, "is", string(colorGreen), 
+                float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset), "\n")
+
+                perfectResult2 = (math.Sqrt(float64(workPiece))) // these global values are used later to Fprint to a log file
                 perfectResult3 = math.Cbrt(float64(workPiece)) 
                 break // out of the for loop because the workPiece is itself a perfect square
             }
 // ---------------------------------------------------------------------------------------------------------
 
-            if diffOfLarger < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt of 3
-                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the higher side of", workPiece, "* that we found a PP of", string(colorCyan),
-                 ProspectiveHitOnLargeSide, string(colorReset), "a difference of", diffOfLarger)
+
+// larger side section: ----------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+            if diffOfLarger < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt or Cbrt 
+                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the higher side of", workPiece, 
+                "* that we found a PP of", string(colorCyan), ProspectiveHitOnLargeSide, string(colorReset), "a difference of", diffOfLarger)
 
                 fmt.Println("the ", radical_index, " root of ", workPiece, " is calculated as ", string(colorGreen), 
-                float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
-                 string(colorReset))
+                float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset))
 
                 fmt.Printf("with pdiff of %0.4f \n", (float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide))*100000)
 
@@ -1929,30 +1988,35 @@ func readTheTableOfPP (index int, start time.Time) {  // this gets called 380,00
                 //corresponding_diffs = append(corresponding_diffs, diffOfLarger)
                 //diffs_as_percent = append(diffs_as_percent, float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide))
 
-// in the next five lines we load (append) a record into/to the file (array) of Results 
-Result1 := Results{
-    result: float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
-    pdiff: float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide),
-}
+                // in the next five lines we load (append) a record into/to the file (array) of Results 
+                Result1 := Results{
+                    result: float64(rootOfProspectiveHitOnLargeSide) / float64(RootOfsmallerPerfectProductOnce),
+                    pdiff: float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide),
+                }
                 sortedResults = append(sortedResults, Result1)
 
-
                 t2 := time.Now()
-                elapsed2 := t2.Sub(start)
-// if needed, notify the user that we are still working 
-                if float64(elapsed2.Seconds()) > 0.14  {
+                elapsed2 := t2.Sub(startBeforeCall)
+                // if needed, notify the user that we are still working 
+                    Tim_win = 0.188
+                    if radical_index == 3 {
+                        Tim_win = 0.0033 
+                    }
+                if float64(elapsed2.Seconds()) > Tim_win {
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
             }
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+// smaller side section: ----------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
             if diffOfSmaller < precisionOfRoot {  // report the prospects, their differences, and the calculated result for the Sqrt or Cbrt 
-                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, "* that we found a PP of", string(colorCyan),
-                 ProspectiveHitOnSmallerSide, string(colorReset), "a difference of", diffOfSmaller)
+                fmt.Println("small PP is", string(colorCyan), smallerPerfectProductOnce, string(colorReset), "and, slightly on the lesser side of", workPiece, 
+                "* that we found a PP of", string(colorCyan), ProspectiveHitOnSmallerSide, string(colorReset), "a difference of", diffOfSmaller)
 
                 fmt.Println("the ", radical_index, " root of ", workPiece, " is calculated as ", string(colorGreen), 
-                float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
-                 string(colorReset))
+                float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce), string(colorReset))
 
                 fmt.Printf("with pdiff of %0.4f \n", (float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide))*100000)
 
@@ -1961,28 +2025,34 @@ Result1 := Results{
                 //corresponding_diffs = append(corresponding_diffs, diffOfSmaller)
                 //diffs_as_percent = append(diffs_as_percent, float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide))
 
-// in the next five lines we load (append) a record into/to the file (array) of Results 
-Result1 := Results{
-    result: float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
-    pdiff: float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide),
-}
+                // in the next five lines we load (append) a record into/to the file (array) of Results 
+                Result1 := Results{
+                    result: float64(rootOfProspectiveHitOnSmallerSide) / float64(RootOfsmallerPerfectProductOnce),
+                    pdiff: float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide),
+                }
                 sortedResults = append(sortedResults, Result1)
 
-
                 t2 := time.Now()
-                elapsed2 := t2.Sub(start)
-// if needed, notify the user that we are still working 
-                if float64(elapsed2.Seconds()) > 0.14  {
+                elapsed2 := t2.Sub(startBeforeCall)
+                // if needed, notify the user that we are still working 
+                    Tim_win = 0.188
+                    if radical_index == 3 {
+                        Tim_win = 0.0033 
+                    }
+                if float64(elapsed2.Seconds()) > Tim_win  {
                     fmt.Println(float64(elapsed2.Seconds()), "Seconds have elapsed ... working ...\n")
                 }
             }
-            break // out of the for loop if we found any prospects using the current index value 
-        }
-    }
-}
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-func getInputFromUserAndSetPrecision() {
-    radical_index = 2
+            break // each time we find a prospect we break out of the for loop --- if we found any prospects using the current index value we break 
+        } // end of if :: if largerPerfectProduct > smallerPerfectProductOnce*workPiece  //  we only handle reads that were big enough to be prospects 
+    } // this is the end of the afforementioned for loop that we break out of each time we have found a prospect and handled it 
+} // the end of the readTheTableOfPP func that gets called 380,000 times
+
+
+func getInputFromUserAndSetPrecision() int {
+    radical_index := 2 // we set it to 2 becuase if the user just hits enter we want radical_index set as 2 by default 
     skip_redoing_loop = 0 
     for radical_index > 1 && skip_redoing_loop == 0 { 
         // radical_index will initially be 2, and the skip flag will be initially 0, therefore we will initially enter this for loop 
@@ -2033,13 +2103,14 @@ func getInputFromUserAndSetPrecision() {
     if radical_index == 2 { // if doing a square root we just use a tolerance of 4 for all workpieces. 
         precisionOfRoot = 4
     }
+return radical_index 
 }
 
 
 // Build a table of 810,000 pairs of PPs with their roots, does either squares or cubes:
 //--------------------------------------------------------------------------------------
 
-func buildTableOfPerfectProducts() {
+func buildTableOfPerfectProducts(radical_index int) {
 
     var PerfectProduct int 
     Table_of_perfect_Products = nil // this fixed my bug 
@@ -8286,7 +8357,7 @@ i = 1
     var sloc1 float32
     var sloc2 float32
 func sloc() {
-    sloc1 = 8293                   // total sloc 
+    sloc1 = 8310                   // total sloc 
     sloc2 = sloc1 * float32(0.45) // effective sloc
     pages_of_code = sloc1 / float32(49)
 }
