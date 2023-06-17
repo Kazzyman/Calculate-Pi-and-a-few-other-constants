@@ -8357,8 +8357,8 @@ i = 1
     var sloc1 float32
     var sloc2 float32
 func sloc() {
-    sloc1 = 8310                   // total sloc 
-    sloc2 = sloc1 * float32(0.45) // effective sloc
+    sloc1 = 8364                   // total sloc 
+    sloc2 = sloc1 * float32(0.42) // effective sloc
     pages_of_code = sloc1 / float32(49)
 }
     var build_date = `(June 16 2023)`
