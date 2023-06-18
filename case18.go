@@ -22,7 +22,7 @@ var colorReset = "\033[0m"
 
     // the following globals, are used in multiple funcs of case 18: calculate either square or cube root of any integer 
     //------------------------------------------------------------------------------------------------------------------
-        var Tim_win float64
+        var Tim_win float64 // Time Window
         var sortedResults = []Results{} // sortedResults is an array of type Results as defined at the top of this file 
         var Table_of_perfect_Products = []int{}  
         var diffOfLarger int 
@@ -35,18 +35,16 @@ var colorReset = "\033[0m"
 
 func main() {
     precisionOfRoot = 1700
-    workPiece = 3
-    radical_index := 3 
+    workPiece = 2
+        numR := 2
+        fmt.Println("\nThis proc endlessly calculates the root of all integers beginging with 2; and builds a txt file of its results.\n")
+        fmt.Println("\nEnter 2 for SquareRoot, or 3 for CubeRoot\n")
+        fmt.Scan(&numR)  // pause and request input from the user 
+    radical_index := numR
     for 1 == 1 {
         sortedResults = nil
         xRootOfy(18, workPiece, radical_index)
         workPiece++
-    }
-}
-
-func check(e error) {   // create a func named check which takes one parameter "e" of type error 
-    if e != nil {
-        panic(e)        // use panic() to display error code 
     }
 }
 
@@ -74,7 +72,8 @@ func xRootOfy(num int, workPiece int, radical_index int) { // calculates either 
                 precisionOfRoot = 4
             }
 
-    //radical_index := getInputFromUserAndSetPrecision() 
+    //radical_index := getInputFromUserAndSetPrecision() // this step is not needed in this continuous automated version 
+
     buildTableOfPerfectProducts(radical_index) // 800,000 entries, 400,000 pairs 
 
 // The following section consists of the principal for loop with a conditional break ------------------------------------------------------------------
@@ -95,25 +94,25 @@ func xRootOfy(num int, workPiece int, radical_index int) { // calculates either 
                 }
 
 
-        fileHandle, err31 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err31)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+        fileHandle, err31 := os.OpenFile("logfile_from_selection_180.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err31)                                // ... gets a file handle to logfile_from_selection_180.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
                     if index == 80000 {
-                        fmt.Printf("\n80,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d", workPiece, Tim_win, precisionOfRoot)
-                        fmt.Fprintf(fileHandle, "\n80,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d", workPiece, Tim_win, precisionOfRoot)
+                        fmt.Printf("\n80,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d\n", workPiece, Tim_win, precisionOfRoot)
+                        fmt.Fprintf(fileHandle, "\n80,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d\n", workPiece, Tim_win, precisionOfRoot)
                     }    
                     if index == 160000 {
-                        fmt.Printf("\n160,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d", workPiece, Tim_win, precisionOfRoot)
-                        fmt.Fprintf(fileHandle, "\n160,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d", workPiece, Tim_win, precisionOfRoot)
+                        fmt.Printf("\n160,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d\n", workPiece, Tim_win, precisionOfRoot)
+                        fmt.Fprintf(fileHandle, "\n160,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d\n", workPiece, Tim_win, precisionOfRoot)
                     }
                     if index == 240000 {
-                        fmt.Printf("\n240,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d", workPiece, Tim_win, precisionOfRoot)
-                        fmt.Fprintf(fileHandle, "\n240,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d", workPiece, Tim_win, precisionOfRoot)
+                        fmt.Printf("\n240,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d\n", workPiece, Tim_win, precisionOfRoot)
+                        fmt.Fprintf(fileHandle, "\n240,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d\n", workPiece, Tim_win, precisionOfRoot)
                     }                
                     if index == 320000 {
-                        fmt.Printf("\n320,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d", workPiece, Tim_win, precisionOfRoot)
-                        fmt.Fprintf(fileHandle, "\n320,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d", workPiece, Tim_win, precisionOfRoot)
+                        fmt.Printf("\n320,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d\n", workPiece, Tim_win, precisionOfRoot)
+                        fmt.Fprintf(fileHandle, "\n320,000 ... still working ... workPiece is: %d, TimeWindow is: %0.4f, precision is: %d\n", workPiece, Tim_win, precisionOfRoot)
                     }                
 
         index = index + 2 // increment the index and read the table again 
@@ -130,8 +129,8 @@ func xRootOfy(num int, workPiece int, radical_index int) { // calculates either 
 
 // the following sections log the final results to a text file (and also does one conditional Printf) -------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
-        fileHandle, err31 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-            check(err31)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+        fileHandle, err31 := os.OpenFile("logfile_from_selection_180.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+            check(err31)                                // ... gets a file handle to logfile_from_selection_180.txt
             defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
         Hostname, _ := os.Hostname()
@@ -209,8 +208,8 @@ func handlePerfectSquaresAndCubes(startFromTop time.Time, radical_index int, num
             t_s1 := time.Now() 
             elapsed_s1 := t_s1.Sub(startFromTop)
 
-                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) 
-                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                fileHandle, err1 := os.OpenFile("logfile_from_selection_180.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) 
+                    check(err1)                                // ... gets a file handle to logfile_from_selection_180.txt
                     defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
                 Hostname, _ := os.Hostname()
@@ -308,8 +307,8 @@ func readTheTableOfPP (index int, startBeforeCall time.Time, radical_index int) 
 
                 fmt.Printf("with pdiff of %0.4f \n", (float64(diffOfLarger)/float64(ProspectiveHitOnLargeSide))*100000)
 
-    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) 
-        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+    fileHandle, err1 := os.OpenFile("logfile_from_selection_180.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) 
+        check(err1)                                // ... gets a file handle to logfile_from_selection_180.txt
         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
     _ , err2 := fmt.Fprint(fileHandle,"\nsmall PP is ", smallerPerfectProductOnce, " and, slightly on the higher side of ", workPiece, 
@@ -364,8 +363,8 @@ func readTheTableOfPP (index int, startBeforeCall time.Time, radical_index int) 
                 fmt.Printf("with pdiff of %0.4f \n", (float64(diffOfSmaller)/float64(ProspectiveHitOnSmallerSide))*100000)
 
 
-    fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) 
-        check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+    fileHandle, err1 := os.OpenFile("logfile_from_selection_180.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) 
+        check(err1)                                // ... gets a file handle to logfile_from_selection_180.txt
         defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
 
     _ , err2 := fmt.Fprint(fileHandle,"\nsmall PP is ", smallerPerfectProductOnce, " and, slightly on the higher side of ", workPiece, 
@@ -414,7 +413,7 @@ func readTheTableOfPP (index int, startBeforeCall time.Time, radical_index int) 
 
 } // the end of the readTheTableOfPP func that gets called 380,000 times
 
-
+/*
 func getInputFromUserAndSetPrecision() int {
     radical_index := 2 // we set it to 2 becuase if the user just hits enter we want radical_index set as 2 by default 
     skip_redoing_loop = 0 
@@ -469,7 +468,7 @@ func getInputFromUserAndSetPrecision() int {
     }
 return radical_index 
 }
-
+*/
 
 // Build a table of 810,000 pairs of PPs with their roots, does either squares or cubes:
 //--------------------------------------------------------------------------------------
@@ -492,4 +491,10 @@ func buildTableOfPerfectProducts(radical_index int) {
             Table_of_perfect_Products = append(Table_of_perfect_Products, PerfectProduct ) 
             Table_of_perfect_Products = append(Table_of_perfect_Products, root ) // the root of the prior PP
         }
+}
+
+func check(e error) {   // create a func named check which takes one parameter "e" of type error 
+    if e != nil {
+        panic(e)        // use panic() to display error code 
+    }
 }
