@@ -50,7 +50,6 @@ func check(e error) {   // create a func named check which takes one parameter "
     }
 }
 
-// case 18: 
 func xRootOfy(num int, workPiece int, radical_index int) { // calculates either square or cube root of any integer 
 
     var index = 0 // counter used in the for loop in this func :: is also passed to the pricipal func readTheTableOfPP // cannot be a global
@@ -83,7 +82,9 @@ func xRootOfy(num int, workPiece int, radical_index int) { // calculates either 
 
         startBeforeCall := time.Now()
 
-    for index < 380000 { // the table has 800,000 entries, 400,000 pairs; so index increments by 2 at the bottom of this loop 
+    //for index < 380000 { // the table has 800,000 entries, 400,000 pairs; so index increments by 2 at the bottom of this loop 
+    for index < 400000 { // the table has 825,000 entries, > 410,000 pairs; so index increments by 2 at the bottom of this loop 
+
 
         readTheTableOfPP(index, startBeforeCall, radical_index) // pass-in an index to the table: 380,000 indexs corresponding to the number of pairs of entries 
 
@@ -156,7 +157,7 @@ func xRootOfy(num int, workPiece int, radical_index int) { // calculates either 
         // display the best fitting result :
             if radical_index == 2 {
                 if len(sortedResults) > 0 {
-                fmt.Printf("\n %0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
+                    fmt.Printf("\n %0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
                 }
             }
             if radical_index == 3 {
@@ -167,22 +168,28 @@ func xRootOfy(num int, workPiece int, radical_index int) { // calculates either 
 
             // Fprint/log the best fitting result :
                 if radical_index == 2 {
-                    fmt.Println("\n len of sorted is ", len(sortedResults))
-                    _ , err11 := fmt.Fprintf(fileHandle, "len of sorted is %d", len(sortedResults))
+                    fmt.Println("\n len of sorted was ", len(sortedResults))
+                    _ , err11 := fmt.Fprintf(fileHandle, "len of sorted was %d", len(sortedResults))
                     check(err11)
                     if len(sortedResults) > 0 {
                     _ , err48 := fmt.Fprintf(fileHandle, "\n %0.9f, is the best approximation for the Square Root of %d \n", sortedResults[0].result, workPiece)
                     check(err48)
                     }
+                    fmt.Println("\nThat's all folks!\n\nNext ...")
+                    _ , err22 := fmt.Fprint(fileHandle, "\nThat's all folks!\n\nNext ...")
+                    check(err22)
                 }
                 if radical_index == 3 {
-                    fmt.Println("\n len of sorted is ", len(sortedResults))
-                    _ , err11 := fmt.Fprintf(fileHandle, "len of sorted is %d", len(sortedResults))
+                    fmt.Println("\n len of sorted was ", len(sortedResults))
+                    _ , err11 := fmt.Fprintf(fileHandle, "len of sorted was %d", len(sortedResults))
                     check(err11)
                     if len(sortedResults) > 0 {
-                    _ , err49 := fmt.Fprintf(fileHandle, "\n %0.9f, is the best approximation for the  Cube  Root of %d \n", sortedResults[0].result, workPiece)
-                    check(err49)
+                        _ , err49 := fmt.Fprintf(fileHandle, "\n %0.9f, is the best approximation for the  Cube  Root of %d \n", sortedResults[0].result, workPiece)
+                        check(err49)
                     }
+                    fmt.Println("\nThat's all folks!\n\nNext ...")
+                    _ , err22 := fmt.Fprint(fileHandle, "\nThat's all folks!\n\nNext ...")
+                    check(err22)
                 }
     //-----------------------------------------------------------------------------
 
@@ -246,7 +253,7 @@ func readTheTableOfPP (index int, startBeforeCall time.Time, radical_index int) 
     // ^^^ also read the root wich corresponds
 
         iter := 0
-    for iter < 420000 { // 420,000 loops. Why do we need so many?, Because index may be 0 to 380,000 ?? and we need to read through 830,000 table entries 
+    for iter < 410000 { // 410,000 loops. Why do we need so many?, Because index may be 0 to 400,000 ?? and we need to read through 825,000 table entries 
         iter++
 
         index = index + 2
@@ -473,7 +480,7 @@ func buildTableOfPerfectProducts(radical_index int) {
     Table_of_perfect_Products = nil // this fixed my bug 
     root := 10 
             iter := 0
-        for iter < 810000 { // a table of 810,000 pairs of PPs with their roots ought to do it !!
+        for iter < 825000 { // a table of 825,000 pairs of PPs with their roots ought to do it !!
             iter++
             root++ 
             if radical_index == 3 { // build an array of perfect cubes 
