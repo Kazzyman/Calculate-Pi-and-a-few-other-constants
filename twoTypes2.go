@@ -15,7 +15,6 @@ func main(){
     start := time.Now()
     //with_float64_types() // runs pretty quickly
     with_big_Float_types()  // can take forever 
-    // got 31 digits in 1 hour and 26 min using this algorithm with one billion iters at 128 prec
     t := time.Now()
     elapsed := t.Sub(start)
     TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
@@ -57,9 +56,14 @@ func with_big_Float_types() {
             sumBig.Add(threeBig,  new(big.Float).Quo(fourBig, new(big.Float).Mul(digitoneBig, new(big.Float).Mul(digittwoBig, digitthreeBig))))
 
                     iterBig = 1
-                for iterBig < 5000000 { 
+                for iterBig < 10000 { // 1,000,000,000
                     // Total run with SetPrec at:  128 and iters of 50000000  was 23.1879034s    :: 3.14159265358979323846264
                     // Total run with SetPrec at: 1024 and iters of 600000000 was 12m23.9554367s :: 3.14159265358979323846264338
+                    /* We have calculated pi correctly to 28 digits using 1000000000 iters and Prec of 128
+                        The correctly calculated digits are:                                        3.141592653589793238462643383
+                        Total run with SetPrec at: 128 and iters of 1000000000 was 7m57.3179415s
+                // got 31 digits in 1 hour and 26 min using this algorithm with one billion (must have been ten) iters at 128 prec
+                    */
                     iterBig++
 
                     digitoneBig.Add(digitoneBig, twoBig) 
@@ -75,7 +79,6 @@ func with_big_Float_types() {
                         }
                 }
                 printResultStats(sumBig, iterBig, precision) 
-
 }
 
 
@@ -83,7 +86,6 @@ func printResultStats(sumBig *big.Float, iterBig int, precision int) {
     var piAs86chars string 
     piAs86chars =                   "3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628"
     stringOfSum := sumBig.Text('f', 86) // create a string version of a big result, 80 some odd chars in length 
-
     //fmt.Printf("\nSum as 86  chars is %s as string type\n", stringOfSum)
 
     fmt.Printf("pi as calculated is: %0.84f \n", sumBig)
@@ -91,22 +93,22 @@ func printResultStats(sumBig *big.Float, iterBig int, precision int) {
     fmt.Println("                              10        20        30        40        50        60        70        80   85")
     fmt.Printf("pi from the web is:  %s \n", piAs86chars)        
 
-    posInPi := 0
-    var piChar byte  
-    var ppis int 
+    posInPi := 0 // to be the incremented offset : piChar = piAs86chars[posInPi]
+    var piChar byte  // one byte (character) of pi as string, e.g. piChar = piAs86chars[posInPi]
+    var copyOfLastPosition int // an external (to the loop) copy of positionInString
     var stringVerOfCorrectDigits = []string{}  
-    for positionInString, char := range stringOfSum {
+    for positionInString, charAtRangePos := range stringOfSum {
         piChar = piAs86chars[posInPi] 
-            if char == rune(piChar) {
-                stringVerOfCorrectDigits = append(stringVerOfCorrectDigits, string(char))
-                //fmt.Printf("we have agreement up to char pos: %d \n", positionInString)
-                ppis = positionInString 
+            if charAtRangePos == rune(piChar) {
+                stringVerOfCorrectDigits = append(stringVerOfCorrectDigits, string(charAtRangePos))
+                //fmt.Printf("we have agreement up to character pos: %d \n", positionInString)
+                copyOfLastPosition = positionInString // save an external copy, of the last position found to have matched pi, as an int 
             } else {
                 break // to print result and info below 
             }
         posInPi++
     }        
-    fmt.Printf("\nWe have calculated pi correctly to %d digits using %d iters and Prec of %d \n", ppis, iterBig, precision)
+    fmt.Printf("\nWe have calculated pi correctly to %d digits using %d iters and Prec of %d \n", copyOfLastPosition, iterBig, precision)
     fmt.Print("The correctly calculated digits are: ")
         for _, oneChar := range stringVerOfCorrectDigits {
             fmt.Print(oneChar)
