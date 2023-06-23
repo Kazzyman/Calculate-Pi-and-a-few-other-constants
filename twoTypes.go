@@ -10,7 +10,7 @@ import (
 
 var iterBig int
 var precision int 
-var piAs102chars string 
+var piAs86chars string 
 
 func main(){
     start := time.Now()
@@ -57,7 +57,7 @@ func with_big_Float_types() {
             sumBig.Add(threeBig,  new(big.Float).Quo(fourBig, new(big.Float).Mul(digitoneBig, new(big.Float).Mul(digittwoBig, digitthreeBig))))
 
                     iterBig = 1
-                for iterBig < 50000000 { 
+                for iterBig < 5000000 { 
                     // Total run with SetPrec at:  128 and iters of 50000000  was 23.1879034s    :: 3.14159265358979323846264
                     // Total run with SetPrec at: 1024 and iters of 600000000 was 12m23.9554367s :: 3.14159265358979323846264338
                     iterBig++
@@ -75,19 +75,19 @@ func with_big_Float_types() {
                         }
                 }
                 
-                stringOfSum := sumBig.Text('f', 100)
-                fmt.Printf("\nSum as 102 chars is %s as a string type\n", stringOfSum)
-                fmt.Println("                    1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890")
-                fmt.Println("                            10        20        30        40        50        60        70        80        90       99")
-                fmt.Printf("per big.Float type: %0.99f \n", sumBig)
-                piAs102chars = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679"
-                fmt.Printf("piAs102chars is     %s \n", piAs102chars)        
+                stringOfSum := sumBig.Text('f', 86)
+                fmt.Printf("\nSum as 86  chars is %s as string type\n", stringOfSum)
+                fmt.Println("                    1234567890123456789012345678901234567890123456789012345678901234567890123456789012345")
+                fmt.Println("                            10        20        30        40        50        60        70        80   85")
+                fmt.Printf("per big.Float type: %0.84f \n", sumBig)
+                piAs86chars =                   "3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628"
+                fmt.Printf("piAs86chars is      %s \n", piAs86chars)        
 
                     posInPi := 0
                     var piChar byte  
                     var ppis int 
                     for positionInString, char := range stringOfSum {
-                        piChar = piAs102chars[posInPi] 
+                        piChar = piAs86chars[posInPi] 
                             if char == rune(piChar) {
                                 //fmt.Printf("we have agreement up to char pos: %d \n", positionInString)
                                 ppis = positionInString 
@@ -99,7 +99,7 @@ func with_big_Float_types() {
                         posInPi++
                         //fmt.Printf("\nPosiion in the string is: %d and the char is: %c\n", positionInString, char)
                     }        
-                    fmt.Printf("\nWe have calculated pi correctly to %d digits\n", ppis)
+                    fmt.Printf("\nWe have calculated pi correctly to %d digits using %d iters and Prec of %d \n", ppis, iterBig, precision)
 }
 
 /*
