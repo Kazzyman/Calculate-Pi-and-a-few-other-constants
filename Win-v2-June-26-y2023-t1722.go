@@ -93,7 +93,8 @@ fmt.Println("5:", string(colorCyan), "Pi:", string(colorReset), "An infinite ser
 fmt.Println("    ... this equation can be found in an ancient Sanskrit verse")
 fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
 fmt.Println("      One-Hundred-Million iterations will be executed -- in less than a second")
-fmt.Println("      14 digits of π -- VERY FAST -- gives 7 digits in just 100 iterations !!!")
+fmt.Println("      yielding  digits of π \n")
+
 fmt.Println("6:", string(colorCyan), "Pi:", string(colorReset), "Gottfried Wilhelm Leibniz, late 17th century ( and by Isaac Newton )")
 fmt.Println("    π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ...")
 fmt.Println("      4 Billion iterations will be executed")
@@ -160,7 +161,7 @@ fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MA
             BBPF(selection)
 
         case 5: // a series by Indian astronomer Nilakantha Somayaji circa 1500 AD 
-            Nilakantha(selection)
+            Nilakantha_Somayaji_with_big_Float_types(selection)
 
         case 6: // Gottfried Wilhelm Leibniz
             GottfriedWilhelmLeibniz(selection)
@@ -1096,294 +1097,6 @@ func buildTableOfPerfectProducts(radical_index int) {
 
 
 
-/*
-func BBPF(selection int) { // case 2: 
-    fmt.Println("\nYou selected #", selection, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
-    fmt.Println("How many digits of pi should we calculate? Enter one integer '4 to 16' ")
-
-          var numAi float64 // aligned with the value below it
-          //numAi := new(big.Float)
-    fmt.Scan(&numAi)
-
-    fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
-    //fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePiBBPusingBigFloats(numAi)) 
-
-    fmt.Println("and Pi from the web is    : 3.141592653589793")
-}
-func calculatePi(precision float64) float64 {
-//func calculatePiBBPusingBigFloats(numberofdigits *big.Float) big.Float {
-                //twoBig := big.NewFloat(2)
-                //sixteen := big.NewFloat(16)
-      var pi float64
-      //pi := new(big.Float)
-          pi = 0
-          //pi = big.NewFloat(0)
-      var k float64
-      //k := new(big.Float)
-          k = 0
-          //k = big.NewFloat(0)
-      for k < (precision-2) {
-        //for k.Cmp((numberofdigits.Sub(numberofdigits, twoBig))) {
-            pi += math.Pow(16, -k) * (4.0/(8*k+1) - 2.0/(8*k+4) - 1.0/(8*k+5) - 1.0/(8*k+6))
-            //pi += new(big.Pow(sixteen, k.Neg()))
-
-            fmt.Println(pi)
-            k++
-        }
-      return pi
-}
-*/
-
-
-/*
-func BBPF(selection int) { // case 2: 
-    fmt.Println("\nYou selected #", selection, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
-    fmt.Println("How many digits of pi should we calculate? Enter one integer '4 to 16' ")
-
-    //var numAi float64 // aligned with the value below it
-    numAi := new(big.Float)
-
-    fmt.Scan(&numAi)
-
-    //fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePi(numAi)) 
-    fmt.Printf("pi calculated to %.0f places: %.15f \n", numAi, calculatePiBBPusingBigFloats(numAi)) 
-
-    fmt.Println("and Pi from the web is    : 3.141592653589793")
-}
-
-func calculatePiBBPusingBigFloats(numberofdigits big.Float) big.Float {
-    //twoBig := big.NewFloat(2)
-    //sixteen := big.NewFloat(16)
-    var pi big.Float
-    var k big.Float
-    pi = big.Float(0)
-    k = big.Float(0)
-    for k.Cmp(numberofdigits.Sub(numberofdigits, big.Float(2))) < 0 {
-        pi += big.Pow(big.Float(16), k.Neg()) * (big.Float(4)/big.Float(8*k+1) - big.Float(2)/big.Float(8*k+4) - big.Float(1)/big.Float(8*k+5) - big.Float(1)/big.Float(8*k+6))
-        k++
-    }
-    return pi
-}
-*/
-
-
-
-func Nilakantha(selection int){  // case 5: 
-    fmt.Println("\n\nYou selected #", selection, " a series by Indian astronomer Nilakantha Somayaji circa 1500 AD")
-    fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
-    fmt.Println("    One-Hundred-Million iterations will be executed ... working ...\n")
-    start := time.Now() 
-        iterFloat64 = 0
-        var LeftOfMantissa float64 
-            LeftOfMantissa = 3
-        var digitone float64
-            digitone = 2
-        var digittwo float64
-            digittwo = 3
-        var digitthree float64
-            digitthree = 4
-        four = 4
-        var firstsum float64
-            firstsum = LeftOfMantissa + (four / (digitone*digittwo*digitthree)) 
-        var nextterm float64
-        iterInt64 = 1
-    for iterInt64 < 100000000 {
-        iterInt64++
-        iterFloat64++
-        digitone = digitthree 
-        digittwo = digitthree + 1
-        digitthree = digitthree + 2 
-        nextterm = four/(digitone*digittwo*digitthree)
-            if iterInt64 % 2 == 0 {  // % is modulus operator 
-                firstsum = firstsum - nextterm 
-            } else {
-                firstsum = firstsum + nextterm
-            }
-            if iterInt64 == 100 {
-                fmt.Println("   #1 234567# ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.141592,653589793 is, again, the value of π from the web") 
-                fmt.Println("   #1 234567 890123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start)
-                fmt.Println(iterInt64, " iterations were completed in ", elapsed, " yielding 7 digits of π\n") 
-            }
-            if iterInt64 == 500 {
-                fmt.Println("   #1 23456789# ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.14159265,3589793 is, again, the value of π from the web") 
-                fmt.Println("   #1 23456789 0123456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start)
-                fmt.Println(iterInt64, " iterations were completed in ", elapsed, " yielding 9 digits of π\n") 
-            }
-            if iterInt64 == 10000 {
-                fmt.Println("   #1 234567890123# ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.141592653589,793 is, again, the value of π from the web") 
-                fmt.Println("   #1 234567890123 456# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start)
-                fmt.Println("10,000 iterations were completed in ", elapsed, " yielding 13 digits of π\n") 
-            }
-            if iterInt64 == 50000 {
-                fmt.Println("   #1 2345678901234# ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.1415926535897,93 is, again, the value of π from the web") 
-                fmt.Println("   #1 2345678901234 56# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start)
-                fmt.Println("50,000,000 iterations were completed in ", elapsed, " yielding 14 digits of π\n") 
-            }
-            if iterInt64 == 1000000 {
-                fmt.Println("   #1 2345678901234# ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.1415926535897,93 is, again, the value of π from the web") 
-                fmt.Println("   #1 2345678901234 56# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start)
-                fmt.Println("1,000,000 iterations were completed in ", elapsed, " still yielding 14 digits of π\n") 
-            }
-            if iterInt64 == 100000000 {
-                fmt.Println("   #1 2345678901234# ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.1415926535897,93 is, again, the value of π from the web") 
-                fmt.Println("   #1 2345678901234 56# :: counting the first 16 actual digits of π")
-                t := time.Now()
-                elapsed := t.Sub(start)
-                fmt.Println("100,000,000 iterations were completed in ", elapsed, " still yielding 14 digits of π\n") 
-                LinesPerIter = 15
-                fmt.Println("at aprox", LinesPerIter, "lines of code per iteration ...")
-                LinesPerSecond = (LinesPerIter * iterFloat64) / elapsed.Seconds() // .Seconds() returns a float64
-                fmt.Printf("Aprox %.0f lines of code were executed per second \n", LinesPerSecond) 
-                fmt.Println("      1000000000 is one billion, for comparison in liew of commas \n\n")
-
-    // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
-                    defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
-                Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- selection #%d on %s \n", selection, Hostname)
-                    check(err0)
-                current_time := time.Now()
-                _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
-                check(err6)
-                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second \n", LinesPerSecond) 
-                    check(err2)
-                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds \n", iterFloat64/elapsed.Seconds())
-                    check(err4)
-                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations \n", iterFloat64)
-                    check(err5)
-                TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
-                _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
-                    check(err7)
-            //
-                fmt.Println("  -- If we ran 50 billion more iterations we still would get only those 14 digits :(\n") // =========
-                fmt.Println(" per option #", selection, "  --  the Nilakantha Somayaji series, circa 1500 AD\n")
-                fmt.Println("Select 12 at menu to display prior results")
-            }  // end of last if in first for loop 
-} // end of first for loop 
-// optional code to show the futility of more iterations follows
-        // 50 Billion more iterations option follows 
-        fmt.Println(string(colorGreen), "Enter any positive digit to continue with the 50 billion iterations, 0 to exit", string(colorReset))
-        option50 := 0
-        fmt.Scan(&option50)
-
-        if option50 > 0 {
-
-            fmt.Println(string(colorCyan), "\n\nYou elected to continue the series by Indian astronomer Nilakantha Somayaji circa 1500 AD", string(colorReset))
-            fmt.Println("    π = 3 + 4/(2*3*4) - 4/(4*5*6) + 4/(6*7*8) - 4/(8*9*10) + 4/(10*11*12) ...")
-            fmt.Println("    50 billion iterations will be executed \n\n", string(colorCyan), "   ... working ...\n", string(colorReset))
-            start := time.Now() 
-                iterFloat64 = 0
-                var LeftOfMantissa float64 
-                    LeftOfMantissa = 3
-                var digitone float64
-                    digitone = 2
-                var digittwo float64
-                    digittwo = 3
-                var digitthree float64
-                    digitthree = 4
-                four = 4
-                var firstsum float64
-                    firstsum = LeftOfMantissa + (four / (digitone*digittwo*digitthree)) 
-                var nextterm float64
-                iterInt64 = 1
-        for iterInt64 < 50000000000 {
-            iterInt64++
-            iterFloat64++
-            digitone = digitthree 
-            digittwo = digitthree + 1
-            digitthree = digitthree + 2 
-            nextterm = four/(digitone*digittwo*digitthree)
-                if iterInt64 % 2 == 0 {  // % is modulus operator 
-                    firstsum = firstsum - nextterm 
-                } else {
-                    firstsum = firstsum + nextterm
-                }
-            if iterInt64 == 1000000000 {
-                fmt.Println("    1 2345678901234 ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.1415926535897,93 is, again, the value of π from the web") 
-                fmt.Println("    1 2345678901234 56 :: counting the first 16 actual digits of π")
-                t := time.Now() ; elapsed := t.Sub(start)
-                fmt.Println(iterInt64, " iterations were completed in ", elapsed, " yielding still just 14 digits of π\n") 
-                fmt.Println(string(colorCyan), "  ... working ...\n", string(colorReset))
-            }
-            if iterInt64 == 5000000000 {
-                fmt.Println("    1 2345678901234 ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.1415926535897,93 is, again, the value of π from the web") 
-                fmt.Println("    1 2345678901234 56 :: counting the first 16 actual digits of π")
-                t := time.Now() ;  elapsed := t.Sub(start)
-                fmt.Println(iterInt64, " 5 billion iterations were completed in ", elapsed, " yielding still just 14 digits of π\n") 
-                fmt.Println(string(colorCyan), "  ... working ...\n", string(colorReset))
-            }            
-            if iterInt64 == 9000000000 {
-                fmt.Println("    1 2345678901234 ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.1415926535897,93 is, again, the value of π from the web") 
-                fmt.Println("    1 2345678901234 56 :: counting the first 16 actual digits of π")
-                t := time.Now() ;  elapsed := t.Sub(start)
-                fmt.Println(iterInt64, " 9 billion iterations were completed in ", elapsed, " yielding still just 14 digits of π\n") 
-                fmt.Println(string(colorCyan), "  ... working ...\n", string(colorReset))
-            }
-            if iterInt64 == 50000000000 {  // no additional digit are obtained even after 50 billion iterations
-                fmt.Println("    1 2345678901234567 ")
-                fmt.Println("   ", firstsum, " is what we have calculated per Nilakantha Somayaji") 
-                fmt.Println("    3.141592653589793 is, again, the value of π from the web") 
-                fmt.Println("    1 2345678901234567 :: counting the first 16 actual digits of π")
-                t := time.Now() ;  elapsed := t.Sub(start)
-                fmt.Println(iterInt64, " 50 billion iterations were completed in ", elapsed, " yielding still just 14 digits of π\n") 
-            }
-        } // second for loop
-
-                t := time.Now() ;  elapsed := t.Sub(start)
-
-            // store reults in a log file which can be displayed from within the program by selecting option #12
-                fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
-                    check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
-                    defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
-                Hostname, _ := os.Hostname()
-                _ , err0 := fmt.Fprintf(fileHandle, "\n  -- 50B continued Nilakantha Somayaji -- selection #%d on %s \n", selection, Hostname)
-                    check(err0)
-                current_time := time.Now()
-                _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
-                check(err6)
-                _ , err2 := fmt.Fprintf(fileHandle, "%.0f was Lines/Second \n", LinesPerSecond) 
-                    check(err2)
-                _ , err4 := fmt.Fprintf(fileHandle, "%e was Iterations/Seconds \n", iterFloat64/elapsed.Seconds())
-                    check(err4)
-                _ , err5 := fmt.Fprintf(fileHandle, "%e was total Iterations \n", iterFloat64)
-                    check(err5)
-                TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
-                _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
-                    check(err7)
-            //
-
-    } // my options50 if
-}
-
 
 func GottfriedWilhelmLeibniz(selection int){  // case 6: 
     fmt.Println("\n\nYou selected #", selection, " Gottfried Wilhelm Leibniz formula  :  π = 4 * ( 1 - 1/3 + 1/5 - 1/7 + 1/9 ... ")
@@ -1815,10 +1528,15 @@ if iterInt64 == 4200 { fmt.Println("... still working, 4200 iterations completed
 
 
         if iterInt64 == 5000 { // was 5500
-            fmt.Printf("  %.2713f per Archimedes'\n", p_d)  // show the first 2,713 digits of calculated pi
+            fmt.Printf(" A peek at the result formatted 1500f is: %.1500f \nper Archimedes'\n", p_d)  // show the first 1,500 digits of calculated pi
             fmt.Println(iterInt64, " iterations were completed, \n ... which generated a ", numberOfSides, "sided polygon!!\n")
-            fmt.Println(iterInt64, " iterations were completed yielding 2,712 correct digits of π!!!\n")
+            //fmt.Println(iterInt64, " iterations were completed yielding 2,712 correct digits of π!!!\n")
             fmt.Println("Go's math/big objects were set to a precision value of:", precision)
+
+            fmt.Println("\n\n\n")
+            printResultStatsLong(p_d, precision, "AM") // sumBig *big.Float, precision int, useAlternateFile string
+
+            fmt.Println("\n\nThese digits are also in a text file named: dataLog-From_AM_Method_lengthy_prints.txt")
         }
     }
         t := time.Now()
@@ -3205,7 +2923,7 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
 
     } else {
 
-        fmt.Printf("\n\nBut we have calculated pi correctly to %d digits using precision of %d \n", copyOfLastPosition, precision)
+        fmt.Printf("\n\n... we have actually calculated pi correctly to %d digits using precision of %d \n", copyOfLastPosition, precision)
 
         if useAlternateFile == "BBPF" {
             fmt.Printf("Those %d digits can be found in ", copyOfLastPosition)
@@ -3221,30 +2939,68 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
                 defer fileHandleChud.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
             _, err2prslc2c := fmt.Fprintf(fileHandleChud, "\nThese are the %d verified digits we have calculated: \n", copyOfLastPosition)
                 check(err2prslc2c)
-            for _, oneChar := range stringVerOfCorrectDigits {
-                //fmt.Print(oneChar) // to the console // the whole point of using an alternate file is to not clutter up the console or the default file 
-    // *************************************** this is the one and only logging loop ******************************************************************************        
-                    _ , err8prslc2c := fmt.Fprint(fileHandleChud, oneChar)  // to a file
-                    check(err8prslc2c)
-             }
+                    for _, oneChar := range stringVerOfCorrectDigits {
+                        //fmt.Print(oneChar) // to the console // the whole point of using an alternate file is to not clutter up the console or the default file 
+                            _ , err8prslc2c := fmt.Fprint(fileHandleChud, oneChar)  // to a file
+                                check(err8prslc2c)
+                    }
             _ , err9prslc2c := fmt.Fprint(fileHandleChud, "\n...the preceeding was printed one char at a time \n")
                 check(err9prslc2c)  
                 fileHandleChud.Close() 
+
+
+
         } else if useAlternateFile == "BBPF" {
             fileHandleBBPF, err1prslc2c := os.OpenFile("dataLog-From_BBPF_Method_lengthy_prints.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
                 check(err1prslc2c)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                 defer fileHandleBBPF.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
             _, err2prslc2c := fmt.Fprintf(fileHandleBBPF, "\nThese are the %d verified digits we have calculated: \n", copyOfLastPosition)
                 check(err2prslc2c)
-            for _, oneChar := range stringVerOfCorrectDigits {
-                //fmt.Print(oneChar) // to the console // the whole point of using an alternate file is to not clutter up the console or the default file 
-    // *************************************** this is the one and only logging loop ******************************************************************************        
-                    _ , err8prslc2c := fmt.Fprint(fileHandleBBPF, oneChar)  // to a file
-                    check(err8prslc2c)
-             }
+                    for _, oneChar := range stringVerOfCorrectDigits {
+                        //fmt.Print(oneChar) // to the console // the whole point of using an alternate file is to not clutter up the console or the default file 
+                            _ , err8prslc2c := fmt.Fprint(fileHandleBBPF, oneChar)  // to a file
+                                check(err8prslc2c)
+                    }
             _ , err9prslc2c := fmt.Fprint(fileHandleBBPF, "\n...the preceeding was printed one char at a time \n")
                 check(err9prslc2c)  
                 fileHandleBBPF.Close() 
+
+
+
+        } else if useAlternateFile == "AM" {
+            fileHandleAM, err1prslc2c := os.OpenFile("dataLog-From_AM_Method_lengthy_prints.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                check(err1prslc2c)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                defer fileHandleAM.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+            _, err2prslc2c := fmt.Fprintf(fileHandleAM, "\nThese are the %d verified digits we have calculated: \n", copyOfLastPosition)
+                check(err2prslc2c)
+                    for _, oneChar := range stringVerOfCorrectDigits {
+                        fmt.Print(oneChar) // to the console  
+                            _ , err8prslc2c := fmt.Fprint(fileHandleAM, oneChar)  // to a file
+                                check(err8prslc2c)
+                    }
+            _ , err9prslc2c := fmt.Fprint(fileHandleAM, "\n...the preceeding was printed one char at a time \n")
+                check(err9prslc2c)  
+                fileHandleAM.Close() 
+
+
+
+        } else if useAlternateFile == "Nilakantha" {
+            fileHandleNilakan, err1prslc2c := os.OpenFile("dataLog-From_Nilakantha_Method_lengthy_prints.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                check(err1prslc2c)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                defer fileHandleNilakan.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+            _, err2prslc2c := fmt.Fprintf(fileHandleNilakan, "\nThese are the %d verified digits we have calculated: \n", copyOfLastPosition)
+                check(err2prslc2c)
+                    for _, oneChar := range stringVerOfCorrectDigits {
+                        fmt.Print(oneChar) // to the console  
+                            _ , err8prslc2c := fmt.Fprint(fileHandleNilakan, oneChar)  // to a file
+                                check(err8prslc2c)
+                     }
+            _ , err9prslc2c := fmt.Fprint(fileHandleNilakan, "\n...the preceeding was printed one char at a time \n")
+                check(err9prslc2c)  
+                fileHandleNilakan.Close() 
+
+
+
         } else if useAlternateFile == "lessThanOneHundred" {
             fileHandleDefault, err1prslc2d := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
                 check(err1prslc2d)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
@@ -3252,15 +3008,17 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
             _, err2prslc2d := fmt.Fprintf(fileHandleDefault, "\nThese are the %d verified digits we have calculated: \n", copyOfLastPosition)
                 check(err2prslc2d)
                 fmt.Printf("\n These are the %d verified digits we have calculated: \n", copyOfLastPosition)
-    // *************************************** this is the one and only printing loop ******************************************************************************        
-            for _, oneChar := range stringVerOfCorrectDigits {
-                fmt.Print(oneChar)
-                    _ , err8prslc2d := fmt.Fprint(fileHandleDefault, oneChar)
-                    check(err8prslc2d)  
-            }
+                    for _, oneChar := range stringVerOfCorrectDigits {
+                        fmt.Print(oneChar)
+                            _ , err8prslc2d := fmt.Fprint(fileHandleDefault, oneChar)
+                                check(err8prslc2d)  
+                    }
             _ , err9prslc2d := fmt.Fprint(fileHandleDefault, "\n...the preceeding was printed one char at a time \n")
                 check(err9prslc2d) 
                 fileHandleDefault.Close()
+
+
+
 
         } else {
             fileHandleDefault, err1prslc2d := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
@@ -3269,12 +3027,11 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
             _, err2prslc2d := fmt.Fprintf(fileHandleDefault, "\nThese are the %d verified digits we have calculated: \n", copyOfLastPosition)
                 check(err2prslc2d)
                 fmt.Printf("\n These are the %d verified digits we have calculated: \n", copyOfLastPosition)
-    // *************************************** this is the one and only printing loop ******************************************************************************        
-            for _, oneChar := range stringVerOfCorrectDigits {
-                fmt.Print(oneChar)
-                    _ , err8prslc2d := fmt.Fprint(fileHandleDefault, oneChar)
-                    check(err8prslc2d)  
-            }
+                    for _, oneChar := range stringVerOfCorrectDigits {
+                        fmt.Print(oneChar)
+                            _ , err8prslc2d := fmt.Fprint(fileHandleDefault, oneChar)
+                                check(err8prslc2d)  
+                    }
             _ , err9prslc2d := fmt.Fprint(fileHandleDefault, "\n...the preceeding was printed one char at a time \n")
                 check(err9prslc2d) 
                 fileHandleDefault.Close()
@@ -3283,6 +3040,7 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
         fmt.Print("\n")
         fmt.Println("... the above was printed one char at a time")
 
+
         if useAlternateFile == "chud" {
             fileHandleDefault, err1prslc2d := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
                 check(err1prslc2d)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
@@ -3290,6 +3048,8 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
             _, err2prslc2da := fmt.Fprint(fileHandleDefault, "\nThe remaining longer entries can be viewed in dataLog-From_Chudnovsky_Method_lengthy_prints.txt\n")
                 check(err2prslc2da)
             fileHandleDefault.Close() 
+
+
         } else if useAlternateFile == "BBPF" {
             fileHandleDefault, err1prslc2d := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
                 check(err1prslc2d)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
@@ -3302,3 +3062,114 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
     } // end of else, way up thar 
 
 } // end of func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile string) {
+
+
+
+// case 5: 
+
+func Nilakantha_Somayaji_with_big_Float_types(selection int) {
+
+    fmt.Println("You have selected the Nilakantha Somayaji method using big.Float types")
+    fmt.Println("Enter the number of iterations (suggest between 100,000 and 100,000,000)")
+
+    var iters int 
+
+    fmt.Scanf("%d", &iters) 
+    fmt.Scanf("%d", &iters) 
+
+    fmt.Println("Enter the precision: (suggest between 128 and 512)")
+
+    var precision int 
+
+    fmt.Scanf("%d", &precision) 
+    fmt.Scanf("%d", &precision) 
+
+
+    start := time.Now()
+    var iterBig int
+
+
+    // big.Float constants:
+
+            twoBig := big.NewFloat(2)
+            threeBig := big.NewFloat(3)
+            fourBig := big.NewFloat(4)
+
+    // big.Float variables:
+
+            digitoneBig := new(big.Float)
+            *digitoneBig = *twoBig 
+
+            digittwoBig := new(big.Float)
+            *digittwoBig = *threeBig 
+
+            digitthreeBig := new(big.Float)
+            *digitthreeBig = *fourBig
+
+            sumBig := new(big.Float) 
+            nexttermBig := new(big.Float) 
+
+        //precision = 128
+            sumBig.SetPrec(uint(precision))
+            twoBig.SetPrec(uint(precision))
+            threeBig.SetPrec(uint(precision))
+            fourBig.SetPrec(uint(precision))
+            digitoneBig.SetPrec(uint(precision))       
+            digittwoBig.SetPrec(uint(precision))
+            digitthreeBig.SetPrec(uint(precision))
+            nexttermBig.SetPrec(uint(precision))
+
+            sumBig.Add(threeBig,  new(big.Float).Quo(fourBig, new(big.Float).Mul(digitoneBig, new(big.Float).Mul(digittwoBig, digitthreeBig))))
+
+                    iterBig = 1
+                for iterBig < iters { // 1,000,000,000 yeilds 19 digits in 13 sec
+
+                // 256p 100,000,000 : 56s 25 digits digits June 26 2023 
+                // 1,280p and 1Bil : 23 min without ending
+                // 128p and 100,000,000 49s gave 25 digits June 26 2023 
+                // Total run with SetPrec at: 128 and iters of 1,000,000,000 was 7m57.3179415s
+                // got 31 digits in 1 hour and 26 min using this algorithm with one billion (must have been ten) iters at 128 prec
+                    
+                    iterBig++
+
+                    digitoneBig.Add(digitoneBig, twoBig) 
+                    digittwoBig.Add(digittwoBig, twoBig) 
+                    digitthreeBig.Add(digitthreeBig, twoBig)
+
+                    nexttermBig.Quo(fourBig, new(big.Float).Mul(digitoneBig, new(big.Float).Mul(digittwoBig, digitthreeBig)))
+
+                        if iterBig % 2 == 0 {  // % is modulus operator 
+                            sumBig.Sub(sumBig, nexttermBig) 
+                        } else {
+                            sumBig.Add(sumBig, nexttermBig)
+                        }
+                }
+                printResultStatsLong(sumBig, precision, "Nilakantha") 
+
+    t := time.Now()
+    elapsed := t.Sub(start)
+
+    fmt.Println("Nilakantha\n")
+
+
+// store reults in a log file which can be displayed from within the program by selecting option #12
+            fileHandle, err1 := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                check(err1)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                defer fileHandle.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+            Hostname, _ := os.Hostname()
+            _ , err0 := fmt.Fprintf(fileHandle, "\n  -- Nilakantha Somayaji -- selection #%d on %s \n", selection, Hostname)
+                check(err0)
+            current_time := time.Now()
+            _ , err6 := fmt.Fprint(fileHandle, "was run on: ", current_time.Format(time.ANSIC), "\n")
+            check(err6)
+            
+            _ , err5 := fmt.Fprintf(fileHandle, "%d was total Iterations \n", iters)
+                check(err5)
+            TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+            _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
+                check(err7)
+
+
+    fmt.Printf("Total run with SetPrec at: %d and iters of %d was %s \n ", precision, iterBig, TotalRun) 
+
+}
