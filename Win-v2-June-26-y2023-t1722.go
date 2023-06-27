@@ -2760,35 +2760,57 @@ func check(e error) {   // create a func named check which takes one parameter "
 
 // case 2:
 func BBPF(selection int) {
-    useAlternateFile := "no"
+    useAlternateFile := "BBPF"
     numCPU := runtime.NumCPU()
     runtime.GOMAXPROCS(numCPU)
-    n := 46
+    numberOfDigits := 46
         fmt.Println("\nYou selected #", selection, "the Bailey–Borwein–Plouffe formula for π, circa 1995\n")
         fmt.Println("This version uses channels: GOMAXPROCS(numCPU), and big floats; how many digits of π would you like?")
-    fmt.Scanf("%d", &n)
-    fmt.Scanf("%d", &n) // one is rarely enough ??? 
+    fmt.Scanf("%d", &numberOfDigits)
+    fmt.Scanf("%d", &numberOfDigits) // one is rarely enough ??? 
 
-    p := uint((int(math.Log2(10)))*n + 3)
-        fmt.Println("log2 etc. has set p at: ", p)
-    p = uint(1024)
-        fmt.Println("But we will go with: ", p)
+    if numberOfDigits > 25000 {
+        fmt.Printf("\nYou requested %d digits of pi. Which is kinda a lot. 25,000 would have taken a minute. \n", numberOfDigits)
+        fmt.Println("The amount you asked for could take much longer. Even though I am hammering all of your cores.\n")
+    }
 
-    result := make(chan *big.Float, n)
+    p := uint((int(math.Log2(10)))*numberOfDigits + 3)
+        fmt.Println("log2 etc. (based on numberOfDigits) has set p at: ", p)
+
+    additionalAmount := 1.2 // just have to create this outside these ifs down thar 
+
+    if numberOfDigits <= 12 {
+        additionalAmount = float64(p) + (float64(p) * 0.127)
+    } else if numberOfDigits <= 500 {
+        additionalAmount = float64(p) + (float64(p) * 0.125)
+    } else if numberOfDigits <= 5000 {
+        additionalAmount = float64(p) + (float64(p) * 0.120)
+    } else if numberOfDigits <= 10000 {
+        additionalAmount = float64(p) + (float64(p) * 0.119)
+    } else if numberOfDigits > 10000 {
+        additionalAmount = float64(p) + (float64(p) * 0.115)
+    }
+
+    wholePart := uint(math.Floor(additionalAmount))
+    p = wholePart
+        fmt.Printf("\n ... we have adjusted that to: %d", p)
+
+    result := make(chan *big.Float, numberOfDigits)
     worker := workers2(p)
 
-    pi := new(big.Float).SetPrec(p).SetInt64(0)
-    pi.SetPrec(uint(1024))
+    pi := new(big.Float)
+    pi.SetPrec(p)
 
-    for i := 0; i < n; i++ {
+    for i := 0; i < numberOfDigits; i++ {
         go worker(i, result)
     }
-    for i := 0; i < n; i++ {
+    for i := 0; i < numberOfDigits; i++ {
         pi.Add(pi, <-result)
     }
-    //fmt.Printf("%[1]*.[2]*[3]f \n", 1, n+100, pi)
 
-    printResultStatsLong(pi, int(p), useAlternateFile)
+    fmt.Printf("\n\na peek at pi formatted 250f is: %[1]*.[2]*[3]f \n", 1, 250, pi)
+
+    printResultStatsLong(pi, int(p), useAlternateFile) // p is just the precision that was used for the big floats, which will be reported by printResults... 
 }
 
 
@@ -2842,22 +2864,10 @@ func workers2(p uint) func(id int, result chan *big.Float) {
 
 
 
-
-
-
-
-
-
-
-
-
-
 // case 15: 
 
 // Chudnovsky method, based on https://arxiv.org/pdf/1809.00533.pdf 
-/*
-The accuracy of the code "may" be improved by using a higher precision floating-point type, such as big.Float or math.BigDecimal.
-*/
+
         // 1,000,000 digits requires 70516 loops, per the run on May 7 2023 at 10:30
         //  was run on: Sun May  7 08:50:23 2023
         //  Total run was 8h4m39.7847064s
@@ -2865,25 +2875,18 @@ The accuracy of the code "may" be improved by using a higher precision floating-
 
 func chud(selection int) {  // case 15:
     var digits int 
-    //var precR uint 
-    //precR = 99 // 99 is an arbitrary number, it will be reset by CalcPi via a return value, to the value in prec 
     var loops int 
-    //var pi *big.Float
-    //pi := new(big.Float)
         start := time.Now() // saved start time to be compared with end time t 
     fmt.Println("\nRichard invites you to enter the number of digits of pi to calculate per the Chudnovsky method: \n")
     fmt.Println("The sky is the limit with this method, so don't be shy.  \n")
     fmt.Scanf("%d", &digits) 
     fmt.Scanf("%d", &digits) 
 
-
-//pi, _  = CalcPi(float64(digits))
-//pi, precR, loops := CalcPi(float64(digits), start, precR, loops, selection)
 pi := new(big.Float)
 loops, pi = CalcPi(float64(digits), start, loops, selection) // returns i which gets a new name "loops"
 if loops < 100 {
     fmt.Printf("\na peek at the approximate value of Pi as a big float, and formatted 0.122f, is : \n%0.122f \n\n", pi)
-    // do here what we do with big boys 
+    // do here what we do with the big boys 
     fmt.Println("... but : ")
     printResultStatsLong(pi, int(digits), "lessThanOneHundred")
 }
@@ -3007,8 +3010,9 @@ i = 1 // a secondary dedicated loop counter
         // But, wait. Why is the compiler allowing me to violate the no new var left of the := assignment ??? This IS in a loop !!!!
         if i == 100 {
             //useAlternateFile := "no" // the compiler is not happy unless it sees this created outside of an if
-            fmt.Printf("\n we are at %d loops, here comes a 999f of pi as a big float: \n", i)
-            fmt.Printf("%.999f", pi) // if we do less than 100 loops pi does not get printed at all !!!!!!!!!!!!!!!!
+            fmt.Printf("\n we are at %d loops, here comes a 800f of pi as a big float: \n", i)
+            fmt.Printf("%0.[1]*[2]f \n", 800, pi)
+            //fmt.Printf("%0.[1]*[2]f \n", int(digits), pi) // if digits was known to be the verified string of digits, then this is what we would want 
             printResultStatsLong(pi, int(digits), useAlternateFile) 
             fmt.Printf("\n the above was from %d loops \n", i)
             fmt.Println("enter any int to continue, 0 to end")
@@ -3150,7 +3154,7 @@ i = 1 // a secondary dedicated loop counter
             fileHandleBig.Close() 
 
 
-    return i, pi // asigning it to loops 
+    return i, pi // asigning i to loops 
 } // end of chud 
 
 
@@ -3203,6 +3207,14 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
 
         fmt.Printf("\n\nBut we have calculated pi correctly to %d digits using precision of %d \n", copyOfLastPosition, precision)
 
+        if useAlternateFile == "BBPF" {
+            fmt.Printf("Those %d digits can be found in ", copyOfLastPosition)
+            fmt.Printf("dataLog-From_BBPF_Method_lengthy_prints.txt\n")
+        }
+
+
+
+
         if useAlternateFile == "chud" {
             fileHandleChud, err1prslc2c := os.OpenFile("dataLog-From_Chudnovsky_Method_lengthy_prints.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
                 check(err1prslc2c)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
@@ -3218,10 +3230,22 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
             _ , err9prslc2c := fmt.Fprint(fileHandleChud, "\n...the preceeding was printed one char at a time \n")
                 check(err9prslc2c)  
                 fileHandleChud.Close() 
-        }
-
-
-        if useAlternateFile == "lessThanOneHundred" {
+        } else if useAlternateFile == "BBPF" {
+            fileHandleBBPF, err1prslc2c := os.OpenFile("dataLog-From_BBPF_Method_lengthy_prints.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                check(err1prslc2c)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                defer fileHandleBBPF.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+            _, err2prslc2c := fmt.Fprintf(fileHandleBBPF, "\nThese are the %d verified digits we have calculated: \n", copyOfLastPosition)
+                check(err2prslc2c)
+            for _, oneChar := range stringVerOfCorrectDigits {
+                //fmt.Print(oneChar) // to the console // the whole point of using an alternate file is to not clutter up the console or the default file 
+    // *************************************** this is the one and only logging loop ******************************************************************************        
+                    _ , err8prslc2c := fmt.Fprint(fileHandleBBPF, oneChar)  // to a file
+                    check(err8prslc2c)
+             }
+            _ , err9prslc2c := fmt.Fprint(fileHandleBBPF, "\n...the preceeding was printed one char at a time \n")
+                check(err9prslc2c)  
+                fileHandleBBPF.Close() 
+        } else if useAlternateFile == "lessThanOneHundred" {
             fileHandleDefault, err1prslc2d := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
                 check(err1prslc2d)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                 defer fileHandleDefault.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
@@ -3264,6 +3288,13 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
                 check(err1prslc2d)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
                 defer fileHandleDefault.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
             _, err2prslc2da := fmt.Fprint(fileHandleDefault, "\nThe remaining longer entries can be viewed in dataLog-From_Chudnovsky_Method_lengthy_prints.txt\n")
+                check(err2prslc2da)
+            fileHandleDefault.Close() 
+        } else if useAlternateFile == "BBPF" {
+            fileHandleDefault, err1prslc2d := os.OpenFile("dataLog-From_calculate-pi-and-friends.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // append to file 
+                check(err1prslc2d)                                // ... gets a file handle to dataLog-From_calculate-pi-and-friends.txt
+                defer fileHandleDefault.Close()                  // It’s idiomatic to defer a Close immediately after opening a file.
+            _, err2prslc2da := fmt.Fprint(fileHandleDefault, "\nThe remaining longer entries can be viewed in dataLog-From_BBPF_Method_lengthy_prints.txt\n")
                 check(err2prslc2da)
             fileHandleDefault.Close() 
         }
