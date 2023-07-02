@@ -3771,7 +3771,6 @@ func Gauss_Legendre(selection int) {
             TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
         printResultStatsLong(piAsBF, 0, "Gauss–Legendre", iters, TotalRun, selection)
 
-//printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile string, arg01 int, TotalRun string, selection int)
 } // end of main_juuso 
 
 
@@ -3838,9 +3837,11 @@ computer memory-intensive. Therefore, all record-breaking calculations for many 
 */
 
 // case 37:
-func Gauss_Legendre() {  
+func Gauss_Legendre(selection int) {  
+        start := time.Now()
+    fmt.Printf("\n ... running case %d: \n\n", selection)
     var Ricks_value float64             // Rick's code 
-    var exterior_catcher int           // Rick's code 
+    //var exterior_catcher int           // Rick's code 
     // initialize lists
     pin := []float64{}
     an  := []float64{1}
@@ -3856,8 +3857,9 @@ func Gauss_Legendre() {
     //bn := []float64{}                         // should have been able to accomplish the next line here as in initialize, as above
     //bn = append(bn, float64(1)/math.Sqrt(2))  // append the quotient of 1.0/sqrt of 2 to list bn
 
-    // run the algorithm 4 times
-    for i := 0; i < 4; i++ {  // call the 5 funcs (a,b,t,p, and pi) defined below, each of which returns just one []float64
+    iters := 3 
+    // run the algorithm iters times
+    for i := 0; i < iters; i++ {  // call the 5 funcs (a,b,t,p, and pi) defined below, each of which returns just one []float64
         an = a(an, bn) 
         bn = b(an, bn)
         tn = t(an, bn, tn, pn) // calls func t and passes to it 4 []float64s 
@@ -3882,9 +3884,20 @@ func Gauss_Legendre() {
         fmt.Println(Ricks_value) // Rick's code
         //fmt.Printf("\n\nBottom underscore is %d \n\n", exterior_catcher) this exterior_catcher var is never touched by the for loop 
         fmt.Println("3.1415926535897932 <-- compared to the actual value of Pi")
-        fmt.Println("1 23456789012345 so, 15 digits were calculated correctly")
-        fmt.Println("   ... via the Gauss–Legendre algorithm ...")
+        fmt.Println("1 23456789012345 counting to fifteen \n")
+        fmt.Println("   ... via the Gauss–Legendre algorithm ... \n")
+
+        piAsBF := new(big.Float)
+        piAsBF = big.NewFloat(Ricks_value) // pi is being cast to big from float64
+
+            t := time.Now()
+            elapsed := t.Sub(start)
+            TotalRun := elapsed.String() // cast time durations to a String type for Fprintf "formatted print"
+        printResultStatsLong(piAsBF, 0, "Gauss–Legendre", iters, TotalRun, selection)
+
 } // end of main_juuso 
+
+
 func a(an, bn []float64) []float64 {           // func a accepts an and bn of type []float64, and returns a []float64
     a := (an[len(an)-1] + bn[len(bn)-1]) / float64(2) // create local 'a' = (element of an indexed by len of an-1) + (element of bn indexed by len of bn-1) ?? 
     an = append(an, a)                               // append a to an
