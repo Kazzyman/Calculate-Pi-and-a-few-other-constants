@@ -16,9 +16,9 @@ import (
     "sort"      // Used in xRootOfy (case 18) to sort an array of structs 
     "regexp"
 
-    "bufio"         // used to count the lines in this file -- reportSLOCstats -- AMFimpo01a
+    "bufio"         // used to count the lines in this file -- reportSLOCstats -- AMFimpo01a 
     "log"          //
-    "strings"     // --AMFimpo01b
+    "strings"     // --AMFimpo01b 
 )
 
 func main() {       // top-level program logic flow -- explore SEVENTEEN ways to calculate Pi, plus THREE other constants
@@ -39,6 +39,7 @@ func main() {       // top-level program logic flow -- explore SEVENTEEN ways to
 } 
 
 // will not be run for release versions 
+// --AMFreportSLOCstats01a
 func reportSLOCstats() (totalLines, nonEmptyLines int, err error, myFileName string) {
     pathNameOfMeAsExe := os.Args[0]                         // the objective is to find this source code file 
         re := regexp.MustCompile(`\\exe\\(.*?)\.exe`) 
@@ -71,7 +72,7 @@ func reportSLOCstats() (totalLines, nonEmptyLines int, err error, myFileName str
     }
 
     return totalLines, nonEmptyLines, nil, substring // substring is called/named myFileName in the func definiiton, which is ok 
-}
+} // --AMFreportSLOCstats01b
 
 
 // this func is extremely long, contains all menus, and a very long switch statement 
@@ -133,9 +134,9 @@ if selection == 13 { //=========================================================
 fmt.Print(string(colorYellow))
 fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 
-// --AMFmenu01a
+// --AMFmenu01a 
 fmt.Println(string(colorGreen), "          build date :", string(colorCyan), date.Format("(01-02-2006)"), string(colorReset), filenameOfMe)
-// --AMFmenu01b
+// --AMFmenu01b 
 
 fmt.Print(string(colorYellow))
 fmt.Print("\nSECOND MENU:")
@@ -322,6 +323,8 @@ fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MA
 
         case 14: 
             ArchimedesBig(selection)
+        case 34:
+            ShowArchimedesBig()
 
         case 15: 
             chud(selection)
@@ -1641,8 +1644,7 @@ func GregoryLeibniz(selection int){  // case 7:
 
 
 
-
-func ArchimedesBig (selection int) { // case 14: 
+func ArchimedesBig (selection int) { // case 14: // --AMFArchimedesBiga 
     fmt.Println("\nYou selected #", selection, "  --  An improved version of Archimedes' method")
         start := time.Now()
     r := big.NewFloat(1)              // radius is a constant 1
@@ -1783,7 +1785,7 @@ if iterInt64 == 4200 { fmt.Println("... still working, 4200 iterations completed
                 fmt.Println("Select 12 at menu to display prior results")
 
 }
-// end of :: ArchimedesBig (selection int) { // case 14: 
+// end of :: ArchimedesBig (selection int) { // case 14:  // --AMFArchimedesBigb
 
 
 
@@ -4177,3 +4179,52 @@ func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile str
     }
 
 } // end of func printResultStatsLong(sumBig *big.Float, precision int, useAlternateFile string, arg01 int, TotalRun string, selection int) {
+
+func ShowArchimedesBig() {
+    file, err := os.Open("Win-v2-July-1-y2023-t2154.go")  // create a handle to our file
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    defer file.Close()
+
+    // Create a scanner to read the file line by line.
+    scanner := bufio.NewScanner(file)
+
+    // Create a regular expression that matches the first flag anywhere in the line
+    pattern1 := regexp.MustCompile(`(?s)AMFArchimedesBiga.*?`)
+
+    // Create a regular expression that matches the second flag anywhere in the line
+    pattern2 := regexp.MustCompile(`(?s)AMFArchimedesBigb.*?`)
+
+    // Create a var to store the text of one line 
+    line := "some text just to create the line var"
+
+    // Create a boolean variable to track if we are within the desired range of lines we want to print
+    alreadyFoundFirstTag := false
+
+    
+    for scanner.Scan() {        // Iterate over the lines in our file
+        line = scanner.Text()  // read a line and store the line in var line
+
+        // handle the case of having read the line containing the first flag 
+        if pattern1.MatchString(line) { // if line contains pattern1
+            alreadyFoundFirstTag = !alreadyFoundFirstTag // flips it to true 
+            fmt.Println(line) // print line containing first flag 
+            continue // we read another line
+        }
+
+        // handel the case of having encountered the line containing the second flag
+        if pattern2.MatchString(line) {   // if line contains pattern2
+            fmt.Println(line)
+            break  // we break to stop reading or printing additional lines
+        }
+
+        // handel the case of having already found and printed the line containing the first flag 
+        // print the line following the line containing the first flag, and all interviening lines
+        if alreadyFoundFirstTag { 
+            fmt.Println(line)
+            continue // read another line
+        }
+    }
+}
