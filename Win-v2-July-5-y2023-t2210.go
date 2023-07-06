@@ -3464,7 +3464,7 @@ func Nilakantha_Somayaji_with_big_Float_types(selection int) {
     fmt.Println(" via Nilakantha \n")
     fmt.Printf("Total run with SetPrec at: %d and iters of %d was %s \n\n ", precision, iterBig, TotalRun) 
 
-} // end of Nilakantha_Somayaji_with_big_Float_types() // -- AMFNilakantha_Somayaji_with_big_Float_typesA
+} // end of Nilakantha_Somayaji_with_big_Float_types() // -- AMFNilakantha_Somayaji_with_big_Float_typesB
 
 
 
