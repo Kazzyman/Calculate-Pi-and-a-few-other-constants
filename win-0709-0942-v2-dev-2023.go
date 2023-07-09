@@ -4937,7 +4937,7 @@ func ShowTheSpigot() {  // case 39:
 
 
 
-
+// top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top // top 
 // ============================================================================================================================================================================
 // case 995: // see next few lines and the corresponding switch
 
@@ -4964,10 +4964,10 @@ func refactorWindowsToUnix() {
         filenameOfThisFileSansDotGo := substring2
 
 
-    nameOfNewSourceCodeFile := filenameOfThisFileSansDotGo + "-now-Unix.go"
+    nameOfNewSourceCodeFile := filenameOfThisFileSansDotGo + "-now-Unix-interim.go" // in the next called func we will read this, fix it, then delete it 
 
 
-    fileHandle, err1 := os.Open(nameOfOldSourceCodeFile)       // open the source code file and get a handle to it  
+    fileHandle, err1 := os.Open(nameOfOldSourceCodeFile)       // open the old source code file and get a handle to it  
     if err1 != nil {
         fmt.Println("error opening source per rick in refactorWindowsToUnix")
     }
@@ -4979,12 +4979,7 @@ func refactorWindowsToUnix() {
                     fmt.Println("there was an error scanning at top of for loop in func refactorWindowsToUnix()")
                     fmt.Println(scanner.Err())
                 } 
-/*                                                                                                // this is windows to unix so: 
-                    regexWindowsStart       := regexp.MustCompile(`\s*\/\/\s*\/\*\s*Windows\s*variant\s*`)     // ... // /asterisk Windows var  // something special about this one
-                    regexWindowsEnd         := regexp.MustCompile(`\s*\/\/\s*Windows\s*variant\s*\*\/\s*`)     // ... // Windows var asterisk/
-                    regexUnixStart          := regexp.MustCompile(`\s*\/\*\s*Unix\s*variant`)               // ... /asterisk Unix var  
-                    regexUnixEnd            := regexp.MustCompile(`\s*Unix\s*variant\s*\*\/`)               // ... Unix var asterisk/ 
-*/
+
                     regexWindowsStart       := regexp.MustCompile(` \/\/ \/\* Windows variant `)     // ... // /asterisk Windows var  // something special about this one
                     regexWindowsEnd         := regexp.MustCompile(` \/\/ Windows variant \*\/ `)     // ... // Windows var asterisk/
                     regexUnixStart          := regexp.MustCompile(` \/\* Unix variant `)               // ... /asterisk Unix var  
@@ -5001,7 +4996,7 @@ func refactorWindowsToUnix() {
                     _, err6 := fmt.Fprint(OutputFileHandle, "\n")
                     check(err6)
             } 
-// skip these next two ifs ?? 
+
             // if they ARE found, replace them with the following edited lines 
             if regexUnixStart.MatchString(lineRead) {
                 // write the edited line to the output file
@@ -5042,14 +5037,125 @@ func refactorWindowsToUnix() {
                     _, err58 := fmt.Fprint(OutputFileHandle, "            Windows variant */ \n ")  // dealing with a rouge asterisk/ here *** why/how do we get away with it ?? ***
                     check(err58)
             } 
-            /* *** generates error at same point in file as top placement ****************************
-            if scanner.Err() != nil {
-                fmt.Println("there was an error scanning at bottom of for loop in func refactorWindowsToUnix()")
-            } */
-            //fileHandle.Close() // this crashes 
     } // end of for loop (each pass reads one line)
     fileHandle.Close()
-} // end of func
+    fixTheInterimFile(nameOfNewSourceCodeFile)
+} // end of func ****************************************************************************
+func fixTheInterimFile(interimFile string) {
+
+//nameOfOldSourceCodeFile := filenameOfThisFile // because we will now scan a different file
+
+    regexp2stripDotGo := regexp.MustCompile(`(.+)\.go`)
+
+    match2 := regexp2stripDotGo.FindStringSubmatch(filenameOfThisFile) // grab the stuff between Win- and .go in the name of this file 
+        var substring2 string 
+        if len(match2) >= 2 {
+            substring2 = match2[1]                   // Windows substring is loaded with our base file name 
+        } else {
+            fmt.Println("Substring2 not found in refactorWindowsToUnix")
+        }
+        filenameOfThisFileSansDotGo := substring2
+
+    nameOfNewSourceCodeFile := filenameOfThisFileSansDotGo + "-now-Unix.go" // we write to this one
+
+    fileHandle, err1 := os.Open(interimFile)       // open the source code file and get a handle to it  
+    if err1 != nil {
+        fmt.Println("error opening source per rick in fixTheInterimFile")
+    }
+    defer fileHandle.Close()
+        scanner := bufio.NewScanner(fileHandle)
+        setBreak := "no"
+        for scanner.Scan() {
+            
+                    if setBreak == "yes" {
+                        break
+                    }
+            lineRead := scanner.Text() // this fixes my main problem re formatting getting wasted 
+                if scanner.Err() != nil {
+                    fmt.Println("there was an error scanning at top of for loop in func fixTheInterimFile()")
+                    fmt.Println(scanner.Err())
+                } 
+
+// find "replace1-followingLine" and then read the next line (which will be the garbage bug) and clobber that line with ... 
+// ... "                    _, err55 := fmt.Fprint(OutputFileHandle, "            // /* Unix variant \n ")  // dealing with a rouge /asterisk here *** why/how do we get away with it ?? ***"
+
+
+                    replace1          := regexp.MustCompile(`replace1-followingLine`)    
+                    //regexUnixEnd            := regexp.MustCompile(` Unix variant \*\/ `)       
+
+            // write the read line unchanged to the output file only if replace1-followingLine is not found in the read line from the interim input file
+            // when it does match we first echo the line and then we read the next line and we change that line
+            if !replace1.MatchString(lineRead) { 
+                OutputFileHandle, err2 := os.OpenFile(nameOfNewSourceCodeFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // write to file 
+                check(err2)                               // ... gets a file handle for output 
+                defer OutputFileHandle.Close()          // It’s idiomatic to defer a Close immediately after opening a file.
+                    _, err3 := fmt.Fprint(OutputFileHandle, lineRead)
+                    check(err3)
+                    _, err6 := fmt.Fprint(OutputFileHandle, "\n")
+                    check(err6)
+
+            } else {
+                // OutputFileHandle becomes undefined below this point ???????????
+                OutputFileHandle, err2 := os.OpenFile(nameOfNewSourceCodeFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // write to file 
+                check(err2)  
+                    _, err31 := fmt.Fprint(OutputFileHandle, lineRead)
+                    check(err31)
+                    _, err61 := fmt.Fprint(OutputFileHandle, "\n")
+                    check(err61)
+                // read just the next line, and change it to what it was before the calling func cobbered it 
+
+                /*scanner.Scan() // read the next line 
+                //lineRead := scanner.Text() 
+                    if scanner.Err() != nil {
+                        fmt.Println("there was an error scanning while reading just one more line in func fixTheInterimFile()")
+                        fmt.Println(scanner.Err())
+                    } */
+
+                    //if regexUnixStart.MatchString(lineRead) {
+                        // write the edited line to the output file
+                        OutputFileHandle, err44 := os.OpenFile(nameOfNewSourceCodeFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // write to file 
+                        check(err44)                               // ... gets a file handle for output 
+                        //defer OutputFileHandle.Close()          // It’s idiomatic to defer a Close immediately after opening a file.
+                            // restore / line following : replace1-followingLine
+                            // format: _, err55 := fmt.Fprint(OutputFileHandle, "            // /* Unix variant \n ")
+                            // ... as originalLines :
+                            // fmt.Fprintf(OutputFileHandle, "%s\n", fmt.Sprintf("%s", line))
+                            originalLine1 := fmt.Sprintf("%s", "            // /")  // add : * Unix variant \n 
+                            originalLine2 := fmt.Sprintf("%s", "* Unix variant ")  // add : * Unix variant \n 
+                            originalLine3 := fmt.Sprintf("%s", `\n ")`)
+                            originalLineA := fmt.Sprintf("%s", `                _, err55 := fmt.Fprint(OutputFileHandle, "`)
+                    _, err55 := fmt.Fprintf(OutputFileHandle, "%s%s%s%s\n", originalLineA, originalLine1, originalLine2, originalLine3)  
+                    check(err55)
+                    //_, err69 := fmt.Fprint(OutputFileHandle, "\n")
+                    //check(err69)
+
+                    //} 
+                    //fileHandle.Close()
+                    //break 
+                    setBreak = "yes"
+            }
+    } // end of for loop (each pass reads one line)
+                    replace1 := regexp.MustCompile(`replace1-followingLine`)
+                    for scanner.Scan() {
+        
+                        lineRead := scanner.Text()  
+                            if scanner.Err() != nil {
+                                fmt.Println("there was an error scanning at top of for loop in func fixTheInterimFile()")
+                                fmt.Println(scanner.Err())
+                            } 
+                        if !replace1.MatchString(lineRead) { 
+                            OutputFileHandle, err2 := os.OpenFile(nameOfNewSourceCodeFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600) // write to file 
+                            check(err2)                               // ... gets a file handle for output 
+                            defer OutputFileHandle.Close()          // It’s idiomatic to defer a Close immediately after opening a file.
+                                _, err3 := fmt.Fprint(OutputFileHandle, lineRead)
+                                check(err3)
+                                _, err6 := fmt.Fprint(OutputFileHandle, "\n")
+                                check(err6)
+
+                        }
+                    }
+    fileHandle.Close()
+}
 
 
 // case 995: // see next few lines and the corresponding switch 
