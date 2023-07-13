@@ -2,9 +2,9 @@
 
 This is the main depository of Richard H. Woolley's code. 
 
-  For the Windows executable, download Pi-and-friends.exe
+	For the Windows executable, download Pi-and-friends.exe
 
-  Mac executable is Mac-Pi-and-friends
+	Mac executable is Pi-and-friends-Mac
 
 For the source code to my windows versions, look to the most-recently-dated win-xxx.go file. 
 
