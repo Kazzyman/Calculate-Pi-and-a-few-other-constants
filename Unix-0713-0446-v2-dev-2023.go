@@ -52,14 +52,14 @@ func main() {       // top-level program logic flow -- explore several ways to c
     totalLines, nonEmptyLines := reportSLOCstats(filenameOfThisFile)  // another locally-defined func; returns, and creates, local values of predetermined type 
 
             // The following is for menu header data generation (inception: stripped file name) //  <<------------ below ---------<<
-            //
+            // there oughta be exactly nine of each of these here variant dohickys in this here Unix executable source version 
             // /* Unix variant 
                 re2 := regexp.MustCompile(`Unix-(.+)\.go`)  
             // Unix variant */ 
             //
-             /* Windows variant 
+            /* Windows variant 
                 re2 := regexp.MustCompile(`win-(.+)\.go`)
-             Windows variant */ 
+            Windows variant */ 
 
     match2 := re2.FindStringSubmatch(filenameOfThisFile) // grab the stuff between win- and .go (or Unix- and .go) in the name of this file 
         SansVerOfNameOfThisFile := "string"      // this var, having been initialize to "string", is of type string 
@@ -72,7 +72,7 @@ func main() {       // top-level program logic flow -- explore several ways to c
             //
             /* Windows variant 
                 SansVerOfNameOfThisFile = match2[1]                   // Windows SansVerOfNameOfThisFile is loaded with our base file name 
-            // Windows variant */
+            Windows variant */
 
         } else {
             fmt.Println("SansVerOfNameOfThisFile via match2 not found in main")

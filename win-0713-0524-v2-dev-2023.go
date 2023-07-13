@@ -52,7 +52,7 @@ func main() {       // top-level program logic flow -- explore several ways to c
     totalLines, nonEmptyLines := reportSLOCstats(filenameOfThisFile)  // another locally-defined func; returns, and creates, local values of predetermined type 
 
             // The following is for menu header data generation (inception: stripped file name) //  <<------------ below ---------<<
-            //
+            // ... there should be exactly nine of each commment tag in this dev Windows ver
              /* Unix variant 
                 re2 := regexp.MustCompile(`Unix-(.+)\.go`)  
              Unix variant */ 

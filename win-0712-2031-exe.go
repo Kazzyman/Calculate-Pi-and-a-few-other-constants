@@ -26,6 +26,7 @@ func main() {       // top-level program logic flow -- explore several ways to c
         fmt.Println(string(colorRed), "Finished. Hit Enter to redisplay the Main Menu", string(colorReset)) // this will be the last line of every case #: 
             var JustToPauseTheLoop int 
 
+            // there oughta be exactly ten of each of these here variant dohickys in this here Windows executable version 
             /* Unix variant 
                 fmt.Scanf("%d", &JustToPauseTheLoop) // must pause the endless loop after every switch case to prevent menu redisplay over results
                     //fmt.Scan(&JustToPauseTheLoop) // Scan() would work as a pause, but it requies data input to continue, so we use a Scanf() instead 
