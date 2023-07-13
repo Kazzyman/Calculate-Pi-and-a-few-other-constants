@@ -1,5 +1,7 @@
 package main
 
+// win-0712-2031-exe.go
+
 import (
     "os"          // Used to fetch the name of your system 
     "sync"        // Used in Bailey–Borwein–Plouffe formula [concurent]
@@ -86,7 +88,7 @@ func main() {       // top-level program logic flow -- explore several ways to c
     }
 } // end of main
  `
-    fmt.Println(ShowMain, string(colorReset))
+    fmt.Println(string(colorCyan), ShowMain, string(colorReset))
 }
 
 
@@ -800,7 +802,7 @@ fmt.Print("Enter your selection, 1 -> x", string(colorRed), " (IS THIS WINDOW MA
     }
 }  // end DisplayMenus() -- AMFmenusB
 `
-    fmt.Println(ShowMenus, string(colorReset))
+    fmt.Println(string(colorCyan), ShowMenus, string(colorReset))
 }
 
 
@@ -880,7 +882,9 @@ fmt.Println(" a\u00b2 + 2ab + b\u00b2 = 2ab + c\u00b2 ")
 fmt.Println("       a\u00b2 + b\u00b2 = c\u00b2 \n", string(colorReset))
 fmt.Println("... proves the Pythagorean per Garfield; though, obviously, many other proofs do exist.\n\n")
     fmt.Println("Select 12 at menu to display prior results")
-} `
+} 
+// written entirely by Richard Woolley 
+`
 fmt.Println(DisplayPythagoreanRune)
 }
 
@@ -1754,8 +1758,9 @@ func buildTableOfPerfectProductsC(radical_index int) {  // C suffix denotes case
         }
 }
 // end of case 180: -- AMFxroyCCB
+// written entirely by Richard Woolley 
     `
-    fmt.Println(ShowxRootOfY_continuousCaller, string(colorReset))
+    fmt.Println(string(colorCyan), ShowxRootOfY_continuousCaller, string(colorReset))
 }
 
 
@@ -2566,8 +2571,9 @@ func buildTableOfPerfectProducts(radical_index int) {
             Table_of_perfect_Products = append(Table_of_perfect_Products, root ) // the root of the prior PP
         }
 }  // end of xRootOfy() // case 18: set, -- AMFxRootOfyB
+// written entirely by Richard Woolley 
     `
-    fmt.Println(ShowxRootOfy, string(colorReset))
+    fmt.Println(string(colorCyan), ShowxRootOfy, string(colorReset))
 }
 
 
@@ -3009,8 +3015,9 @@ func GottfriedWilhelmLeibniz(selection int){  // case 6: -- AMFGottfriedWilhelmL
     } // end of second for
     } // end of option9 if
 }  // end GottfriedWilhelmLeibniz() // case 6:
+// written entirely by Richard Woolley 
     `
-    fmt.Println(ShowGottfriedWilhelmLeibniz, string(colorReset))
+    fmt.Println(string(colorCyan), ShowGottfriedWilhelmLeibniz, string(colorReset))
 }
 
 
@@ -3215,8 +3222,9 @@ func GregoryLeibniz(selection int){  // case 7: -- AMFGregoryLeibnizA
             }
     } 
 }  // end of GregoryLeibniz() // case 7:
+// written entirely by Richard Woolley 
     `
-    fmt.Println(ShowGregoryLeibniz, string(colorReset))
+    fmt.Println(string(colorCyan), ShowGregoryLeibniz, string(colorReset))
 }
 
 
@@ -3510,8 +3518,9 @@ if iterInt64 == 4200 { fmt.Println("... still working, 4200 iterations completed
 
 }
 // end of :: ArchimedesBig (selection int) { // case 14:
+// written entirely by Richard Woolley 
     `
-    fmt.Println(ShowArchimedesBig, string(colorReset))
+    fmt.Println(string(colorCyan), ShowArchimedesBig, string(colorReset))
 }
 
 
@@ -4155,8 +4164,9 @@ fmt.Println("\n ... 39 Billion additional loops now ensue, just to get one addit
     } // end of second for loop 
     } // end of 40B continuation if 
 }  // end of JohnWallis() // case 8:
+// written entirely by Richard Woolley 
     `
-    fmt.Println(ShowJohnWallis, string(colorReset))
+    fmt.Println(string(colorCyan), ShowJohnWallis, string(colorReset))
 }
 
 
@@ -4272,6 +4282,7 @@ That is, with continuous compounding, the account value will reach $2.718281828
 [runeMark]
 fmt.Println(Ricks_rune_Paragraph, string(colorReset))
 }  // end of EulersNumber() // -- AMFEulersNumberB
+// written entirely by Richard Woolley 
     `
     fmt.Println(ShowEulersNumber, string(colorReset))
 }
@@ -4415,8 +4426,9 @@ fmt.Println("")
     fmt.Println(Erdos_Borwein, "after", iter, "iterations, i.e., with a final exponent of", iter)
     fmt.Println("1.606695152415291763 is what we get from the web\n")
 }  // // -- AMFErdosBorweinB // case 10: 
+// written entirely by Richard Woolley 
     `
-    fmt.Println(ShowErdosBorwein, string(colorReset))
+    fmt.Println(string(colorCyan), ShowErdosBorwein, string(colorReset))
 }
 
 
@@ -4640,8 +4652,9 @@ func delChar(s string, index int) string {
     tmp := []rune(s)
     return string(append(tmp[0:index], tmp[index+1:]...))
 }  // end TheSpigot() set // -- AMFTheSpigotB
+// adapted by Richard Woolley
     `
-    fmt.Println(ShowTheSpigot, string(colorReset))
+    fmt.Println(string(colorCyan), ShowTheSpigot, string(colorReset))
 }
 
 
@@ -4860,8 +4873,9 @@ func nilakanthaTerm(ch chan float64, k float64) {
         ch <- -4.0 / (j * (j + 1) * (j + 2))
     }
 } // end of nifty_scoreBoard() 
+// adapted by Richard Woolley
     `
-    fmt.Println(Shownifty_scoreBoard, string(colorReset))
+    fmt.Println(string(colorCyan), Shownifty_scoreBoard, string(colorReset))
 }
 
 
@@ -5016,8 +5030,9 @@ func PiMultiThread(workers int, iteration int) float64 {
     wg.Wait()
     return ret.Get()
 }  // end of func BBPfConcurent()
+// adapted by Richard Woolley
     `
-    fmt.Println(ShowBBPfConcurent, string(colorReset))
+    fmt.Println(string(colorCyan), ShowBBPfConcurent, string(colorReset))
 }
 
 
@@ -5215,8 +5230,9 @@ func workers(p uint) func(id int, result chan *big.Float) {
         result <- R
     }
 }  // end of bbp_formula()
+// adapted by Richard Woolley
     `
-    fmt.Println(Showbbp_formula, string(colorReset))
+    fmt.Println(string(colorCyan), Showbbp_formula, string(colorReset))
 }
 
 
@@ -5406,8 +5422,9 @@ func Leibniz_method_one_billion_iters(selection int){
         _ , err7 := fmt.Fprintf(fileHandle, "Total run was %s \n ", TotalRun) 
             check(err7)
 }  // end of Leibniz_method_one_billion_iters()
+// adapted by Richard Woolley
     `
-    fmt.Println(ShowLeibniz_method_one_billion_iters, string(colorReset))
+    fmt.Println(string(colorCyan), ShowLeibniz_method_one_billion_iters, string(colorReset))
 }
 
 func check(e error) {   // create a func named check which takes one parameter "e" of type error 
@@ -5457,10 +5474,11 @@ func check(e error) {   // create a func named check which takes one parameter "
         }
 //========== end of global var section ================================================================================
 
+
 // case 2: // -- AMFBBPFA
 func BBPF(selection int) {
     usingBigFloats = true
-// Richard's modifications: -------------------------------------
+// Richard's modifications start: -------------------------------------
     useAlternateFile := "BBPF" 
 
     numberOfDigits := 1 // just to create it 
@@ -5473,14 +5491,16 @@ func BBPF(selection int) {
         fmt.Printf("\nYou requested %d digits of pi. Which is kinda a lot. 25,000 would have taken a minute. \n", numberOfDigits)
         fmt.Println("The amount you asked for could take much longer. Even though I am hammering all of your cores.\n")
     }
-// --------------------------------------------------------------
+// Richard's modifications end: ---------------------------------------
 
     numCPU := runtime.NumCPU()
     runtime.GOMAXPROCS(numCPU)    
     p := uint((int(math.Log2(10)))*numberOfDigits + 3)
 
-// Richards's mods follow: --------------------------------------------------------
+// more of Richards's mods follow: ------------------------------------------------
         fmt.Println("log2 etc. (based on numberOfDigits) has set p at: ", p)
+
+    // I am adding some precision for cases that go for a whole lot of digits
 
     additionalAmount := 1.2 // just have to create this outside these ifs down thar 
 
@@ -5510,7 +5530,7 @@ func BBPF(selection int) {
 
     pi := new(big.Float)
 
-// Richards modification of SetPrec:
+// Richards modification of SetPrec: --------------------
     pi.SetPrec(p) // this gives a lot more results
 
     for i := 0; i < numberOfDigits; i++ {
@@ -5519,6 +5539,7 @@ func BBPF(selection int) {
     for i := 0; i < numberOfDigits; i++ {
         pi.Add(pi, <-result)
     }
+// -----------------------------------------------------
 
 // Richards's mods follow: --------------------------------------------------------
     fmt.Printf("\n\na peek at pi formatted 250f is: %[1]*.[2]*[3]f \n", 1, 250, pi)
@@ -5570,6 +5591,7 @@ func workers2(p uint) func(id int, result chan *big.Float) {
 
         result <- R
     }
+// Richard significantly modified a version he copied from ... somewhere 
 }  // end of BBPF() set // -- AMFBBPFB
 func ShowBBPF() {  // case 3:
     fmt.Print(string(colorCyan))
@@ -5578,7 +5600,7 @@ func ShowBBPF() {  // case 3:
 // case 2: // -- AMFBBPFA
 func BBPF(selection int) {
     usingBigFloats = true
-// Richard's modifications: -------------------------------------
+// Richard's modifications start: -------------------------------------
     useAlternateFile := "BBPF" 
 
     numberOfDigits := 1 // just to create it 
@@ -5591,14 +5613,16 @@ func BBPF(selection int) {
         fmt.Printf("\nYou requested %d digits of pi. Which is kinda a lot. 25,000 would have taken a minute. \n", numberOfDigits)
         fmt.Println("The amount you asked for could take much longer. Even though I am hammering all of your cores.\n")
     }
-// --------------------------------------------------------------
+// Richard's modifications end: ---------------------------------------
 
     numCPU := runtime.NumCPU()
     runtime.GOMAXPROCS(numCPU)    
     p := uint((int(math.Log2(10)))*numberOfDigits + 3)
 
-// Richards's mods follow: --------------------------------------------------------
+// more of Richards's mods follow: ------------------------------------------------
         fmt.Println("log2 etc. (based on numberOfDigits) has set p at: ", p)
+
+    // I am adding some precision for cases that go for a whole lot of digits
 
     additionalAmount := 1.2 // just have to create this outside these ifs down thar 
 
@@ -5628,7 +5652,7 @@ func BBPF(selection int) {
 
     pi := new(big.Float)
 
-// Richards modification of SetPrec:
+// Richards modification of SetPrec: --------------------
     pi.SetPrec(p) // this gives a lot more results
 
     for i := 0; i < numberOfDigits; i++ {
@@ -5637,6 +5661,7 @@ func BBPF(selection int) {
     for i := 0; i < numberOfDigits; i++ {
         pi.Add(pi, <-result)
     }
+// -----------------------------------------------------
 
 // Richards's mods follow: --------------------------------------------------------
     fmt.Printf("\n\na peek at pi formatted 250f is: %[1]*.[2]*[3]f \n", 1, 250, pi)
@@ -5688,9 +5713,10 @@ func workers2(p uint) func(id int, result chan *big.Float) {
 
         result <- R
     }
-}  // end of BBPF()
+// Richard significantly modified a version he copied from ... somewhere 
+}  // end of BBPF() set // -- AMFBBPFB
     `
-    fmt.Println(ShowBBPF, string(colorReset))
+    fmt.Println(string(colorCyan), ShowBBPF, string(colorReset))
 }
 
 // case 15: // -- AMFchudA
@@ -6242,8 +6268,10 @@ func finishChudIfs(pi *big.Float, digits float64, selection int, i int, useAlter
                 fmt.Scanf("%d", &queryIfTimeToDie) // Windows environments seem to just fly past a single Scanf, so I have used two :) 
             // Windows variant */ 
 } // end of chud()
+// most of the above was written by Richard Woolley
+
     `
-    fmt.Println(Showchud, string(colorReset))
+    fmt.Println(string(colorCyan), Showchud, string(colorReset))
 }
 
 
@@ -6389,7 +6417,7 @@ func deleteAllLogFiles() {  // case 999: // -- AMFdeleteAllLogFilesA
     }
 }  // end of deleteAllLogFiles()
     `
-    fmt.Println(ShowdeleteAllLogFiles, string(colorReset))
+    fmt.Println(string(colorCyan), ShowdeleteAllLogFiles, string(colorReset))
 }
 
 // case 5: // -- AMFNilakantha_Somayaji_with_big_Float_typesA
@@ -6707,8 +6735,10 @@ func Nilakantha_Somayaji_with_big_Float_types(selection int) {
     fmt.Println(" via Nilakantha \n")
     fmt.Printf("Total run with SetPrec at: %d and iters of %d was %s \n\n ", precision, iterBig, TotalRun) 
 } // end of Nilakantha_Somayaji_with_big_Float_types()
+// written entirely by Richard Woolley
+
     `
-    fmt.Println(ShowNilakantha_Somayaji_with_big_Float_types, string(colorReset))
+    fmt.Println(string(colorCyan), ShowNilakantha_Somayaji_with_big_Float_types, string(colorReset))
 }
 
 func Using_this_app() {  // case 96: 
@@ -6716,8 +6746,8 @@ func Using_this_app() {  // case 96:
     var rune_Using_this_app = `
 Any selection from any menu can be made at any menu. 
  
-Each selection has a corresponding selector which displays the source code for that particular algorithm. For example, to view the code 
-for selection #18 one simply enters 38 at any menu – one reason that you might want to do this is to discover the section’s authorship. 
+Each selection has a corresponding selector (+20) which displays the source code for that particular algorithm. For example, to view the 
+code for selection 18 one simply enters 38 at any menu – one reason that you might want to do this is to discover the section’s authorship. 
 
 Additionally, there are a few other operational selections which are not found on any of the menus. For example, can enter 3 to see the 
 magic behind main, or enter 4 to see the code for the menus and switches.
@@ -6739,7 +6769,7 @@ prototype in the three languages that were new to me and found that Go was so mu
 around with any other language. Though, admittedly, I have found that Go is a bit “buggy” on Windows11, Go being intended mainly for use 
 on Unix variants. Which is Ok because Linux and Mac are my preferred programming environments. 
 
-I then got a bit carried away, and a few thousand lines of code later here we are. 
+I then got a bit carried away, and a few thousand lines of code later, here we are. 
 
     `
     fmt.Println(rune_Using_this_app, string(colorReset))
@@ -7127,8 +7157,10 @@ func printResultStatsLongComp(sumBig *big.Float, iterBig int, precision int) {
         }
     fmt.Print("\n")
 }  // end of compareFloat64withBigFloats()
+// written entirely by Richard Woolley
+
     `
-    fmt.Println(ShowcompareFloat64withBigFloats, string(colorReset))
+    fmt.Println(string(colorCyan), ShowcompareFloat64withBigFloats, string(colorReset))
 }
 
 
@@ -7309,8 +7341,9 @@ func pi(an, bn, tn, pin []float64) []float64 {  // this func is all about append
     pin = append(pin, pi)
     return pin
 } // End of Gauss_Legendre 
+// adapted by Richard Woolley
     `
-    fmt.Println(ShowGauss_Legendre, string(colorReset))
+    fmt.Println(string(colorCyan), ShowGauss_Legendre, string(colorReset))
 }
 
 
