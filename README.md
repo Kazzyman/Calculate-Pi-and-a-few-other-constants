@@ -1,4 +1,4 @@
-# calculate constants, pi mostly
+# calculate the maximal digits of a few curious constants, mostly pi by various methods. 
 
 This is the main depository of Richard H. Woolley's code. A project that explores several ways to calculate the digits of pi on your own computer. The app also explores a method for extracting the square and cube roots of any integers using a clever process (top of second menu). 
 
