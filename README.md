@@ -1,6 +1,6 @@
-# constants
+# calculate constants, pi mostly
 
-This is the main depository of Richard H. Woolley's code. 
+This is the main depository of Richard H. Woolley's code. A project that explores several ways to calculate the digits of pi on your own computer.
 
 	For the Windows executable, download Pi-and-friends.exe
 
