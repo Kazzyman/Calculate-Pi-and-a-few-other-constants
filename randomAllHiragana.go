@@ -32,16 +32,23 @@ func main() {
 	//  na ni nu ne no * 1                              niya        niyu         niyo 
 	"na, な", "ni, に", "nu, ぬ", "ne, ね", "no, の",    "niya, にゃ", "niyu, にゅ", "niyo, にょ", 
 
-	//  ha hi hu he ho * 1                          * 2                    ba       bi        bu       be        bo          pa        pi       pu        pe       po
+	//  ha hi hu * 1              he ho * 2                                ba       bi        bu       be        bo          pa        pi       pu        pe       po
 	"ha, は", "hi, ひ", "hu, ふ", "he, へ", "ho, ほ", "he, へ", "ho, ほ",    "ba, ば", "bi, び", "bu, ぶ", "be, べ", "bo, ぼ",    "pa, ぱ", "pi, ぴ", "pu, ぷ", "pe, ぺ", "po, ぽ", 
    // then just the ひs below:
 	"hiya, ひゃ", "hiyu, ひゅ", "hiyo, ひょ",     "biya, びゃ", "biyu, びゅ", "biyo, びょ",     "piya, ぴゃ", "piyu, ぴゅ", "piyo, ぴょ", // it did not used to like this line ????
 
+	//  ma mi mu me mo * 1 
+	"ma, ま", "mi, み", "mu, む", "me, め", "mo, も",     "miya, みゃ", "miyu, みゅ", "miyo, みょ", 
 
+	// 
+	"ya, や", "yu, ゆ", "yo, よ", 
 
-	"ma, ま", "mi, み", "mu, む", "me, め",
-	//"mo, も", "ya, や", "yu, ゆ", "yo, よ", "ra, ら", "ri, り", "ru, る", "re, れ", "ro, ろ", "wa, わ", "wo, を", "nh, ん" 
-	}
+	// 
+	"ra, ら", "ri, り", "ru, る", "re, れ", "ro, ろ",      
+	"riya, りゃ", "riyu, りゅ", "riyo, りょ",
+
+	// 
+	"wa, わ", "wo, を",      "nh, ん"}
 
 	for {
 		randIndex := rand.Intn(len(keyValuePairs))
