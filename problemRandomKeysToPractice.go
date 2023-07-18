@@ -12,9 +12,9 @@ var in string
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
-	keyValuePairs := []string{"a, あ", "i, い", "u, う", "e, え", "o, お", "ka, か", "ki, き", "ku, く", "ke, け", "ko, こ",
-	 "sa, さ", "shi, し", "su, す", "se, せ", "so, そ", "ta, た", "chi, ち", "tsu, つ", "te, て", "to, と", "na, な", "ni, に",
-	  "nu, ぬ", "ne, ね", "no, の", "ha, は", "hi, ひ", "hu, ふ", "he, へ", "ho, ほ", "ma, ま", "mi, み", "mu, む", "me, め",
+	keyValuePairs := []string{"a, あ", "i, い", "u, う", "e, え", "o, お", "ko, こ",
+	 "so, そ", "chi, ち", "tsu, つ", "te, て", "to, と", "ni, に",
+	  "nu, ぬ", "ne, ね", "hi, ひ", "hu, ふ", "he, へ", "ho, ほ", "mi, み", "mu, む", "me, め",
 	   "mo, も", "ya, や", "yu, ゆ", "yo, よ", "ra, ら", "ri, り", "ru, る", "re, れ", "ro, ろ", "wa, わ", "wo, を", "nh, ん"}
 
 	for {
@@ -39,7 +39,7 @@ func main() {
 			fmt.Printf("\nRight! \n")
 		} else {
 			//fmt.Println("You typed", in, "which is not", value, "so you guessed wrongly")
-			fmt.Printf("\n Oops! it was %s", value)
+			fmt.Printf("\n Oops! it was %s, make a note and try again", value)
 
 			// hints: 
 
@@ -132,6 +132,23 @@ func main() {
 			}
 
 
+			if value == "は" {
+				fmt.Printf(", hint: o char \n")
+			}
+			if value == "ひ" {
+				fmt.Printf(", hint: L char \n")
+			}
+			if value == "ふ" {
+				fmt.Printf(", hint: ring<, 2 char \n")
+			}
+			if value == "へ" {
+				fmt.Printf(", hint: ;+ char \n")
+			}
+			if value == "ほ" {
+				fmt.Printf(", hint: _ char \n")
+			}
+
+
 			if value == "ま" {
 				fmt.Printf(", hint: J char \n")
 			}
@@ -162,22 +179,6 @@ func main() {
 				fmt.Printf(", hint: ;+ char \n")
 			}
 			if value == "ろ" {
-				fmt.Printf(", hint: _ char \n")
-			}
-
-			if value == "は" {
-				fmt.Printf(", hint: o char \n")
-			}
-			if value == "ひ" {
-				fmt.Printf(", hint: L char \n")
-			}
-			if value == "ふ" {
-				fmt.Printf(", hint: ring<, 2 char \n")
-			}
-			if value == "へ" {
-				fmt.Printf(", hint: ;+ char \n")
-			}
-			if value == "ほ" {
 				fmt.Printf(", hint: _ char \n")
 			}
 

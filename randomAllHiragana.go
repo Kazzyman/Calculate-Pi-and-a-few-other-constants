@@ -6,16 +6,42 @@ import (
 	"strings"
 	"time"
 )
-
+// 51 15 25 21 = 112 if we include the suffix combinations 
 var in string
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
-	keyValuePairs := []string{"a, あ", "i, い", "u, う", "e, え", "o, お", "ka, か", "ki, き", "ku, く", "ke, け", "ko, こ",
-	 "sa, さ", "shi, し", "su, す", "se, せ", "so, そ", "ta, た", "chi, ち", "tsu, つ", "te, て", "to, と", "na, な", "ni, に",
-	  "nu, ぬ", "ne, ね", "no, の", "ha, は", "hi, ひ", "hu, ふ", "he, へ", "ho, ほ", "ma, ま", "mi, み", "mu, む", "me, め",
-	   "mo, も", "ya, や", "yu, ゆ", "yo, よ", "ra, ら", "ri, り", "ru, る", "re, れ", "ro, ろ", "wa, わ", "wo, を", "nh, ん"}
+	keyValuePairs := []string{
+
+	//  a * 2             i*1        u e o * 2
+	"a, あ", "a, あ",    "i, い",    "u, う", "e, え", "o, お", "u, う", "e, え", "o, お",      
+	
+	//  ka ki ku ke ko * 1                              ga       gi        gu       ge       go * 1
+	"ka, か", "ki, き", "ku, く", "ke, け", "ko, こ",     "ga, が", "gi, ぎ", "gu, ぐ", "ge, げ", "go, ご",
+	          "kiya, きゃ", "kiyu, きゅ", "kiyo, きょ",             "giya, ぎゃ", "giyu, ぎゅ", "giyo, ぎょ", 
+
+	//  sa shi su se so * 1                             za       gi       zu        ze       zo * 1
+	"sa, さ", "shi, し", "su, す", "se, せ", "so, そ",    "za, ざ", "gi, じ", "zu, ず", "ze, ぜ", "zo, ぞ", // one key "zu", has two values づ and ず 
+	         "shiya, しゃ", "shiyu, しゅ", "shiyo, しょ",            "giya, じゃ", "giyu, じゅ", "giyo, じょ", // can i do this, yes 
+
+	//  ta chi tsu se so * 1                            da        gi        zu       de       do * 1
+	"ta, た", "chi, ち", "tsu, つ", "te, て", "to, と",   "da, だ",  "gi, ぢ", "zu, づ", "de, で", "do, ど", // one key "zu", has two values づ and ず
+	         "chiya, ちゃ", "chiyu, ちゅ", "chiyo, ちょ",            "giya, ぢゃ", "giyu, ぢゅ", "giyo, ぢょ", 
+
+	//  na ni nu ne no * 1                              niya        niyu         niyo 
+	"na, な", "ni, に", "nu, ぬ", "ne, ね", "no, の",    "niya, にゃ", "niyu, にゅ", "niyo, にょ", 
+
+	//  ha hi hu he ho * 1                          * 2                    ba       bi        bu       be        bo          pa        pi       pu        pe       po
+	"ha, は", "hi, ひ", "hu, ふ", "he, へ", "ho, ほ", "he, へ", "ho, ほ",    "ba, ば", "bi, び", "bu, ぶ", "be, べ", "bo, ぼ",    "pa, ぱ", "pi, ぴ", "pu, ぷ", "pe, ぺ", "po, ぽ", 
+   // then just the ひs below:
+	"hiya, ひゃ", "hiyu, ひゅ", "hiyo, ひょ",     "biya, びゃ", "biyu, びゅ", "biyo, びょ",     "piya, ぴゃ", "piyu, ぴゅ", "piyo, ぴょ", // it did not used to like this line ????
+
+
+
+	"ma, ま", "mi, み", "mu, む", "me, め",
+	//"mo, も", "ya, や", "yu, ゆ", "yo, よ", "ra, ら", "ri, り", "ru, る", "re, れ", "ro, ろ", "wa, わ", "wo, を", "nh, ん" 
+	}
 
 	for {
 		randIndex := rand.Intn(len(keyValuePairs))
