@@ -14,40 +14,76 @@ func main() {
 
 	keyValuePairs := []string{
 
-	//  a * 2             i*1        u e o * 2
-	"a, あ", "a, あ",    "i, い",    "u, う", "e, え", "o, お", "u, う", "e, え", "o, お",      
-	
-	//  ka ki ku ke ko * 1                              ga       gi        gu       ge       go * 1
-	"ka, か", "ki, き", "ku, く", "ke, け", "ko, こ",     "ga, が", "gi, ぎ", "gu, ぐ", "ge, げ", "go, ご",
-	          "kiya, きゃ", "kiyu, きゅ", "kiyo, きょ",             "giya, ぎゃ", "giyu, ぎゅ", "giyo, ぎょ", 
+// 2 lines of the "vowels" (inclusive)
+//  a * 2 :                i * 1       u         e         o * 2 :
+	"aア, あ", "aア, あ",    "iイ, い",    "uウ, う", "eエ, え", "oオ, お",     "uウ, う", "eエ, え", "oオ, お",      
 
-	//  sa shi su se so * 1                             za       gi       zu        ze       zo * 1
-	"sa, さ", "shi, し", "su, す", "se, せ", "so, そ",    "za, ざ", "gi, じ", "zu, ず", "ze, ぜ", "zo, ぞ", // one key "zu", has two values づ and ず 
-	         "shiya, しゃ", "shiyu, しゅ", "shiyo, しょ",            "giya, じゃ", "giyu, じゅ", "giyo, じょ", // can i do this, yes 
+// 6 lines of the ka group: (inclusive)
+//   ka         ki         ku        ke         ko * 1       /  ga         gi         gu        ge         go * 1          //  naked / ゛
+	"kaカ, か", "kiチ, き", "kuク, く", "keケ, け", "koコ, こ",       "gaガ, が", "giヂ, ぎ", "guグ, ぐ", "geゲ, げ", "goゴ, ご",   //-* ???????????????????????????????????? *-//
+//               ^----^--v                                                 ^^----^
+	           "kiyaチャ, きゃ",  "kiyuチュ, きゅ",  "kiyoチョ, きょ",  // * 1      ^^----^-v                                                // ki, ya yu yo
+	                                                                      "giyaヂャ, ぎゃ",  "giyuヂュ, ぎゅ",  "giyoヂョ, ぎょ",     // * 1 // ki゛, ya yu yo
+//                       ^               ^               ^                          ^               ^               ^        
 
-	//  ta chi tsu se so * 1                            da        gi        zu       de       do * 1
-	"ta, た", "chi, ち", "tsu, つ", "te, て", "to, と",   "da, だ",  "gi, ぢ", "zu, づ", "de, で", "do, ど", // one key "zu", has two values づ and ず
-	         "chiya, ちゃ", "chiyu, ちゅ", "chiyo, ちょ",            "giya, ぢゃ", "giyu, ぢゅ", "giyo, ぢょ", 
+// 6 lines of the sa group: (inclusive)
+//   sa         shi         su        se         so * 1      /   za         gi         zu         ze        zo * 1         //  naked / ゛ 
+	"saサ, さ", "shiシ, し", "suス, す", "seセ, せ", "soソ, そ",      "zaザ, ざ", "giジ, じ", "zuズ, ず", "zeゼ, ぜ", "zoゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
+//               ^----^---v                                                 ^^----^
+	           "shiyaシャ, しゃ",  "shiyuシュ, しゅ",  "shiyoショ, しょ",  // * 1    ^^----^-v                                               // shi, ya yu yo
+	                                                                       "giyaジャ, じゃ",   "giyuジュ, じゅ",   "giyoジョ, じょ",  // * 1 // shi゛, ya yu yo
+//                        ^                ^                ^                        ^                ^                ^    
 
-	//  na ni nu ne no * 1                              niya        niyu         niyo       * 2 : 
-	"na, な", "ni, に", "nu, ぬ", "ne, ね", "no, の",    "niya, にゃ", "niyu, にゅ", "niyo, にょ", "niya, にゃ", "niyu, にゅ", "niyo, にょ", 
+// 6 lines of the ta group: (inclusive)
+//   ta         chi        tsu         te         to * 1     /   da         gi         zu         de         do * 1        //  naked / ゛
+	"taタ, た", "chiチ, ち", "tsuツ, つ", "teテ, て", "toト, と",     "daダ, だ",  "giザ, ぢ", "zuヅ, づ", "deデ, で", "doド, ど",  //-* One key "zu", has two values づ and ず *-//
+//               ^----^---v                                                 ^^----^
+	           "chiyaチャ, ちゃ", "chiyuチュ, ちゅ", "chiyoチョ, ちょ",   // * 1     ^^----^-v                                               // chi, ya yu yo
+	                                                                       "giyaヂャ, ぢゃ",  "giyuヂュ, ぢゅ",  "giyoヂョ, ぢょ",    // * 1 // chi゛, ya yu yo
+//                        ^               ^               ^                          ^               ^               ^
 
-	//  ha hi hu * 1              he ho * 2                                ba       bi        bu       be        bo          pa        pi       pu        pe       po
-	"ha, は", "hi, ひ", "hu, ふ", "he, へ", "ho, ほ", "he, へ", "ho, ほ",    "ba, ば", "bi, び", "bu, ぶ", "be, べ", "bo, ぼ",    "pa, ぱ", "pi, ぴ", "pu, ぷ", "pe, ぺ", "po, ぽ", 
-   // then just the ひs below:
-	"hiya, ひゃ", "hiyu, ひゅ", "hiyo, ひょ",     "biya, びゃ", "biyu, びゅ", "biyo, びょ",     "piya, ぴゃ", "piyu, ぴゅ", "piyo, ぴょ", 
+// 5 lines of the na group: (inclusive) 'cause they are special -- they like to go naked 
+//   na         ni         nu        ne         no * 1                                                                     //  naked, all of them (there are no ゛s on na's)
+	"naナ, な", "niニ, に", "nuヌ, ぬ", "neネ, ね", "noノ, の",    
+//               ^---^---v                                
+               "niyaニャ, にゃ", "niyuニュ, にゅ", "niyoニョ, にょ",   "niyaニャ, にゃ", "niyuニュ, にゅ", "niyoニョ, にょ",                   // * 2 // ni, ya yu yo
+//                       ^              ^              ^                ^               ^              ^ 
 
-	//  ma mi mu me mo * 1                              * 2 : 
-	"ma, ま", "mi, み", "mu, む", "me, め", "mo, も",     "miya, みゃ", "miyu, みゅ", "miyo, みょ", "miya, みゃ", "miyu, みゅ", "miyo, みょ", 
+// 9 lines of the ha group: (inclusive) -- the fully-clothed group 
+//  ha         hi         hu * 1     he        ho          he        ho * 2      /  ba         bi         bu         be         bo             //  naked / ゛
+   "haハ, は", "hiヒ, ひ", "huフ, ふ", "heヘ, へ", "hoホ, ほ", "heヘ, へ", "hoホ, ほ",     "baバ, ば", "biビ, び", "buブ, ぶ", "beベ, べ", "boボ, ぼ",  //-* ????? *-// 
+//              ^---^--v                                                             pa         pi         pu        pe         po            //  poo゜ marks (drag)
+                                                                                    "paパ, ぱ", "piピ, ぴ", "puプ, ぷ", "peペ, ぺ", "poポ, ぽ", //-* ????? *-//
+//              ^------v
+	          "hiyaヒャ, ひゃ", "hiyuヒュ, ひゅ", "hiyoヒョ, ひょ",                                                                         // hi, ya yu yo
+	                                                                                "biyaビャ, びゃ", "biyuビュ, びゅ", "biyoビョ, びょ",   // hi゛, ya yu yo (bi)
+	                                                                                "piyaピャ, ぴゃ", "piyuビュ, ぴゅ", "piyoピョ, ぴょ",   // hi゜, ya yu yo (pi)
+//                     ^               ^              ^                                       ^              ^              ^   
 
-	//  ya yu yo * 3
-	"ya, や", "yu, ゆ", "yo, よ", "ya, や", "yu, ゆ", "yo, よ", "ya, や", "yu, ゆ", "yo, よ", 
+// 5 lines of the ma group: (inclusive) 'cause they too are special -- and also like to go naked
+//  ma         mi        mu         me         mo * 1                                                                     //  naked, all of them (there are no ゛s on ma's)
+   "maマ, ま", "miミ, み", "muム, む", "meメ, め", "moモ, も",     
+//              ^--^-v
+              "miyaミャ, みゃ", "miyuミュ, みゅ", "miyoミョ, みょ",     "miyaミャ, みゃ", "miyuミュ, みゅ", "miyoミョ, みょ",                  // * 2 // mi, ya yu yo 
+//                      ^              ^              ^                  ^              ^              ^
 
-	//  ra ri ru re ro * 1                              * 2 :
-	"ra, ら", "ri, り", "ru, る", "re, れ", "ro, ろ",      	"riya, りゃ", "riyu, りゅ", "riyo, りょ", "riya, りゃ", "riyu, りゅ", "riyo, りょ",
+// 3 lines of the ya, yu, yo set: (inclusive)
+//  ya         yu         yo * 3
+   "yaヤ, や", "yuユ, ゆ", "yoヨ, よ","yaヤ, や", "yuユ, ゆ", "yoヨ, よ", "yaヤ, や", "yuユ, ゆ", "yoヨ, よ",    // * 3 (also used as suffixes)
+// 
 
-	//  wa wo nh * 2
-	"wa, わ", "wo, を",   "nh, ん",       "wa, わ", "wo, を",   "nh, ん" }  // } must be on this line 
+// 5 lines of the ra/la group: (inclusive) actually spelled with the "r" but pronounced with the "L" sounds -- they too are special -- and also like to go naked
+//  ra        ri         ru         re         ro * 1    
+   "raラ, ら", "riリ, り", "ruル, る", "reレ, れ", "roロ, ろ", 
+//             ^----^---v
+              "riyaリャ, りゃ", "riyuリュ, りゅ", "riyoリョ, りょ",    "riyaリャ, りゃ", "riyuリュ, りゅ", "riyoリョ, りょ",    // * 2 // ri, ya yu yo 
+//                      ^              ^              ^             ^               ^             ^ 
+
+// 2 lines (inclusive) of the wa set, plus the nh consonant -- always fully naked AND never have suffixes of ya yu or yo 
+//  wa wo nh * 2
+   "waワ, わ", "woヲ, を",   "nhン, ん",       "waワ, わ", "woヲ, を",   "nhン, ん" }  // * 2 //  and the "}" must be on this line rather than on a line of its own 
+
+   
 
 	for {
 		randIndex := rand.Intn(len(keyValuePairs))
