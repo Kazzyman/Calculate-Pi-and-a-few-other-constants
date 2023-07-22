@@ -83,7 +83,7 @@
 "ビュ, びゅ", 
 "ビョ, びょ",  
 "ピャ, ぴゃ", 
-"ビュ, ぴゅ", 
+"ピュ, ぴゅ", 
 "ピョ, ぴょ", 
 "マ, ま", 
 "ミ, み", 
@@ -129,7 +129,8 @@ func main() {
 	keyValuePairs := []string{
 
 /*
-ChatGPT 3.5 proofread all of the katakana, hiragana pairs used in this code; and my Japanese wife verified them also. 
+ChatGPT 3.5 proofread all of the katakana, hiragana pairs used in this code; and my Japanese wife verified them also. But I did catch them both having gotten one wrong:
+they made one mistake in saying that "ビュ, ぴゅ" was correct when it should have been "ピュ, ぴゅ"
 */
 
 // 2 lines of the "vowels" (inclusive)
@@ -175,7 +176,7 @@ ChatGPT 3.5 proofread all of the katakana, hiragana pairs used in this code; and
 //              ^------v
 	          "ヒャ, ひゃ", "ヒュ, ひゅ", "ヒョ, ひょ",                                                                         // hi, ya yu yo (hya)
 	                                                                                "ビャ, びゃ", "ビュ, びゅ", "ビョ, びょ",   // hi゛, ya yu yo (bi) bya
-	                                                                                "ピャ, ぴゃ", "ビュ, ぴゅ", "ピョ, ぴょ",   // hi゜,  yu yo (pi) pya
+	                                                                                "ピャ, ぴゃ", "ピュ, ぴゅ", "ピョ, ぴょ",   // hi゜,  yu yo (pi) pya
 //                     ^               ^              ^                                       ^              ^              ^   
 
 // 5 lines of the ma group: (inclusive) 'cause they too are special -- and also like to go naked

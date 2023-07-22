@@ -15,32 +15,59 @@ func main() {
 	keyValuePairs := []string{
 
 // 2 lines of the "vowels" (inclusive)
-//  a * 2 :                i * 1       u         e         o * 2 :
+//   a * 2 :                i * 1       u         e         o * 2 :
 	"aア, あ", "aア, あ",    "iイ, い",    "uウ, う", "eエ, え", "oオ, お",     "uウ, う", "eエ, え", "oオ, お",      
 
-// 6 lines of the ka group: (inclusive)
+/*
+In the traditional Hepburn romanization system, the sound じ in hiragana is romanized as "ji," and the katakana ジ is also romanized as "ji" 
+However, in some other romanization systems like the Nihon-shiki and Kunrei-shiki, the sound じ is romanized as "zi" instead of "ji."
+
+The sound ぎ in hiragana is romanized as "gi," and the katakana ギ is also romanized as "gi."
+
+So, both "gi" and "ji" are used as romanizations for different contexts, but the standard in most systems is "ji" for じ in hiragana and "gi" for ぎ in hiragana.
+
+ - - - - original: - - - -  
+// 6 lines of the ka group: (inclusive)                                      vv 
 //   ka         ki         ku        ke         ko * 1       /  ga         gi         gu        ge         go * 1          //  naked / ゛
 	"kaカ, か", "kiキ, き", "kuク, く", "keケ, け", "koコ, こ",       "gaガ, が", "giヂ, ぎ", "guグ, ぐ", "geゲ, げ", "goゴ, ご",   //-* ???????????????????????????????????? *-//
-//               ^----^--v                                                 ^^----^
-	           "kyaキャ, きゃ",  "kyuキュ, きゅ",  "kyoキョ, きょ",  // * 1      ^^----^-v                                                // ki, ya yu yo
+//               ^---^--v                                                  ^^----^
+	           "kyaキャ, きゃ",  "kyuキュ, きゅ",  "kyoキョ, きょ",  // * 1         ^^---^-v                                                // ki, ya yu yo
 	                                                                      "gyaギャ, ぎゃ",  "gyuギュ, ぎゅ",  "gyoギョ, ぎょ",     // * 1 // ki゛, ya yu yo
-//                       ^               ^               ^                          ^               ^               ^        
+//                      ^              ^              ^                            ^              ^               ^        
+- - - - - */ 
+// 6 lines of the ka group: (inclusive) fixed according to kaz and chat      vv gi:ぎ and ギ:ji
+//   ka         ki         ku        ke         ko * 1       /  ga         gi               gu         ge         go * 1          //  naked / ゛
+	"kaカ, か", "kiキ, き", "kuク, く", "keケ, け", "koコ, こ",       "gaガ, が", "gi or jiギ, ぎ", "guグ, ぐ", "geゲ, げ", "goゴ, ご",   //-* ????? *-//
+//               ^---^--v                                                  ^^----------^
+	           "kyaキャ, きゃ",  "kyuキュ, きゅ",  "kyoキョ, きょ",  // * 1         ^^----------^-v                                                // ki, ya yu yo (kya, kyu, kyo)
+	                                                                      "gya or jyaギャ, ぎゃ",  "gyuギュ, ぎゅ",  "gyoギョ, ぎょ",    // * 1 // ki゛, ya yu yo (gya, gyu, gyo)
+//                      ^              ^              ^                                   ^              ^               ^        
+
+
 
 // 6 lines of the sa group: (inclusive)
-//   sa         shi         su        se         so * 1      /   za         gi         zu         ze        zo * 1         //  naked / ゛ 
-	"saサ, さ", "shiシ, し", "suス, す", "seセ, せ", "soソ, そ",      "zaザ, ざ", "giジ, じ", "zuズ, ず", "zeゼ, ぜ", "zoゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
-//               ^----^---v                                                 ^^----^
-	           "shaシャ, しゃ",  "shuシュ, しゅ",  "shoショ, しょ",  // * 1    ^^----^-v                                               // shi, ya yu yo
-	                                                                       "jaジャ, じゃ",   "juジュ, じゅ",   "joジョ, じょ",  // * 1 // shi゛, ya yu yo
-//                        ^                ^                ^                        ^                ^                ^    
+//   sa         shi         su        se         so * 1      /   za         ji or zi never gi   zu          ze         zo * 1         //  naked / ゛ 
+	"saサ, さ", "shiシ, し", "suス, す", "seセ, せ", "soソ, そ",      "zaザ, ざ", "jiジ, じ",           "zu ズ, ず", "zeゼ, ぜ", "zoゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
+//               ^----^-v                                                   ^^---^
+	           "shaシャ, しゃ",  "shuシュ, しゅ",  "shoショ, しょ",  // * 1          ^^---^-v                                          // shi, ya yu yo (sha, shu, sho)
+	                                                                       "jaジャ, じゃ",   "juジュ, じゅ",   "joジョ, じょ",  // * 1 // shi゛, ya yu yo (ja, ju, jo) prefered j vers
+//                      ^              ^              ^                            ^              ^              ^    
+"zu ズ from つ or す, ず", // //-* One key "zu", has two values づ and ず of the ta or sa group *-//
+
 
 // 6 lines of the ta group: (inclusive)
-//   ta         chi        tsu         te         to * 1     /   da         gi         zu         de         do * 1        //  naked / ゛
-	"taタ, た", "chiチ, ち", "tsuツ, つ", "teテ, て", "toト, と",     "daダ, だ",  "giザ, ぢ", "zuヅ, づ", "deデ, で", "doド, ど",  //-* One key "zu", has two values づ and ず *-//
-//               ^----^---v                                                 ^^----^
-	           "chaチャ, ちゃ", "chuチュ, ちゅ", "choチョ, ちょ",   // * 1     ^^----^-v                                               // chi, ya yu yo
-	                                                                       "jaヂャ, ぢゃ",  "juヂュ, ぢゅ",  "joヂョ, ぢょ",    // * 1 // chi゛, ya yu yo
-//                        ^               ^               ^                          ^               ^               ^
+//   ta         chi        tsu         te         to * 1     /   da         gi         zu          de         do * 1        //  naked / ゛
+	"taタ, た", "chiチ, ち", "tsuツ, つ", "teテ, て", "toト, と",     "daダ, だ",  "giザ, ぢ", "zu ヅ, づ", "deデ, で", "doド, ど",  //-* One key "zu", has two values づ and ず *-//
+//               ^----^-v                                                   ^^----^
+	           "chaチャ, ちゃ", "chuチュ, ちゅ", "choチョ, ちょ",   // * 1           ^^---^-v                                          // chi, ya yu yo (cha, chu, cho)
+	                                                                       "ja obsヂャ, ぢゃ",  "ju obsヂュ, ぢゅ",  "jo obsヂョ, ぢょ",    // * 1 // chi゛, ya yu yo (ja, ju, jo) obsolete
+	                                                                    //  ^                 ^                  ^ obsolete, use the j sounds from the sa group instead 
+//                      ^             ^             ^                              ^             ^             ^
+"zu ズ from つ or す, づ", // //-* One key "zu", has two values づ and ず of the ta or sa group *-//
+"zu ヅ from つ or す, づ", // //-* One key "zu", has two values づ and ず of the ta or sa group *-//
+
+
+
 
 // 5 lines of the na group: (inclusive) 'cause they are special -- they like to go naked 
 //   na         ni         nu        ne         no * 1                                                                     //  naked, all of them (there are no ゛s on na's)
@@ -48,6 +75,11 @@ func main() {
 //               ^---^---v                                
                "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",   "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",                   // * 2 // ni, ya yu yo
 //                       ^              ^              ^                ^               ^              ^ 
+
+
+
+
+
 
 // 9 lines of the ha group: (inclusive) -- the fully-clothed group 
 //  ha         hi         hu * 1     he        ho          he        ho * 2      /  ba         bi         bu         be         bo             //  naked / ゛
@@ -57,7 +89,7 @@ func main() {
 //              ^------v
 	          "hyaヒャ, ひゃ", "hyuヒュ, ひゅ", "hyoヒョ, ひょ",                                                                         // hi, ya yu yo
 	                                                                                "byaビャ, びゃ", "byuビュ, びゅ", "byoビョ, びょ",   // b゛, ya yu yo (bi)
-	                                                                                "pyaピャ, ぴゃ", "pyuビュ, ぴゅ", "pyoピョ, ぴょ",   // h゜, ya yu yo (pi)
+	                                                                                "pyaピャ, ぴゃ", "pyuピュ, ぴゅ", "pyoピョ, ぴょ",   // h゜, ya yu yo (pi)
 //                     ^               ^              ^                                       ^              ^              ^   
 
 // 5 lines of the ma group: (inclusive) 'cause they too are special -- and also like to go naked
@@ -81,6 +113,7 @@ func main() {
 
 // 2 lines (inclusive) of the wa set, plus the nh consonant -- always fully naked AND never have suffixes of ya yu or yo 
 //  wa wo nh * 2
+
    "waワ, わ", "woヲ, を",   "nhン, ん",       "waワ, わ", "woヲ, を",   "nhン, ん" }  // * 2 //  and the "}" must be on this line rather than on a line of its own 
 
 
@@ -102,7 +135,21 @@ func main() {
 		fmt.Printf("%s ? ", key)
 		fmt.Scan(&in)
 
+/* - - - oroginal: - - - -
 		if in == value {
+			//fmt.Println("You guessed right! You typed", in, "... the key was", key, "and the value was indeed", value)
+			fmt.Printf("\nRight! \n")
+		} else {
+			//fmt.Println("You typed", in, "which is not", value, "so you guessed wrongly")
+			fmt.Printf("\n Oops! it was %s", value)
+- - - - - */ 
+
+		if key == "zu ズ" || key == "zu ヅ" {
+			if in == "づ" || in == "ず" {
+				//fmt.Println("You guessed right! You typed", in, "... the key was", key, "and the value was indeed", value)
+				fmt.Printf("\nRight! it could have been either ず or づ as they are the same sound \n")
+			}
+		} else if in == value {
 			//fmt.Println("You guessed right! You typed", in, "... the key was", key, "and the value was indeed", value)
 			fmt.Printf("\nRight! \n")
 		} else {
