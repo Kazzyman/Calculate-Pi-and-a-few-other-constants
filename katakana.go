@@ -140,24 +140,24 @@ ChatGPT 3.5 proofread all of the katakana, hiragana pairs used in this code; and
 //     ka        ki       ku      ke       ko * 1     /  ga       gi       gu      ge       go * 1          //  naked / ゛
 	"カ, か", "ギ, き", "ク, く", "ケ, け", "コ, こ",       "ガ, が", "ギ, ぎ", "グ, ぐ", "ゲ, げ", "ゴ, ご",   //-* ???????????????????????????????????? *-//
 //               ^----^--v                                                 ^^----^
-	           "キャ, きゃ",  "キュ, きゅ",  "キョ, きょ",  // * 1      ^^----^-v                                                // ki, ya yu yo
-	                                                                      "ギャ, ぎゃ",  "ギュ, ぎゅ",  "ギョ, ぎょ",     // * 1 // ki゛, ya yu yo
+	           "キャ, きゃ",  "キュ, きゅ",  "キョ, きょ",  // * 1      ^^----^-v                                                // ki, ya yu yo (kya)
+	                                                                      "ギャ, ぎゃ",  "ギュ, ぎゅ",  "ギョ, ぎょ",     // * 1 // ki゛, ya yu yo (gya)
 //                       ^               ^               ^                          ^               ^               ^        
 
 // 6 lines of the sa group: (inclusive)
 //     sa       shi      su       se      so * 1    /   za       gi       zu       ze       zo * 1         //  naked / ゛ 
 	"サ, さ", "シ, し", "ス, す", "セ, せ", "ソ, そ",      "ザ, ざ", "ジ, じ", "ズ, ず", "ゼ, ぜ", "ゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
 //               ^----^---v                                                 ^^----^
-	           "シャ, しゃ",  "シュ, しゅ",  "ショ, しょ",  // * 1    ^^----^-v                                               // shi, ya yu yo
-	                                                                       "ジャ, じゃ",   "ジュ, じゅ",   "ジョ, じょ",  // * 1 // shi゛, ya yu yo
+	           "シャ, しゃ",  "シュ, しゅ",  "ショ, しょ",  // * 1    ^^----^-v                                               // shi, ya yu yo (sha)
+	                                                                       "ジャ, じゃ",   "ジュ, じゅ",   "ジョ, じょ",  // * 1 // shi゛, ya yu yo (ja)
 //                        ^                ^                ^                        ^                ^                ^    
 
 // 6 lines of the ta group: (inclusive)
 //     ta       chi     tsu      te       to * 1   /   da        gi       zu       de      do * 1        //  naked / ゛
 	"タ, た", "チ, ち", "ツ, つ", "テ, て", "ト, と",     "ダ, だ",  "ザ, ぢ", "ヅ, づ", "デ, で", "ド, ど",  //-* One key "zu", has two values づ and ず *-//
 //               ^----^---v                                                 ^^----^
-	           "チャ, ちゃ", "チュ, ちゅ", "チョ, ちょ",   // * 1     ^^----^-v                                               // chi, ya yu yo
-	                                                                       "ヂャ, ぢゃ",  "ヂュ, ぢゅ",  "ヂョ, ぢょ",    // * 1 // chi゛, ya yu yo
+	           "チャ, ちゃ", "チュ, ちゅ", "チョ, ちょ",   // * 1     ^^----^-v                                               // chi, ya yu yo (cha, u, o)
+	                                                                       "ヂャ, ぢゃ",  "ヂュ, ぢゅ",  "ヂョ, ぢょ",    // * 1 // chi゛, ya yu yo (ja, u, o)
 //                        ^               ^               ^                          ^               ^               ^
 
 // 5 lines of the na group: (inclusive) 'cause they are special -- they like to go naked 
@@ -173,16 +173,16 @@ ChatGPT 3.5 proofread all of the katakana, hiragana pairs used in this code; and
 //              ^---^--v                                                                pa       pi       pu       pe       po            //  poo゜ marks (drag)
                                                                                     "パ, ぱ", "ピ, ぴ", "プ, ぷ", "ペ, ぺ", "ポ, ぽ", //-* ????? *-//
 //              ^------v
-	          "ヒャ, ひゃ", "ヒュ, ひゅ", "ヒョ, ひょ",                                                                         // hi, ya yu yo
-	                                                                                "ビャ, びゃ", "ビュ, びゅ", "ビョ, びょ",   // hi゛, ya yu yo (bi)
-	                                                                                "ピャ, ぴゃ", "ビュ, ぴゅ", "ピョ, ぴょ",   // hi゜,  yu yo (pi)
+	          "ヒャ, ひゃ", "ヒュ, ひゅ", "ヒョ, ひょ",                                                                         // hi, ya yu yo (hya)
+	                                                                                "ビャ, びゃ", "ビュ, びゅ", "ビョ, びょ",   // hi゛, ya yu yo (bi) bya
+	                                                                                "ピャ, ぴゃ", "ビュ, ぴゅ", "ピョ, ぴょ",   // hi゜,  yu yo (pi) pya
 //                     ^               ^              ^                                       ^              ^              ^   
 
 // 5 lines of the ma group: (inclusive) 'cause they too are special -- and also like to go naked
 //     ma       mi       mu       me      mo * 1                                                                     //  naked, all of them (there are no ゛s on ma's)
    "マ, ま", "ミ, み", "ム, む", "メ, め", "モ, も",     
 //              ^--^-v
-              "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ",     "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ",                  // * 2 // mi, ya yu yo 
+              "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ",     "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ",                  // * 2 // mi, ya yu yo (myo)
 //                      ^              ^              ^                  ^              ^              ^
 
 // 3 lines of the ya, yu, yo set: (inclusive)
@@ -194,7 +194,7 @@ ChatGPT 3.5 proofread all of the katakana, hiragana pairs used in this code; and
 //     ra      ri       ru       re       ro * 1    
    "ラ, ら", "リ, り", "ル, る", "レ, れ", "ロ, ろ", 
 //             ^----^---v
-              "リャ, りゃ", "リュ, りゅ", "リョ, りょ",    "ャ, りゃ", "リュ, りゅ", "リョ, りょ",    // * 2 // ri, ya yu yo 
+              "リャ, りゃ", "リュ, りゅ", "リョ, りょ",    "ャ, りゃ", "リュ, りゅ", "リョ, りょ",    // * 2 // ri, ya yu yo (ryo)
 //                      ^              ^              ^             ^               ^             ^ 
 
 // 2 lines (inclusive) of the wa set, plus the nh consonant -- always fully naked AND never have suffixes of ya yu or yo 
