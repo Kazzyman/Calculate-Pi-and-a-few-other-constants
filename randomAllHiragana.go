@@ -37,10 +37,10 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 - - - - - */ 
 // 6 lines of the ka group: (inclusive) fixed according to kaz and chat      vv gi:ぎ and ギ:ji
 //   ka         ki         ku        ke         ko * 1       /  ga         gi               gu         ge         go * 1          //  naked / ゛
-	"kaカ, か", "kiキ, き", "kuク, く", "keケ, け", "koコ, こ",       "gaガ, が", "gi or jiギ, ぎ", "guグ, ぐ", "geゲ, げ", "goゴ, ご",   //-* ????? *-//
-//               ^---^--v                                                  ^^----------^
-	           "kyaキャ, きゃ",  "kyuキュ, きゅ",  "kyoキョ, きょ",  // * 1         ^^----------^-v                                                // ki, ya yu yo (kya, kyu, kyo)
-	                                                                      "gya or jyaギャ, ぎゃ",  "gyuギュ, ぎゅ",  "gyoギョ, ぎょ",    // * 1 // ki゛, ya yu yo (gya, gyu, gyo)
+	"kaカ, か", "kiキ, き", "kuク, く", "keケ, け", "koコ, こ",       "gaガ, が", "giギ, ぎ", "guグ, ぐ", "geゲ, げ", "goゴ, ご",   //-* ????? *-//
+//               ^---^--v                                                  ^^----^
+	           "kyaキャ, きゃ",  "kyuキュ, きゅ",  "kyoキョ, きょ",  // * 1         ^^- --^-v                                            // ki, ya yu yo (kya, kyu, kyo)
+	                                                                      "gyaギャ, ぎゃ",  "gyuギュ, ぎゅ",  "gyoギョ, ぎょ",    // * 1 // ki゛, ya yu yo (gya, gyu, gyo)
 //                      ^              ^              ^                                   ^              ^               ^        
 
 
@@ -68,17 +68,12 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 
 
 
-
 // 5 lines of the na group: (inclusive) 'cause they are special -- they like to go naked 
-//   na         ni         nu        ne         no * 1                                                                     //  naked, all of them (there are no ゛s on na's)
+//   na         ni         nu        ne         no * 1                                                              //  naked, all of them (there are no ゛s on na's)
 	"naナ, な", "niニ, に", "nuヌ, ぬ", "neネ, ね", "noノ, の",    
-//               ^---^---v                                
-               "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",   "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",                   // * 2 // ni, ya yu yo
-//                       ^              ^              ^                ^               ^              ^ 
-
-
-
-
+//               ^---^--v                                
+               "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",   "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",               // * 2 // ni, ya yu yo (nya, nyu, nyo)
+//                      ^             ^             ^               ^              ^             ^ 
 
 
 // 9 lines of the ha group: (inclusive) -- the fully-clothed group 
@@ -90,14 +85,14 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 	          "hyaヒャ, ひゃ", "hyuヒュ, ひゅ", "hyoヒョ, ひょ",                                                                         // hi, ya yu yo
 	                                                                                "byaビャ, びゃ", "byuビュ, びゅ", "byoビョ, びょ",   // b゛, ya yu yo (bi)
 	                                                                                "pyaピャ, ぴゃ", "pyuピュ, ぴゅ", "pyoピョ, ぴょ",   // h゜, ya yu yo (pi)
-//                     ^               ^              ^                                       ^              ^              ^   
+//                     ^             ^             ^                                         ^             ^             ^   
 
 // 5 lines of the ma group: (inclusive) 'cause they too are special -- and also like to go naked
 //  ma         mi        mu         me         mo * 1                                                                     //  naked, all of them (there are no ゛s on ma's)
    "maマ, ま", "miミ, み", "muム, む", "meメ, め", "moモ, も",     
-//              ^--^-v
+//              ^---^-v
               "myaミャ, みゃ", "myuミュ, みゅ", "myoミョ, みょ",     "myaミャ, みゃ", "myuミュ, みゅ", "myoミョ, みょ",                  // * 2 // mi, ya yu yo 
-//                      ^              ^              ^                  ^              ^              ^
+//                      ^            ^             ^                 ^             ^             ^
 
 // 3 lines of the ya, yu, yo set: (inclusive)
 //  ya         yu         yo * 3
@@ -107,9 +102,9 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 // 5 lines of the ra/la group: (inclusive) actually spelled with the "r" but pronounced with the "L" sounds -- they too are special -- and also like to go naked
 //  ra        ri         ru         re         ro * 1    
    "raラ, ら", "riリ, り", "ruル, る", "reレ, れ", "roロ, ろ", 
-//             ^----^---v
+//             ^----^--v
               "ryaリャ, りゃ", "ryuリュ, りゅ", "ryoリョ, りょ",    "ryaリャ, りゃ", "ryuリュ, りゅ", "ryoリョ, りょ",    // * 2 // ri, ya yu yo 
-//                      ^              ^              ^             ^               ^             ^ 
+//                     ^             ^             ^               ^             ^             ^ 
 
 // 2 lines (inclusive) of the wa set, plus the nh consonant -- always fully naked AND never have suffixes of ya yu or yo 
 //  wa wo nh * 2
