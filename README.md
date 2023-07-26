@@ -6,4 +6,4 @@ For the source code to the windows version, look to the most-recently-dated win-
 
 	For the Windows executable, download Pi-and-friends.exe
 
-	Mac executable is Pi-and-friends-Mac
+	Mac/Linux executable is Pi-and-friends-Mac  but it may not run on older versions of Mac OS, Don:t even try to run it on older versions of linux
