@@ -39,30 +39,30 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 //   ka         ki         ku        ke         ko * 1       /  ga         gi               gu         ge         go * 1          //  naked / ゛
 	"kaカ, か", "kiキ, き", "kuク, く", "keケ, け", "koコ, こ",       "gaガ, が", "giギ, ぎ", "guグ, ぐ", "geゲ, げ", "goゴ, ご",   //-* ????? *-//
 //               ^---^--v                                                  ^^----^
-	           "kyaキャ, きゃ",  "kyuキュ, きゅ",  "kyoキョ, きょ",  // * 1         ^^- --^-v                                            // ki, ya yu yo (kya, kyu, kyo)
+	           "kyaキャ, きゃ",  "kyuキュ, きゅ",  "kyoキョ, きょ",  // * 1         ^^- --^-v                                             // ki, ya yu yo (kya, kyu, kyo)
 	                                                                      "gyaギャ, ぎゃ",  "gyuギュ, ぎゅ",  "gyoギョ, ぎょ",    // * 1 // ki゛, ya yu yo (gya, gyu, gyo)
 //                      ^              ^              ^                                   ^              ^               ^        
 
 
 
 // 6 lines of the sa group: (inclusive)
-//   sa         shi         su        se         so * 1      /   za         ji or zi never gi   zu          ze         zo * 1         //  naked / ゛ 
-	"saサ, さ", "shiシ, し", "suス, す", "seセ, せ", "soソ, そ",      "zaザ, ざ", "jiジ, じ",           "zu ズ, ず", "zeゼ, ぜ", "zoゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
+//   sa         shi         su        se         so * 1      /   za         ji never gi   　　zu          ze         zo * 1         //  naked / ゛ 
+	"saサ, さ", "shiシ, し", "suス, す", "seセ, せ", "soソ, そ",      "zaザ, ざ", "jiジ, じ",         "zu ズ, ず", "zeゼ, ぜ", "zoゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
 //               ^----^-v                                                   ^^---^
-	           "shaシャ, しゃ",  "shuシュ, しゅ",  "shoショ, しょ",  // * 1          ^^---^-v                                          // shi, ya yu yo (sha, shu, sho)
-	                                                                       "jaジャ, じゃ",   "juジュ, じゅ",   "joジョ, じょ",  // * 1 // shi゛, ya yu yo (ja, ju, jo) prefered j vers
+	           "shaシャ, しゃ",  "shuシュ, しゅ",  "shoショ, しょ",  // * 1          ^^---^-v                                       // shi,  ya yu yo (sha, shu, sho)
+	                                                                       "jaジャ, じゃ",   "juジュ, じゅ",   "joジョ, じょ",      // shi゛, ya yu yo (ja, ju, jo) prefered jx vers ***
 //                      ^              ^              ^                            ^              ^              ^    
 "zu ズ from つ or す, ず", // //-* One key "zu", has two values づ and ず of the ta or sa group *-//
-
-
-// 6 lines of the ta group: (inclusive)
-//   ta         chi        tsu         te         to * 1     /   da         gi         zu          de         do * 1        //  naked / ゛
-	"taタ, た", "chiチ, ち", "tsuツ, つ", "teテ, て", "toト, と",     "daダ, だ",  "giザ, ぢ", "zu ヅ, づ", "deデ, で", "doド, ど",  //-* One key "zu", has two values づ and ず *-//
+                                                                    //             ^
+                                                                   //              じ is used 95% relative to ぢ , therefore ぢ is 95% wrong! 
+// 6 lines of the ta group: (inclusive)                                            v   
+//   ta         chi        tsu         te         to * 1     /   da         ji never gi    zu          de         do * 1        //  naked / ゛
+	"taタ, た", "chiチ, ち", "tsuツ, つ", "teテ, て", "toト, と",     "daダ, だ",  "jiヂ, ぢ",     "zu ヅ, づ", "deデ, で", "doド, ど",  //-* One key "zu", has two values づ and ず *-//
 //               ^----^-v                                                   ^^----^
 	           "chaチャ, ちゃ", "chuチュ, ちゅ", "choチョ, ちょ",   // * 1           ^^---^-v                                          // chi, ya yu yo (cha, chu, cho)
 	                                                                       "ja obsヂャ, ぢゃ",  "ju obsヂュ, ぢゅ",  "jo obsヂョ, ぢょ",    // * 1 // chi゛, ya yu yo (ja, ju, jo) obsolete
-	                                                                    //  ^                 ^                  ^ obsolete, use the j sounds from the sa group instead 
-//                      ^             ^             ^                              ^             ^             ^
+	                                                                    //  ^                 ^                  ^ obsolete, use the jx versions from the sa group instead ***
+//                      ^             ^             ^                                  ^                 ^                 ^ ち s
 "zu ズ from つ or す, づ", // //-* One key "zu", has two values づ and ず of the ta or sa group *-//
 "zu ヅ from つ or す, づ", // //-* One key "zu", has two values づ and ず of the ta or sa group *-//
 
@@ -139,11 +139,22 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 			fmt.Printf("\n Oops! it was %s", value)
 - - - - - */ 
 
-		if key == "zu ズ" || key == "zu ヅ" {
+		if key == "jaジャ" {
+			if in == "じゃ" {
+				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
+			} else {
+				fmt.Printf("\n Oops! it was %s and remember that it is nearly-never from chi ち but is nearly-always from shi し ", value)
+			}
+		}
+		// then check for additional special prompt(key)/value events or conditions
+
+		if key == "zu ズ" || key == "zu ヅ" || key == "zu ズ from つ or す" {
 			if in == "づ" || in == "ず" {
 				//fmt.Println("You guessed right! You typed", in, "... the key was", key, "and the value was indeed", value)
 				fmt.Printf("\nRight! it could have been either ず or づ as they are the same sound \n")
 			}
+
+		// the next two following conditions are for all normal (not special) prompt(key)/value events or conditions 
 		} else if in == value {
 			//fmt.Println("You guessed right! You typed", in, "... the key was", key, "and the value was indeed", value)
 			fmt.Printf("\nRight! \n")
