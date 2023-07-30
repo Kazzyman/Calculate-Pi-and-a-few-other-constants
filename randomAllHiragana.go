@@ -6,7 +6,8 @@ import (
 	"strings"
 	"time"
 )
-// 51 15 25 21 = 112 if we include the suffix combinations 
+// 46 15 25 21 = 107 chars from the blue card if we include all the suffixed combination "chars". 46*2=92 for just the complete simple hiragana set of base chars. 
+// ... doubling it all for katakana gives a grand total of 214 Japanese chars excluding the various punctuation characters. 
 var in string
 
 func main() {
@@ -19,10 +20,13 @@ func main() {
 	"aア, あ", "aア, あ",    "iイ, い",    "uウ, う", "eエ, え", "oオ, お",     "uウ, う", "eエ, え", "oオ, お",      
 
 /*
-In the traditional Hepburn romanization system, the sound じ in hiragana is romanized as "ji," and the katakana ジ is also romanized as "ji" 
-However, in some other romanization systems like the Nihon-shiki and Kunrei-shiki, the sound じ is romanized as "zi" instead of "ji."
+   "ji" is for じ ,and "gi" is for ぎ .
+ぎ:gi ギ
+じ:ji ジ
 
-The sound ぎ in hiragana is romanized as "gi," and the katakana ギ is also romanized as "gi."
+ji:じ or ジ In the traditional Hepburn romanization system, the sound じ in hiragana is romanized as "ji," and the katakana ジ is also romanized as "ji" 
+zi:じ However, in some other romanization systems like the Nihon-shiki and Kunrei-shiki, the sound じ is romanized as "zi" instead of "ji."
+gi:ぎ or ギ The sound gi:ぎ in hiragana is romanized as "gi," and the katakana ギ is also romanized as "gi."
 
 So, both "gi" and "ji" are used as romanizations for different contexts, but the standard in most systems is "ji" for じ in hiragana and "gi" for ぎ in hiragana.
 
@@ -46,8 +50,8 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 
 
 // 6 lines of the sa group: (inclusive)
-//   sa         shi         su        se         so * 1      /   za         ji never gi   　　zu          ze         zo * 1         //  naked / ゛ 
-	"saサ, さ", "shiシ, し", "suス, す", "seセ, せ", "soソ, そ",      "zaザ, ざ", "jiジ, じ",         "zu ズ, ず", "zeゼ, ぜ", "zoゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
+//   sa         shi         su        se         so * 1      /   za         ji never gi   　zu          ze         zo * 1         //  naked / ゛ 
+	"saサ, さ", "shiシ, し", "suス, す", "seセ, せ", "soソ, そ",      "zaザ, ざ", "jiジ, じ",       "zu ズ, ず", "zeゼ, ぜ", "zoゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
 //               ^----^-v                                                   ^^---^
 	           "shaシャ, しゃ",  "shuシュ, しゅ",  "shoショ, しょ",  // * 1          ^^---^-v                                       // shi,  ya yu yo (sha, shu, sho)
 	                                                                       "jaジャ, じゃ",   "juジュ, じゅ",   "joジョ, じょ",      // shi゛, ya yu yo (ja, ju, jo) prefered jx vers ***
@@ -126,19 +130,44 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 		key := parts[0]
 		value := parts[1]
 
-		//fmt.Println("Type the key for this sound:", key)
+		//fmt.Println("Type the key or keys needed to form the hiragana chars for this sound:", key)
 		fmt.Printf("%s ? ", key)
 		fmt.Scan(&in)
 
-/* - - - oroginal: - - - -
-		if in == value {
-			//fmt.Println("You guessed right! You typed", in, "... the key was", key, "and the value was indeed", value)
-			fmt.Printf("\nRight! \n")
-		} else {
-			//fmt.Println("You typed", in, "which is not", value, "so you guessed wrongly")
-			fmt.Printf("\n Oops! it was %s", value)
-- - - - - */ 
+/*
+	ぎ:gi ギ
+	じ:ji ジ
 
+	ji:じ or ジ In the traditional Hepburn romanization system, the sound じ in hiragana is romanized as "ji," and the katakana ジ is also romanized as "ji" 
+	zi:じ However, in some other romanization systems like the Nihon-shiki and Kunrei-shiki, the sound じ is romanized as "zi" instead of "ji."
+	gi:ぎ or ギ The sound gi:ぎ in hiragana is romanized as "gi," and the katakana ギ is also romanized as "gi."
+*/
+		// proper use of the ji sound from the sa group (sometimes spelled zi) : sa->za,ji
+		if key == "jiジ" {
+			if in == "じ" {
+				fmt.Printf("\nRight! it is always from shi し and NEVER from chi ち ,and it is the sound ji, NEVER gi ( that being ぎ:gi ギ )  \n")
+				// さ　し　 す　せ　そ　
+				// sa shi su se so
+				// za ji  zu ze zo゛　()
+			} else {
+				fmt.Printf("\n Oops! it was %s and remember, the sound is ji always from shi し ,and NEVER from chi ち ", value)
+			}
+		}
+
+		// proper use of the gi sound from the ka group : ka->ga
+		if key == "giギ" {
+			if in == "ぎ" {
+				fmt.Printf("\nRight! it is always from chi ち and NEVER from shi し ,and it is the sound gi, NEVER ji ( that being じ:ji ジ )  \n")
+				// か　き　く　け　こ　
+				// ka ki ku ke ko
+				// ga gi gu ge go゛
+			} else {
+				fmt.Printf("\n Oops! it was %s and remember, the sound is gi always from chi ち ,and NEVER from shi し ", value)
+			}
+		}
+
+
+		// properly-constructed forms of ji used as ja, ju, jo which are nearly always from shi し and really never from chi ち
 		if key == "jaジャ" {
 			if in == "じゃ" {
 				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
@@ -146,61 +175,95 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 				fmt.Printf("\n Oops! it was %s and remember that it is nearly-never from chi ち but is nearly-always from shi し ", value)
 			}
 		}
-		// then check for additional special prompt(key)/value events or conditions
+		if key == "juジュ" {
+			if in == "じゅ" {
+				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
+			} else {
+				fmt.Printf("\n Oops! it was %s and remember that it is nearly-never from chi ち but is nearly-always from shi し ", value)
+			}
+		}
+		if key == "joジョ" {
+			if in == "じょ" {
+				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
+			} else {
+				fmt.Printf("\n Oops! it was %s and remember that it is nearly-never from chi ち but is nearly-always from shi し ", value)
+			}
+		}
 
-		if key == "zu ズ" || key == "zu ヅ" || key == "zu ズ from つ or す" {
+// /* obsolete forms of ja, ju and jo 
+		if key == "ja obsヂャ" {
+			if in == "ぢゃ" {
+				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
+			} else {
+				fmt.Printf("\n Oops! it was %s and remember that it is nearly-never from chi ち but is nearly-always from shi し ", value)
+			}
+		}
+		if key == "ju obsヂュ" {
+			if in == "ぢゅ" {
+				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
+			} else {
+				fmt.Printf("\n Oops! it was %s and remember that it is nearly-never from chi ち but is nearly-always from shi し ", value)
+			}
+		}
+		if key == "jo obsヂョ" {
+			if in == "ぢょ" {
+				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
+			} else {
+				fmt.Printf("\n Oops! it was %s and remember that it is nearly-never from chi ち but is nearly-always from shi し ", value)
+			}
+		}
+// */
+
+
+		// then we check for additional very-special prompt(key)/value events or conditions
+
+		if key == "zu ズ" || key == "zu ヅ" || key == "zu ズ from つ or す" || key == "zu ヅ from つ or す" {
 			if in == "づ" || in == "ず" {
-				//fmt.Println("You guessed right! You typed", in, "... the key was", key, "and the value was indeed", value)
 				fmt.Printf("\nRight! it could have been either ず or づ as they are the same sound \n")
 			}
 
 		// the next two following conditions are for all normal (not special) prompt(key)/value events or conditions 
+
 		} else if in == value {
-			//fmt.Println("You guessed right! You typed", in, "... the key was", key, "and the value was indeed", value)
 			fmt.Printf("\nRight! \n")
 		} else {
-			//fmt.Println("You typed", in, "which is not", value, "so you guessed wrongly")
-			fmt.Printf("\n Oops! it was %s", value)
+			fmt.Printf("\n Oops! actually it was %s", value)
 
-// hints: 
-
-			if value == "ほ" {
-				fmt.Printf(", hint: ring--->, \"-\" \n")
-			}
+// hints: may want to add additional special hints above
 
 			if value == "あ" {
-				fmt.Printf(", hint: middle<, 3 char \n")
+				fmt.Printf(", hint: middle<- to the 3 char \n")
 			}
 			if value == "い" {
-				fmt.Printf(", hint: E char \n")
+				fmt.Printf(", hint: middle < to the E char \n")
 			}
 			if value == "う" {
-				fmt.Printf(", hint: middle->, 4, u \n")
+				fmt.Printf(", hint: middle> to the 4 char \n")
 			}
 			if value == "え" {
-				fmt.Printf(", hint: 5 char \n")
+				fmt.Printf(", hint: index > to the 5 char \n")
 			}
 			if value == "お" {
-				fmt.Printf(", hint: index--->, 6 char \n")
+				fmt.Printf(", hint: index--> to the 6 char \n")
 			}
-
+			// 5
 
 			if value == "か" {
-				fmt.Printf(", hint: T char \n")
+				fmt.Printf(", hint: index --> to the T char \n")
 			}
 			if value == "き" {
-				fmt.Printf(", hint: G char \n")
+				fmt.Printf(", hint: G char, key|ki of G \n")
 			}
 			if value == "く" {
 				fmt.Printf(", hint: H char \n")
 			}
 			if value == "け" {
-				fmt.Printf(", hint: :* char \n")
+				fmt.Printf(", hint: :* chars \n")
 			}
 			if value == "こ" {
-				fmt.Printf(", hint: B char \n")
+				fmt.Printf(", hint: B char, ko way below \n")
 			}
-
+			// 10
 
 			if value == "さ" {
 				fmt.Printf(", hint: X char \n")
@@ -217,24 +280,24 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 			if value == "そ" {
 				fmt.Printf(", hint: C char \n")
 			}
-
+			// 15
 
 			if value == "た" {
-				fmt.Printf(", hint: Q char \n")
+				fmt.Printf(", hint: Q char, pinky tag \n")
 			}
 			if value == "ち" {
-				fmt.Printf(", hint: A char \n")
+				fmt.Printf(", hint: A char, A cheater \n")
 			}
 			if value == "つ" {
-				fmt.Printf(", hint: Z char \n")
+				fmt.Printf(", hint: Z char, pinky mowed down by Tsunami \n")
 			}
 			if value == "て" {
-				fmt.Printf(", hint: W char \n")
+				fmt.Printf(", hint: W char, next to ta \n")
 			}
 			if value == "と" {
-				fmt.Printf(", hint: S char \n")
+				fmt.Printf(", hint: S char, wedding-ring instead of toe \n")
 			}
-
+			// 20
 
 			if value == "な" {
 				fmt.Printf(", hint: U char \n")
@@ -246,86 +309,87 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 				fmt.Printf(", hint: ring<---, 1 char \n")
 			}
 			if value == "ね" {
-				fmt.Printf(", hint: ,< char \n")
+				fmt.Printf(", hint: ring< to the , char \n")
 			}
 			if value == "の" {
-				fmt.Printf(", hint: k char \n")
+				fmt.Printf(", hint: K char \n")
 			}
-
+			// 25
 
 			if value == "ま" {
 				fmt.Printf(", hint: J char \n")
 			}
 			if value == "み" {
-				fmt.Printf(", hint: V char \n")
+				fmt.Printf(", hint: N char \n")
 			}
 			if value == "む" {
-				fmt.Printf(", hint: ]} char \n")
+				fmt.Printf(", hint: pinky---> one-over \n")
 			}
 			if value == "め" {
-				fmt.Printf(", hint: /? char \n")
+				fmt.Printf(", hint: slide down to the /? chars \n")
 			}
 			if value == "も" {
 				fmt.Printf(", hint: M char \n")
 			}
-
+			// 30
 
 			if value == "ら" {
-				fmt.Printf(", hint: o char \n")
+				fmt.Printf(", hint: ra:raised-ring-finger \n")
 			}
 			if value == "り" {
-				fmt.Printf(", hint: L char \n")
+				fmt.Printf(", hint: ri:ring-stays-put \n")
 			}
 			if value == "る" {
-				fmt.Printf(", hint: .> char \n")
+				fmt.Printf(", hint: ru:loop-left \n")
 			}
 			if value == "れ" {
-				fmt.Printf(", hint: ;+ char \n")
+				fmt.Printf(", hint: re:lay-little-finger \n")
 			}
 			if value == "ろ" {
-				fmt.Printf(", hint: _ char \n")
+				fmt.Printf(", hint: ro:roll-way-over \n")
 			}
+			// 35
 
-			if value == "は" {
-				fmt.Printf(", hint: o char \n")
+			if value == "ほ" {
+				fmt.Printf(", hint: F \n") 
 			}
 			if value == "ひ" {
-				fmt.Printf(", hint: L char \n")
+				fmt.Printf(", hint: V \n")
 			}
 			if value == "ふ" {
-				fmt.Printf(", hint: ring<, 2 char \n")
+				fmt.Printf(", hint: 2 \n")
 			}
 			if value == "へ" {
-				fmt.Printf(", hint: ;+ char \n")
+				fmt.Printf(", hint: far-upper-right-corner \n")
 			}
 			if value == "ほ" {
-				fmt.Printf(", hint: _ char \n")
+				fmt.Printf(", hint: ring-->long-reach, dash char\n")
 			}
-
+			// 40
 
 			if value == "や" {
-				fmt.Printf(", hint: 7 char \n")
+				fmt.Printf(", hint: index long-reach<--, to the 7 char \n")
 			}
-
 			if value == "ゆ" {
-				fmt.Printf(", hint: index->, 8 \n")
+				fmt.Printf(", hint: index->, to the 8 char \n")
 			}
 			if value == "よ" {
-				fmt.Printf(", hint: 9 char \n")
+				fmt.Printf(", hint: middle>, to the 9 char \n")
 			}
-
+			// 43
 
 			if value == "わ" {
-				fmt.Printf(", hint: 0 char \n")
+				fmt.Printf(", hint: ring>, to the zero char \n")
 			}
 			if value == "を" {
-				fmt.Printf(", hint: 0^ char \n")
+				fmt.Printf(", hint: ring>, to the ^zero char \n")
 			}
-
+			// 45
 			
 			if value == "ん" {
 				fmt.Printf(", hint: Y char \n")
 			}
+			// 46
 		}
 		fmt.Println()
 	}
