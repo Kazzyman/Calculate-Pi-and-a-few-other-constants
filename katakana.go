@@ -88,18 +88,18 @@
 	"マ, ま",  ma - I don't see it, I just don't (a breast pump maybe?)
 	"ミ, み",  mi - think three, lines that is; me thinks 3
 	"ム, む",  mu - now it's an even-fatter-jawed moo-cow 
-	"メ, め",  me - cross off the mess. But that's nothing nu 
-	"モ, も",  mo - way to go Joe!
+	"メ, め",  me - cross off the mess. But that's nothing nu ヌ
+	"モ, も",  mo - way to right go Joe!
 	"ミャ, みゃ", ...
 	"ミュ, みゅ", 
 	"ミョ, みょ",     
 	"ヤ, や", 
 	"ユ, ゆ", yu - you won "1", yes, let's ko with that ユ　
 	"ヨ, よ", ... 
-	"ラ, ら",  ra - rimes with te, not! so, why the te look-alike? "テ, て"
-	"リ, り",  ri り - we all still see it as a lefty i guess 
+	"ラ, ら",  ra - rimes with te, not! So, why the te look-alike? "テ, て"
+	"リ, り",  ri り - we all still see it as a lefty i guess, longer on the right ring 
 	"ル, る",  ru - is now two?
-	"レ, れ",  re - at least it looks like ru now, but that should have been ro doing that!
+	"レ, れ",  re - at least it looks like ru now, but that should have been ro doing that! しshe-it
 	"ロ, ろ",  ro - is a square O -- maybe it had always been the way to go to do a square O for ro? 
 	"リャ, りゃ", ...
 	"リュ, りゅ", 
@@ -135,73 +135,73 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 */
 
 // "vowels" :
-//  a * 2 :             　i * 1       u        　e        o            u        e        o * 2 :
+//  a         * 2 :     　i  * 1      u       　e        o             u        e        o  * 2 :
 	"ア, あ", "ア, あ",    "イ, い",    "ウ, う", "エ, え", "オ, お",     "ウ, う", "エ, え", "オ, お",      
 
 // ka group: 
-//  ka       ki       ku      　ke       ko * 1     /  　ga       gi       gu      　ge       go * 1          //  naked / ゛
-	"カ, か", "キ, き", "ク, く", "ケ, け", "コ, こ",       "ガ, が", "ギ, ぎ", "グ, ぐ", "ゲ, げ", "ゴ, ご",   //-* ???????????????????????????????????? *-//
+//  ka       ki       ku      　ke       ko * 1    ||  　ga       gi       gu      　ge       go * 1         //  naked || ゛marks
+	"カ, か", "キ, き", "ク, く", "ケ, け", "コ, こ",       "ガ, が", "ギ, ぎ", "グ, ぐ", "ゲ, げ", "ゴ, ご",  
 //            ^---^--v                                            ^^--^
-	           "キャ, きゃ",  "キュ, きゅ",  "キョ, きょ",  // * 1     ^^--^-v                                           // ki,  ya yu yo (kya)
-	                                                              "ギャ, ぎゃ",  "ギュ, ぎゅ",  "ギョ, ぎょ",     // * 1 // ki゛, ya yu yo (gya)
+	           "キャ, きゃ",  "キュ, きゅ",  "キョ, きょ",  // * 1     ^^--^-v                                           // ki,  ya yu yo (kya, kyu, kyo)
+	                                                              "ギャ, ぎゃ",  "ギュ, ぎゅ",  "ギョ, ぎょ",     // * 1 // ki゛, ya yu yo (gya, gyu, gyo)
 //                   ^            ^             ^                       ^             ^            ^        
 
-// sa group: // formated to here
-//     sa       shi      su       se      so * 1    /   za       gi       zu       ze       zo * 1         //  naked / ゛ 
-	"サ, さ", "シ, し", "ス, す", "セ, せ", "ソ, そ",      "ザ, ざ", "ジ, じ", "ズ, ず", "ゼ, ぜ", "ゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
-//               ^----^---v                                                 ^^----^
-	           "シャ, しゃ",  "シュ, しゅ",  "ショ, しょ",  // * 1    ^^----^-v                                               // shi, ya yu yo (sha)
-	                                                                       "ジャ, じゃ",   "ジュ, じゅ",   "ジョ, じょ",  // * 1 // shi゛, ya yu yo (ja)
-//                        ^                ^                ^                        ^                ^                ^    
+// sa group: 
+//  sa       shi      su       se        so * 1   ||   za       ji        zu       ze       zo * 1         //  naked || ゛marks
+	"サ, さ", "シ, し", "ス, す", "セ, せ", "ソ, そ",      "ザ, ざ", "ジ, じ", "ズ, ず", "ゼ, ぜ", "ゾ, ぞ",      //-* One key "zu", has two values づ and ず *-//
+//           ^----^-v                                           ^^---^
+	          "シャ, しゃ",  "シュ, しゅ",  "ショ, しょ",  // * 1    ^^---^-v                                          // shi,  ya yu yo (sha, shu, sho)
+	                                                             "ジャ, じゃ",   "ジュ, じゅ",   "ジョ, じょ",  // * 1 // shi゛, ya yu yo (ja, ju, jo)
+//                  ^            ^             ^                       ^             ^              ^    
 
-// 6 lines of the ta group: (inclusive)
-//     ta       chi     tsu      te       to * 1   /   da        gi       zu       de      do * 1        //  naked / ゛
-	"タ, た", "チ, ち", "ツ, つ", "テ, て", "ト, と",     "ダ, だ",  "ザ, ぢ", "ヅ, づ", "デ, で", "ド, ど",  //-* One key "zu", has two values づ and ず *-//
-//               ^----^---v                                                 ^^----^
-	           "チャ, ちゃ", "チュ, ちゅ", "チョ, ちょ",   // * 1     ^^----^-v                                               // chi, ya yu yo (cha, u, o)
-	                                                                       "ヂャ, ぢゃ",  "ヂュ, ぢゅ",  "ヂョ, ぢょ",    // * 1 // chi゛, ya yu yo (ja, u, o)
-//                        ^               ^               ^                          ^               ^               ^
+// ta group: 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　vv ji never gi
+//  ta       chi      tsu      te        to * 1   ||   da        ji       zu       de       do * 1        //  naked || ゛marks
+	"タ, た", "チ, ち", "ツ, つ", "テ, て", "ト, と",      "ダ, だ",  "ヂ, ぢ", "ヅ, づ", "デ, で", "ド, ど",    //-* One key "zu", has two values づ and ず *-//
+//            ^--^--v                                            ^^--^
+             "チャ, ちゃ", "チュ, ちゅ", "チョ, ちょ",   // * 1      ^^--^-v                                           // chi,  ya yu yo (cha, chu, cho)
+	                                                              "ヂャ, ぢゃ",  "ヂュ, ぢゅ",  "ヂョ, ぢょ",    // * 1 // chi゛, ya yu yo (ja, ju, jo)
+//                  ^           ^            ^                          ^            ^             ^
 
-// 5 lines of the na group: (inclusive) 'cause they are special -- they like to go naked 
-//     na       ni       nu       ne       no * 1                                                                     //  naked, all of them (there are no ゛s on na's)
+// na group:  'cause they are na-ty special -- they like to go naked 
+//  na       ni       nu        ne       no * 1                                                       //  naked, all of them (there are no ゛s on na's)
 	"ナ, な", "ニ, に", "ヌ, ぬ", "ネ, ね", "ノ, の",    
-//               ^---^---v                                
-               "ニャ, にゃ", "ニュ, にゅ", "ニョ, にょ",   "ニャ, にゃ", "ニュ, にゅ", "ニョ, にょ",                   // * 2 // ni, ya yu yo
-//                       ^              ^              ^                ^               ^              ^ 
+//            ^---^-v                                
+             "ニャ, にゃ", "ニュ, にゅ", "ニョ, にょ",   "ニャ, にゃ", "ニュ, にゅ", "ニョ, にょ",                   // * 2 // ni, ya yu yo (nya, nyu, nyo)
+//                  ^           ^            ^              ^           ^            ^ 
 
-// 9 lines of the ha group: (inclusive) -- the fully-clothed group 
-//     ha       hi       hu * 1   he       ho       he       ho * 2    /  ba       bi       bu       be       bo             //  naked / ゛
-   "ハ, は", "ヒ, ひ", "フ, ふ", "ヘ, へ", "ホ, ほ", "ヘ, へ", "ホ, ほ",     "バ, ば", "ビ, び", "ブ, ぶ", "ベ, べ", "ボ, ぼ",  //-* ????? *-// 
-//              ^---^--v                                                                pa       pi       pu       pe       po            //  poo゜ marks (drag)
-                                                                                    "パ, ぱ", "ピ, ぴ", "プ, ぷ", "ペ, ぺ", "ポ, ぽ", //-* ????? *-//
-//              ^------v
-	          "ヒャ, ひゃ", "ヒュ, ひゅ", "ヒョ, ひょ",                                                                         // hi, ya yu yo (hya)
-	                                                                                "ビャ, びゃ", "ビュ, びゅ", "ビョ, びょ",   // hi゛, ya yu yo (bi) bya
-	                                                                                "ピャ, ぴゃ", "ピュ, ぴゅ", "ピョ, ぴょ",   // hi゜,  yu yo (pi) pya
-//                     ^               ^              ^                                       ^              ^              ^   
+// ha group: -- the fully-clothed group (゛marks, and poo゜marks too)
+//  ha       hi       hu       he        ho   * 1   ||    ba       bi       bu        be       bo          //  naked || ゛marks
+   "ハ, は", "ヒ, ひ", "フ, ふ", "ヘ, へ", "ホ, ほ",         "バ, ば", "ビ, び", "ブ, ぶ", "ベ, べ", "ボ, ぼ",    //  ゛marks 
+//            ^--^--v                                      pa        pi       pu       pe        po        //  poo゜ marks (drag)
+                                                           "パ, ぱ", "ピ, ぴ", "プ, ぷ", "ペ, ぺ", "ポ, ぽ",  //   ^ ^  ^ ^ ^  ^ ^ ^
+//            ^-----v                                                ^^--^
+	          "ヒャ, ひゃ", "ヒュ, ひゅ", "ヒョ, ひょ",               //  ^^--^--v           v            v       // hi , ya yu yo (hi) hya, hyu, hyo
+	                                                                  "ビャ, びゃ", "ビュ, びゅ", "ビョ, びょ",   // hi゛, ya yu yo (bi) bya, byu, byo
+	                                                                  "ピャ, ぴゃ", "ピュ, ぴゅ", "ピョ, ぴょ",   // hi゜,  ya yu yo (pi) pya, pyu, pyo
+//                  ^           ^            ^                                            ^           ^            ^   
 
-// 5 lines of the ma group: (inclusive) 'cause they too are special -- and also like to go naked
-//     ma       mi       mu       me      mo * 1                                                                     //  naked, all of them (there are no ゛s on ma's)
+// ma group:  'cause they too are special -- they too also like to go naked
+//  ma       mi       mu        me       mo * 1                   //  naked, all of them (there are no ゛s on mama's)
    "マ, ま", "ミ, み", "ム, む", "メ, め", "モ, も",     
-//              ^--^-v
-              "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ",     "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ",                  // * 2 // mi, ya yu yo (myo)
-//                      ^              ^              ^                  ^              ^              ^
+//            ^--^-v
+             "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ",                // * 1 // mi , ya yu yo (mya, myu, myo)
+//                  ^           ^            ^          
 
-// 3 lines of the ya, yu, yo set: (inclusive)
-//     ya       yu       yo * 3
-   "ヤ, や", "ユ, ゆ", "ヨ, よ","ヤ, や", "ユ, ゆ", "ヨ, よ", "ヤ, や", "ユ, ゆ", "ヨ, よ",    // * 3 (also used as suffixes)
+// ya, yu, yo set: 
+//  ya       yu       yo  * 1
+   "ヤ, や", "ユ, ゆ", "ヨ, よ",    // * 1 (also used as suffixes)
 // 
 
-// 5 lines of the ra/la group: (inclusive) actually spelled with the "r" but pronounced with the "L" sounds -- they too are special -- and also like to go naked
-//     ra      ri       ru       re       ro * 1    
+// ra/la group: spelled with the "r" but pronounced with the "L" sounds -- they too are special -- and also like to go naked
+//  ra       ri       ru       re        ro  * 1    
    "ラ, ら", "リ, り", "ル, る", "レ, れ", "ロ, ろ", 
-//             ^----^---v
-              "リャ, りゃ", "リュ, りゅ", "リョ, りょ",    "ャ, りゃ", "リュ, りゅ", "リョ, りょ",    // * 2 // ri, ya yu yo (ryo)
-//                      ^              ^              ^             ^               ^             ^ 
+//            ^--^--v
+             "リャ, りゃ", "リュ, りゅ", "リョ, りょ",       // * 1 // ri, ya yu yo (ryo)
+//                  ^           ^            ^       
 
-// 2 lines (inclusive) of the wa set, plus the nh consonant -- always fully naked AND never have suffixes of ya yu or yo 
-//     wa       wo         nh * 2
-   "ワ, わ", "ヲ, を",   "ン, ん",       "ワ, わ", "ヲ, を",   "ン, ん" }  // * 2 //  and the "}" must be on this line rather than on a line of its own 
+// wa set, plus the nh consonant -- always fully naked AND never even wear suffixes of ya yu, or yo 
+//     wa       wo         nh                                   * 2
+   "ワ, わ", "ヲ, を",   "ン, ん",       "ワ, わ", "ヲ, を",   "ン, ん" }  // * 2 //  go.lang requires that the "}" must be on this line rather than on a line of its own 
 
    
 // meat of the algorithm: ---------------------------------------------------------------------------
@@ -231,168 +231,165 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 // end of meat --------------------------------------------------------------------------------------
 
 			// hints for katakana (key) prompts: (values are in hiragana)
+			// hints only are given for values that are naked (lack ゛゜or suffixes of や, ゆ, or よ)
 
-			if value == "ほ" {
-				fmt.Printf(", hint: L-ring---> to the \"-\" char\n")
+			if value == "あ" { // a ア, maybe a grotesque A
+				fmt.Printf(", hint: middle<- to the 3 char, looks nothing-like the hiragana a, but a lot like a te ア, あ, fuck mae! \n")
 			}
-
-			if value == "あ" {
-				fmt.Printf(", hint: middle<- to the 3 char, looks nothing like the hiragana a, but a lot like a te, fuck me \n")
+			if value == "い" { // i イ, shift the two lines of the hiragana 
+				fmt.Printf(", hint: middle < to the E char, イ looks more like a hiragana te, but at least it is still two mostly-vertical lines イ　\n")
 			}
-			if value == "い" {
-				fmt.Printf(", hint: middle < to the E char, also looks more like a hiragana te, but at least it is still two mostly-vertical lines \n")
+			if value == "う" { // u ウ, um-kay
+				fmt.Printf(", hint: middle> to the 4 char, u ウ　is ok, having had to look for angles \n")
 			}
-			if value == "う" {
-				fmt.Printf(", hint: middle> to the 4 char, u is ok, having had to look for angles \n")
+			if value == "え" { // e エ, eye see it as a ... an, eye 
+				fmt.Printf(", hint: index > to the 5 char, it エ　does have a vague, angular resemblance  \n")
 			}
-			if value == "え" {
-				fmt.Printf(", hint: index > to the 5 char, it does have a vague, angular resemblance \n")
-			}
-			if value == "お" {
-				fmt.Printf(", hint: index--> to the 6 char, has only a vague resemblance, albeit with no curves \n")
+			if value == "お" { // o オ, on-the-go maybe
+				fmt.Printf(", hint: index--> to the 6 char, オ　has only a vague resemblance, albeit with less curves \n")
 			}
 
 
-			if value == "か" {
+			if value == "か" { // ka カ
 				fmt.Printf(", hint: index --> to the T char \n")
 			}
-			if value == "き" {
+			if value == "き" { // ki キ
 				fmt.Printf(", hint: L-index > to the G char \n")
 			}
-			if value == "く" {
-				fmt.Printf(", hint: R-index <- to the H char, no, just no. Starting with one angle, they settled for this? \n")
+			if value == "く" { // ku ク, compare to ta タ, and ke ケ
+				fmt.Printf(", hint: R-index <- to the H char, ク　no, just no. Starting with one angle, they settled for this? \n")
 			}
-			if value == "け" {
-				fmt.Printf(", hint: pinky -> one over to thte :* chars, well, bits of it are there, just as many curves though \n")
+			if value == "け" { // ke ケ, compare to ku ク, and ta タ
+				fmt.Printf(", hint: pinky -> one over to the :* chars, ケ, bits of it are there, just as many curves though \n")
 			}
-			if value == "こ" {
-				fmt.Printf(", hint: index <--- to the B char, alright, it makes sense, 'cause angles \n")
+			if value == "こ" { // ko コ, compare to ni ニ
+				fmt.Printf(", hint: index <--- to the B char, alright, コ　it makes sense, 'cause angles \n")
 			}
 
 
-			if value == "さ" {
+			if value == "さ" { // sa サ, if you 'se' so sa 
 				fmt.Printf(", hint: ring >v to the X char, at least the sa goes to the left, and it looks a lot like se, I'd say \n")
 			}
-			if value == "し" {
-				fmt.Printf(", hint: middle on the D char, has no excuse to2 look like this (as there are no angles here, less curve though) \n")
+			if value == "し" { // shi シ, she sleeps and snores, compare to tsu ツ, and so ソ, 
+				fmt.Printf(", hint: middle on the D char, シ she is sleeping/snoring here, but has no excuse to2 look like this (no angles here, less curve though) \n")
 			}
-			if value == "す" {
-				fmt.Printf(", hint: index < to the R char, I can understand, since they were looking for angles (sue is running) \n")
+			if value == "す" { // su ス, sue is running 
+				fmt.Printf(", hint: index < to the R char, they were looking for angles (sue is running ス) \n")
 			}
-			if value == "せ" {
+			if value == "せ" { // se セ
 				fmt.Printf(", hint: pinky to the P char \n")
 			}
-			if value == "そ" {
-				fmt.Printf(", hint: index <-- to the C char, Looks like し they started with all angles and apparently had to backtrack  \n")
+			if value == "そ" { // so ソ, compare to ん ン which lays down more and has a more laid-down back-tick 
+				fmt.Printf(", hint: index <-- to the C char, ソ Looks like しシ or no ノ, or ン starting with all angles - `had to `backtrack?  \n")
 			}
 
 
-			if value == "た" {
-				fmt.Printf(", hint: pinky < to the Q char, the top left looks like ta, more at least than ku タク, he ケ \n")
+			if value == "た" { // ta タ, compare to ku ク and ke ケ
+				fmt.Printf(", hint: pinky < to the Q char, the top left looks like ta, more at least than ku ク, or he ケ \n")
 			}
-			if value == "ち" {
-				fmt.Printf(", hint: pinky on the A char, There is some resemblance if we see the middle line as the top of the backwards c \n")
+			if value == "ち" { // chi チ, compare to te テ
+				fmt.Printf(", hint: pinky on the A char, 'some' resemblance if we see the middle line as the top of the backwards c \n")
 			}
-			if value == "つ" {
-				fmt.Printf(", hint: pinky to the Z char, understandable?, if we are generous. Very generous..゛as in adding two \n")
+			if value == "つ" { // tsu ツ, compare to shi シ, she who sleeps low and snores loudly 
+				fmt.Printf(", hint: pinky to the Z char, understandable?, if we are generous. Very generous..゛as in adding two ツ  shi シ said \n")
 			}
-			if value == "て" {
+			if value == "て" { // te テ, compare to chi チ
 				fmt.Printf(", hint: ring < to the W char, te went the wrong way, and gained a flat hat \n")
 			}
-			if value == "と" {
+			if value == "と" { // to ト
 				fmt.Printf(", hint: ring on the S char, toe is flipped-out. Kicked in the balls, on its head \n")
 			}
 
 
-			if value == "な" {
+			if value == "な" { // na ナ, compare to me メ, and nu ヌ
 				fmt.Printf(", hint: index < to the U char, is simple, very simple \n")
 			}
-			if value == "に" {
+			if value == "に" { // ni ニ
 				fmt.Printf(", hint: middle < to the I char \n")
 			}
-			if value == "ぬ" {
+			if value == "ぬ" { // nu ヌ, compare to me メ, and na ナ
 				fmt.Printf(", hint: R-ring<--- to the 1 char, at least two lines cross, nu flew  \n")
 			}
-			if value == "ね" {
+			if value == "ね" { // ne ネ
 				fmt.Printf(", hint: L-ring <v to the ,< chars, a hoe that got nailed \n")
 			}
-			if value == "の" {
+			if value == "の" { // no ノ, no extra marks needed on this classic no symbol 
 				fmt.Printf(", hint: middle on the k char, drop the curve, and I'll take it \n")
 			}
 
 
-			if value == "ま" {
-				fmt.Printf(", hint: index on the J char \n")
+			if value == "ま" { // ma マ, mama is unique, see the breast pump? 
+				fmt.Printf(", hint: index on the J char, (a breast pump maybe?) \n")
 			}
-			if value == "み" {
-				fmt.Printf(", hint: index <v to the N char \n")
+			if value == "み" { // mi ミ, and two makes three 
+				fmt.Printf(", hint: index <v to the N char, me thinks 3 \n")
 			}
-			if value == "む" {
-				fmt.Printf(", hint: pinky two over ---> to the ]} chars \n")
+			if value == "む" { // mu ム, an even-fatter-jawed moo-cow
+				fmt.Printf(", hint: pinky two over ---> to the ]} chars, now it's an even-fatter-jawed moo-cow  \n")
 			}
-			if value == "め" {
-				fmt.Printf(", hint: pinky -> slide down to the /? chars \n")
+			if value == "め" { // me メ
+				fmt.Printf(", hint: pinky -> slide down to the /? chars, cross off the mess. But that's nothing nu ヌ \n")
 			}
-			if value == "も" {
-				fmt.Printf(", hint: middle <v to the M char \n")
-			}
-
-
-			if value == "ら" {
-				fmt.Printf(", hint: ring ^ to the o char \n")
-			}
-			if value == "り" {
-				fmt.Printf(", hint: ring on the L char \n")
-			}
-			if value == "る" {
-				fmt.Printf(", hint: pinky < to the .> chars \n")
-			}
-			if value == "れ" {
-				fmt.Printf(", hint: pinky on the ;+ chars \n")
-			}
-			if value == "ろ" {
-				fmt.Printf(", hint: pinky ---> long slide to the _ and backslash chars \n")
+			if value == "も" { // mo モ
+				fmt.Printf(", hint: middle <v to the M char, way to hang to the right; you go Joe! \n")
 			}
 
-			if value == "は" {
-				fmt.Printf(", hint: L-index on the F char \n")
+
+			if value == "ら" { // ra ラ
+				fmt.Printf(", hint: ring ^ to the o char, Similar ラ, ら \n")
 			}
-			if value == "ひ" {
+			if value == "り" { // ri リ
+				fmt.Printf(", hint: ring on the L char, longer on the right ring \n")
+			}
+			if value == "る" { // ru ル, is two
+				fmt.Printf(", hint: pinky < to the .> chars, ル, る, ru is now two? \n")
+			}
+			if value == "れ" { // re レ, more, or less, a ru ル - しshe-said
+				fmt.Printf(", hint: pinky on the ;+ chars, レ, れ; しshe-it \n")
+			}
+			if value == "ろ" { // ro ロ
+				fmt.Printf(", hint: pinky ---> long slide to the _ and backslash chars, maybe it had always been the way to go to do a square O for ro? \n")
+			}
+
+			if value == "ほ" { // ha ハ 
+				fmt.Printf(", hint: L-ring---> to the \"-\" char\n")
+			}
+			if value == "ひ" { // hi ヒ
 				fmt.Printf(", hint: index > to the V char \n")
 			}
-			if value == "ふ" {
-				fmt.Printf(", hint: ring<, to the 2 char, if we squint? \n")
+			if value == "ふ" { // hu フ, squinting it is a ふフ
+				fmt.Printf(", hint: ring<, to the 2 char, if we squint? フ, ふ\n")
 			}
-			if value == "へ" {
+			if value == "へ" { // he ヘ
 				fmt.Printf(", hint: ;+ char \n")
 			}
-			if value == "ほ" {
-				fmt.Printf(", hint: ring ---> to the - char \n")
+			if value == "ほ" { // ho ホ, now with a dress and all
+				fmt.Printf(", hint: ring ---> to the - char, now looks like a hoe \n")
 			}
 
 
-			if value == "や" {
+			if value == "や" { // ya ヤ
 				fmt.Printf(", hint: index <-- to the 7 char \n")
 			}
 
-			if value == "ゆ" {
-				fmt.Printf(", hint: index->, to the 8 char \n")
+			if value == "ゆ" { // yu ユ
+				fmt.Printf(", hint: index->, to the 8 char, yu looks like ユ \n")
 			}
-			if value == "よ" {
-				fmt.Printf(", hint: middle to the 9 char \n")
+			if value == "よ" { // yo ヨ
+				fmt.Printf(", hint: middle to the 9 char, tripple yo ヨ \n")
 			}
 
 
-			if value == "わ" {
+			if value == "わ" { // wa ワ, compare to wo ヲ
 				fmt.Printf(", hint: ring > to the 0 char, so now it's a water fall for wa? \n")
 			}
-			if value == "を" {
+			if value == "を" { // wo ヲ, compare to wa ワ
 				fmt.Printf(", hint: ring > shifted 0 char, NOW, it looks like wa. Now! For fucks sake, Now? \n")
 			}
 
 			
-			if value == "ん" {
-				fmt.Printf(", hint: Y char, pointing at the one last remaining bent stroke \n")
+			if value == "ん" { // nh ン, compare to so ソ
+				fmt.Printf(", hint: Y char, pointing at the one last remaining bent stroke of the hiragana char \n")
 			}
 		}
 		fmt.Println()
