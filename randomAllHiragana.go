@@ -1,5 +1,5 @@
 package main
-
+// 20:08
 import (
 	"fmt"
 	"math/rand"
