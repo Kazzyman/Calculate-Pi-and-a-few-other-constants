@@ -112,7 +112,7 @@
 	"ン, ん",  nh - fuck!, fuck!, Fuck! Y oh Y he said "pointing" at the one last remaining bent stroke 
  ^112 -- 
 51+15+25+21 = 112 if we include the suffixed combinations */
-
+// test
 package main
 
 import (
