@@ -4,11 +4,11 @@
 	"エ, え",  e - has a vague, angular resemblance
 	"オ, お",  o - also has only a vague resemblance, albeit with no curves 
 	"カ, か",  ka - ka, a bit simpler, and a bit more angular, it is still ka ka 
-	"ギ, き",  ki - ok, just dropped the unneeded curve -- I see it
+	"キ, き",  ki - ok, just dropped the unneeded curve -- I see it
 	"ク, く",  ku - no, just no. Starting with one angle, they settled for this? 
-	"ケ, け",  ke - well, bits of it are there, just as many curves though 
+	"ケ, け",  ke - well, bits of it are there, just as many curves though (same as ku but with a tiny stickout)
 	"コ, こ",  ko - alright, it makes sense, 'cause angles 
-	"ガ, が",  ka゛ - is ka゛　
+	"カ, か",  ka゛ - is ka゛　
 	"ギ, ぎ",   etcetera ... 
 	"グ, ぐ", 
 	"ゲ, げ", 
@@ -19,11 +19,11 @@
 	"ギャ, ぎゃ",  ... 
 	"ギュ, ぎゅ",  
 	"ギョ, ぎょ",  
-	"サ, さ",  at least the sa goes to the left
-	"シ, し",  shi - has no excuse to look like this (as there are no angles here)
-	"ス, す",  su - I can understand, since they were looking for angles 
+	"サ, さ",  at least the sa goes to the left, but it looks a lot like se, i'd say
+	"シ, し",  shi - has no excuse to2 look like this (as there are no angles here, less curve though)
+	"ス, す",  su - I can understand, since they were looking for angles (sue is running)
 	"セ, せ",  se - just kinda lost a stroke, but I like it
-	"ソ, そ",  so - is a no-go from the git-go. Again, they started with all angles and apparently had to backtrack 
+	"ソ, そ",  so - is a no-go from the git-go. Looks like し they started with all angles and apparently had to backtrack 
 	"ザ, ざ",  ... 
 	"ジ, じ",
 	"ズ, ず",
@@ -35,10 +35,10 @@
 	"ジャ, じゃ",
 	"ジュ, じゅ",
 	"ジョ, じょ",
-	"タ, た",  ta - is bullshit!
-	"チ, ち",  chi - is double-lined te-rible bullshit! 
-	"ツ, つ",  tsu - is understandable, if we are generous. Very generous..゛　
-	"テ, て",  te - just whent the wrong way, and gained a flat hat 
+	"タ, た",  ta - the top left looks like ta, more at least than ku タク, he ケ 
+	"チ, ち",  chi - There is some resemblance if we see the middle line as the top of the backwards c
+	"ツ, つ",  tsu - is understandable?, if we are generous. Very generous..゛as in adding two
+	"テ, て",  te - just went the wrong way, and gained a flat hat 
 	"ト, と",  to - is flipped-out. Kicked in the balls, on its head
 	"ダ, だ",  ... 
 	"ザ, ぢ",
@@ -53,7 +53,7 @@
 	"ヂョ, ぢょ",
 	"ナ, な",  na - ok, it is simple, very simple
 	"ニ, に",  ni - again, simple 
-	"ヌ, ぬ",  nu - at least two lines cross
+	"ヌ, ぬ",  nu - at least two lines cross, nu flew 
 	"ネ, ね",  ne - with angles it almost nails it, almost. looks too much like a hoe that got nailed 
 	"ノ, の",  no - drop the curve, and I'll take it
 	"ニャ, にゃ", ...
@@ -85,31 +85,31 @@
 	"ピャ, ぴゃ", 
 	"ピュ, ぴゅ", 
 	"ピョ, ぴょ", 
-	"マ, ま",  ma - I don't see it, I just don't 
-	"ミ, み",  mi - think three, lines that is
+	"マ, ま",  ma - I don't see it, I just don't (a breast pump maybe?)
+	"ミ, み",  mi - think three, lines that is; me thinks 3
 	"ム, む",  mu - now it's an even-fatter-jawed moo-cow 
 	"メ, め",  me - cross off the mess. But that's nothing nu 
-	"モ, も",  mo - way to go joe!
+	"モ, も",  mo - way to go Joe!
 	"ミャ, みゃ", ...
 	"ミュ, みゅ", 
 	"ミョ, みょ",     
 	"ヤ, や", 
-	"ユ, ゆ", yu - you won "1", yes, let's ko with that! コ　
+	"ユ, ゆ", yu - you won "1", yes, let's ko with that ユ　
 	"ヨ, よ", ... 
 	"ラ, ら",  ra - rimes with te, not! so, why the te look-alike? "テ, て"
-	"リ, り",  ri - we all still see it as a lefty i 
+	"リ, り",  ri り - we all still see it as a lefty i guess 
 	"ル, る",  ru - is now two?
 	"レ, れ",  re - at least it looks like ru now, but that should have been ro doing that!
-	"ロ, ろ",  ro - is a square O -- maybe it had always been the way to go? 
+	"ロ, ろ",  ro - is a square O -- maybe it had always been the way to go to do a square O for ro? 
 	"リャ, りゃ", ...
 	"リュ, りゅ", 
 	"リョ, りょ",    
 	"ャ, りゃ", 
 	"リュ, りゅ", 
 	"リョ, りょ", 
-	"ワ, わ",  wa - ok, and so now it's a water fall?
+	"ワ, わ",  wa - ok, and so now it's a water fall for wa?
 	"ヲ, を",  wo - oh no! NOW, it looks like wa. Now! For fucks sake, Now? 
-	"ン, ん",  nh - fuck!, fuck!, Fuck! Y oh Y he said pointing at the one last remaining bent stroke 
+	"ン, ん",  nh - fuck!, fuck!, Fuck! Y oh Y he said "pointing" at the one last remaining bent stroke 
  ^112 -- 
 51+15+25+21 = 112 if we include the suffixed combinations */
 
@@ -134,19 +134,19 @@ ChatGPT 3.5 proofread all of the katakana, hiragana pairs used in this code; and
 they made one mistake in saying that "ビュ, ぴゅ" was correct when it should have been "ピュ, ぴゅ"
 */
 
-// 2 lines of the "vowels" (inclusive)
-//      a * 2 :             i * 1       u        e        o * 2 :
+// "vowels" :
+//  a * 2 :             　i * 1       u        　e        o            u        e        o * 2 :
 	"ア, あ", "ア, あ",    "イ, い",    "ウ, う", "エ, え", "オ, お",     "ウ, う", "エ, え", "オ, お",      
 
-// 6 lines of the ka group: (inclusive) 
-//     ka        ki       ku      ke       ko * 1     /  ga       gi       gu      ge       go * 1          //  naked / ゛
-	"カ, か", "ギ, き", "ク, く", "ケ, け", "コ, こ",       "ガ, が", "ギ, ぎ", "グ, ぐ", "ゲ, げ", "ゴ, ご",   //-* ???????????????????????????????????? *-//
-//               ^----^--v                                                 ^^----^
-	           "キャ, きゃ",  "キュ, きゅ",  "キョ, きょ",  // * 1      ^^----^-v                                                // ki, ya yu yo (kya)
-	                                                                      "ギャ, ぎゃ",  "ギュ, ぎゅ",  "ギョ, ぎょ",     // * 1 // ki゛, ya yu yo (gya)
-//                       ^               ^               ^                          ^               ^               ^        
+// ka group: 
+//  ka       ki       ku      　ke       ko * 1     /  　ga       gi       gu      　ge       go * 1          //  naked / ゛
+	"カ, か", "キ, き", "ク, く", "ケ, け", "コ, こ",       "ガ, が", "ギ, ぎ", "グ, ぐ", "ゲ, げ", "ゴ, ご",   //-* ???????????????????????????????????? *-//
+//            ^---^--v                                            ^^--^
+	           "キャ, きゃ",  "キュ, きゅ",  "キョ, きょ",  // * 1     ^^--^-v                                           // ki,  ya yu yo (kya)
+	                                                              "ギャ, ぎゃ",  "ギュ, ぎゅ",  "ギョ, ぎょ",     // * 1 // ki゛, ya yu yo (gya)
+//                   ^            ^             ^                       ^             ^            ^        
 
-// 6 lines of the sa group: (inclusive)
+// sa group: // formated to here
 //     sa       shi      su       se      so * 1    /   za       gi       zu       ze       zo * 1         //  naked / ゛ 
 	"サ, さ", "シ, し", "ス, す", "セ, せ", "ソ, そ",      "ザ, ざ", "ジ, じ", "ズ, ず", "ゼ, ぜ", "ゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
 //               ^----^---v                                                 ^^----^
@@ -237,19 +237,19 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 			}
 
 			if value == "あ" {
-				fmt.Printf(", hint: middle<- to the 3 char \n")
+				fmt.Printf(", hint: middle<- to the 3 char, looks nothing like the hiragana a, but a lot like a te, fuck me \n")
 			}
 			if value == "い" {
-				fmt.Printf(", hint: middle < to the E char \n")
+				fmt.Printf(", hint: middle < to the E char, also looks more like a hiragana te, but at least it is still two mostly-vertical lines \n")
 			}
 			if value == "う" {
-				fmt.Printf(", hint: middle> to the 4 char \n")
+				fmt.Printf(", hint: middle> to the 4 char, u is ok, having had to look for angles \n")
 			}
 			if value == "え" {
-				fmt.Printf(", hint: index > to the 5 char \n")
+				fmt.Printf(", hint: index > to the 5 char, it does have a vague, angular resemblance \n")
 			}
 			if value == "お" {
-				fmt.Printf(", hint: index--> to the 6 char \n")
+				fmt.Printf(", hint: index--> to the 6 char, has only a vague resemblance, albeit with no curves \n")
 			}
 
 
@@ -260,64 +260,64 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 				fmt.Printf(", hint: L-index > to the G char \n")
 			}
 			if value == "く" {
-				fmt.Printf(", hint: R-index <- to the H char \n")
+				fmt.Printf(", hint: R-index <- to the H char, no, just no. Starting with one angle, they settled for this? \n")
 			}
 			if value == "け" {
-				fmt.Printf(", hint: pinky -> one over to thte :* chars \n")
+				fmt.Printf(", hint: pinky -> one over to thte :* chars, well, bits of it are there, just as many curves though \n")
 			}
 			if value == "こ" {
-				fmt.Printf(", hint: index <--- to the B char \n")
+				fmt.Printf(", hint: index <--- to the B char, alright, it makes sense, 'cause angles \n")
 			}
 
 
 			if value == "さ" {
-				fmt.Printf(", hint: ring >v to the X char \n")
+				fmt.Printf(", hint: ring >v to the X char, at least the sa goes to the left, and it looks a lot like se, I'd say \n")
 			}
 			if value == "し" {
-				fmt.Printf(", hint: middle on the D char \n")
+				fmt.Printf(", hint: middle on the D char, has no excuse to2 look like this (as there are no angles here, less curve though) \n")
 			}
 			if value == "す" {
-				fmt.Printf(", hint: index < to the R char \n")
+				fmt.Printf(", hint: index < to the R char, I can understand, since they were looking for angles (sue is running) \n")
 			}
 			if value == "せ" {
 				fmt.Printf(", hint: pinky to the P char \n")
 			}
 			if value == "そ" {
-				fmt.Printf(", hint: index <-- to the C char \n")
+				fmt.Printf(", hint: index <-- to the C char, Looks like し they started with all angles and apparently had to backtrack  \n")
 			}
 
 
 			if value == "た" {
-				fmt.Printf(", hint: pinky < to the Q char \n")
+				fmt.Printf(", hint: pinky < to the Q char, the top left looks like ta, more at least than ku タク, he ケ \n")
 			}
 			if value == "ち" {
-				fmt.Printf(", hint: pinky on the A char \n")
+				fmt.Printf(", hint: pinky on the A char, There is some resemblance if we see the middle line as the top of the backwards c \n")
 			}
 			if value == "つ" {
-				fmt.Printf(", hint: pinky to the Z char \n")
+				fmt.Printf(", hint: pinky to the Z char, understandable?, if we are generous. Very generous..゛as in adding two \n")
 			}
 			if value == "て" {
-				fmt.Printf(", hint: ring < to the W char \n")
+				fmt.Printf(", hint: ring < to the W char, te went the wrong way, and gained a flat hat \n")
 			}
 			if value == "と" {
-				fmt.Printf(", hint: ring on the S char \n")
+				fmt.Printf(", hint: ring on the S char, toe is flipped-out. Kicked in the balls, on its head \n")
 			}
 
 
 			if value == "な" {
-				fmt.Printf(", hint: index < to the U char \n")
+				fmt.Printf(", hint: index < to the U char, is simple, very simple \n")
 			}
 			if value == "に" {
 				fmt.Printf(", hint: middle < to the I char \n")
 			}
 			if value == "ぬ" {
-				fmt.Printf(", hint: R-ring<--- to the 1 char \n")
+				fmt.Printf(", hint: R-ring<--- to the 1 char, at least two lines cross, nu flew  \n")
 			}
 			if value == "ね" {
-				fmt.Printf(", hint: L-ring <v to the ,< chars \n")
+				fmt.Printf(", hint: L-ring <v to the ,< chars, a hoe that got nailed \n")
 			}
 			if value == "の" {
-				fmt.Printf(", hint: middle on the k char \n")
+				fmt.Printf(", hint: middle on the k char, drop the curve, and I'll take it \n")
 			}
 
 
@@ -361,7 +361,7 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 				fmt.Printf(", hint: index > to the V char \n")
 			}
 			if value == "ふ" {
-				fmt.Printf(", hint: ring<, to the 2 char \n")
+				fmt.Printf(", hint: ring<, to the 2 char, if we squint? \n")
 			}
 			if value == "へ" {
 				fmt.Printf(", hint: ;+ char \n")
@@ -384,15 +384,15 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 
 
 			if value == "わ" {
-				fmt.Printf(", hint: ring > to the 0 char \n")
+				fmt.Printf(", hint: ring > to the 0 char, so now it's a water fall for wa? \n")
 			}
 			if value == "を" {
-				fmt.Printf(", hint: ring > shifted to the 0 char \n")
+				fmt.Printf(", hint: ring > shifted 0 char, NOW, it looks like wa. Now! For fucks sake, Now? \n")
 			}
 
 			
 			if value == "ん" {
-				fmt.Printf(", hint: Y char \n")
+				fmt.Printf(", hint: Y char, pointing at the one last remaining bent stroke \n")
 			}
 		}
 		fmt.Println()
