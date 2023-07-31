@@ -1,5 +1,5 @@
 package main
-// 20:08
+
 import (
 	"fmt"
 	"math/rand"
@@ -31,16 +31,16 @@ gi:ぎ or ギ The sound gi:ぎ in hiragana is romanized as "gi," and the katakan
 So, both "gi" and "ji" are used as romanizations for different contexts, but the standard in most systems is "ji" for じ in hiragana and "gi" for ぎ in hiragana.
 
 */
-// ka group: (inclusive) fixed according to kaz and chat                   vv gi:ぎ 
-//  ka         ki         ku          ke         ko * 1       /   ga          gi         gu         ge         go * 1          //  naked / ゛
-	"kaカ, か", "kiキ, き", "kuク, く", "keケ, け", "koコ, こ",       "gaガ, が", "giギ, ぎ", "guグ, ぐ", "geゲ, げ", "goゴ, ご",   //-* ????? *-//
+// ka group: fixed according to kaz and chat                                  vv gi:ぎ 
+//  ka         ki         ku          ke         ko * 1      ||   ga          gi         gu         ge         go * 1          //  naked || ゛marks
+	"kaカ, か", "kiキ, き", "kuク, く", "keケ, け", "koコ, こ",       "gaガ, が", "giギ, ぎ", "guグ, ぐ", "geゲ, げ", "goゴ, ご",   
 //              ^----^--v                                                     ^^----^
 	           "kyaキャ, きゃ",  "kyuキュ, きゅ",  "kyoキョ, きょ",  // * 1        ^^- --^-v                                                // ki,  ya yu yo (kya, kyu, kyo)
 	                                                                         "gyaギャ, ぎゃ",  "gyuギュ, ぎゅ",  "gyoギョ, ぎょ",    // * 1 // ki゛, ya yu yo (gya, gyu, gyo)
 //                      ^               ^                ^                            ^                ^               ^        
 
-// sa group: (inclusive)
-//  sa         shi         su          se         so * 1      /   za         ji never gi   　zu          ze         zo * 1         //  naked / ゛ 
+// sa group: 
+//  sa         shi         su          se         so * 1     ||    za         ji never gi   　zu          ze         zo * 1         //  naked || ゛marks
 	"saサ, さ", "shiシ, し", "suス, す", "seセ, せ", "soソ, そ",      "zaザ, ざ", "jiジ, じ",       "zu ズ, ず", "zeゼ, ぜ", "zoゾ, ぞ",  //-* One key "zu", has two values づ and ず *-//
 //               ^----^-v                                                     ^^----^
 	           "shaシャ, しゃ",  "shuシュ, しゅ",  "shoショ, しょ",  // * 1        ^^--^-^-v                                          // shi,  ya yu yo (sha, shu, sho)
@@ -49,7 +49,7 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 "zu ズ from つ or す, ず", // //-* One key "zu", has two values づ and ず of the ta or sa group *-//
                                                                     //             ^
                                                                    //              じ is used 95% relative to ぢ , therefore ぢ is 95% wrong! 
-// 6 lines of the ta group: (inclusive)                                            v   
+// ta group:   
 //  ta         chi         tsu          te         to * 1     /    da          ji never gi    zu          de          do * 1        //  naked / ゛
 	"taタ, た", "chiチ, ち", "tsuツ, つ", "teテ, て", "toト, と",     "daダ, だ",  "jiヂ, ぢ",     "zu ヅ, づ", "deデ, で", "doド, ど",  //-* One key "zu", has two values づ and ず *-//
 //               ^----^-v                                                      ^^----^
@@ -62,48 +62,47 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 
 
 
-// 5 lines of the na group: (inclusive) 'cause they are special -- they like to go naked 
-//   na         ni         nu        ne         no * 1                                                              //  naked, all of them (there are no ゛s on na's)
+// na group: 'cause they are special -- they really prefer to go-naked 
+//   na         ni         nu        ne         no * 1       //  naked, all of them (there are no ゛s on na's)
 	"naナ, な", "niニ, に", "nuヌ, ぬ", "neネ, ね", "noノ, の",    
-//               ^---^--v                                
-               "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",   "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",               // * 2 // ni, ya yu yo (nya, nyu, nyo)
-//                      ^             ^             ^               ^              ^             ^ 
+//              ^----^---v                                
+               "nyaニャ, にゃ", "nyuニュ, にゅ", "nyoニョ, にょ",   // ni, ya yu yo (nya, nyu, nyo)
+//                       ^              ^               ^       
 
 
-// 9 lines of the ha group: (inclusive) -- the fully-clothed group 
-//  ha         hi         hu * 1     he        ho          he        ho * 2      /  ba         bi         bu         be         bo             //  naked / ゛
-   "haハ, は", "hiヒ, ひ", "huフ, ふ", "heヘ, へ", "hoホ, ほ", "heヘ, へ", "hoホ, ほ",     "baバ, ば", "biビ, び", "buブ, ぶ", "beベ, べ", "boボ, ぼ",  //-* ????? *-// 
-//              ^---^--v                                                             pa         pi         pu        pe         po            //  poo゜ marks (drag)
-                                                                                    "paパ, ぱ", "piピ, ぴ", "puプ, ぷ", "peペ, ぺ", "poポ, ぽ", //-* ????? *-//
-//              ^------v
-	          "hyaヒャ, ひゃ", "hyuヒュ, ひゅ", "hyoヒョ, ひょ",                                                                         // hi, ya yu yo
-	                                                                                "byaビャ, びゃ", "byuビュ, びゅ", "byoビョ, びょ",   // b゛, ya yu yo (bi)
-	                                                                                "pyaピャ, ぴゃ", "pyuピュ, ぴゅ", "pyoピョ, ぴょ",   // h゜, ya yu yo (pi)
-//                     ^             ^             ^                                         ^             ^             ^   
+// ha group: -- the fully-clothed group 
+//  ha         hi         hu          he         ho    * 1      ||    ba         bi         bu         be          bo            //  naked || ゛marks
+   "haハ, は", "hiヒ, ひ", "huフ, ふ", "heヘ, へ", "hoホ, ほ",          "baバ, ば", "biビ, び", "buブ, ぶ", "beベ, べ", "boボ, ぼ",  
+//              ^-^--v                                                pa         pi         pu          pe         po            //  poo゜ marks (drag)
+                                                                     "paパ, ぱ", "piピ, ぴ", "puプ, ぷ", "peペ, ぺ", "poポ, ぽ", 
+//              ^-------v                                                         v----v
+	            "hyaヒャ, ひゃ", "hyuヒュ, ひゅ", "hyoヒョ, ひょ",              //     v---------v                                      // hi, ya yu yo (hya, hyu, hyo)
+	                                                                               "byaビャ, びゃ", "byuビュ, びゅ", "byoビョ, びょ",   // bi, ya yu yo (bya, byu, byo)
+	                                                                               "pyaピャ, ぴゃ", "pyuピュ, ぴゅ", "pyoピョ, ぴょ",   // pi, ya yu yo (pya, pyu, pyo)
+//                   -  ^       --      ^    --         ^                                    ^             ^               ^   
 
-// 5 lines of the ma group: (inclusive) 'cause they too are special -- and also like to go naked
-//  ma         mi        mu         me         mo * 1                                                                     //  naked, all of them (there are no ゛s on ma's)
+// ma group: 'cause they too are special -- they too also like to go naked
+//  ma         mi         mu          me         mo * 1          //  naked, all of them (there are no ゛s on mama's)
    "maマ, ま", "miミ, み", "muム, む", "meメ, め", "moモ, も",     
-//              ^---^-v
-              "myaミャ, みゃ", "myuミュ, みゅ", "myoミョ, みょ",     "myaミャ, みゃ", "myuミュ, みゅ", "myoミョ, みょ",                  // * 2 // mi, ya yu yo 
-//                      ^            ^             ^                 ^             ^             ^
+//              ^----^--v
+               "myaミャ, みゃ", "myuミュ, みゅ", "myoミョ, みょ",    // mi, ya yu yo (mya, myu, myo)
+//                       ^              ^               ^   
 
-// 3 lines of the ya, yu, yo set: (inclusive)
-//  ya         yu         yo * 3
-   "yaヤ, や", "yuユ, ゆ", "yoヨ, よ","yaヤ, や", "yuユ, ゆ", "yoヨ, よ", "yaヤ, や", "yuユ, ゆ", "yoヨ, よ",    // * 3 (also used as suffixes)
+// ya, yu, yo set: 
+//  ya         yu         yo 
+   "yaヤ, や", "yuユ, ゆ", "yoヨ, よ",    // (also used as suffixes)
 // 
 
-// 5 lines of the ra/la group: (inclusive) actually spelled with the "r" but pronounced with the "L" sounds -- they too are special -- and also like to go naked
-//  ra        ri         ru         re         ro * 1    
+// ra/la group: spelled with the "r" but pronounced with the "L" sounds -- they too are special -- and also like to go naked
+//  ra         ri          ru         re         ro     
    "raラ, ら", "riリ, り", "ruル, る", "reレ, れ", "roロ, ろ", 
-//             ^----^--v
-              "ryaリャ, りゃ", "ryuリュ, りゅ", "ryoリョ, りょ",    "ryaリャ, りゃ", "ryuリュ, りゅ", "ryoリョ, りょ",    // * 2 // ri, ya yu yo 
-//                     ^             ^             ^               ^             ^             ^ 
+//               ^---^--v
+               "ryaリャ, りゃ", "ryuリュ, りゅ", "ryoリョ, りょ",   // ri, ya yu yo (rya, ryu, ryo)
+//                      ^               ^               ^  
 
-// 2 lines (inclusive) of the wa set, plus the nh consonant -- always fully naked AND never have suffixes of ya yu or yo 
-//  wa wo nh * 2
-
-   "waワ, わ", "woヲ, を",   "nhン, ん",       "waワ, わ", "woヲ, を",   "nhン, ん" }  // * 2 //  and the "}" must be on this line rather than on a line of its own 
+// wa set, plus the nh consonant -- always fully naked AND never have suffixes of ya yu, or yo 
+//  wa         wo           nh   * 2
+   "waワ, わ", "woヲ, を",   "nhン, ん",   "waワ, わ", "woヲ, を",   "nhン, ん" }  //  go.lang requies that the "}" must be on this line rather than on a line of its own 
 
 
 	for {
@@ -133,50 +132,50 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 	zi:じ However, in some other romanization systems like the Nihon-shiki and Kunrei-shiki, the sound じ is romanized as "zi" instead of "ji."
 	gi:ぎ or ギ The sound gi:ぎ in hiragana is romanized as "gi," and the katakana ギ is also romanized as "gi."
 */
-		// proper use of the ji sound from the sa group (sometimes spelled zi) : sa->za,ji , special handelers
+		// proper use of the ji sound from the sa group (sometimes spelled zi) : sa->za,ji , special key handelers
 		if key == "jiジ" {
 			if in == "じ" {
-				fmt.Printf("\nRight! it is always from shi し and NEVER from chi ち ,it is the sound ji, NEVER gi ( that being ぎ:gi ギ )  \n")
+				fmt.Printf("\nRight! ジ is always from shi し and NEVER from chi ち ,it is the sound ji, NEVER gi ( that being ぎ:gi ギ )  \n")
 				skip = true 
 				// さ　し　 す　せ　そ　
 				// sa shi su se so
-				// za ji  zu ze zo゛　()
+				// za ji  zu ze zo゛
 			} else {
-				fmt.Printf("\n Oops! it was %s and remember, ジ is the sound is ji always from shi し ,and NEVER from the other ji: chi ち ", value)
+				fmt.Printf("\n Oops! it was %s and remember, ジ is the sound ji always from shi し ,and NEVER from the other ji: chi ぢ ", value)
 				skip = true 
 			}
 		}
-		// proper use of the ji sound from the ta group : ta->da,ji
+		// proper use of the ji sound from the ta group : ta->da,ji , a special key handeler
 		if key == "jiヂ" {
 			if in == "ぢ" {
 				fmt.Printf("\nRight! ヂ is always from chi ち ,it is the sound ji, NEVER gi ( that being ぎ:gi ギ )  \n")
 				skip = true 
-				// た　ち　
-				// sa shi su se so
-				// za ji  zu ze zo゛　()
+				// た　ち   つ　て　と　
+				// ta chi tsu te to
+				// da ji  zu  de do゛
 			} else {
-				fmt.Printf("\n Oops! it was %s and remember, the ヂ sound is ji always from chi ち or shi し ,and NEVER from chi ち ", value)
+				fmt.Printf("\n Oops! it was %s and remember, the ヂ sound ji is always from either chi ち or shi し ", value)
 				skip = true 
 			}
 		}
 
-		// proper use of the gi sound from the ka group : ka->ga , a special handeler
+		// proper use of the gi sound from the ka group : ka->ga , a special key handeler
 		if key == "giギ" {
 			if in == "ぎ" {
-				fmt.Printf("\nRight! it is always from chi ち and NEVER from shi し ,and it is the sound gi, NEVER ji ( that being じ:ji ジ )  \n")
+				fmt.Printf("\nRight! it is always from ki き and NEVER from shi し ,and it is the sound gi, NEVER ji ( that being じ:ji ジ )  \n")
 				skip = true 
 				// か　き　く　け　こ　
 				// ka ki ku ke ko
 				// ga gi gu ge go゛
 			} else {
-				fmt.Printf("\n Oops! it was %s and remember, the sound is gi always from chi ち ,and NEVER from shi し ", value)
+				fmt.Printf("\n Oops! it was %s and remember, the sound gi is always from ki き ,and NEVER from shi し or chi ち ", value)
 				skip = true 
 			}
 		}
 
 
 		// properly-constructed forms of ji used as ja, ju, jo which are nearly always from shi し and really never from chi ち
-		// , special handelers
+		// , special key handelers
 		if key == "jaジャ" {
 			if in == "じゃ" {
 				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
@@ -205,7 +204,7 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 			}
 		}
 
-// /* obsolete forms of ja, ju and jo , special handelers
+// /* obsolete forms of ja, ju and jo , special key handelers
 		if key == "ja obsヂャ" {
 			if in == "ぢゃ" {
 				fmt.Printf("\nRight! it is nearly always from shi し and really never from chi ち  \n")
@@ -236,7 +235,7 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 // */
 
 
-		// then we check for additional very-special prompt(key)/value events or conditions
+		// then we check for additional very-special prompt(key)/value events or conditions,  , a very-special key handeler
 
 		if key == "zu ズ" || key == "zu ヅ" || key == "zu ズ from つ or す" || key == "zu ヅ from つ or す" {
 			if in == "づ" || in == "ず" {
