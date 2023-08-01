@@ -15,7 +15,8 @@ func main() {
 	for 1 == 1 {
 			fmt.Printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 			fmt.Printf("  Main Menu: \n\n")
-			fmt.Printf("  Enter 1 to practice Katakana, Enter 2 to practice recognizing Hiragana sounds \n\n\n")
+			fmt.Printf("  Enter 1 to practice recognizing Katakana prompts \n")
+			fmt.Printf("  Enter 2 to practice recognizing Romaji-Katakana prompts \n\n\n")
 
 			fmt.Scan(&menu)
 
@@ -23,8 +24,9 @@ func main() {
 				fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 
 			fmt.Println("\n\n\n\n")
-			fmt.Println("                   Using Hiragana input mode on your system, Type the Hiragana that corresponds to the Katakana prompt")
-			fmt.Println("                   enter 'exit' to return the the main menu (change input mode to US or Alpha-numeric to enter 'exit')")
+			fmt.Println("         'practicing recognizing Katakana' ")
+			fmt.Println("      Using Hiragana input mode on your system, Type the Hiragana that corresponds to the Katakana prompt")
+			fmt.Println("      Enter 'menu' to return to the the main menu (-change input mode to US or Alpha-numeric to enter 'menu' ) \n\n")
 
 			kata()
 		}
@@ -32,8 +34,9 @@ func main() {
 				fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 
 			fmt.Println("\n\n\n\n")
-			fmt.Println("                   Using Hiragana input mode on your system, Type the Hiragana that corresponds to the Romnaji-Katakana prompt")
-			fmt.Println("                   enter 'exit' to return the the main menu (change input mode to US or Alpha-numeric to enter 'exit')")
+			fmt.Println("         'practicing converting Romaji-Katakana prompts to Hiragana' ")
+			fmt.Println("      Using Hiragana input mode on your system, Type the Hiragana that corresponds to the Romaji-Katakana prompt")
+			fmt.Println("      Enter 'menu' to return to the the main menu (-change input mode to US or Alpha-numeric to enter 'menu' ) \n\n")
 
 			hira()
 		}
@@ -147,7 +150,7 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 
 		fmt.Scan(&in)
 
-		if in == "exit" {
+		if in == "menu" {
 			return 
 		}
 
@@ -485,7 +488,7 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 
 		fmt.Scan(&in)
 
-		if in == "exit" {
+		if in == "menu" {
 			return 
 		}
 /*
