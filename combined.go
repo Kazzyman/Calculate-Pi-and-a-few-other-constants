@@ -135,9 +135,16 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 		key := parts[0]
 		value := parts[1]
 
-
+/*
 		//fmt.Println("Type the key for this sound:", key)
 		fmt.Printf("%s ? ", key)
+*/
+
+		fmt.Printf("%s", key)
+		fmt.Printf("%s", string(colorCyan))
+		fmt.Printf(" ? ")
+		fmt.Printf("%s", string(colorReset))
+
 		fmt.Scan(&in)
 
 		if in == "exit" {
@@ -155,7 +162,16 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 			fmt.Printf("%s", string(colorRed))
 			fmt.Printf("      ^Oops! ")
 			fmt.Printf("%s", string(colorReset))
+
+/*
 			fmt.Printf("it was: %s ", value)
+*/
+			fmt.Printf("it was: ")
+			fmt.Printf("%s", string(colorCyan))
+			fmt.Printf("%s ", value)
+			fmt.Printf("%s", string(colorReset))
+
+
 // end of meat --------------------------------------------------------------------------------------
 
 			// hints for katakana (key) prompts: (values are in hiragana)
@@ -688,7 +704,7 @@ So, both "gi" and "ji" are used as romanizations for different contexts, but the
 				fmt.Printf("%s", string(colorRed))
 				fmt.Printf("      ^Oops! ")
 				fmt.Printf("%s", string(colorReset))
-				
+
 				//fmt.Printf("it was: %s \n", value)
 
 				fmt.Printf("it was: ")
