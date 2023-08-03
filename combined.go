@@ -53,32 +53,11 @@ func mainMenu() {
 }
 
 
-
-
-
 func kata() {
 
 	rand.Seed(time.Now().UnixNano())
 
-	keyValuePairs := []string{
-
 /*
-ChatGPT 3.5 proofread all of the katakana, hiragana pairs used in this code; and my Japanese wife verified them also. But I did catch them both having gotten one wrong:
-they made one mistake in saying that "ビュ, ぴゅ" was correct when it should have been "ピュ, ぴゅ"
-*/
-
-// "vowels" :
-//  a         * 2 :     　i  * 1      u       　e        o             u        e        o  * 2 :
-	"ア, あ", "ア, あ",    "イ, い",    "ウ, う", "エ, え", "オ, お",     "ウ, う", "エ, え", "オ, お",      
-
-// ka group: 
-//  ka       ki       ku      　ke       ko * 1    ||  　ga       gi       gu      　ge       go * 1         //  naked || ゛marks
-	"カ, か", "キ, き", "ク, く", "ケ, け", "コ, こ",       "ガ, が", "ギ, ぎ", "グ, ぐ", "ゲ, げ", "ゴ, ご",  
-//            ^---^--v                                            ^^--^
-	           "キャ, きゃ",  "キュ, きゅ",  "キョ, きょ",  // * 1     ^^--^-v                                           // ki,  ya yu yo (kya, kyu, kyo)
-	                                                              "ギャ, ぎゃ",  "ギュ, ぎゅ",  "ギョ, ぎょ",     // * 1 // ki゛, ya yu yo (gya, gyu, gyo)
-//                   ^            ^             ^                       ^             ^            ^        
-
 // sa group: 
 //  sa       shi      su       se        so * 1   ||   za       ji        zu       ze       zo * 1         //  naked || ゛marks
 	"サ, さ", "シ, し", "ス, す", "セ, せ", "ソ, そ",      "ザ, ざ", "ジ, じ", "ズ, ず", "ゼ, ぜ", "ゾ, ぞ",      //-* One key "zu", has two values づ and ず *-//
@@ -117,24 +96,12 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
 //  ma       mi       mu        me       mo * 1                   //  naked, all of them (there are no ゛s on mama's)
    "マ, ま", "ミ, み", "ム, む", "メ, め", "モ, も",     
 //            ^--^-v
-             "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ",                // * 1 // mi , ya yu yo (mya, myu, myo)
+             "ミャ, みゃ", "ミュ, みゅ", "ミョ, みょ"                // * 1 // mi , ya yu yo (mya, myu, myo)
 //                  ^           ^            ^          
 
-// ya, yu, yo set: 
-//  ya       yu       yo  * 1
-   "ヤ, や", "ユ, ゆ", "ヨ, よ",    // * 1 (also used as suffixes)
-// 
+}  // go.lang requires that the "}" must be on this line rather than on a line of its own 
+*/
 
-// ra/la group: spelled with the "r" but pronounced with the "L" sounds -- they too are special -- and also like to go naked
-//  ra       ri       ru       re        ro  * 1    
-   "ラ, ら", "リ, り", "ル, る", "レ, れ", "ロ, ろ", 
-//            ^--^--v
-             "リャ, りゃ", "リュ, りゅ", "リョ, りょ",       // * 1 // ri, ya yu yo (ryo)
-//                  ^           ^            ^       
-
-// wa set, plus the nh consonant -- always fully naked AND never even wear suffixes of ya yu, or yo 
-//     wa       wo         nh                                   * 2
-   "ワ, わ", "ヲ, を",   "ン, ん",       "ワ, わ", "ヲ, を",   "ン, ん" }  // * 2 //  go.lang requires that the "}" must be on this line rather than on a line of its own 
 
 doingContextSH = false
 ContextSHskip = false 
@@ -144,21 +111,18 @@ ContextSHskip = false
 		//  v v v v v          v v
 		if doingContextSH == false && ContextSHskip == false {
 
-		randIndex := rand.Intn(len(keyValuePairs))
-		keyValuePairSelected := keyValuePairs[randIndex]
+		randIndex := rand.Intn(len(fileOfCards))
+		cardSelected := fileOfCards[randIndex]
 
-		parts = strings.Split(keyValuePairSelected, ", ")
+		parts = strings.Split(cardSelected, ", ")
 
 			if len(parts) != 2 {
-				fmt.Println("Invalid key-value pair:", keyValuePairSelected)
+				fmt.Println("Invalid key-value pair:", cardSelected)
 				continue
 				// or throw an error of some kind ?????????????????????????????????
 			}
 
-			key = parts[0]
-			value = parts[1]
-
-			fmt.Printf("%s", key)
+			fmt.Printf("%s", KeyK)
 			fmt.Printf("%s", string(colorCyan))
 			fmt.Printf(" ? ")
 			fmt.Printf("%s", string(colorReset))
@@ -182,7 +146,7 @@ ContextSHskip = false
 		// else if -- if this is not our first rodeo 
 		} else if ContextSHskip == false {
 				giveAhint(value)
-				fmt.Printf("%s", key)
+				fmt.Printf("%s", KeyK)
 				fmt.Printf("%s", string(colorCyan))
 				fmt.Printf(" ? ")
 				fmt.Printf("%s", string(colorReset))
@@ -467,11 +431,11 @@ they made one mistake in saying that "ビュ, ぴゅ" was correct when it should
    "ワ, わ", "ヲ, を",   "ン, ん",       "ワ, わ", "ヲ, を",   "ン, ん" } 
 
 		randIndex := rand.Intn(len(keyValuePairs))
-		keyValuePairSelected := keyValuePairs[randIndex]
+		cardSelected := keyValuePairs[randIndex]
 
-		parts = strings.Split(keyValuePairSelected, ", ")
+		parts = strings.Split(cardSelected, ", ")
 		if len(parts) != 2 {
-			fmt.Println("Invalid key-value pair:", keyValuePairSelected)
+			fmt.Println("Invalid key-value pair:", cardSelected)
 			//continue
 		}
 
@@ -816,11 +780,11 @@ if doingContextSH == false {
 
 
 		randIndex := rand.Intn(len(keyValuePairs))
-		keyValuePairSelected := keyValuePairs[randIndex]
+		cardSelected := keyValuePairs[randIndex]
 
-		parts = strings.Split(keyValuePairSelected, ", ")
+		parts = strings.Split(cardSelected, ", ")
 		if len(parts) != 2 {
-			fmt.Println("Invalid key-value pair:", keyValuePairSelected)
+			fmt.Println("Invalid key-value pair:", cardSelected)
 			continue
 		}
 
@@ -1290,14 +1254,672 @@ var menu int
 var in string
 var doingContextSH bool 
 var ContextSHskip bool
-var parts []string 
-var value string
-var key string
+//var parts []string 
+//var value string
+//var key string
 
-        var colorReset = "\033[0m"          
-        var colorRed = "\033[31m"
-        var colorGreen = "\033[32m"
-        var colorYellow = "\033[33m"
-        var colorPurple = "\033[35m"
-        var colorCyan = "\033[36m"
-        var colorWhite = "\033[37m"
+  var colorReset = "\033[0m"          
+  var colorRed = "\033[31m"
+  var colorGreen = "\033[32m"
+  var colorYellow = "\033[33m"
+  var colorPurple = "\033[35m"
+  var colorCyan = "\033[36m"
+  var colorWhite = "\033[37m"
+
+type charSetStruct struct {
+	KeyK string
+	KeyH string
+	KeyR string 
+	KeyRK string 
+
+	Value string
+
+	Hint1k string 
+	Hint2k string
+
+	Hint1h string
+	Hint2h string
+}
+var fileOfCards = []charSetStruct{
+{"ア", "あ", "a", "aア", "あ",
+ " a あ ア looks nothing-like the hiragana a, but a lot like a te ア, あ fuck mae! a ア, maybe a grotesque A",
+ " a ア あ ア maybe a grotesque A",
+ " a",
+ " a"},
+
+{"イ", "い", "i", "iイ", "い",
+ " i い イ looks more like a hiragana te, but at least it is still two mostly-vertical lines イ shift the two lines of the hiragana",
+ " i イ い イ shift the two lines of the hiragana い",
+ " i",
+ " i"},
+
+{"ウ", "う", "u", "uウ", "う",
+ " u う ウ　is ok, having had to look for angles. u ウ, um-kay",
+ " u ウ う ウ more angles and with a tick for its top line",
+ " u",
+ " u"},
+
+{"エ", "え", "e", "eエ", "え",
+ " e え エ　does have a vague, angular resemblance. e エ, eye see it as a ... an, eye; may-bey",
+ " e エ え エ eye see it as a ... an, eye eh; well, may-bey",
+ " e",
+ " e"},
+
+{"オ", "お", "o", "oオ", "お",
+ " o お オ　has only a vague resemblance, albeit with less curves. o オ, is someone on-the-go maybe",
+ " o オ お オ is someone on-the-go maybe",
+ " o",
+ " o"},
+
+{"カ", "か", "ka", "kaカ", "か",
+ " ka か カ is an easy one",
+ " ka, same か albeit more angular and one less line to draw",
+ " ka",
+ " ka"},
+
+{"キ", "き", "ki", "kiキ", "き",
+ " ki き キ is an easy one",
+ " ki き キ has the same top",
+ " ki",
+ " ki"},
+
+{"ク", "く", "ku", "kuク", "く",
+ " ku く ク　no, just no. Starting with one angle, they settled for this? ku ク, compare to ta タ, and ke ケ",
+ " ku ク く ク compare ta タ, ke ケ",
+ " ku",
+ " ku"},
+
+{"ケ", "け", "ke", "keケ", "け",
+ " ke け ケ bits of it are there, just as many curves though. ke ケ, compare to ku ク, and ta タ",
+ " ke ケ け ケ compare ku ク, ta タ",
+ " ke",
+ " ke"},
+
+{"コ", "こ", "ko", "koコ", "こ",
+ " ko こ コ it makes sense, 'cause angles",
+ " ko コ　こ コ, compare ni ニ",
+ " ko",
+ " ko"},
+
+{"ガ", "が", "ga", "gaガ", "が",
+ " ga",
+ " ga",
+ " ga",
+ " ga"},
+
+{"ギ", "ぎ", "gi", "giギ", "ぎ",
+ " gi",
+ " gi",
+ " gi",
+ " gi"},
+
+{"グ", "ぐ", "gu", "guグ", "ぐ",
+ " gu",
+ " gu",
+ " gu",
+ " gu"},
+
+{"ゲ", "げ", "ge", "geゲ", "げ",
+ " ge",
+ " ge",
+ " ge",
+ " ge"},
+
+{"ゴ", "ご", "go", "goゴ", "ご",
+ " go",
+ " go",
+ " go",
+ " go"},
+
+{"キャ", "きゃ", "kya", "kyaキャ", "きゃ",
+ " kya",
+ " kya",
+ " kya",
+ " kya"},
+
+{"キュ", "きゅ", "kyu", "kyuキュ", "きゅ",
+ " kyu",
+ " kyu",
+ " kyu",
+ " kyu"},
+
+{"キョ", "きょ", "kyo", "kyoキョ", "きょ",
+ " kyo",
+ " kyo",
+ " kyo",
+ " kyo"},
+
+{"ギャ", "ぎゃ", "gya", "gyaギャ", "ぎゃ",
+ " gya",
+ " gya",
+ " gya",
+ " gya"},
+
+{"ギュ", "ぎゅ", "gyu", "gyuギュ", "ぎゅ",
+ " gyu",
+ " gyu",
+ " gyu",
+ " gyu"},
+
+{"ギョ", "ぎょ", "gyo", "gyoギョ", "ぎょ",
+ " gyo",
+ " gyo",
+ " gyo",
+ " gyo"},
+
+{"サ", "さ", "sa", "saサ", "さ",
+ " sa",
+ " sa",
+ " sa",
+ " sa"},
+
+{"シ", "し", "shi", "shiシ", "し",
+ " shi",
+ " shi",
+ " shi",
+ " shi"},
+
+{"ス", "す", "su", "suス", "す",
+ " su",
+ " su",
+ " su",
+ " su"},
+
+{"セ", "せ", "se", "seセ", "せ",
+ " se",
+ " se",
+ " se",
+ " se"},
+
+{"ソ", "そ", "so", "soソ", "そ",
+ " so",
+ " so",
+ " so",
+ " so"},
+
+{"ザ", "ざ", "za", "zaザ", "ざ",
+ " za",
+ " za",
+ " za",
+ " za"},
+
+{"ジ", "じ", "ji", "jiジ", "じ",
+ " ji",
+ " ji",
+ " ji",
+ " ji"},
+
+{"ズ", "ず", "zu", "zuズ", "ず",
+ " zu",
+ " zu",
+ " zu",
+ " zu"},
+
+{"ゼ", "ぜ", "ze", "zeゼ", "ぜ",
+ " ze",
+ " ze",
+ " ze",
+ " ze"},
+
+{"ゾ", "ぞ", "zo", "zoゾ", "ぞ",
+ " zo",
+ " zo",
+ " zo",
+ " zo"},
+
+{"シャ", "しゃ", "sha", "shaシャ", "しゃ",
+ " sha",
+ " sha",
+ " sha",
+ " sha"},
+
+{"シュ", "しゅ", "shu", "shuシュ", "しゅ",
+ " shu",
+ " shu",
+ " shu",
+ " shu"},
+
+{"ショ", "しょ", "sho", "shoショ", "しょ",
+ " sho",
+ " sho",
+ " sho",
+ " sho"},
+
+{"ジャ", "じゃ", "ja", "jaジャ", "じゃ",
+ " ja",
+ " ja",
+ " ja",
+ " ja"},
+
+{"ジュ", "じゅ", "ju", "juジュ", "じゅ",
+ " ju",
+ " ju",
+ " ju",
+ " ju"},
+
+{"ジョ", "じょ", "jo", "joジョ", "じょ",
+ " jo",
+ " jo",
+ " jo",
+ " jo"},
+
+{"タ", "た", "ta", "taタ", "た",
+ " ta",
+ " ta",
+ " ta",
+ " ta"},
+
+{"チ", "ち", "chi", "chiチ", "ち",
+ " chi",
+ " chi",
+ " chi",
+ " chi"},
+
+{"ツ", "つ", "tsu", "tsuツ", "つ",
+ " tsu",
+ " tsu",
+ " tsu",
+ " tsu"},
+
+{"テ", "て", "te", "teテ", "て",
+ " te",
+ " te",
+ " te",
+ " te"},
+
+{"ト", "と", "to", "toト", "と",
+ " to",
+ " to",
+ " to",
+ " to"},
+
+{"ダ", "だ", "da", "daダ", "だ",
+ " da",
+ " da",
+ " da",
+ " da"},
+
+{"ヂ", "ぢ", "ji", "jiヂ", "ぢ",
+ " ji",
+ " ji",
+ " ji",
+ " ji"},
+
+{"ヅ", "づ", "zu", "zuヅ", "づ",
+ " zu",
+ " zu",
+ " zu",
+ " zu"},
+
+{"デ", "で", "de", "deデ", "で",
+ " de",
+ " de",
+ " de",
+ " de"},
+
+{"ド", "ど", "do", "doド", "ど",
+ " do",
+ " do",
+ " do",
+ " do"},
+
+{"チャ", "ちゃ", "cha", "chaチャ", "ちゃ",
+ " cha",
+ " cha",
+ " cha",
+ " cha"},
+
+{"チュ", "ちゅ", "chu", "chuチュ", "ちゅ",
+ " chu",
+ " chu",
+ " chu",
+ " chu"},
+
+{"チョ", "ちょ", "cho", "choチョ", "ちょ",
+ " cho",
+ " cho",
+ " cho",
+ " cho"},
+
+{"ヂャ", "ぢゃ", "ja", "jaヂャ", "ぢゃ",
+ " ja",
+ " ja",
+ " ja",
+ " ja"},
+
+{"ヂュ", "ぢゅ", "ju", "juヂュ", "ぢゅ",
+ " ju",
+ " ju",
+ " ju",
+ " ju"},
+
+{"ヂョ", "ぢょ", "jo", "joヂョ", "ぢょ",
+ " jo",
+ " jo",
+ " jo",
+ " jo"},
+
+{"ナ", "な", "na", "naナ", "な",
+ " na",
+ " na",
+ " na",
+ " na"},
+
+{"ニ", "に", "ni", "niニ", "に",
+ " ni",
+ " ni",
+ " ni",
+ " ni"},
+
+{"ヌ", "ぬ", "nu", "nuヌ", "ぬ",
+ " nu",
+ " nu",
+ " nu",
+ " nu"},
+
+{"ネ", "ね", "ne", "neネ", "ね",
+ " ne",
+ " ne",
+ " ne",
+ " ne"},
+
+{"ノ", "の", "no", "noノ", "の",
+ " no",
+ " no",
+ " no",
+ " no"},
+
+{"ニャ", "にゃ", "nya", "nyaニャ", "にゃ",
+ " nya",
+ " nya",
+ " nya",
+ " nya"},
+
+{"ニュ", "にゅ", "nyu", "nyuニュ", "にゅ",
+ " nyu",
+ " nyu",
+ " nyu",
+ " nyu"},
+
+{"ニョ", "にょ", "nyo", "nyoニョ", "にょ",
+ " nyo",
+ " nyo",
+ " nyo",
+ " nyo"},
+
+{"ハ", "は", "ha", "haハ", "は",
+ " ha",
+ " ha",
+ " ha",
+ " ha"},
+
+{"ヒ", "ひ", "hi", "hiヒ", "ひ",
+ " hi",
+ " hi",
+ " hi",
+ " hi"},
+
+{"フ", "ふ", "fu", "fuフ", "ふ",
+ " fu",
+ " fu",
+ " fu",
+ " fu"},
+
+{"ヘ", "へ", "he", "heヘ", "へ",
+ " he",
+ " he",
+ " he",
+ " he"},
+
+{"ホ", "ほ", "ho", "hoホ", "ほ",
+ " ho",
+ " ho",
+ " ho",
+ " ho"},
+
+{"バ", "ば", "ba", "baバ", "ば",
+ " ba",
+ " ba",
+ " ba",
+ " ba"},
+
+{"ビ", "び", "bi", "biビ", "び",
+ " bi",
+ " bi",
+ " bi",
+ " bi"},
+
+{"ブ", "ぶ", "bu", "buブ", "ぶ",
+ " bu",
+ " bu",
+ " bu",
+ " bu"},
+
+{"ベ", "べ", "be", "beベ", "べ",
+ " be",
+ " be",
+ " be",
+ " be"},
+
+{"ボ", "ぼ", "bo", "boボ", "ぼ",
+ " bo",
+ " bo",
+ " bo",
+ " bo"},
+
+{"パ", "ぱ", "pa", "paパ", "ぱ",
+ " pa",
+ " pa",
+ " pa",
+ " pa"},
+
+{"ピ", "ぴ", "pi", "piピ", "ぴ",
+ " pi",
+ " pi",
+ " pi",
+ " pi"},
+
+{"プ", "ぷ", "pu", "puプ", "ぷ",
+ " pu",
+ " pu",
+ " pu",
+ " pu"},
+
+{"ペ", "ぺ", "pe", "peペ", "ぺ",
+ " pe",
+ " pe",
+ " pe",
+ " pe"},
+
+{"ポ", "ぽ", "po", "poポ", "ぽ",
+ " po",
+ " po",
+ " po",
+ " po"},
+
+{"ヒャ", "ひゃ", "hya", "hyaヒャ", "ひゃ",
+ " hya",
+ " hya",
+ " hya",
+ " hya"},
+
+{"ヒュ", "ひゅ", "hyu", "hyuヒュ", "ひゅ",
+ " hyu",
+ " hyu",
+ " hyu",
+ " hyu"},
+
+{"ヒョ", "ひょ", "hyo", "hyoヒョ", "ひょ",
+ " hyo",
+ " hyo",
+ " hyo",
+ " hyo"},
+
+{"ビャ", "びゃ", "bya", "byaビャ", "びゃ",
+ " bya",
+ " bya",
+ " bya",
+ " bya"},
+
+{"ビュ", "びゅ", "byu", "byuビュ", "びゅ",
+ " byu",
+ " byu",
+ " byu",
+ " byu"},
+
+{"ビョ", "びょ", "byo", "byoビョ", "びょ",
+ " byo",
+ " byo",
+ " byo",
+ " byo"},
+
+{"ピャ", "ぴゃ", "pya", "pyaピャ", "ぴゃ",
+ " pya",
+ " pya",
+ " pya",
+ " pya"},
+
+{"ピュ", "ぴゅ", "pyu", "pyuピュ", "ぴゅ",
+ " pyu",
+ " pyu",
+ " pyu",
+ " pyu"},
+
+{"ピョ", "ぴょ", "pyo", "pyoピョ", "ぴょ",
+ " pyo",
+ " pyo",
+ " pyo",
+ " pyo"},
+
+{"マ", "ま", "ma", "maマ", "ま",
+ " ma",
+ " ma",
+ " ma",
+ " ma"},
+
+{"ミ", "み", "mi", "miミ", "み",
+ " mi",
+ " mi",
+ " mi",
+ " mi"},
+
+{"ム", "む", "mu", "muム", "む",
+ " mu",
+ " mu",
+ " mu",
+ " mu"},
+
+{"メ", "め", "me", "meメ", "め",
+ " me",
+ " me",
+ " me",
+ " me"},
+
+{"モ", "も", "mo", "moモ", "も",
+ " mo",
+ " mo",
+ " mo",
+ " mo"},
+
+{"ミャ", "みゃ", "mya", "myaミャ", "みゃ",
+ " mya",
+ " mya",
+ " mya",
+ " mya"},
+
+{"ミュ", "みゅ", "myu", "myuミュ", "みゅ",
+ " myu",
+ " myu",
+ " myu",
+ " myu"},
+
+{"ミョ", "みょ", "myo", "myoミョ", "みょ",
+ " myo",
+ " myo",
+ " myo",
+ " myo"},
+
+{"ヤ", "や", "ya", "yaヤ", "や",
+ " ya",
+ " ya",
+ " ya",
+ " ya"},
+
+{"ユ", "ゆ", "yu", "yuユ", "ゆ",
+ " yu",
+ " yu",
+ " yu",
+ " yu"},
+
+{"ヨ", "よ", "yo", "yoヨ", "よ",
+ " yo",
+ " yo",
+ " yo",
+ " yo"},
+
+{"ラ", "ら", "ra", "raラ", "ら",
+ " ra",
+ " ra",
+ " ra",
+ " ra"},
+
+{"リ", "り", "ri", "riリ", "り",
+ " ri",
+ " ri",
+ " ri",
+ " ri"},
+
+{"ル", "る", "ru", "ruル", "る",
+ " ru",
+ " ru",
+ " ru",
+ " ru"},
+
+{"レ", "れ", "re", "reレ", "れ",
+ " re",
+ " re",
+ " re",
+ " re"},
+
+{"ロ", "ろ", "ro", "roロ", "ろ",
+ " ro",
+ " ro",
+ " ro",
+ " ro"},
+
+{"リャ", "りゃ", "rya", "ryaリャ", "りゃ",
+ " rya",
+ " rya",
+ " rya",
+ " rya"},
+
+{"リュ", "りゅ", "ryu", "ryuリュ", "りゅ",
+ " ryu",
+ " ryu",
+ " ryu",
+ " ryu"},
+
+{"リョ", "りょ", "ryo", "ryoリョ", "りょ",
+ " ryo",
+ " ryo",
+ " ryo",
+ " ryo"},
+
+{"ワ", "わ", "wa", "waワ", "わ",
+ " wa",
+ " wa",
+ " wa",
+ " wa"},
+
+{"ヲ", "を", "wo", "woヲ", "を",
+ " wo",
+ " wo",
+ " wo",
+ " wo"},
+
+{"ン", "ん", "n", "nン", "ん",
+ " n",
+ " n",
+ " n",
+ " n"},
+}
